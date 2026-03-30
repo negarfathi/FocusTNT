@@ -1,0 +1,70 @@
+///*** 1_main ***///
+START: main_bb5;
+
+FROM: main_bb5;
+errno := 0;
+v3 := errno;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(v3 != 1);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(v3 == 1);
+TO: main_bb7;
+
+FROM: main_bb6;
+errno := 1;
+TO: main_waitpid.exit;
+
+FROM: main_bb7;
+errno := 2;
+TO: main_waitpid.exit;
+
+FROM: main_waitpid.exit;
+TO: main_waitpid.exit_end;
+
+FROM: main_waitpid.exit_end;
+assume(1 <= 0);
+TO: main_bb8;
+
+FROM: main_waitpid.exit_end;
+assume(0 <= 0);
+TO: main_.critedge;
+
+FROM: main_bb8;
+v6 := errno;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v6 != 1);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v6 == 1);
+TO: main_bb10;
+
+FROM: main_bb9;
+errno := 1;
+TO: main_waitpid.exit1;
+
+FROM: main_bb10;
+errno := 2;
+TO: main_waitpid.exit1;
+
+FROM: main_waitpid.exit1;
+v9 := errno;
+TO: main_waitpid.exit1_end;
+
+FROM: main_waitpid.exit1_end;
+assume(v9 == 1);
+TO: main_bb8;
+
+FROM: main_waitpid.exit1_end;
+assume(v9 != 1);
+TO: main_.critedge;
+
+FROM: main_.critedge;
+TO: main_.critedge_ret;
+

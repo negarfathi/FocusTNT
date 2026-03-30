@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "33770695-ced1-31a8-bdd8-80ed856a6122"
+    creation_time: "2025-12-20T07:34:25Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_NT_Loop0_TestCase4.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_NT_Loop0_TestCase4.c: "97f79e76ee84c2a1fd988f3d734fd1c9ebdbfff1694bf01d5ff1028cf68ea21a"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_NT_Loop0_TestCase4.c"
+        line: 21
+        column: 5
+        function: "main"
+      value: "((((((best == (10U) && cur == (60U)) && (it_min == (5U) && st_max == (100U)))) || (((best == (10U) && cur == (40U)) && (it_min == (5U) && st_max == (100U))))) || ((((best == (10U) && cur == (30U)) && (it_min == (5U) && st_max == (100U)))) || ((((best == (10U) && cur == (100U)) && (it_min == (5U) && st_max == (100U)))) || (((best == (10U) && cur == (110U)) && (it_min == (5U) && st_max == (100U))))))) || (((((best == (10U) && cur == (90U)) && (it_min == (5U) && st_max == (100U)))) || ((((best == (10U) && cur == (10U)) && (it_min == (5U) && st_max == (100U)))) || (((best == (10U) && cur == (80U)) && (it_min == (5U) && st_max == (100U)))))) || ((((best == (10U) && cur == (20U)) && (it_min == (5U) && st_max == (100U)))) || ((((best == (10U) && cur == (50U)) && (it_min == (5U) && st_max == (100U)))) || (((best == (10U) && cur == (70U)) && (it_min == (5U) && st_max == (100U))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_NT_Loop0_TestCase4.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

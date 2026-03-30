@@ -1,0 +1,52 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "void main(void)" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int __retres;" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int val = -1;" -> ASSUME {val == (-1);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "[!(! val)]" -> ASSUME {val == (-1);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG20;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG20 :
+    MATCH "[val != 0]" -> ASSUME {val == (-1);} GOTO ARG21;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG21 :
+    MATCH "val >>= 1;" -> ASSUME {val == (-1);} GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG23 :
+    TRUE -> STOP;
+
+END AUTOMATON

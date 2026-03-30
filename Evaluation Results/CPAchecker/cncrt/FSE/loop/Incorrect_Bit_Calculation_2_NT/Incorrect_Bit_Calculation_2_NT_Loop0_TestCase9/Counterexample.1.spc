@@ -1,0 +1,52 @@
+CONTROL AUTOMATON ErrorPath1
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "int main()" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int a0 = (long)0;" -> ASSUME {a0 == (0);} GOTO ARG11;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG11 :
+    MATCH "int a1 = 0;" -> ASSUME {a1 == (0);} GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "[( a0 & 1 ) == 0]" -> GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "a0 = ( a1 << 31 ) | ( a0 >> 1 );" -> ASSUME {a0 == (0);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "a1 = a1 >> 1;" -> ASSUME {a1 == (0);} GOTO ARG18;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG18 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG19 :
+    TRUE -> STOP;
+
+END AUTOMATON

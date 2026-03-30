@@ -1,0 +1,87 @@
+///*** 1_main ***///
+START: main_bb7;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb7;
+flag := 0;
+flag := 0;
+var__temp_verrno.0 := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(1 <= 0);
+TO: main_bb13;
+
+FROM: main_bb7_end;
+assume(0 <= 0);
+TO: main_bb8;
+
+FROM: main_bb8;
+verrno.0 := var__temp_verrno.0;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(vpos.0 slt 40);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(vpos.0 sge 40);
+TO: main_bb13;
+
+FROM: main_bb9;
+v13 := 40 - vpos.0;
+v14 := flag;
+var__temp_v.0.i := 0;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume((v14 != 1) && (vpos.0 slt v13));
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume((v14 == 1) || (vpos.0 sge v13));
+TO: main_read.exit;
+
+FROM: main_bb10;
+flag := 1;
+var__temp_v.0.i := 1;
+TO: main_read.exit;
+
+FROM: main_read.exit;
+v.0.i := var__temp_v.0.i;
+TO: main_read.exit_end;
+
+FROM: main_read.exit_end;
+assume(v.0.i == -1);
+TO: main_bb11;
+
+FROM: main_read.exit_end;
+assume(v.0.i != -1);
+TO: main_bb12;
+
+FROM: main_bb11;
+v18 := verrno.0 + 1;
+var__temp_verrno.0 := v18;
+var__temp_vpos.0 := vpos.0;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(v18 == 5);
+TO: main_bb13;
+
+FROM: main_bb11_end;
+assume(v18 != 5);
+TO: main_bb8;
+
+FROM: main_bb12;
+v20 := vpos.0 + v.0.i;
+var__temp_verrno.0 := verrno.0;
+var__temp_vpos.0 := v20;
+TO: main_bb8;
+
+FROM: main_bb13;
+TO: main_bb13_ret;
+

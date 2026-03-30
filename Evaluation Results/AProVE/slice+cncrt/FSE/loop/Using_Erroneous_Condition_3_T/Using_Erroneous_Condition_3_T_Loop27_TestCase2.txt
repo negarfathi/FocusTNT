@@ -1,0 +1,232 @@
+YES
+proof of /FILES_DIR/concretizer/Using_Erroneous_Condition_3_T_Loop27_TestCase2.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 85 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1928 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 1 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 138 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 88 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Using_Erroneous_Condition_3_T_Loop27_TestCase2.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Using_Erroneous_Condition_3_T_Loop27_TestCase2.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca [10 x i32], align 16
+		%2 = alloca [10 x i32], align 16
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		%7 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %1)
+		%8 = bitcast *[10 x i32] %1 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %8, i8 0, i64 40, i1 0)
+		%9 = bitcast *i8 %8 to *BasicStructureType(elementType: i32, elementType: [9 x i32])
+		%10 = getelementptr %9, 0, 0
+		store 5, %10
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %2)
+		%11 = bitcast *[10 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %11, i8 0, i64 40, i1 0)
+		%12 = bitcast *i8 %11 to *BasicStructureType(elementType: i32, elementType: [9 x i32])
+		%13 = getelementptr %12, 0, 0
+		store 6, %13
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 10, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 10, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %14
+	14:
+		%15 = load %6
+		%16 = icmp slt %15 9
+		br %16, %17, %20
+	17:
+		%18 = load %6
+		%19 = add i32 %18, 1
+		store %19, %6
+		br %14
+	20:
+		%21 = getelementptr %1, 0, 9
+		store 0, %21
+		%22 = getelementptr %2, 0, 9
+		store 0, %22
+		br %23
+	23:
+		%24 = load %4
+		%25 = load %5
+		%26 = icmp slt %24 %25
+		br %26, %27, %52
+	27:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		%28 = load %4
+		store %28, %7
+		br %29
+	29:
+		%30 = load %3
+		%31 = sext i32 %30 to i64
+		%32 = getelementptr %1, 0, %31
+		%33 = load %32
+		%34 = load %3
+		%35 = sext i32 %34 to i64
+		%36 = getelementptr %2, 0, %35
+		%37 = load %36
+		%38 = icmp ne %33 %37
+		br %38, %39, %47
+	39:
+		%40 = load %7
+		%41 = add i32 %40, 1
+		store %41, %7
+		%42 = load %7
+		%43 = load %5
+		%44 = icmp eq %42 %43
+		br %44, %45, %46
+	45:
+		br %47
+	46:
+		br %29
+	47:
+		%48 = load %3
+		%49 = add i32 %48, 1
+		store %49, %3
+		%50 = load %4
+		%51 = add i32 %50, 8
+		store %51, %4
+		br %23
+	52:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 9 rulesP rules:
+f_319(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) -> f_320(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) :|: v120 < 9 && v118 <= 7
+f_320(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) -> f_322(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) :|: 0 = 0
+f_322(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) -> f_324(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) :|: TRUE
+f_324(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 7, 8, 40, 4) -> f_326(v111, v112, v113, v114, v115, v116, v117, v120, 1, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4) :|: 0 = 0
+f_326(v111, v112, v113, v114, v115, v116, v117, v120, 1, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4) -> f_328(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) :|: v133 = 1 + v120 && 2 <= v133 && v133 <= 9
+f_328(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) -> f_330(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) :|: TRUE
+f_330(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) -> f_332(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) :|: TRUE
+f_332(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 40, 4, 2, 9) -> f_318(v111, v112, v113, v114, v115, v116, v117, v120, 1, v133, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) :|: TRUE
+f_318(v111, v112, v113, v114, v115, v116, v117, v118, 1, v120, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) -> f_319(v111, v112, v113, v114, v115, v116, v117, v120, 1, v118, v121, v122, v123, v124, v125, v126, v127, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_319(v111:0, v112:0, v113:0, v114:0, v115:0, v116:0, v117:0, v120:0, 1, v118:0, v121:0, v122:0, v123:0, v124:0, v125:0, v126:0, v127:0, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) -> f_319(v111:0, v112:0, v113:0, v114:0, v115:0, v116:0, v117:0, 1 + v120:0, 1, v120:0, v121:0, v122:0, v123:0, v124:0, v125:0, v126:0, v127:0, 5, 6, 0, 10, 39, 3, 8, 9, 40, 4) :|: v118:0 < 8 && v120:0 < 9 && v120:0 > 0
+Filtered unneeded arguments:
+   f_319(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24, x25, x26, x27) -> f_319(x8, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_319(v120:0, v118:0) -> f_319(1 + v120:0, v120:0) :|: v120:0 < 9 && v120:0 > 0 && v118:0 < 8
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_319(v120:0, v118:0) -> f_319(1 + v120:0, v120:0) :|: v120:0 < 9 && v120:0 > 0 && v118:0 < 8
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_319(v120:0:0, v118:0:0) -> f_319(1 + v120:0:0, v120:0:0) :|: v120:0:0 < 9 && v120:0:0 > 0 && v118:0:0 < 8
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_319 ] = -1*f_319_1
+
+The following rules are decreasing:
+f_319(v120:0:0, v118:0:0) -> f_319(1 + v120:0:0, v120:0:0) :|: v120:0:0 < 9 && v120:0:0 > 0 && v118:0:0 < 8
+
+The following rules are bounded:
+f_319(v120:0:0, v118:0:0) -> f_319(1 + v120:0:0, v120:0:0) :|: v120:0:0 < 9 && v120:0:0 > 0 && v118:0:0 < 8
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Using_Erroneous_Condition_3_T_Loop27_TestCase2.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Using_Erroneous_Condition_3_T_Loop27_TestCase2.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 5713 milliseconds

@@ -1,0 +1,346 @@
+TOOL_DIR is /opt/term/proton
+BM_DIR = /tmp/PROTON-benchmark.icpJEc
+
+Input File is : Incorrect_Control_Statement_1_NT_Loop0_TestCase7.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Rewrite Buffer is not NULL
+
+Finished Rewriting  extern char __VERIFIER_nondet_char(void);
+/*
+Commit Number: e6801c90311679fc0854af73da95fe58079c59f4
+URL: https://github.com/FreeRADIUS/freeradius-server/commit/e6801c90311679fc0854af73da95fe58079c59f4
+Project Name: freeradius-serve
+License: GPL2
+termination: false
+
+
+*/
+int main()
+{
+    int stop = 0;
+    char array[101] = ":a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:";
+    for( int i = 0 ; i < 100 ; i++ )
+        {;}
+    array[100] = 0;
+    char* p = array;
+    while( (*p) && (!stop) )
+    {
+        switch(*p){
+        case '}':
+            stop = 1;
+            break;
+
+        case ':':
+            {if( *(p+1) && (*(p+1) == '-')){
+                p += 2;
+                stop = 1;
+            }}
+            break;
+        default:
+            p++;
+        }
+    }
+    return 0;
+}
+./proton: line 26:    92 Aborted                 bracer -in $FILE_NAME -c
+
+Input File is : Incorrect_Control_Statement_1_NT_Loop0_TestCase7_braced.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Finished call to function ParseAST   
+
+ Rewrite Buffer is Not NULL 
+
+Finished Rewriting 
+typedef enum {myFalse, myTrue} myBool; myBool __VERIFIER_nondet_myBool(void);
+extern void __VERIFIER_reached_control(int, char const *);
+extern void __VERIFIER_loop_head(int, char const *);
+extern void __VERIFIER_control_true(int, char const *);
+extern void __VERIFIER_control_false(int, char const *);
+extern char __VERIFIER_nondet_char(void);
+/*
+Commit Number: e6801c90311679fc0854af73da95fe58079c59f4
+URL: https://github.com/FreeRADIUS/freeradius-server/commit/e6801c90311679fc0854af73da95fe58079c59f4
+Project Name: freeradius-serve
+License: GPL2
+termination: false
+
+
+*/
+int main()
+{
+    int stop = 0;
+    char array[101] = ":a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:a:";
+   myBool pStored0 = myFalse; __VERIFIER_reached_control(16, __func__);
+ for( int i = 0 ; i < 100 ; i++ )
+        { __VERIFIER_loop_head(16, __func__);
+printf("CBMC Instrumentation @ line16");myBool flag=__VERIFIER_nondet_myBool();static int oi;static int ostop;if(pStored0){__CPROVER_assert(!(oi==i && ostop==stop),"recurrent state found");} if(flag){oi=i;ostop=stop;pStored0=myTrue;} ;}
+    array[100] = 0;
+    char* p = array;
+   myBool pStored1 = myFalse; __VERIFIER_reached_control(20, __func__);
+ while( (*p) && (!stop) )
+    { __VERIFIER_loop_head(20, __func__);
+printf("CBMC Instrumentation @ line20");myBool flag=__VERIFIER_nondet_myBool();static char * op;static int ostop;if(pStored1){__CPROVER_assert(!(op==p && ostop==stop),"recurrent state found");} if(flag){op=p;ostop=stop;pStored1=myTrue;} 
+        switch(*p){
+        case '}':
+            stop = 1;
+            break;
+
+        case ':':
+            { __VERIFIER_reached_control(27, __func__);
+if( *(p+1) && (*(p+1) == '-')){ __VERIFIER_control_true(27, __func__);
+
+                p += 2;
+                stop = 1;
+            }}
+            break;
+        default:
+            p++;
+        }
+    }
+    return 0;
+}
+./proton: line 26:   104 Aborted                 instrumenter -in *braced.c -c
+Incorrect_Control_Statement_1_NT_Loop0_TestCase7_braced_instrumented.c
+NTFILE is Incorrect_Control_Statement_1_NT_Loop0_TestCase7_braced_instrumented.c
+
+* *                 CBMC 5.95.0 (n/a) 64-bit                * *
+* *                 Copyright (C) 2001-2018                 * *
+* *              Daniel Kroening, Edmund Clarke             * *
+* * Carnegie Mellon University, Computer Science Department * *
+* *                  kroening@kroening.com                  * *
+* *        Protected in part by U.S. patent 7,225,417       * *
+* *  *****************************************************  * *
+* *                 Built with Llama                        * *
+* *  *****************************************************  * *
+
+ORIG CFILE = Incorrect_Control_Statement_1_NT_Loop0_TestCase7.c
+b'679f5957ef194102897b7dae339bad72d37690f4900d6f9f28d558be4f84d945  Incorrect_Control_Statement_1_NT_Loop0_TestCase7.c\n'
+
+ Witness file name is /opt/term/proton//FILES_DIR/Incorrect_Control_Statement_1_NT_Loop0_TestCase7.witness.graphml
+FINAL tracefilelines FIlE LINE ******************************
+
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 16 reachedControl
+main 16 loopHead
+main 20 reachedControl
+main 20 loopHead
+enteringLasso
+main 27 reachedControl
+main 20 loopHead
+Trace file line inside enterred lasso check : main 27 reachedControl
+Traceback (most recent call last):
+  File "/opt/term/proton/parse_trace_vf.py", line 303, in <module>
+    generateViolationWitness(processed_data)
+  File "/opt/term/proton/parse_trace_vf.py", line 211, in generateViolationWitness
+    nonTermWit_file = open(os.environ['WITNESS_FILENAME'], 'w')
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/term/proton//FILES_DIR/Incorrect_Control_Statement_1_NT_Loop0_TestCase7.witness.graphml'
+NT-CHECKRESULT. GLRV=0. Z3RV=10. NTRES=1
+NTRES=1 TRES=10 for Incorrect_Control_Statement_1_NT_Loop0_TestCase7.c
+FILE=Incorrect_Control_Statement_1_NT_Loop0_TestCase7_braced_instrumented.c GLRES=0 Z3RES=10 NTRES=1 TRES=10 TNT-RESULT=FALSE(termination) EXITCODE=1
+FALSE(termination)
+Runtime: 10012 milliseconds

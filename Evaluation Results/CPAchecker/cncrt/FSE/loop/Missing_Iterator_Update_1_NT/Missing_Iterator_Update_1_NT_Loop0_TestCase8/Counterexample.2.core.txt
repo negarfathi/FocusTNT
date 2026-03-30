@@ -1,0 +1,21 @@
+line 13:	N31 -{int errno = 0;}-> N32
+	errno == 0;
+line 31:	N17 -{int ret;}-> N18
+line 31:	N18 -{waitpid()}-> N1
+line 16:	N2 -{int num = -10;}-> N3
+	num == -10;
+line 17:	N3 -{while}-> N4
+line 17:	N4 -{[num < 0]}-> N5
+	num == -10;
+line 19:	N10 -{[errno != 1]}-> N8
+	errno == 0;
+line 20:	N8 -{errno = 1;}-> N11
+	errno == 1;
+line 32:	N19 -{Label: again}-> N20
+line 33:	N20 -{[!(ret == 0)]}-> N21
+	ret == -10;
+line 37:	N21 -{[ret < 0]}-> N25
+	ret == -10;
+line 38:	N25 -{[errno == 1]}-> N27
+	errno == 1;
+line 39:	N27 -{Goto: again}-> N20

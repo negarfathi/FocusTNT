@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "a31a9209-5b95-32b2-803e-ed1b31d00780"
+    creation_time: "2025-12-20T11:21:05Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop20_TestCase7.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop20_TestCase7.c: "a737deba92862a41877abd2f98fee6f0e4dcfa94f9441456976c2220033d2c28"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop20_TestCase7.c"
+        line: 19
+        column: 5
+        function: "main"
+      value: "(((((h == (9) && hash == (12)) && (i == (11) && (r == (1) && rehash == (3))))) || (((h == (9) && hash == (12)) && (i == (12) && (r == (1) && rehash == (3)))))) || ((((h == (9) && hash == (12)) && (i == (9) && (r == (0) && rehash == (3))))) || (((h == (9) && hash == (12)) && (i == (10) && (r == (1) && rehash == (3)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop20_TestCase7.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

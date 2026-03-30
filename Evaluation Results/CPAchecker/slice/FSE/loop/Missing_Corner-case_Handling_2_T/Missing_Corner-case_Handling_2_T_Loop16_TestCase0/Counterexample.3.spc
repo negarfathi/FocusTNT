@@ -1,0 +1,48 @@
+CONTROL AUTOMATON ErrorPath3
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG12_1_1;
+STATE USEFIRST ARG12_0_1 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG12_1_1;
+STATE USEFIRST ARG12_1_1 :
+    MATCH "void main(void)" -> GOTO ARG12_2_1;
+STATE USEFIRST ARG12_2_1 :
+    MATCH "" -> GOTO ARG12_3_1;
+STATE USEFIRST ARG12_3_1 :
+    MATCH "int __retres;" -> GOTO ARG12_4_1;
+STATE USEFIRST ARG12_4_1 :
+    MATCH "int val = __VERIFIER_nondet_int();" -> GOTO ARG12_5_1;
+STATE USEFIRST ARG12_5_1 :
+    MATCH "int val = __VERIFIER_nondet_int();" -> GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "[[!(val <= 0)]]" -> GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "[[val != 0]]" -> GOTO ARG37;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG37 :
+    MATCH "val >>= 1;" -> GOTO ARG47;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG47 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG226 :
+    TRUE -> STOP;
+
+END AUTOMATON

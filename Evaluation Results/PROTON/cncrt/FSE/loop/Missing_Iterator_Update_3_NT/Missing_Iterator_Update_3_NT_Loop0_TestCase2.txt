@@ -1,0 +1,156 @@
+TOOL_DIR is /opt/term/proton
+BM_DIR = /tmp/PROTON-benchmark.LOOsC6
+
+Input File is : Missing_Iterator_Update_3_NT_Loop0_TestCase2.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Rewrite Buffer is not NULL
+
+Finished Rewriting  extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 8ddb6410edb0c4e87b4c6b9d0887868977c8eff5
+URL: https://github.com/mirror/busybox/commit/8ddb6410edb0c4e87b4c6b9d0887868977c8eff5
+Project Name: busybox
+License: GPL2
+termination: FALSE
+*/
+int flag = 0;
+int fopen_or_warn()
+{
+
+    flag++;
+    {if( flag > 10 )// avoid almost-sure
+        {return 0;}}
+    int i =  -1;
+    {if( i >= 0 )
+        {return 0;}
+    else
+        {return i;}}
+}
+int main()
+{
+    int len = 2;
+    {if( len <= 0 )
+        {return 0;}}
+    int argv1[2] = {-1,0};
+    for( int i = 0 ; i < len - 1 ; i++ )
+        {;}
+    argv1[len-1] = 0;
+    int* argv = argv1;
+    int fp = 0;
+    goto GOT_NEW_FILE;
+    do{
+        {if( *argv > 0 )
+        {
+            fp = fopen_or_warn();
+            {if( fp == 0 )
+                {continue;}}
+        }}
+        argv++;
+GOT_NEW_FILE:
+    fp++;
+    }while( *argv );
+    return 0;
+}
+./proton: line 26:    92 Aborted                 bracer -in $FILE_NAME -c
+
+Input File is : Missing_Iterator_Update_3_NT_Loop0_TestCase2_braced.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Finished call to function ParseAST   
+
+ Rewrite Buffer is Not NULL 
+
+Finished Rewriting 
+typedef enum {myFalse, myTrue} myBool; myBool __VERIFIER_nondet_myBool(void);
+extern void __VERIFIER_reached_control(int, char const *);
+extern void __VERIFIER_loop_head(int, char const *);
+extern void __VERIFIER_control_true(int, char const *);
+extern void __VERIFIER_control_false(int, char const *);
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 8ddb6410edb0c4e87b4c6b9d0887868977c8eff5
+URL: https://github.com/mirror/busybox/commit/8ddb6410edb0c4e87b4c6b9d0887868977c8eff5
+Project Name: busybox
+License: GPL2
+termination: FALSE
+*/
+int flag = 0;
+int fopen_or_warn()
+{
+
+    flag++;
+    { __VERIFIER_reached_control(14, __func__);
+if( flag > 10 )// avoid almost-sure
+        { __VERIFIER_control_true(15, __func__);
+return 0;}}
+    int i =  -1;
+    { __VERIFIER_reached_control(17, __func__);
+if( i >= 0 )
+        { __VERIFIER_control_true(18, __func__);
+return 0;}
+    else
+        { __VERIFIER_control_false(20, __func__);
+return i;}}
+}
+int main()
+{
+    int len = 2;
+    { __VERIFIER_reached_control(25, __func__);
+if( len <= 0 )
+        { __VERIFIER_control_true(26, __func__);
+return 0;}}
+    int argv1[2] = {-1,0};
+   myBool pStored0 = myFalse; __VERIFIER_reached_control(29, __func__);
+ for( int i = 0 ; i < len - 1 ; i++ )
+        { __VERIFIER_loop_head(29, __func__);
+printf("CBMC Instrumentation @ line29");myBool flag=__VERIFIER_nondet_myBool();static int oflag;static int oi;static int olen;if(pStored0){__CPROVER_assert(!(oflag==flag && oi==i && olen==len),"recurrent state found");} if(flag){oflag=flag;oi=i;olen=len;pStored0=myTrue;} ;}
+    argv1[len-1] = 0;
+    int* argv = argv1;
+    int fp = 0;
+    goto GOT_NEW_FILE;
+   myBool pStored1 = myFalse; __VERIFIER_reached_control(34, __func__);
+ do{ __VERIFIER_loop_head(34, __func__);
+printf("CBMC Instrumentation @ line34");myBool flag=__VERIFIER_nondet_myBool();static int oflag;static int ofp;static int olen;if(pStored1){__CPROVER_assert(!(oflag==flag && ofp==fp && olen==len),"recurrent state found");} if(flag){oflag=flag;ofp=fp;olen=len;pStored1=myTrue;} 
+        { __VERIFIER_reached_control(35, __func__);
+if( *argv > 0 )
+        { __VERIFIER_control_true(36, __func__);
+
+            fp = fopen_or_warn();
+            { __VERIFIER_reached_control(38, __func__);
+if( fp == 0 )
+                { __VERIFIER_control_true(39, __func__);
+continue;}}
+        }}
+        argv++;
+GOT_NEW_FILE:
+    fp++;
+    }while( *argv );
+    return 0;
+}
+./proton: line 26:   104 Aborted                 instrumenter -in *braced.c -c
+Missing_Iterator_Update_3_NT_Loop0_TestCase2_braced_instrumented.c
+NTFILE is Missing_Iterator_Update_3_NT_Loop0_TestCase2_braced_instrumented.c
+
+* *                 CBMC 5.95.0 (n/a) 64-bit                * *
+* *                 Copyright (C) 2001-2018                 * *
+* *              Daniel Kroening, Edmund Clarke             * *
+* * Carnegie Mellon University, Computer Science Department * *
+* *                  kroening@kroening.com                  * *
+* *        Protected in part by U.S. patent 7,225,417       * *
+* *  *****************************************************  * *
+* *                 Built with Llama                        * *
+* *  *****************************************************  * *
+
+NT-CHECKRESULT. GLRV=0. Z3RV=1. NTRES=0
+T-CHECKRESULT. TRES=0
+NTRES=0 TRES=0 for Missing_Iterator_Update_3_NT_Loop0_TestCase2.c
+FILE=Missing_Iterator_Update_3_NT_Loop0_TestCase2_braced_instrumented.c GLRES=0 Z3RES=1 NTRES=0 TRES=0 TNT-RESULT=TRUE EXITCODE=0
+TRUE
+Runtime: 6521 milliseconds

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "27318706-2824-390a-8e22-059205c6d6ee"
+    creation_time: "2025-12-20T01:27:00Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop18_TestCase0.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop18_TestCase0.c: "a79893f1f4ccd04947105fd180abee6adf6f715a617ea67a926d0bed745e5949"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop18_TestCase0.c"
+        line: 11
+        column: 3
+        function: "main"
+      value: "(((((ui == (262144U) || ui == (131072U)) || (ui == (1024U) || ui == (2147483648U))) || ((ui == (32U) || ui == (65536U)) || (ui == (512U) || ui == (134217728U)))) || (((ui == (4194304U) || ui == (128U)) || (ui == (4U) || ui == (64U))) || ((ui == (8U) || ui == (256U)) || (ui == (16384U) || ui == (2048U))))) || ((((ui == (2097152U) || ui == (1073741824U)) || (ui == (524288U) || ui == (268435456U))) || ((ui == (8388608U) || ui == (536870912U)) || (ui == (1048576U) || ui == (1U)))) || (((ui == (2U) || ui == (67108864U)) || (ui == (4096U) || ui == (33554432U))) || ((ui == (16U) || ui == (8192U)) || (ui == (32768U) || ui == (16777216U))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop18_TestCase0.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

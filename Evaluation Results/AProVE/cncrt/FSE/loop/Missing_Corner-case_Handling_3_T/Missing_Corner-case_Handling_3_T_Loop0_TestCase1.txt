@@ -1,0 +1,245 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Corner-case_Handling_3_T_Loop0_TestCase1.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 90 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1126 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Corner-case_Handling_3_T_Loop0_TestCase1.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Corner-case_Handling_3_T_Loop0_TestCase1.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.stacksave" returnParam: *i8 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.stackrestore" returnParam: BasicVoidType parameters: (*i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca *i8, align 8
+		%5 = alloca i64, align 8
+		%6 = alloca i64, align 8
+		%7 = alloca i32, align 4
+		%8 = alloca i32, align 4
+		%9 = alloca i32, align 4
+		%10 = alloca i32, align 4
+		%11 = alloca i32, align 4
+		%12 = alloca i32, align 4
+		%13 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 1, %3
+		%14 = load %2
+		%15 = icmp sle %14 0
+		br %15, %25, %16
+	16:
+		%17 = load %3
+		%18 = icmp sle %17 0
+		br %18, %25, %19
+	19:
+		%20 = load %2
+		%21 = icmp sgt %20 65534
+		br %21, %25, %22
+	22:
+		%23 = load %3
+		%24 = icmp sgt %23 65534
+		br %24, %25, %26
+	25:
+		store 0, %1
+		br %104
+	26:
+		%27 = load %2
+		%28 = zext i32 %27 to i64
+		%29 = load %3
+		%30 = zext i32 %29 to i64
+		%31 = call *i8 @llvm.stacksave()
+		store %31, %4
+		%32 = mul i64 %28, %30
+		%33 = alloca i32, numElementsLit: %32, align 16
+		store %28, %5
+		store %30, %6
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %6)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %33)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		store 0, %7
+		br %34
+	34:
+		%35 = load %7
+		%36 = load %2
+		%37 = icmp slt %35 %36
+		br %37, %38, %66
+	38:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %8)
+		store 0, %8
+		br %39
+	39:
+		%40 = load %8
+		%41 = load %3
+		%42 = icmp slt %40 %41
+		br %42, %43, %62
+	43:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %9)
+		store 0, %9
+		%44 = load %9
+		%45 = icmp sgt %44 0
+		br %45, %46, %49
+	46:
+		%47 = load %9
+		%48 = sub i32 0, %47
+		store %48, %9
+		br %49
+	49:
+		%50 = load %9
+		%51 = srem i32 %50, 4
+		%52 = load %7
+		%53 = sext i32 %52 to i64
+		%54 = mul i64 %53, %30
+		%55 = getelementptr %33, %54
+		%56 = load %8
+		%57 = sext i32 %56 to i64
+		%58 = getelementptr %55, %57
+		store %51, %58
+		br %59
+	59:
+		%60 = load %8
+		%61 = add i32 %60, 1
+		store %61, %8
+		br %39
+	62:
+		br %63
+	63:
+		%64 = load %7
+		%65 = add i32 %64, 1
+		store %65, %7
+		br %34
+	66:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %10)
+		store 0, %10
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %11)
+		store 0, %11
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %12)
+		store 0, %12
+		br %67
+	67:
+		%68 = load %11
+		%69 = icmp ne %68 0
+		br %69, %74, %70
+	70:
+		%71 = load %12
+		%72 = load %2
+		%73 = icmp slt %71 %72
+		br %74
+	74:
+		%75 = phi [0, %67], [%73, %70]
+		br %75, %76, %102
+	76:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %13)
+		store 0, %13
+		br %77
+	77:
+		%78 = load %13
+		%79 = load %3
+		%80 = sub i32 %79, 1
+		%81 = icmp sle %78 %80
+		br %81, %82, %98
+	82:
+		%83 = load %12
+		%84 = sext i32 %83 to i64
+		%85 = mul i64 %84, %30
+		%86 = getelementptr %33, %85
+		%87 = load %13
+		%88 = sext i32 %87 to i64
+		%89 = getelementptr %86, %88
+		%90 = load %89
+		%91 = load %10
+		%92 = icmp ne %90 %91
+		br %92, %93, %94
+	93:
+		store 1, %11
+		br %94
+	94:
+		br %95
+	95:
+		%96 = load %13
+		%97 = add i32 %96, 1
+		store %97, %13
+		br %77
+	98:
+		br %99
+	99:
+		%100 = load %12
+		%101 = add i32 %100, 1
+		store %101, %12
+		br %67
+	102:
+		store 0, %1
+		%103 = load %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.stackrestore(*i8 %103)
+		br %104
+	104:
+		%105 = load %1
+		ret %105
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.003s
+Runtime: 3764 milliseconds

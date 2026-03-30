@@ -1,0 +1,199 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_3_T_Loop0_TestCase6.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 77 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1423 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_3_T_Loop0_TestCase6.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_3_T_Loop0_TestCase6.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Name: __const.main.argv1 initVal: (1,0) type: [2 x i32] addrSpace: null alignment: 4 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture noalias, *i8 nocapture noalias readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "fopen_or_warn" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = load @flag
+		%4 = add i32 %3, 1
+		store %4, @flag
+		%5 = load @flag
+		%6 = icmp sgt %5 10
+		br %6, %7, %8
+	7:
+		store 0, %1
+		br %14
+	8:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 5, %2
+		%9 = load %2
+		%10 = icmp sge %9 0
+		br %10, %11, %12
+	11:
+		store 0, %1
+		br %14
+	12:
+		%13 = load %2
+		store %13, %1
+		br %14
+	14:
+		%15 = load %1
+		ret %15
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 31
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca [2 x i32], align 4
+		%4 = alloca i32, align 4
+		%5 = alloca *i32, align 8
+		%6 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 2, %2
+		%7 = load %2
+		%8 = icmp sle %7 0
+		br %8, %9, %10
+	9:
+		store 0, %1
+		br %51
+	10:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[2 x i32] %3)
+		%11 = bitcast *[2 x i32] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %11, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@1ab39e36, i64 8, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		br %12
+	12:
+		%13 = load %4
+		%14 = load %2
+		%15 = sub i32 %14, 1
+		%16 = icmp slt %13 %15
+		br %16, %17, %21
+	17:
+		br %18
+	18:
+		%19 = load %4
+		%20 = add i32 %19, 1
+		store %20, %4
+		br %12
+	21:
+		%22 = load %2
+		%23 = sub i32 %22, 1
+		%24 = sext i32 %23 to i64
+		%25 = getelementptr %3, 0, %24
+		store 0, %25
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i32 %5)
+		%26 = getelementptr %3, 0, 0
+		store %26, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %43
+	27:
+		br %28
+	28:
+		%29 = load %5
+		%30 = load %29
+		%31 = icmp sgt %30 0
+		br %31, %32, %40
+	32:
+		%33 = call i32 @fopen_or_warn()
+		store %33, %6
+		%34 = load %6
+		%35 = icmp eq %34 0
+		br %35, %36, %39
+	36:
+		%37 = load %5
+		%38 = getelementptr %37, 1
+		store %38, %5
+		br %46
+	39:
+		br %40
+	40:
+		%41 = load %5
+		%42 = getelementptr %41, 1
+		store %42, %5
+		br %43
+	43:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%44 = load %6
+		%45 = add i32 %44, 1
+		store %45, %6
+		br %46
+	46:
+		%47 = load %5
+		%48 = load %47
+		%49 = icmp ne %48 0
+		br %49, %28, %50
+	50:
+		store 0, %1
+		br %51
+	51:
+		%52 = load %1
+		ret %52
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.009s
+Runtime: 4001 milliseconds

@@ -1,0 +1,38 @@
+///*** 1_main ***///
+START: main_bb6;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb6;
+flag := 0;
+count := 0;
+v9 := flag;
+v10 := count;
+TO: main_read.exit;
+
+FROM: main_read.exit;
+TO: main_read.exit_v.;
+FROM: main_read.exit_v.;
+assume((v9 == 1) || (v10 sgt 100));
+v. := 0;
+TO: main_read.exit_sv.;
+
+FROM: main_read.exit_v.;
+assume((v9 != 1) && (v10 sle 100));
+v. := -1;
+TO: main_read.exit_sv.;
+
+FROM: main_read.exit_sv.;
+TO: main_read.exit_end;
+
+FROM: main_read.exit_end;
+assume(v. slt 0);
+TO: main_bb7;
+
+FROM: main_read.exit_end;
+assume(v. sge 0);
+TO: main_read.exit;
+
+FROM: main_bb7;
+TO: main_bb7_ret;
+

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "8f93e8c3-59ca-31ec-a9be-d7e846c1cd3d"
+    creation_time: "2025-12-20T06:23:43Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase5.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase5.c: "00543e69da30aec06a962552291c2552eb5f2ee7600ea9f836c44c2aaefb663a"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase5.c"
+        line: 14
+        column: 5
+        function: "main"
+      value: "((((i == (1000000) && (number == (1000000) && width == (6)))) || (((i == (100000) && (number == (1000000) && width == (5)))) || ((i == (100) && (number == (1000000) && width == (2)))))) || ((((i == (10) && (number == (1000000) && width == (1)))) || ((i == (10000) && (number == (1000000) && width == (4))))) || (((i == (1000) && (number == (1000000) && width == (3)))) || ((i == (10000000) && (number == (1000000) && width == (7)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase5.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

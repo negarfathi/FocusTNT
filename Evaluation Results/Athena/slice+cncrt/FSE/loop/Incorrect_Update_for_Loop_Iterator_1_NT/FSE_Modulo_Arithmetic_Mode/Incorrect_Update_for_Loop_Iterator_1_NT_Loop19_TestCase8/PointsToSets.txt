@@ -1,0 +1,53 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE   3:   %max_msg_size = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %max_msg_size = alloca i32, align 4 + 0
+NODE   4:   %buffer_read_offset = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %buffer_read_offset = alloca i32, align 4 + 0
+NODE   5:   %buffer_bytes_left = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %buffer_bytes_left = alloca i32, align 4 + 0
+NODE   6:   %size = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %size = alloca i32, align 4 + 0
+NODE   7:   store i32 256, i32* %max_msg_size, align 4 (points-to size: 0)
+NODE   8:   store i32 600, i32* %buffer_read_offset, align 4 (points-to size: 0)
+NODE   9:   store i32 0, i32* %buffer_bytes_left, align 4 (points-to size: 0)
+NODE  10:   %0 = load i32, i32* %max_msg_size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  11:   ret void (points-to size: 0)
+NODE  12:   %1 = load i32, i32* %buffer_read_offset, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  13:   %2 = load i32, i32* %buffer_bytes_left, align 4 (points-to size: 1)
+    -> null + 0
+NODE  14:   store i32 0, i32* %__retres, align 4 (points-to size: 0)
+NODE  15:   store i32 64, i32* %size, align 4 (points-to size: 0)
+NODE  16:   %3 = load i32, i32* %buffer_bytes_left, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  17:   %4 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  18:   %div = sdiv i32 %4, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  19:   %5 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  20:   %mul = mul nsw i32 %5, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   store i32 %mul, i32* %size, align 4 (points-to size: 0)
+NODE  22:   %6 = load i32, i32* %max_msg_size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  23:   %7 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  24:   %8 = load i32, i32* %max_msg_size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  25:   %10 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  26:   %11 = load i32, i32* %buffer_read_offset, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  27:   %sub = sub nsw i32 %10, %11 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  28:   store i32 %sub, i32* %buffer_bytes_left, align 4 (points-to size: 0)
+NODE  29:   %9 = load i32, i32* %max_msg_size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  30:   store i32 %9, i32* %size, align 4 (points-to size: 0)
+NODE  31: main (points-to size: 1)
+    -> main + 0

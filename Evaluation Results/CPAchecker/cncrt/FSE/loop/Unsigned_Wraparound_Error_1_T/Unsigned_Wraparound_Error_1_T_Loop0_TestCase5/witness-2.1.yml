@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "2b8c14fb-679e-335f-8603-9536de270324"
+    creation_time: "2025-12-20T08:06:43Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop0_TestCase5.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop0_TestCase5.c: "9017b936f4d48f2949f27b714904c8e0a858fe763913922921f7912f7cab1d6a"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop0_TestCase5.c"
+        line: 21
+        column: 5
+        function: "main"
+      value: "((((((best == (100U) && cur == (1000U)) && (it_min == (10U) && (pre == (900U) && st_max == (1000U))))) || (((best == (100U) && cur == (1100U)) && (it_min == (10U) && (pre == (1000U) && st_max == (1000U)))))) || ((((best == (100U) && cur == (800U)) && (it_min == (10U) && (pre == (700U) && st_max == (1000U))))) || ((((best == (100U) && cur == (900U)) && (it_min == (10U) && (pre == (800U) && st_max == (1000U))))) || (((best == (100U) && cur == (500U)) && (it_min == (10U) && (pre == (400U) && st_max == (1000U)))))))) || (((((best == (100U) && cur == (300U)) && (it_min == (10U) && (pre == (200U) && st_max == (1000U))))) || ((((best == (100U) && cur == (700U)) && (it_min == (10U) && (pre == (600U) && st_max == (1000U))))) || (((best == (100U) && cur == (200U)) && (it_min == (10U) && (pre == (100U) && st_max == (1000U))))))) || ((((best == (100U) && cur == (100U)) && (it_min == (10U) && st_max == (1000U)))) || ((((best == (100U) && cur == (400U)) && (it_min == (10U) && (pre == (300U) && st_max == (1000U))))) || (((best == (100U) && cur == (600U)) && (it_min == (10U) && (pre == (500U) && st_max == (1000U)))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop0_TestCase5.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

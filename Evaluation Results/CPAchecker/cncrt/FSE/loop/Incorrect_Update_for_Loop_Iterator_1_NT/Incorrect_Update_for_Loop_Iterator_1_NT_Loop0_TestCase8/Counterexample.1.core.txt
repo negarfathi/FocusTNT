@@ -1,0 +1,51 @@
+line 12:	N2 -{int max_msg_size = 256;}-> N3
+	max_msg_size == 256;
+line 13:	N3 -{int buffer_read_offset = 600;}-> N4
+	buffer_read_offset == 600;
+line 14:	N4 -{int buffer_bytes_left = 0;}-> N5
+	buffer_bytes_left == 0;
+line 15:	N5 -{[!(max_msg_size < -1)]}-> N9
+	max_msg_size == 256;
+line 15:	N9 -{[!(buffer_read_offset <= 0)]}-> N8
+	buffer_read_offset == 600;
+line 15:	N8 -{[!(buffer_bytes_left < 0)]}-> N6
+	buffer_bytes_left == 0;
+line 17:	N6 -{int size = 64;}-> N11
+	size == 64;
+line 18:	N11 -{while}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == 0;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 128;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 256;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 128;
+	max_msg_size == 256;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -472;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -472;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 256;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 256;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 256;
+	max_msg_size == 256;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -344;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -344;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 512;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 256;
+line 21:	N18 -{[size > max_msg_size]}-> N17
+	buffer_bytes_left == -344;
+	size == 256;
+	size == 512;
+	max_msg_size == 256;
+none:	N20 -{}-> N12

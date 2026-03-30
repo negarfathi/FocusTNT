@@ -1,0 +1,88 @@
+CONTROL AUTOMATON ErrorPath5
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG752;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG752 :
+    MATCH "extern unsigned char __VERIFIER_nondet_uchar(void);" -> GOTO ARG754_1_1;
+STATE USEFIRST ARG754_0_1 :
+    MATCH "extern unsigned char __VERIFIER_nondet_uchar(void);" -> GOTO ARG754_1_1;
+STATE USEFIRST ARG754_1_1 :
+    MATCH "void main(void)" -> GOTO ARG754_2_1;
+STATE USEFIRST ARG754_2_1 :
+    MATCH "" -> GOTO ARG754_3_1;
+STATE USEFIRST ARG754_3_1 :
+    MATCH "unsigned char l = 1;" -> GOTO ARG754;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG754 :
+    MATCH "" -> GOTO ARG908;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG908 :
+    MATCH "1" -> GOTO ARG926_1_2;
+STATE USEFIRST ARG926_0_2 :
+    MATCH "1" -> GOTO ARG926_1_2;
+STATE USEFIRST ARG926_1_2 :
+    MATCH "unsigned char tmp_1;" -> GOTO ARG926_2_2;
+STATE USEFIRST ARG926_2_2 :
+    MATCH "tmp_1 = l;" -> GOTO ARG926_3_2;
+STATE USEFIRST ARG926_3_2 :
+    MATCH "l = (unsigned char)((int)l - 1);" -> GOTO ARG926;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG926 :
+    MATCH "[[!(! tmp_1)]]" -> GOTO ARG932;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG932 :
+    MATCH "unsigned char tmp_0;" -> GOTO ARG936_1_3;
+STATE USEFIRST ARG936_0_3 :
+    MATCH "unsigned char tmp_0;" -> GOTO ARG936_1_3;
+STATE USEFIRST ARG936_1_3 :
+    MATCH "tmp_0 = l;" -> GOTO ARG936_2_3;
+STATE USEFIRST ARG936_2_3 :
+    MATCH "l = (unsigned char)((int)l - 1);" -> GOTO ARG936;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG936 :
+    MATCH "" -> GOTO ARG970;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG970 :
+    MATCH "1" -> GOTO ARG986_1_4;
+STATE USEFIRST ARG986_0_4 :
+    MATCH "1" -> GOTO ARG986_1_4;
+STATE USEFIRST ARG986_1_4 :
+    MATCH "unsigned char tmp_1;" -> GOTO ARG986_2_4;
+STATE USEFIRST ARG986_2_4 :
+    MATCH "tmp_1 = l;" -> GOTO ARG986_3_4;
+STATE USEFIRST ARG986_3_4 :
+    MATCH "l = (unsigned char)((int)l - 1);" -> GOTO ARG986;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG986 :
+    MATCH "[[!(! tmp_1)]]" -> GOTO ARG994;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG994 :
+    MATCH "unsigned char tmp_0;" -> GOTO ARG1002_1_5;
+STATE USEFIRST ARG1002_0_5 :
+    MATCH "unsigned char tmp_0;" -> GOTO ARG1002_1_5;
+STATE USEFIRST ARG1002_1_5 :
+    MATCH "tmp_0 = l;" -> GOTO ARG1002_2_5;
+STATE USEFIRST ARG1002_2_5 :
+    MATCH "l = (unsigned char)((int)l - 1);" -> GOTO ARG1002;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG1002 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG1316 :
+    TRUE -> STOP;
+
+END AUTOMATON

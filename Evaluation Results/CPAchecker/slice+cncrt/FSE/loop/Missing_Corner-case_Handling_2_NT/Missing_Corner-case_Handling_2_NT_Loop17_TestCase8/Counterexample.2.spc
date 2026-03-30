@@ -1,0 +1,88 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG6;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG6 :
+    MATCH "int __retres;" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int val = -5;" -> ASSUME {val == (-5);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "[!(! val)]" -> ASSUME {val == (-5);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG20;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG20 :
+    MATCH "[val != 0]" -> ASSUME {val == (-5);} GOTO ARG21;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG21 :
+    MATCH "val >>= 1;" -> ASSUME {val == (-3);} GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "" -> GOTO ARG23;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG23 :
+    MATCH "[val != 0]" -> ASSUME {val == (-3);} GOTO ARG41;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG41 :
+    MATCH "val >>= 1;" -> ASSUME {val == (-2);} GOTO ARG42;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG42 :
+    MATCH "" -> GOTO ARG45;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG45 :
+    MATCH "[val != 0]" -> ASSUME {val == (-2);} GOTO ARG50;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG50 :
+    MATCH "val >>= 1;" -> ASSUME {val == (-1);} GOTO ARG51;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG51 :
+    MATCH "" -> GOTO ARG52;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG52 :
+    MATCH "[val != 0]" -> ASSUME {val == (-1);} GOTO ARG53;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG53 :
+    MATCH "val >>= 1;" -> ASSUME {val == (-1);} GOTO ARG54;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG54 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG55 :
+    TRUE -> STOP;
+
+END AUTOMATON

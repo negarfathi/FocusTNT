@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <key attr.name="invariant" attr.type="string" for="node" id="invariant"/>
+ <key attr.name="isEntryNode" attr.type="boolean" for="node" id="entry">
+  <default>false</default>
+ </key>
+ <key attr.name="isSinkNode" attr.type="boolean" for="node" id="sink">
+  <default>false</default>
+ </key>
+ <key attr.name="isCycleHead" attr.type="boolean" for="node" id="cyclehead">
+  <default>false</default>
+ </key>
+ <key attr.name="sourcecodeLanguage" attr.type="string" for="graph" id="sourcecodelang"/>
+ <key attr.name="programFile" attr.type="string" for="graph" id="programfile"/>
+ <key attr.name="programHash" attr.type="string" for="graph" id="programhash"/>
+ <key attr.name="specification" attr.type="string" for="graph" id="specification"/>
+ <key attr.name="architecture" attr.type="string" for="graph" id="architecture"/>
+ <key attr.name="producer" attr.type="string" for="graph" id="producer"/>
+ <key attr.name="creationTime" attr.type="string" for="graph" id="creationtime"/>
+ <key attr.name="startline" attr.type="int" for="edge" id="startline"/>
+ <key attr.name="endline" attr.type="int" for="edge" id="endline"/>
+ <key attr.name="originFileName" attr.type="string" for="edge" id="originfile">
+  <default>/FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase0.c</default>
+ </key>
+ <key attr.name="control" attr.type="string" for="edge" id="control"/>
+ <key attr.name="enterFunction" attr.type="string" for="edge" id="enterFunction"/>
+ <key attr.name="witness-type" attr.type="string" for="graph" id="witness-type"/>
+ <key attr.name="inputWitnessHash" attr.type="string" for="graph" id="inputwitnesshash"/>
+ <graph edgedefault="directed">
+  <data key="witness-type">violation_witness</data>
+  <data key="sourcecodelang">C</data>
+  <data key="producer">CPAchecker 4.2.2-87-g286450afe4 / terminationAnalysis</data>
+  <data key="specification">CHECK( init(main()), LTL(F end) )</data>
+  <data key="programfile">/FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase0.c</data>
+  <data key="programhash">7a3e4f837dc60e678c7cd075b0710d6f6b5e2fbba43606a8f5a4c4a14cb07f81</data>
+  <data key="architecture">64bit</data>
+  <data key="creationtime">2025-12-19T21:42:41Z</data>
+  <node id="A263">
+   <data key="entry">true</data>
+  </node>
+  <node id="A265_2_1"/>
+  <edge source="A263" target="A265_2_1">
+   <data key="startline">10</data>
+   <data key="endline">10</data>
+   <data key="enterFunction">main</data>
+  </edge>
+  <node id="A266"/>
+  <edge source="A265_2_1" target="A266">
+   <data key="startline">13</data>
+   <data key="endline">13</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="sink">
+   <data key="sink">true</data>
+  </node>
+  <edge source="A265_2_1" target="sink">
+   <data key="startline">13</data>
+   <data key="endline">13</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A266" target="sink">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A271">
+   <data key="cyclehead">true</data>
+   <data key="invariant">1</data>
+  </node>
+  <edge source="A266" target="A271">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A271" target="A271">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A271" target="sink">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-false</data>
+  </edge>
+ </graph>
+</graphml>

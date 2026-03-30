@@ -1,0 +1,120 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "int main()" -> GOTO ARG6;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG6 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int i,j;" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int i,j;" -> GOTO ARG10;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG10 :
+    MATCH "int num = 5;" -> ASSUME {num == (5);} GOTO ARG13;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG13 :
+    MATCH "[!(num > 65534)]" -> ASSUME {num == (5);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG19;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG19 :
+    MATCH "i = 0" -> ASSUME {i == (0);} GOTO ARG28;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG28 :
+    MATCH "[i < num]" -> ASSUME {i == (0);num == (5);} GOTO ARG33;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG33 :
+    MATCH "" -> GOTO ARG34;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG34 :
+    MATCH "i = 0" -> ASSUME {i == (0);} GOTO ARG35;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG35 :
+    MATCH "[i < 3]" -> ASSUME {i == (0);} GOTO ARG36;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG36 :
+    MATCH "" -> GOTO ARG39;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG39 :
+    MATCH "i++" -> ASSUME {i == (1);} GOTO ARG40;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG40 :
+    MATCH "[i < 3]" -> ASSUME {i == (1);} GOTO ARG41;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG41 :
+    MATCH "" -> GOTO ARG42;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG42 :
+    MATCH "i++" -> ASSUME {i == (2);} GOTO ARG52;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG52 :
+    MATCH "[i < 3]" -> ASSUME {i == (2);} GOTO ARG61;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG61 :
+    MATCH "" -> GOTO ARG63;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG63 :
+    MATCH "i++" -> ASSUME {i == (3);} GOTO ARG65;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG65 :
+    MATCH "[!(i < 3)]" -> ASSUME {i == (3);} GOTO ARG70;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG70 :
+    MATCH "" -> GOTO ARG71;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG71 :
+    MATCH "i++" -> ASSUME {i == (4);} GOTO ARG74;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG74 :
+    MATCH "[i < num]" -> ASSUME {i == (4);num == (5);} GOTO ARG75;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG75 :
+    MATCH "" -> GOTO ARG76;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG76 :
+    MATCH "i = 0" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG77 :
+    TRUE -> STOP;
+
+END AUTOMATON

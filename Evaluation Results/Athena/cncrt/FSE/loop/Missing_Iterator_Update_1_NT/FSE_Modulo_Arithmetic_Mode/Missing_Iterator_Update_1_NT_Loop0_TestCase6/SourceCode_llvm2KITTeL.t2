@@ -1,0 +1,78 @@
+///*** 1_main ***///
+START: main_bb10;
+
+FROM: main_bb10;
+errno := 0;
+v15 := errno;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v15 != 1);
+TO: main_bb11;
+
+FROM: main_bb10_end;
+assume(v15 == 1);
+TO: main_bb12;
+
+FROM: main_bb11;
+errno := 1;
+var__temp_vret.0 := -5;
+TO: main_waitpid.exit;
+
+FROM: main_bb12;
+errno := 2;
+var__temp_vret.0 := -5;
+TO: main_waitpid.exit;
+
+FROM: main_waitpid.exit;
+vret.0 := var__temp_vret.0;
+var__temp_vret.1 := vret.0;
+TO: main_waitpid.exit_end;
+
+FROM: main_waitpid.exit_end;
+assume(vret.0 == 0);
+TO: main_bb13;
+
+FROM: main_waitpid.exit_end;
+assume(vret.0 != 0);
+TO: main_waitpid.exit1;
+
+FROM: main_bb13;
+v18 := errno;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v18 != 1);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v18 == 1);
+TO: main_bb15;
+
+FROM: main_bb14;
+errno := 1;
+var__temp_vret.1 := -5;
+TO: main_waitpid.exit1;
+
+FROM: main_bb15;
+errno := 2;
+var__temp_vret.1 := -5;
+TO: main_waitpid.exit1;
+
+FROM: main_waitpid.exit1;
+vret.1 := var__temp_vret.1;
+v21 := errno;
+var__temp_vret.0 := vret.1;
+TO: main_waitpid.exit1_end;
+
+FROM: main_waitpid.exit1_end;
+assume((vret.1 < 0) && (v21 == 1));
+TO: main_waitpid.exit;
+
+FROM: main_waitpid.exit1_end;
+assume((vret.1 >= 0) || (v21 != 1));
+TO: main_bb16;
+
+FROM: main_bb16;
+TO: main_bb16_ret;
+

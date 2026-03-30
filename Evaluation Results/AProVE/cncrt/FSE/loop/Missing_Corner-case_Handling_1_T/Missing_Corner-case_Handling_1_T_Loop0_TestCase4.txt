@@ -1,0 +1,136 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Corner-case_Handling_1_T_Loop0_TestCase4.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 84 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 466 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Corner-case_Handling_1_T_Loop0_TestCase4.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Corner-case_Handling_1_T_Loop0_TestCase4.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Name: count initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "read" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 14
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = load @flag
+		%4 = icmp eq %3 1
+		br %4, %8, %5
+	5:
+		%6 = load @count
+		%7 = icmp sgt %6 100
+		br %7, %8, %9
+	8:
+		store 0, %1
+		br %23
+	9:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store -10, %2
+		%10 = load %2
+		%11 = icmp sle %10 0
+		br %11, %12, %13
+	12:
+		store -1, %1
+		br %23
+	13:
+		%14 = load %2
+		%15 = srem i32 %14, 1000
+		store %15, %2
+		%16 = load %2
+		%17 = icmp slt %16 995
+		br %17, %18, %22
+	18:
+		%19 = load @count
+		%20 = add i32 %19, 1
+		store %20, @count
+		%21 = load %2
+		store %21, %1
+		br %23
+	22:
+		store 1, @flag
+		store 0, %1
+		br %23
+	23:
+		%24 = load %1
+		ret %24
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 49
+	0:
+		%1 = alloca i32, align 4
+		store 0, %1
+		br %2
+	2:
+		%3 = call i32 @read()
+		%4 = icmp sle %3 0
+		br %4, %5, %6
+	5:
+		br %7
+	6:
+		br %2
+	7:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 2993 milliseconds

@@ -1,0 +1,20 @@
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+
+Commit Number: 8852f5f8ff3d521897175ddeb711d6b77e03fa8a
+URL: https://github.com/GNUnet-Mirror/GNUnet/commit/8852f5f8ff3d521897175ddeb711d6b77e03fa8a
+Project Name: GNUnet
+License: AGPL-3.0
+termination: FALSE
+*/
+int main()
+{
+    unsigned int ui = 1;
+    unsigned int size = 4000000000;
+    unsigned int BUFFSIZE = 1;
+    if( size < BUFFSIZE )
+        size = BUFFSIZE;
+    while( ui < size )
+        ui *= 2;
+    return 0;
+}

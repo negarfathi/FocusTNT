@@ -1,0 +1,533 @@
+#include <regex>
+#include <thread>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+#include "clang/Tooling/Tooling.h"
+
+#include "../include/file/info.h"
+#include "../include/slicer/action.h"
+#include "../include/concretizer/action.h"
+#include "../include/result_processor/result_processor.h"
+
+void mergeSlicedPrograms(std::string &slicedProgram1, std::string &slicedProgram2, std::string &functionName, std::filesystem::path &mergedSlicedProgram);
+void fixFramacBugs(const std::string& fileName, const std::filesystem::path& filePath);
+
+int main(int argc, char *argv[]) {
+    if (argc < 7) {
+        std::cerr << "Usage: ./FocusTNT <path/to/SourceCode.c> <path/to/TestCases.csv> --tool=Athena/PROTON/UAutomizer/AProVE/CPAchecker/2LS --benchmark=TermCOMP/FSE --slicer=true/false --concretizer=true/false --timeout=X\n";
+        return 1;
+    }
+
+
+    std::filesystem::path toolPath = std::filesystem::canonical(argv[0]);
+    std::filesystem::path toolDirectory = toolPath.parent_path();
+
+
+    std::filesystem::path sourceCodePath = std::filesystem::canonical(argv[1]);
+    std::ifstream sourceCodeStream(sourceCodePath);
+    if (!sourceCodeStream) {
+        std::cerr << strerror(errno) << ": " << sourceCodePath << std::endl;
+        return 1;
+    }
+
+
+    std::filesystem::path testCasesPath = std::filesystem::canonical(argv[2]);
+    std::ifstream testCasesStream(testCasesPath);
+    if (!testCasesStream) {
+        std::cerr << strerror(errno) << ": " << testCasesPath << std::endl;
+        return 1;
+    }
+
+
+    std::string toolName = argv[3];
+    toolName.erase(toolName.find("--tool="), std::string("--tool=").length());
+
+
+    std::string benchmarkName = argv[4];
+    benchmarkName.erase(benchmarkName.find("--benchmark="), std::string("--benchmark=").length());
+
+
+    std::string slicerFlag = argv[5];
+    slicerFlag.erase(slicerFlag.find("--slicer="), std::string("--slicer=").length());
+
+
+    std::string concretizerFlag = argv[6];
+    concretizerFlag.erase(concretizerFlag.find("--concretizer="), std::string("--concretizer=").length());
+
+
+    std::string timeout = argv[7];
+    timeout.erase(timeout.find("--timeout="), std::string("--timeout=").length());
+
+
+    sourceCodeName = sourceCodePath.stem().string();
+    sourceCodeExtension = sourceCodePath.extension().string();
+    sourceCodeDirectory = sourceCodePath.parent_path();
+
+
+    std::filesystem::create_directories(sourceCodeDirectory / "slicer");
+    std::filesystem::create_directories(sourceCodeDirectory / "concretizer");
+
+
+    if (slicerFlag == "true") {
+        std::vector<LoopDescriptor> loops;
+
+        std::stringstream sourceCodeBuffer;
+        sourceCodeBuffer << sourceCodeStream.rdbuf();
+        std::string sourceCodeFile = sourceCodeBuffer.str();
+
+        std::string header = "#include \"stdlib.h\"\n";
+        if (sourceCodeFile.find(header) == std::string::npos) {
+            sourceCodeFile = header + sourceCodeFile;
+            std::ofstream sourceCodeStream(sourceCodePath);
+            sourceCodeStream << sourceCodeFile;
+            sourceCodeStream.close();
+        }
+
+        clang::tooling::runToolOnCode(std::make_unique<slicer::Action>(loops), sourceCodeFile);
+
+        if (!loops.empty() && !sourceCodeName.starts_with("Incorrect_Return_")) {
+            for (auto &loop : loops) {
+                std::cout << "Generating a sliced program for the loop at line " + loop.lineNumber + "..." << std::endl;
+
+                std::string slicingCriterion = "";
+                if (!loop.conditionVariables.empty()) {
+                    slicingCriterion += "\"-slice-rd=";
+                    int counter = 1;
+                    for (auto &condVar : loop.conditionVariables) {
+                        if (counter > 1) slicingCriterion += ", ";
+                        slicingCriterion += condVar;
+                        counter++;
+                    }
+                    slicingCriterion += "\" ";
+                }
+                if (loop.hasEarlyExits) {
+                    slicingCriterion += "-slice-annot " + loop.functionName + " ";
+                }
+
+                if (loop.functionName == "main") {
+                    std::string command_FramaC = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR framac/frama-c-gui:dev bash -c '"
+                                                 "frama-c -load-plugin slicing -eva -quiet "
+                                                 "-main main "
+                                                 + slicingCriterion +
+                                                 "-slicing-level 3 -slicing-keep-annotations "
+                                                 "/FILES_DIR/" + sourceCodeName + sourceCodeExtension + " "
+                                                 "-then-on \"Slicing export\" -print | awk \"/\\/\\* Generated by Frama-C \\*/ {found=1} found\" > /FILES_DIR/slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + sourceCodeExtension + "'";
+                    int result_FramaC = system(command_FramaC.c_str());
+                    if (result_FramaC != 0) {
+                        std::cerr << "Frama-C execution failed." << "\n";
+                    }
+                    fixFramacBugs(sourceCodeName, (sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + sourceCodeExtension)).string());
+                }
+                else {
+                    std::string command1_FramaC = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR framac/frama-c-gui:dev bash -c '"
+                                                  "frama-c -load-plugin slicing -eva -quiet "
+                                                  "-main " + loop.functionName + " "
+                                                  + slicingCriterion +
+                                                  "-slice-return " + loop.functionName + " "
+                                                  "-slicing-level 3 -slicing-keep-annotations "
+                                                  "/FILES_DIR/" + sourceCodeName + sourceCodeExtension + " "
+                                                  "-then-on \"Slicing export\" -print | awk \"/\\/\\* Generated by Frama-C \\*/ {found=1} found\" > /FILES_DIR/slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v1" + sourceCodeExtension + "'";
+                    int result1_FramaC = system(command1_FramaC.c_str());
+                    if (result1_FramaC != 0) {
+                        std::cerr << "Frama-C execution failed." << "\n";
+                    }
+                    fixFramacBugs(sourceCodeName, (sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v1" + sourceCodeExtension)).string());
+
+                    std::string command2_FramaC = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR framac/frama-c-gui:dev bash -c '"
+                                                  "cd /FILES_DIR && "
+                                                  "frama-c -load-plugin slicing -eva -quiet "
+                                                  "-main main "
+                                                  "-slice-calls " + loop.functionName + " "
+                                                  "-slicing-level 3 -slicing-keep-annotations "
+                                                  "/FILES_DIR/" + sourceCodeName + sourceCodeExtension + " "
+                                                  "-then-on \"Slicing export\" -print | awk \"/\\/\\* Generated by Frama-C \\*/ {found=1} found\" > /FILES_DIR/slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v2" + sourceCodeExtension + "'";
+                    int result2_FramaC = system(command2_FramaC.c_str());
+                    if (result2_FramaC != 0) {
+                        std::cerr << "Frama-C execution failed." << "\n";
+                    }
+                    fixFramacBugs(sourceCodeName, (sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v2" + sourceCodeExtension)).string());
+
+                    std::ifstream slicedProgram1_Stream(sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v1" + sourceCodeExtension));
+                    std::stringstream slicedProgram1_Buffer;
+                    slicedProgram1_Buffer << slicedProgram1_Stream.rdbuf();
+                    std::string slicedProgram1 = slicedProgram1_Buffer.str();
+
+                    std::ifstream slicedProgram2_Stream(sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "_v2" + sourceCodeExtension));
+                    std::stringstream slicedProgram2_Buffer;
+                    slicedProgram2_Buffer << slicedProgram2_Stream.rdbuf();
+                    std::string slicedProgram2 = slicedProgram2_Buffer.str();
+
+                    std::filesystem::path mergedSlicedProgram = sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop" + loop.lineNumber + "" + sourceCodeExtension);
+
+                    mergeSlicedPrograms(slicedProgram1, slicedProgram2, loop.functionName, mergedSlicedProgram);
+                }
+            }
+
+            for (auto &cPath : std::filesystem::directory_iterator(sourceCodeDirectory / "slicer")) {
+                if (cPath.is_regular_file() && cPath.path().extension() == sourceCodeExtension) {
+                    std::string cName = cPath.path().stem().string();
+                    if (!cName.ends_with("_v1") && !cName.ends_with("_v2")) {
+                        std::ifstream inStream(cPath.path());
+                        std::stringstream inBuffer;
+                        inBuffer << inStream.rdbuf();
+                        std::string inFile = inBuffer.str();
+                        inStream.close();
+
+                        std::size_t acslStartPos = inFile.find("/*@");
+                        while (acslStartPos != std::string::npos) {
+                            std::size_t acslEndPos = inFile.find("*/", acslStartPos + 3);
+                            if (acslEndPos == std::string::npos) {
+                                inFile.erase(acslStartPos);
+                                break;
+                            }
+                            else {
+                                std::size_t eraseLength = (acslEndPos - acslStartPos) + 2;
+                                if (acslEndPos + 3 < inFile.size() && inFile[acslEndPos + 2] == ' ' && inFile[acslEndPos + 3] == ';') {
+                                    eraseLength += 2;
+                                }
+                                inFile.erase(acslStartPos, eraseLength);
+                            }
+                            acslStartPos = inFile.find("/*@", acslStartPos);
+                        }
+
+                        std::size_t headerPos = inFile.find(header);
+                        if (headerPos != std::string::npos) {
+                            inFile.erase(headerPos, header.size());
+                        }
+
+                        std::ofstream outStream(cPath.path(), std::ios::trunc);
+                        outStream << inFile;
+                        outStream.close();
+                    }
+                }
+            }
+        }
+
+        else {
+            std::filesystem::copy_file(sourceCodeDirectory / (sourceCodeName + sourceCodeExtension), sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop0" + sourceCodeExtension), std::filesystem::copy_options::overwrite_existing);
+        }
+    }
+
+    else {
+        std::filesystem::copy_file(sourceCodeDirectory / (sourceCodeName + sourceCodeExtension), sourceCodeDirectory / ("slicer/" + sourceCodeName + "_Loop0" + sourceCodeExtension), std::filesystem::copy_options::overwrite_existing);
+    }
+
+
+    if (concretizerFlag == "true") {
+        std::vector<std::vector<VariableAssignment>> allAssignments;
+        std::string line;
+        std::vector<std::string> names;
+        if (std::getline(testCasesStream, line)) {
+            int braceDepth = 0;
+            std::string current;
+            for (char c : line) {
+                if (c == ',' && braceDepth == 0) {
+                    auto left = current.find_first_not_of(" \t\r\n");
+                    auto right = current.find_last_not_of(" \t\r\n");
+                    if (left != std::string::npos && right != std::string::npos)
+                        names.push_back(current.substr(left, right - left + 1));
+                    else
+                        names.push_back("");
+                    current.clear();
+                } else {
+                    if (c == '{') braceDepth++;
+                    if (c == '}') braceDepth--;
+                    current.push_back(c);
+                }
+            }
+            if (!current.empty()) {
+                auto left = current.find_first_not_of(" \t\r\n");
+                auto right = current.find_last_not_of(" \t\r\n");
+                if (left != std::string::npos && right != std::string::npos)
+                    names.push_back(current.substr(left, right - left + 1));
+                else
+                    names.push_back("");
+            }
+        }
+        while (std::getline(testCasesStream, line)) {
+            if (!line.empty()) {
+                int braceDepth = 0;
+                std::string current;
+                std::vector<std::string> values;
+                std::vector<VariableAssignment> rowAssignments;
+                for (char c : line) {
+                    if (c == ',' && braceDepth == 0) {
+                        auto left = current.find_first_not_of(" \t\r\n");
+                        auto right = current.find_last_not_of(" \t\r\n");
+                        if (left != std::string::npos && right != std::string::npos)
+                            values.push_back(current.substr(left, right - left + 1));
+                        else
+                            values.push_back("");
+                        current.clear();
+                    } else {
+                        if (c == '{') braceDepth++;
+                        if (c == '}') braceDepth--;
+                        current.push_back(c);
+                    }
+                }
+                if (!current.empty()) {
+                    auto left = current.find_first_not_of(" \t\r\n");
+                    auto right = current.find_last_not_of(" \t\r\n");
+                    if (left != std::string::npos && right != std::string::npos)
+                        values.push_back(current.substr(left, right - left + 1));
+                    else
+                        values.push_back("");
+                }
+                for (size_t columnIndex = 0;
+                     columnIndex < values.size() && columnIndex < names.size();
+                     ++columnIndex) {
+                    rowAssignments.push_back({names[columnIndex], values[columnIndex]});
+                }
+                allAssignments.push_back(rowAssignments);
+            }
+        }
+
+        for (auto &cPath : std::filesystem::directory_iterator(sourceCodeDirectory / "slicer")) {
+            if (cPath.is_regular_file() && cPath.path().extension() == sourceCodeExtension) {
+                std::string cName = cPath.path().stem().string();
+                if (!cName.ends_with("_v1") && !cName.ends_with("_v2")) {
+                    std::ifstream cStream(cPath);
+                    std::stringstream cBuffer;
+                    cBuffer << cStream.rdbuf();
+                    std::string cFile = cBuffer.str();
+
+                    if (allAssignments.size() == 0) {
+                        std::filesystem::copy_file(cPath, sourceCodeDirectory / ("concretizer/" + cName + "_TestCase0" + sourceCodeExtension), std::filesystem::copy_options::overwrite_existing);
+                    }
+                    else {
+                        for (size_t i = 0; i < allAssignments.size(); i++) {
+                            std::cout << "Generating a concretized program for " + cName + " from test case " + std::to_string(i + 1) + "..." << std::endl;
+
+                            std::vector<VariableAssignment> &assignments = allAssignments[i];
+                            std::string assignmentIndex = std::to_string(i + 1);
+                            clang::tooling::runToolOnCode(std::make_unique<concretizer::Action>(assignments, assignmentIndex), cFile);
+
+                            std::filesystem::rename(sourceCodeDirectory / (sourceCodeName + "_TestCase" + assignmentIndex + sourceCodeExtension), sourceCodeDirectory / ("concretizer/" + cName + "_TestCase" + assignmentIndex + sourceCodeExtension));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    else {
+        for (auto &cPath : std::filesystem::directory_iterator(sourceCodeDirectory / "slicer")) {
+            if (cPath.is_regular_file() && cPath.path().extension() == sourceCodeExtension) {
+                std::string cName = cPath.path().stem().string();
+                if (!cName.ends_with("_v1") && !cName.ends_with("_v2")) {
+                    std::filesystem::copy_file(cPath, sourceCodeDirectory / ("concretizer/" + cName + "_TestCase0" + sourceCodeExtension), std::filesystem::copy_options::overwrite_existing);
+                }
+            }
+        }
+    }
+
+
+    for (auto &cPath : std::filesystem::directory_iterator(sourceCodeDirectory / "concretizer")) {
+        if (cPath.is_regular_file() && cPath.path().extension() == sourceCodeExtension) {
+            auto start_time = std::chrono::steady_clock::now();
+
+            std::string cName = cPath.path().stem().string();
+
+            std::cout << "Running " + toolName + " on " + cName + "..." << std::endl;
+
+            std::string input_file = cName + sourceCodeExtension;
+            std::string output_file = cName + ".txt";
+
+            if (toolName == "Athena") {
+                input_file = std::regex_replace(cName, std::regex("_Loop[0-9]+_TestCase[0-9]+"), "") + sourceCodeExtension;
+
+                if (benchmarkName == "TermCOMP") {
+                    std::filesystem::create_directories(sourceCodeDirectory / cName);
+                    std::filesystem::copy_file(cPath, sourceCodeDirectory / (cName + "/" + input_file), std::filesystem::copy_options::overwrite_existing);
+                    std::string command_TermCOMP = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
+                                                   " " + (sourceCodeDirectory / (cName + "/" + input_file)).string() +
+                                                   " --timeout=" + timeout +
+                                                   " --semantic-augmentor-mode=none"
+                                                   " --type-annotator-mode=none"
+                                                   " --signedness-info=none"
+                                                   " --unreachable-exit=true"
+                                                   " --muval-mode=TermCOMP";
+                    int result_TermCOMP = system(command_TermCOMP.c_str());
+                    if (result_TermCOMP != 0) {
+                        std::cerr << toolName + " execution failed." << "\n";
+                    }
+                    std::filesystem::copy_file(sourceCodeDirectory / (cName + "/Output.txt"), sourceCodeDirectory / output_file, std::filesystem::copy_options::overwrite_existing);
+                }
+
+                else if (benchmarkName == "FSE") {
+                    std::filesystem::create_directories(sourceCodeDirectory / ("FSE_Bitvector_Mode/" + cName));
+                    std::filesystem::copy_file(cPath, sourceCodeDirectory / ("FSE_Bitvector_Mode/" + cName + "/" + input_file), std::filesystem::copy_options::overwrite_existing);
+                    std::string command_BV = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
+                                             " " + (sourceCodeDirectory / ("FSE_Bitvector_Mode/" + cName + "/" + input_file)).string() +
+                                             " --timeout=" + timeout +
+                                             " --semantic-augmentor-mode=none"
+                                             " --type-annotator-mode=all"
+                                             " --signedness-info=all"
+                                             " --unreachable-exit=true"
+                                             " --muval-mode=FSE-BV";
+                    int result_BV = system(command_BV.c_str());
+                    if (result_BV != 0) {
+                        std::cerr << toolName + "_BV execution failed." << "\n";
+                    }
+                    std::filesystem::copy_file(sourceCodeDirectory / ("FSE_Bitvector_Mode/" + cName + "/Output.txt"), sourceCodeDirectory / ("FSE_Bitvector_Mode_" + output_file), std::filesystem::copy_options::overwrite_existing);
+
+
+                    std::filesystem::create_directories(sourceCodeDirectory / ("FSE_Modulo_Arithmetic_Mode/" + cName));
+                    std::filesystem::copy_file(cPath, sourceCodeDirectory / ("FSE_Modulo_Arithmetic_Mode/" + cName + "/" + input_file), std::filesystem::copy_options::overwrite_existing);
+                    std::string command_MA = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
+                                             " " + (sourceCodeDirectory / ("FSE_Modulo_Arithmetic_Mode/" + cName + "/" + input_file)).string() +
+                                             " --timeout=" + timeout +
+                                             " --semantic-augmentor-mode=only-nobv"
+                                             " --type-annotator-mode=only-bv"
+                                             " --signedness-info=only-bv"
+                                             " --unreachable-exit=true"
+                                             " --muval-mode=FSE-MI";
+                    int result_MA = system(command_MA.c_str());
+                    if (result_MA != 0) {
+                        std::cerr << toolName + "_MA execution failed." << "\n";
+                    }
+                    std::filesystem::copy_file(sourceCodeDirectory / ("FSE_Modulo_Arithmetic_Mode/" + cName + "/Output.txt"), sourceCodeDirectory / ("FSE_Modulo_Arithmetic_Mode_" + output_file), std::filesystem::copy_options::overwrite_existing);
+
+
+                    std::filesystem::create_directories(sourceCodeDirectory / ("FSE_Mathematical_Integer_Mode/" + cName));
+                    std::filesystem::copy_file(cPath, sourceCodeDirectory / ("FSE_Mathematical_Integer_Mode/" + cName + "/" + input_file), std::filesystem::copy_options::overwrite_existing);
+                    std::string command_MI = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
+                                             " " + (sourceCodeDirectory / ("FSE_Mathematical_Integer_Mode/" + cName + "/" + input_file)).string() +
+                                             " --timeout=" + timeout +
+                                             " --semantic-augmentor-mode=none"
+                                             " --type-annotator-mode=all"
+                                             " --signedness-info=all"
+                                             " --unreachable-exit=true"
+                                             " --muval-mode=FSE-MI";
+                    int result_MI = system(command_MI.c_str());
+                    if (result_MI != 0) {
+                        std::cerr << toolName + "_MI execution failed." << "\n";
+                    }
+                    std::filesystem::copy_file(sourceCodeDirectory / ("FSE_Mathematical_Integer_Mode/" + cName + "/Output.txt"), sourceCodeDirectory / ("FSE_Mathematical_Integer_Mode_" + output_file), std::filesystem::copy_options::overwrite_existing);
+                }
+            }
+
+            else if (toolName == "PROTON") {
+                std::string command_PROTON = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools/PROTON:/WORK -v " + sourceCodeDirectory.string() + ":/FILES_DIR -w /opt/term/proton proton bash -lc '"
+                                             "timeout " + timeout + " ./proton --64 --propertyFile /opt/term/proton/termination.prp --graphml-witness /FILES_DIR/" + cName + ".witness.graphml /FILES_DIR/concretizer/" + input_file + " > /FILES_DIR/" + output_file + " 2>&1'";
+                int result_PROTON = system(command_PROTON.c_str());
+                if (result_PROTON != 0) {
+                    std::cerr << toolName + " execution failed." << "\n";
+                }
+
+                auto end_time = std::chrono::steady_clock::now();
+                auto runtime = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+                std::ofstream(sourceCodeDirectory / output_file, std::ios::app) << "Runtime: " << runtime << " milliseconds" << std::endl;
+            }
+
+            else if (toolName == "UAutomizer") {
+                std::string command = "docker run --rm -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR uautomizer /bin/bash -c '"
+                                      "cd /opt/uautomizer/config && "
+                                      "ln -sf svcomp-Termination-64bit-Automizer_Default.epf svcomp-Termination-64bit-Automizer_Bitvector.epf && "
+                                      "timeout " + timeout + " python3 /opt/uautomizer/Ultimate.py --spec /TOOL_DIR/UAutomizer/termination.prp --file /FILES_DIR/concretizer/" + input_file + " --architecture 64bit > /FILES_DIR/" + output_file + " 2>&1 ; "
+                                      "if [ -f Ultimate.log ]; then cp Ultimate.log /FILES_DIR/" + cName + ".log; fi'";
+                int result = system(command.c_str());
+                if (result != 0) {
+                    std::cerr << toolName + " execution failed." << "\n";
+                }
+                auto end_time = std::chrono::steady_clock::now();
+                auto runtime = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+                std::ofstream(sourceCodeDirectory / output_file, std::ios::app) << "Runtime: " << runtime << " milliseconds" << std::endl;
+            }
+
+            else if (toolName == "AProVE") {
+                std::string command = "docker run --rm --platform linux/amd64 --entrypoint /bin/bash -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR nlommen/aprove_koat_loat:578822 -c '"
+                                      "timeout " + timeout + " /aprove/AProVE.sh -m wst --bit-width 64 /FILES_DIR/concretizer/" + input_file + " > /FILES_DIR/" + output_file + " 2>&1'";
+                int result = system(command.c_str());
+                if (result != 0) {
+                    std::cerr << toolName + " execution failed." << "\n";
+                }
+                auto end_time = std::chrono::steady_clock::now();
+                auto runtime = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+                std::ofstream(sourceCodeDirectory / output_file, std::ios::app) << "Runtime: " << runtime << " milliseconds" << std::endl;
+            }
+
+            else if (toolName == "CPAchecker") {
+                std::string command = "docker run --rm --platform linux/amd64 --entrypoint /bin/bash -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR sosylab/cpachecker:dev -c '"
+                                      "timeout " + timeout + " /cpachecker/scripts/cpa.sh --config /cpachecker/config/terminationAnalysis.properties --preprocess --heap 10000M --64 --stats --output-path /FILES_DIR/" + cName + " /FILES_DIR/concretizer/" + input_file + " > /FILES_DIR/" + output_file + " 2>&1'";
+                int result = system(command.c_str());
+                if (result != 0) {
+                    std::cerr << toolName + " execution failed." << "\n";
+                }
+                auto end_time = std::chrono::steady_clock::now();
+                auto runtime = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+                std::ofstream(sourceCodeDirectory / output_file, std::ios::app) << "Runtime: " << runtime << " milliseconds" << std::endl;
+            }
+
+            else if (toolName == "2LS") {
+                std::string command = "docker run --rm -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + sourceCodeDirectory.string() + ":/FILES_DIR 2ls /bin/bash -c '"
+                                      "timeout " + timeout + " /root/2ls/src/2ls/2ls --graphml-witness witness.graphml --termination --64 /FILES_DIR/concretizer/" + input_file + " > /FILES_DIR/" + output_file + " 2>&1'";
+                int result = system(command.c_str());
+                if (result != 0) {
+                    std::cerr << toolName + " execution failed." << "\n";
+                }
+                auto end_time = std::chrono::steady_clock::now();
+                auto runtime = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
+                std::ofstream(sourceCodeDirectory / output_file, std::ios::app) << "Runtime: " << runtime << " milliseconds" << std::endl;
+            }
+
+            std::this_thread::sleep_for(std::chrono::seconds(5));
+        }
+    }
+
+
+    std::string excelPath = (toolDirectory.parent_path() / (benchmarkName + " - Evaluation Results.xlsx")).string();
+    std::string groundTruthPath = (toolDirectory.parent_path() / "GroundTruth.csv").string();
+
+    std::string variantResults = CollectVariantResults(sourceCodeDirectory, toolName);
+
+    if (toolName == "Athena") {
+        std::map<std::string, std::ostringstream> buckets;
+        std::istringstream iss(variantResults);
+        std::string line;
+
+        while (std::getline(iss, line)) {
+            if (line.find("FSE_Bitvector_Mode_") != std::string::npos)
+                buckets["Athena_BV"] << line << "\n";
+            else if (line.find("FSE_Modulo_Arithmetic_Mode_") != std::string::npos)
+                buckets["Athena_MA"] << line << "\n";
+            else if (line.find("FSE_Mathematical_Integer_Mode_") != std::string::npos)
+                buckets["Athena_MI"] << line << "\n";
+            else
+                buckets["Athena"] << line << "\n";
+        }
+
+        for (auto &[mode, content] : buckets) {
+            std::vector<std::string> toolDecisionAndMetrics = EvaluateToolDecisionAndMetrics(content.str(), groundTruthPath, sourceCodeName);
+
+            std::cout << "──────────────────────────────────────────────\n";
+            std::cout << "Mode: " << mode << "\n";
+            std::cout << "① Variant Results:\n" << content.str();
+            std::cout << "② Tool Decision: " << toolDecisionAndMetrics[0] << "\n";
+            std::cout << "③ SR: " << toolDecisionAndMetrics[1] << "\n";
+            std::cout << "④ TVT: " << toolDecisionAndMetrics[2] << "\n";
+            std::cout << "⑤ AVT: " << toolDecisionAndMetrics[3] << "\n";
+            std::cout << "⑥ MVT: " << toolDecisionAndMetrics[4] << "\n";
+            WriteResultsToExcel(excelPath, mode, sourceCodeName + sourceCodeExtension, slicerFlag, concretizerFlag, {content.str(), toolDecisionAndMetrics[0], toolDecisionAndMetrics[1], toolDecisionAndMetrics[2], toolDecisionAndMetrics[3], toolDecisionAndMetrics[4]});
+            std::cout << "──────────────────────────────────────────────\n";
+        }
+    }
+    else {
+        std::vector<std::string> toolDecisionAndMetrics = EvaluateToolDecisionAndMetrics(variantResults, groundTruthPath, sourceCodeName);
+
+        std::cout << "──────────────────────────────────────────────\n";
+        std::cout << "① Variant Results:\n" << variantResults;
+        std::cout << "② Tool Decision: " << toolDecisionAndMetrics[0] << "\n";
+        std::cout << "③ SR: " << toolDecisionAndMetrics[1] << "\n";
+        std::cout << "④ TVT: " << toolDecisionAndMetrics[2] << "\n";
+        std::cout << "⑤ AVT: " << toolDecisionAndMetrics[3] << "\n";
+        std::cout << "⑥ MVT: " << toolDecisionAndMetrics[4] << "\n";
+        WriteResultsToExcel(excelPath, toolName, sourceCodeName + sourceCodeExtension, slicerFlag, concretizerFlag, {variantResults, toolDecisionAndMetrics[0], toolDecisionAndMetrics[1], toolDecisionAndMetrics[2], toolDecisionAndMetrics[3], toolDecisionAndMetrics[4]});
+        std::cout << "──────────────────────────────────────────────\n";
+    }
+
+    return 0;
+}

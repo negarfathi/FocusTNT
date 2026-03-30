@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "e6bbf542-53d7-332c-a3aa-dcc7e47b0e19"
+    creation_time: "2025-12-20T14:46:47Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop17_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop17_TestCase2.c: "6466cc90a193f80f23cb9fe971f6c19b6aeae125da7a806556d6f535e8b94c51"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop17_TestCase2.c"
+        line: 21
+        column: 3
+        function: "main"
+      value: "(((((i == (2) && (num_crtc == (10) && num_output == (20)))) || ((i == (5) && (num_crtc == (10) && num_output == (20))))) || (((i == (3) && (num_crtc == (10) && num_output == (20)))) || (((i == (7) && (num_crtc == (10) && num_output == (20)))) || ((i == (8) && (num_crtc == (10) && num_output == (20))))))) || ((((i == (9) && (num_crtc == (10) && num_output == (20)))) || (((i == (4) && (num_crtc == (10) && num_output == (20)))) || ((i == (0) && (num_crtc == (10) && num_output == (20)))))) || (((i == (10) && (num_crtc == (10) && num_output == (20)))) || (((i == (1) && (num_crtc == (10) && num_output == (20)))) || ((i == (6) && (num_crtc == (10) && num_output == (20))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop17_TestCase2.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

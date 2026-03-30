@@ -1,0 +1,20 @@
+extern unsigned short __VERIFIER_nondet_ushort(void);
+/*
+
+Commit Number: f9bfec180f91671d8ba72a01cab1781c1f5e9999
+URL: https://github.com/squireblackdens/daapd/commit/f9bfec180f91671d8ba72a01cab1781c1f5e9999
+Project Name: daapd
+License: GPL-2.0
+termination: FALSE
+*/
+int main()
+{
+    unsigned short int s, seqnum, len;
+    seqnum = 50000;
+    len = 100;;
+    for( s = seqnum ; s < seqnum + len; s++ )
+    {
+
+    }
+    return 0;
+}

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "e2940cef-3127-36e4-bde1-f1f7d0d13f4a"
+    creation_time: "2025-12-20T06:24:55Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop0_TestCase7.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop0_TestCase7.c: "b2f5b1f93dd96170e6c5aa96100cb1fbe55140cb1739c52064db313bc68b564e"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop0_TestCase7.c"
+        line: 13
+        column: 5
+        function: "main"
+      value: "(((((number == (200000U) && width == (5))) || ((number == (20U) && width == (9)))) || (((number == (2000000000U) && width == (1))) || (((number == (20000U) && width == (6))) || ((number == (200U) && width == (8)))))) || ((((number == (2000000U) && width == (4))) || ((number == (2000U) && width == (7)))) || (((number == (200000000U) && width == (2))) || (((number == (20000000U) && width == (3))) || ((number == (2U) && width == (10)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop0_TestCase7.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

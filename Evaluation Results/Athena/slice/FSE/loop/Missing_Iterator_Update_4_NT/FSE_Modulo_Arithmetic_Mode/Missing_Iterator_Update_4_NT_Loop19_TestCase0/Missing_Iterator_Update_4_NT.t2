@@ -1,0 +1,32 @@
+///*** 1_main ***///
+START: main_bb5;
+
+
+
+FROM: main_bb5;
+v12 := nondet_int();
+v13 := nondet_int();
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume((((v12 < 0) || (v13 < 0)) || (v12 > 65534)) || (v13 > 65534));
+TO: main_bb7;
+
+FROM: main_bb5_end;
+assume((((v12 >= 0) && (v13 >= 0)) && (v12 <= 65534)) && (v13 <= 65534));
+TO: main_bb6;
+
+FROM: main_bb6;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(0 < v12);
+TO: main_bb6;
+
+FROM: main_bb6_end;
+assume(0 >= v12);
+TO: main_bb7;
+
+FROM: main_bb7;
+TO: main_bb7_ret;
+

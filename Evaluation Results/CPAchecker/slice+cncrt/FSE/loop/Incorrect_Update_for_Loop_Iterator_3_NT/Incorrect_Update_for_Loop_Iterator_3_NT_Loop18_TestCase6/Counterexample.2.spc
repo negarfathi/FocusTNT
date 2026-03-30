@@ -1,0 +1,120 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int nfds = 5;" -> ASSUME {nfds == (5);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "int nr = 30;" -> ASSUME {nr == (30);} GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "int NR_OPEN = 25;" -> ASSUME {NR_OPEN == (25);} GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "" -> GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "[nfds <= nr]" -> ASSUME {nfds == (5);nr == (30);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "nfds *= 2;" -> ASSUME {nfds == (10);} GOTO ARG18;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG18 :
+    MATCH "[!(nfds > NR_OPEN)]" -> ASSUME {nfds == (10);NR_OPEN == (25);} GOTO ARG19;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG19 :
+    MATCH "" -> GOTO ARG20;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG20 :
+    MATCH "[nfds <= nr]" -> ASSUME {nfds == (10);nr == (30);} GOTO ARG42;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG42 :
+    MATCH "nfds *= 2;" -> ASSUME {nfds == (20);} GOTO ARG50;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG50 :
+    MATCH "[!(nfds > NR_OPEN)]" -> ASSUME {nfds == (20);NR_OPEN == (25);} GOTO ARG55;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG55 :
+    MATCH "" -> GOTO ARG59;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG59 :
+    MATCH "[nfds <= nr]" -> ASSUME {nfds == (20);nr == (30);} GOTO ARG65;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG65 :
+    MATCH "nfds *= 2;" -> ASSUME {nfds == (40);} GOTO ARG67;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG67 :
+    MATCH "[nfds > NR_OPEN]" -> ASSUME {nfds == (40);NR_OPEN == (25);} GOTO ARG68;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG68 :
+    MATCH "nfds = NR_OPEN;" -> ASSUME {nfds == (25);} GOTO ARG69;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG69 :
+    MATCH "" -> GOTO ARG70;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG70 :
+    MATCH "" -> GOTO ARG71;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG71 :
+    MATCH "[nfds <= nr]" -> ASSUME {nfds == (25);nr == (30);} GOTO ARG72;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG72 :
+    MATCH "nfds *= 2;" -> ASSUME {nfds == (50);} GOTO ARG73;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG73 :
+    MATCH "[nfds > NR_OPEN]" -> ASSUME {nfds == (50);NR_OPEN == (25);} GOTO ARG74;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG74 :
+    MATCH "nfds = NR_OPEN;" -> ASSUME {nfds == (25);} GOTO ARG75;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG75 :
+    MATCH "" -> GOTO ARG76;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG76 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG83 :
+    TRUE -> STOP;
+
+END AUTOMATON

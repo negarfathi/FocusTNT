@@ -1,0 +1,67 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Misusing_Method_Overloading_3_NT_Loop0_TestCase0.cpp
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 42 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Misusing_Method_Overloading_3_NT_Loop0_TestCase0.cpp
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Misusing_Method_Overloading_3_NT_Loop0_TestCase0.cpp to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+"class.std::__cxx11::basic_string" --> BasicStructureType(elementType: BasicTypeName typeName: "struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider"BasicStructureType(elementType: *i8), elementType: i64, elementType: BasicTypeName typeName: union.anonBasicStructureType(elementType: i64, elementType: [8 x i8]))
+
+"struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider" --> BasicStructureType(elementType: *i8)
+
+union.anon --> BasicStructureType(elementType: i64, elementType: [8 x i8])
+
+"class.std::allocator" --> BasicStructureType(elementType: i8)
+
+struct.Rule --> BasicStructureType(elementType: BasicTypeName typeName: "class.std::__cxx11::basic_string"BasicStructureType(elementType: BasicTypeName typeName: "struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider"BasicStructureType(elementType: *i8), elementType: i64, elementType: BasicTypeName typeName: union.anonBasicStructureType(elementType: i64, elementType: [8 x i8])))
+
+Global variables:
+
+Function declarations and definitions:
+
+
+
+Analyze Termination of all function calls matching the pattern:
+main()line 12:0 missing EOF at '$_ZN4RuleC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE'
+Aborted 1769213023Exec. 4, LLVMToSEGraph with some error. Reason: java.lang.IllegalArgumentException: Cannot analyze a function without its definition!.
+            aprove.InputModules.Programs.llvm.states.LLVMAbstractStateFactory.createBeginState(LLVMAbstractStateFactory.java:586)
+            aprove.InputModules.Programs.llvm.segraph.graphConstructionSteps.LLVMRootStateCreationStep.perform(LLVMRootStateCreationStep.java:25)
+            aprove.InputModules.Programs.llvm.segraph.LLVMSEGraph.executeStepAndPutSucessorStepsInQueue(LLVMSEGraph.java:1087)
+            aprove.InputModules.Programs.llvm.segraph.LLVMSEGraph.buildFullGraph(LLVMSEGraph.java:243)
+            aprove.InputModules.Programs.llvm.segraph.LLVMSEGraph.buildFullGraph(LLVMSEGraph.java:216)
+            aprove.InputModules.Programs.llvm.segraph.LLVMGraphBuilder.buildGraph(LLVMGraphBuilder.java:84)
+            aprove.InputModules.Programs.llvm.processors.LLVMToSEGraphProcessor.process(LLVMToSEGraphProcessor.java:110)
+            aprove.Strategies.ExecutableStrategies.Executor.execute(Executor.java:326)
+Runtime: 2640 milliseconds

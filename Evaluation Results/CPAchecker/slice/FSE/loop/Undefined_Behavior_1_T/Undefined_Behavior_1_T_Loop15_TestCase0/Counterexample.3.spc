@@ -1,0 +1,52 @@
+CONTROL AUTOMATON ErrorPath3
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "extern unsigned int __VERIFIER_nondet_uint(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_0_1 :
+    MATCH "extern unsigned int __VERIFIER_nondet_uint(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_1_1 :
+    MATCH "void main(void)" -> GOTO ARG11_2_1;
+STATE USEFIRST ARG11_2_1 :
+    MATCH "" -> GOTO ARG11_3_1;
+STATE USEFIRST ARG11_3_1 :
+    MATCH "unsigned int num = __VERIFIER_nondet_uint();" -> GOTO ARG11_4_1;
+STATE USEFIRST ARG11_4_1 :
+    MATCH "unsigned int num = __VERIFIER_nondet_uint();" -> GOTO ARG11_5_1;
+STATE USEFIRST ARG11_5_1 :
+    MATCH "num ++;" -> GOTO ARG11_6_1;
+STATE USEFIRST ARG11_6_1 :
+    MATCH "num ++;" -> GOTO ARG11_7_1;
+STATE USEFIRST ARG11_7_1 :
+    MATCH "num ++;" -> GOTO ARG11;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG11 :
+    MATCH "" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "1" -> GOTO ARG30_1_2;
+STATE USEFIRST ARG30_0_2 :
+    MATCH "1" -> GOTO ARG30_1_2;
+STATE USEFIRST ARG30_1_2 :
+    MATCH "num >>= 7;" -> GOTO ARG30;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG30 :
+    MATCH "[[!(! num)]]" -> GOTO ARG35;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG35 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG195 :
+    TRUE -> STOP;
+
+END AUTOMATON

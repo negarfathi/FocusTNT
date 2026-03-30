@@ -1,0 +1,221 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Undefined_Behavior_1_Loop14_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 93 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 968 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 102 ms]
+(8) IntTRS
+    (9) IntTRSNonPeriodicNontermProof [COMPLETE, 171 ms]
+    (10) NO
+(11) SCC2IRS [SOUND, 0 ms]
+(12) IntTRS
+    (13) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+    (14) IntTRS
+    (15) IntTRSNonPeriodicNontermProof [COMPLETE, 75 ms]
+    (16) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Undefined_Behavior_1_Loop14_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Undefined_Behavior_1_Loop14_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1000, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		br %3
+	3:
+		%4 = load %1
+		%5 = add i32 %4, 1
+		%6 = load %2
+		%7 = mul i32 %6, 7
+		%8 = lshr i32 %5, %7
+		%9 = icmp ne %8 0
+		br %9, %10, %13
+	10:
+		%11 = load %2
+		%12 = add i32 %11, 1
+		store %12, %2
+		br %3
+	13:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 13 rulesP rules:
+f_147(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_148(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+f_148(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_149(v52, v53, 1000, 1001, v60, v57, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+f_149(v52, v53, 1000, 1001, v60, v57, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4) -> f_150(v52, v53, 1000, 1001, v60, v63, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: v63 = 7 * v60 && 14 <= v63
+f_150(v52, v53, 1000, 1001, v60, v63, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_151(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 2, 4, 14) :|: 0 = 0
+f_151(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 2, 4, 14) -> f_152(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: v64 != 0
+f_152(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_154(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: 0 = 0
+f_154(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_156(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_156(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_158(v52, v53, 1000, 1001, v60, v63, v64, 1, v61, v62, 3, 7, 0, 2, 4, 14) :|: 0 = 0
+f_158(v52, v53, 1000, 1001, v60, v63, v64, 1, v61, v62, 3, 7, 0, 2, 4, 14) -> f_159(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: v65 = 1 + v60 && 3 <= v65
+f_159(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_160(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_160(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_161(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_161(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_146(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4) :|: TRUE
+f_146(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_147(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+Combined rules. Obtained 2 rulesP rules:
+f_147(v52:0, v53:0, 1000, 1001, v56:0, v57:0, v58:0, 1, v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) -> f_147(v52:0, v53:0, 1000, 1001, v60:0, 7 * v60:0, v64:0, 1, 1 + v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) :|: 7 * v60:0 > 13 && v60:0 > 1 && v64:0 < 0
+f_147(v52:0, v53:0, 1000, 1001, v56:0, v57:0, v58:0, 1, v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) -> f_147(v52:0, v53:0, 1000, 1001, v60:0, 7 * v60:0, v64:0, 1, 1 + v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) :|: 7 * v60:0 > 13 && v60:0 > 1 && v64:0 > 0
+Filtered unneeded arguments:
+   f_147(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) -> f_147(x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_147(v60:0) -> f_147(1 + v60:0) :|: 7 * v60:0 > 13 && v60:0 > 1
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_147(v60:0) -> f_147(1 + v60:0) :|: 7 * v60:0 > 13 && v60:0 > 1
+
+----------------------------------------
+
+(9) IntTRSNonPeriodicNontermProof (COMPLETE)
+Normalized system to the following form:
+f(pc, v60:0) -> f(1, 1 + v60:0) :|: pc = 1 && (7 * v60:0 > 13 && v60:0 > 1)
+Proved unsatisfiability of the following formula, indicating that the system is never left after entering:
+(((run2_0 = ((1 * 1)) and run2_1 = ((1 * 1) + (run1_1 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and (((run1_1 * 7)) > ((1 * 13)) and ((run1_1 * 1)) > ((1 * 1))))) and !(((run2_0 * 1)) = ((1 * 1)) and (((run2_1 * 7)) > ((1 * 13)) and ((run2_1 * 1)) > ((1 * 1)))))
+Proved satisfiability of the following formula, indicating that the system is entered at least once:
+((run2_0 = ((1 * 1)) and run2_1 = ((1 * 1) + (run1_1 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and (((run1_1 * 7)) > ((1 * 13)) and ((run1_1 * 1)) > ((1 * 1)))))
+
+----------------------------------------
+
+(10)
+NO
+
+----------------------------------------
+
+(11) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 13 rulesP rules:
+f_147(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_148(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+f_148(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_149(v52, v53, 1000, 1001, v60, v57, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+f_149(v52, v53, 1000, 1001, v60, v57, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4) -> f_150(v52, v53, 1000, 1001, v60, v63, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: v63 = 7 * v60 && 14 <= v63
+f_150(v52, v53, 1000, 1001, v60, v63, v58, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_151(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 2, 4, 14) :|: 0 = 0
+f_151(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 2, 4, 14) -> f_152(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: v64 != 0
+f_152(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_154(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: 0 = 0
+f_154(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_156(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_156(v52, v53, 1000, 1001, v60, v63, v64, 1, v56, v61, v62, 3, 7, 0, 2, 4, 14) -> f_158(v52, v53, 1000, 1001, v60, v63, v64, 1, v61, v62, 3, 7, 0, 2, 4, 14) :|: 0 = 0
+f_158(v52, v53, 1000, 1001, v60, v63, v64, 1, v61, v62, 3, 7, 0, 2, 4, 14) -> f_159(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: v65 = 1 + v60 && 3 <= v65
+f_159(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_160(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_160(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_161(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) :|: TRUE
+f_161(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4, 14) -> f_146(v52, v53, 1000, 1001, v60, v63, v64, 1, v65, v61, v62, 3, 7, 0, 2, 4) :|: 1 <= v52 && 1 <= v53 && 1 <= v60 && 7 <= v63 && 2 <= v65 && 4 <= v61 && 4 <= v62 && v52 <= v61 && v53 <= v62
+f_146(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) -> f_147(v52, v53, 1000, 1001, v56, v57, v58, 1, v60, v61, v62, 3, 7, 0, 2, 4) :|: 0 = 0
+Combined rules. Obtained 2 rulesP rules:
+f_147(v52:0, v53:0, 1000, 1001, v56:0, v57:0, v58:0, 1, v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) -> f_147(v52:0, v53:0, 1000, 1001, v60:0, 7 * v60:0, v64:0, 1, 1 + v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) :|: v60:0 > 1 && 7 * v60:0 > 13 && v53:0 > 0 && v52:0 > 0 && v64:0 < 0 && v61:0 > 3 && v62:0 > 3 && v62:0 >= v53:0 && v61:0 >= v52:0
+f_147(v52:0, v53:0, 1000, 1001, v56:0, v57:0, v58:0, 1, v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) -> f_147(v52:0, v53:0, 1000, 1001, v60:0, 7 * v60:0, v64:0, 1, 1 + v60:0, v61:0, v62:0, 3, 7, 0, 2, 4) :|: v60:0 > 1 && 7 * v60:0 > 13 && v53:0 > 0 && v52:0 > 0 && v64:0 > 0 && v61:0 > 3 && v62:0 > 3 && v62:0 >= v53:0 && v61:0 >= v52:0
+Filtered unneeded arguments:
+   f_147(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) -> f_147(x1, x2, x9, x10, x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_147(v52:0, v53:0, v60:0, v61:0, v62:0) -> f_147(v52:0, v53:0, 1 + v60:0, v61:0, v62:0) :|: 7 * v60:0 > 13 && v60:0 > 1 && v53:0 > 0 && v52:0 > 0 && v61:0 > 3 && v62:0 > 3 && v61:0 >= v52:0 && v62:0 >= v53:0
+
+----------------------------------------
+
+(12)
+Obligation:
+Rules:
+f_147(v52:0, v53:0, v60:0, v61:0, v62:0) -> f_147(v52:0, v53:0, 1 + v60:0, v61:0, v62:0) :|: 7 * v60:0 > 13 && v60:0 > 1 && v53:0 > 0 && v52:0 > 0 && v61:0 > 3 && v62:0 > 3 && v61:0 >= v52:0 && v62:0 >= v53:0
+
+----------------------------------------
+
+(13) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(14)
+Obligation:
+Rules:
+f_147(v52:0:0, v53:0:0, v60:0:0, v61:0:0, v62:0:0) -> f_147(v52:0:0, v53:0:0, 1 + v60:0:0, v61:0:0, v62:0:0) :|: v61:0:0 >= v52:0:0 && v62:0:0 >= v53:0:0 && v62:0:0 > 3 && v61:0:0 > 3 && v52:0:0 > 0 && v53:0:0 > 0 && v60:0:0 > 1 && 7 * v60:0:0 > 13
+
+----------------------------------------
+
+(15) IntTRSNonPeriodicNontermProof (COMPLETE)
+Normalized system to the following form:
+f(pc, v52:0:0, v53:0:0, v60:0:0, v61:0:0, v62:0:0) -> f(1, v52:0:0, v53:0:0, 1 + v60:0:0, v61:0:0, v62:0:0) :|: pc = 1 && (v61:0:0 >= v52:0:0 && v62:0:0 >= v53:0:0 && v62:0:0 > 3 && v61:0:0 > 3 && v52:0:0 > 0 && v53:0:0 > 0 && v60:0:0 > 1 && 7 * v60:0:0 > 13)
+Proved unsatisfiability of the following formula, indicating that the system is never left after entering:
+(((run2_0 = ((1 * 1)) and run2_1 = ((run1_1 * 1)) and run2_2 = ((run1_2 * 1)) and run2_3 = ((1 * 1) + (run1_3 * 1)) and run2_4 = ((run1_4 * 1)) and run2_5 = ((run1_5 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and (((((((((run1_4 * 1)) >= ((run1_1 * 1)) and ((run1_5 * 1)) >= ((run1_2 * 1))) and ((run1_5 * 1)) > ((1 * 3))) and ((run1_4 * 1)) > ((1 * 3))) and ((run1_1 * 1)) > 0) and ((run1_2 * 1)) > 0) and ((run1_3 * 1)) > ((1 * 1))) and ((run1_3 * 7)) > ((1 * 13))))) and !(((run2_0 * 1)) = ((1 * 1)) and (((((((((run2_4 * 1)) >= ((run2_1 * 1)) and ((run2_5 * 1)) >= ((run2_2 * 1))) and ((run2_5 * 1)) > ((1 * 3))) and ((run2_4 * 1)) > ((1 * 3))) and ((run2_1 * 1)) > 0) and ((run2_2 * 1)) > 0) and ((run2_3 * 1)) > ((1 * 1))) and ((run2_3 * 7)) > ((1 * 13)))))
+Proved satisfiability of the following formula, indicating that the system is entered at least once:
+((run2_0 = ((1 * 1)) and run2_1 = ((run1_1 * 1)) and run2_2 = ((run1_2 * 1)) and run2_3 = ((1 * 1) + (run1_3 * 1)) and run2_4 = ((run1_4 * 1)) and run2_5 = ((run1_5 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and (((((((((run1_4 * 1)) >= ((run1_1 * 1)) and ((run1_5 * 1)) >= ((run1_2 * 1))) and ((run1_5 * 1)) > ((1 * 3))) and ((run1_4 * 1)) > ((1 * 3))) and ((run1_1 * 1)) > 0) and ((run1_2 * 1)) > 0) and ((run1_3 * 1)) > ((1 * 1))) and ((run1_3 * 7)) > ((1 * 13)))))
+
+----------------------------------------
+
+(16)
+NO
+/FILES_DIR/concretizer/Undefined_Behavior_1_Loop14_TestCase3.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Undefined_Behavior_1_Loop14_TestCase3.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 4609 milliseconds

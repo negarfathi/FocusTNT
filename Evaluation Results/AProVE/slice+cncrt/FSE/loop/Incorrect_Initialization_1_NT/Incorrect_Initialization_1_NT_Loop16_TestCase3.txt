@@ -1,0 +1,188 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop16_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 73 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop16_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop16_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: .str initVal: \0A\00 type: [2 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "strcspn_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 *i8, 1 *i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%3 = alloca *i8, align 8
+		%4 = alloca *i8, align 8
+		%5 = alloca i32, align 4
+		%6 = alloca *i8, align 8
+		%7 = alloca *i8, align 8
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %6)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %7)
+		%8 = load %3
+		store %8, %7
+		br %9
+	9:
+		%10 = load %7
+		%11 = load %10
+		%12 = sext i8 %11 to i32
+		%13 = icmp ne %12 0
+		br %13, %14, %42
+	14:
+		%15 = load %4
+		store %15, %6
+		br %16
+	16:
+		%17 = load %6
+		%18 = load %17
+		%19 = sext i8 %18 to i32
+		%20 = icmp ne %19 0
+		br %20, %21, %39
+	21:
+		%22 = load %7
+		%23 = load %22
+		%24 = sext i8 %23 to i32
+		%25 = load %6
+		%26 = load %25
+		%27 = sext i8 %26 to i32
+		%28 = icmp eq %24 %27
+		br %28, %29, %36
+	29:
+		%30 = load %7
+		%31 = load %3
+		%32 = ptrtoint *i8 %30 to i64
+		%33 = ptrtoint *i8 %31 to i64
+		%34 = sub i64 %32, %33
+		%35 = trunc i64 %34 to i32
+		store %35, %5
+		br %43
+	36:
+		%37 = load %6
+		%38 = getelementptr %37, 1
+		store %38, %6
+		br %16
+	39:
+		%40 = load %7
+		%41 = getelementptr %40, 1
+		store %41, %7
+		br %9
+	42:
+		store 0, %5
+		br %43
+	43:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%44 = load %5
+		ret %44
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 69
+	0:
+		%1 = alloca [100 x i8], align 16
+		%2 = alloca i32, align 4
+		%3 = alloca *i8, align 8
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[100 x i8] %1)
+		%5 = bitcast *[100 x i8] %1 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %5, i8 0, i64 100, i1 0)
+		%6 = bitcast *i8 %5 to *[100 x i8]
+		%7 = getelementptr %6, 0, 0
+		store 97, %7
+		%8 = getelementptr %6, 0, 1
+		store 10, %8
+		%9 = getelementptr %6, 0, 2
+		store 97, %9
+		%10 = getelementptr %6, 0, 3
+		store 10, %10
+		%11 = getelementptr %6, 0, 4
+		store 97, %11
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 0, %2
+		br %12
+	12:
+		%13 = load %2
+		%14 = icmp slt %13 99
+		br %14, %15, %18
+	15:
+		%16 = load %2
+		%17 = add i32 %16, 1
+		store %17, %2
+		br %12
+	18:
+		%19 = getelementptr %1, 0, 99
+		store 0, %19
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		%20 = getelementptr %1, 0, 0
+		store %20, %3
+		br %21
+	21:
+		%22 = load %3
+		%23 = load %22
+		%24 = icmp ne %23 0
+		br %24, %25, %32
+	25:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%26 = load %3
+		%27 = call i32 @strcspn_slice_1(*i8 %26, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@55442e02)
+		store %27, %4
+		%28 = load %4
+		%29 = load %3
+		%30 = sext i32 %28 to i64
+		%31 = getelementptr %29, %30
+		store %31, %3
+		br %21
+	32:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop16_TestCase3.c:27:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop16_TestCase3.c:27:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Aborted 1766131010Exec. 4, LLVMToSEGraph with some error. Reason: InconsistentStateException [integerState=vals:
+Runtime: 17033 milliseconds

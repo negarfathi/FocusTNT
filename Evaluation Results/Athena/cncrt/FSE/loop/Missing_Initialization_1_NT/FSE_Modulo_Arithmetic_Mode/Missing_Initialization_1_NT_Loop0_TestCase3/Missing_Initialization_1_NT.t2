@@ -1,0 +1,86 @@
+///*** 1_main ***///
+START: main_bb5;
+
+
+
+FROM: main_bb5;
+var__temp_vres.0 := 0;
+var__temp_vpkt.0 := 11;
+TO: main_bb6;
+
+FROM: main_bb6;
+vres.0 := var__temp_vres.0;
+vpkt.0 := var__temp_vpkt.0;
+var__temp_vres.1 := vres.0;
+var__temp_vpkt.1 := vpkt.0;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(vpkt.0 < 10);
+TO: main_wrap_around.exit;
+
+FROM: main_bb6_end;
+assume(vpkt.0 >= 10);
+TO: main_bb11;
+
+FROM: main_wrap_around.exit;
+vres.1 := var__temp_vres.1;
+vpkt.1 := var__temp_vpkt.1;
+var__temp_vres.0 := vres.1;
+var__temp_vpkt.0 := vpkt.1;
+TO: main_wrap_around.exit_end;
+
+FROM: main_wrap_around.exit_end;
+assume(vres.1 == 0);
+TO: main_bb7;
+
+FROM: main_wrap_around.exit_end;
+assume(vres.1 != 0);
+TO: main_bb6;
+
+FROM: main_bb7;
+v14 := vpkt.1 + 1;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v14 > 2147483647);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(v14 <= 2147483647);
+TO: main_bb9;
+
+FROM: main_bb8;
+v16 := v14 - 2147483647;
+v17 := v16 - 1;
+v18 := v17 % 4294967296;
+v19 := -2147483648 + v18;
+var__temp_vres.1 := 7;
+var__temp_vpkt.1 := v19;
+TO: main_wrap_around.exit;
+
+FROM: main_bb9;
+var__temp_vres.1 := 7;
+var__temp_vpkt.1 := v14;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v14 < -2147483648);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v14 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb10;
+v21 := -2147483648 - v14;
+v22 := v21 - 1;
+v23 := v22 % 4294967296;
+v24 := 2147483647 - v23;
+var__temp_vres.1 := 7;
+var__temp_vpkt.1 := v24;
+TO: main_wrap_around.exit;
+
+FROM: main_bb11;
+TO: main_bb11_ret;
+

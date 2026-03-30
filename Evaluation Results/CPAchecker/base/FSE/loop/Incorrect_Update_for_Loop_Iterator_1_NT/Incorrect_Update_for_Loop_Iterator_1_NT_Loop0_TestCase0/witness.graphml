@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <key attr.name="invariant" attr.type="string" for="node" id="invariant"/>
+ <key attr.name="isEntryNode" attr.type="boolean" for="node" id="entry">
+  <default>false</default>
+ </key>
+ <key attr.name="isSinkNode" attr.type="boolean" for="node" id="sink">
+  <default>false</default>
+ </key>
+ <key attr.name="isCycleHead" attr.type="boolean" for="node" id="cyclehead">
+  <default>false</default>
+ </key>
+ <key attr.name="sourcecodeLanguage" attr.type="string" for="graph" id="sourcecodelang"/>
+ <key attr.name="programFile" attr.type="string" for="graph" id="programfile"/>
+ <key attr.name="programHash" attr.type="string" for="graph" id="programhash"/>
+ <key attr.name="specification" attr.type="string" for="graph" id="specification"/>
+ <key attr.name="architecture" attr.type="string" for="graph" id="architecture"/>
+ <key attr.name="producer" attr.type="string" for="graph" id="producer"/>
+ <key attr.name="creationTime" attr.type="string" for="graph" id="creationtime"/>
+ <key attr.name="startline" attr.type="int" for="edge" id="startline"/>
+ <key attr.name="endline" attr.type="int" for="edge" id="endline"/>
+ <key attr.name="originFileName" attr.type="string" for="edge" id="originfile">
+  <default>/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase0.c</default>
+ </key>
+ <key attr.name="control" attr.type="string" for="edge" id="control"/>
+ <key attr.name="enterFunction" attr.type="string" for="edge" id="enterFunction"/>
+ <key attr.name="witness-type" attr.type="string" for="graph" id="witness-type"/>
+ <key attr.name="inputWitnessHash" attr.type="string" for="graph" id="inputwitnesshash"/>
+ <graph edgedefault="directed">
+  <data key="witness-type">violation_witness</data>
+  <data key="sourcecodelang">C</data>
+  <data key="producer">CPAchecker 4.2.2-87-g286450afe4 / terminationAnalysis</data>
+  <data key="specification">CHECK( init(main()), LTL(F end) )</data>
+  <data key="programfile">/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase0.c</data>
+  <data key="programhash">96bce70ed79e6af3919175aeb01b0bab05fa6b946de6ce6aa24c18c174ea946e</data>
+  <data key="architecture">64bit</data>
+  <data key="creationtime">2025-12-19T21:30:51Z</data>
+  <node id="A3033">
+   <data key="entry">true</data>
+  </node>
+  <node id="A3035_2_1"/>
+  <edge source="A3033" target="A3035_2_1">
+   <data key="startline">10</data>
+   <data key="endline">10</data>
+   <data key="enterFunction">main</data>
+  </edge>
+  <node id="sink">
+   <data key="sink">true</data>
+  </node>
+  <edge source="A3035_2_1" target="sink">
+   <data key="startline">15</data>
+   <data key="endline">15</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A3038"/>
+  <edge source="A3035_2_1" target="A3038">
+   <data key="startline">15</data>
+   <data key="endline">15</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A3041"/>
+  <edge source="A3038" target="A3041">
+   <data key="startline">18</data>
+   <data key="endline">18</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A3038" target="sink">
+   <data key="startline">18</data>
+   <data key="endline">18</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <edge source="A3041" target="sink">
+   <data key="startline">21</data>
+   <data key="endline">21</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A3053">
+   <data key="cyclehead">true</data>
+   <data key="invariant">((size == (64) &amp;&amp; buffer_bytes_left == (0)) &amp;&amp; (buffer_read_offset == (64) &amp;&amp; max_msg_size == (64)))</data>
+  </node>
+  <edge source="A3041" target="A3053">
+   <data key="startline">21</data>
+   <data key="endline">21</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A3048"/>
+  <edge source="A3053" target="A3048">
+   <data key="startline">18</data>
+   <data key="endline">18</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A3053" target="sink">
+   <data key="startline">18</data>
+   <data key="endline">18</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <edge source="A3048" target="A3053">
+   <data key="startline">21</data>
+   <data key="endline">21</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A3048" target="A3053">
+   <data key="startline">21</data>
+   <data key="endline">21</data>
+   <data key="control">condition-false</data>
+  </edge>
+ </graph>
+</graphml>

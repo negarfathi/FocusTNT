@@ -1,0 +1,44 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int mask = (signed long)0;" -> ASSUME {mask == (0);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "" -> GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "[(mask & 1) == 0]" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "mask >>= 1;" -> ASSUME {mask == (0);} GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    TRUE -> STOP;
+
+END AUTOMATON

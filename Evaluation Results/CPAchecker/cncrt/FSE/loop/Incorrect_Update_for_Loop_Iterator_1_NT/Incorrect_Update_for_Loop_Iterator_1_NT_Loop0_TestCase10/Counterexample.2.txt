@@ -1,0 +1,59 @@
+none:	N1 -{INIT GLOBAL VARS}-> N22
+line 1:	N22 -{int __VERIFIER_nondet_int();}-> N23
+lines 10-26:	N23 -{int main();}-> N24
+none:	N24 -{Function start dummy edge}-> N2
+line 12:	N2 -{int max_msg_size = 128;}-> N3
+	max_msg_size == 128;
+line 13:	N3 -{int buffer_read_offset = 300;}-> N4
+	buffer_read_offset == 300;
+line 14:	N4 -{int buffer_bytes_left = 0;}-> N5
+	buffer_bytes_left == 0;
+line 15:	N5 -{[!(max_msg_size < -1)]}-> N9
+	max_msg_size == 128;
+	max_msg_size == 128;
+line 15:	N9 -{[!(buffer_read_offset <= 0)]}-> N8
+	buffer_read_offset == 300;
+	buffer_read_offset == 300;
+line 15:	N8 -{[!(buffer_bytes_left < 0)]}-> N6
+	buffer_bytes_left == 0;
+	buffer_bytes_left == 0;
+line 17:	N6 -{int size = 64;}-> N11
+	size == 64;
+line 18:	N11 -{while}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == 0;
+	buffer_bytes_left == 0;
+size / 2 == 32
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 128;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 128;
+	max_msg_size == 128;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 128;
+	max_msg_size == 128;
+	size == 128;
+max_msg_size == 128;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -172;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -172;
+	buffer_bytes_left == -172;
+size / 2 == 64
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 256;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 128;
+	max_msg_size == 128;
+line 21:	N18 -{[size > max_msg_size]}-> N17
+	size == 256;
+	max_msg_size == 128;
+	size == 256;
+max_msg_size == 128;
+line 22:	N17 -{size = max_msg_size;}-> N19
+	size == 128;
+none:	N19 -{}-> N16
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -172;
+none:	N20 -{}-> N12

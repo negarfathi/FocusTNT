@@ -1,0 +1,142 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Incorrect_Initialization_3_T_Loop10_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 87 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Initialization_3_T_Loop10_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Initialization_3_T_Loop10_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "strchr_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: *i8 parameters: (0 *i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 11
+	0:
+		%2 = alloca *i8, align 8
+		%3 = alloca *i8, align 8
+		store %0, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		br %4
+	4:
+		%5 = load %2
+		%6 = load %5
+		%7 = sext i8 %6 to i32
+		%8 = icmp ne %7 0
+		br %8, %9, %19
+	9:
+		%10 = load %2
+		%11 = load %10
+		%12 = sext i8 %11 to i32
+		%13 = icmp eq %12 10
+		br %13, %14, %16
+	14:
+		%15 = load %2
+		store %15, %3
+		br %20
+	16:
+		%17 = load %2
+		%18 = getelementptr %17, 1
+		store %18, %2
+		br %4
+	19:
+		store null, %3
+		br %20
+	20:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%21 = load %3
+		ret %21
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 44
+	0:
+		%1 = alloca [100 x i8], align 16
+		%2 = alloca i32, align 4
+		%3 = alloca *i8, align 8
+		%4 = alloca *i8, align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[100 x i8] %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 0, %2
+		br %5
+	5:
+		%6 = load %2
+		%7 = icmp slt %6 99
+		br %7, %8, %14
+	8:
+		%9 = load %2
+		%10 = sext i32 %9 to i64
+		%11 = getelementptr %1, 0, %10
+		store 10, %11
+		%12 = load %2
+		%13 = add i32 %12, 1
+		store %13, %2
+		br %5
+	14:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		%15 = getelementptr %1, 0, 0
+		store %15, %3
+		%16 = getelementptr %1, 0, 99
+		store 0, %16
+		br %17
+	17:
+		%18 = load %3
+		%19 = load %18
+		%20 = icmp ne %19 0
+		br %20, %21, %26
+	21:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		%22 = load %3
+		%23 = call *i8 @strchr_slice_1(*i8 %22)
+		store %23, %4
+		%24 = load %4
+		%25 = getelementptr %24, 1
+		store %25, %3
+		br %17
+	26:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Incorrect_Initialization_3_T_Loop10_TestCase0.c:17:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Incorrect_Initialization_3_T_Loop10_TestCase0.c:17:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Aborted 1766142055Exec. 4, LLVMToSEGraph with some error. Reason: java.lang.ClassCastException: class aprove.InputModules.Programs.llvm.internalStructures.expressions.LLVMHeuristicConstRef cannot be cast to class aprove.InputModules.Programs.llvm.internalStructures.expressions.LLVMHeuristicVarRef (aprove.InputModules.Programs.llvm.internalStructures.expressions.LLVMHeuristicConstRef and aprove.InputModules.Programs.llvm.internalStructures.expressions.LLVMHeuristicVarRef are in unnamed module of loader 'app').
+Runtime: 7079 milliseconds

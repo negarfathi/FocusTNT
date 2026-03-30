@@ -1,0 +1,64 @@
+line 9:	N4 -{int num_crtc = 10;}-> N5
+	num_crtc == 10;
+line 10:	N5 -{int num_output = 5;}-> N6
+	num_output == 5;
+line 11:	N6 -{[!(num_crtc > 65534)]}-> N9
+	num_crtc == 10;
+line 16:	N9 -{[!(num_output > 65534)]}-> N12
+	num_output == 5;
+line 20:	N7 -{i = 0;}-> N16
+	i == 0;
+line 21:	N16 -{while}-> N17
+line 21:	N17 -{[i < num_crtc]}-> N18
+	i == 0;
+	num_crtc == 10;
+line 22:	N18 -{i = 0;}-> N20
+	i == 0;
+line 23:	N20 -{while}-> N21
+line 23:	N21 -{[i < num_output]}-> N22
+	__CPAchecker_TMP_0 == 0;
+	i == 0;
+	num_output == 5;
+line 23:	N24 -{i = i + 1;}-> N25
+	i == 1;
+none:	N26 -{}-> N21
+line 23:	N21 -{[i < num_output]}-> N22
+	__CPAchecker_TMP_0 == 1;
+	i == 1;
+	num_output == 5;
+line 23:	N24 -{i = i + 1;}-> N25
+	i == 2;
+none:	N26 -{}-> N21
+line 23:	N21 -{[i < num_output]}-> N22
+	__CPAchecker_TMP_0 == 2;
+	i == 2;
+	num_output == 5;
+line 23:	N24 -{i = i + 1;}-> N25
+	i == 3;
+none:	N26 -{}-> N21
+line 23:	N21 -{[i < num_output]}-> N22
+	__CPAchecker_TMP_0 == 3;
+	i == 3;
+	num_output == 5;
+line 23:	N24 -{i = i + 1;}-> N25
+	i == 4;
+none:	N26 -{}-> N21
+line 23:	N21 -{[i < num_output]}-> N22
+	__CPAchecker_TMP_0 == 4;
+	i == 4;
+	num_output == 5;
+line 23:	N24 -{i = i + 1;}-> N25
+	i == 5;
+none:	N26 -{}-> N21
+line 23:	N21 -{[!(i < num_output)]}-> N23
+	__CPAchecker_TMP_1 == 5;
+	i == 5;
+	num_output == 5;
+line 24:	N27 -{i = i + 1;}-> N28
+	i == 6;
+none:	N29 -{}-> N17
+line 21:	N17 -{[i < num_crtc]}-> N18
+	i == 0;
+	i == 6;
+	num_crtc == 10;
+line 23:	N20 -{while}-> N21

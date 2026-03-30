@@ -1,0 +1,191 @@
+YES
+proof of /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase8.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 114 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1108 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 152 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 12 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 91 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase8.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase8.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "gettablesize" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 90000, %2
+		%3 = load %2
+		%4 = srem i32 %3, 99999
+		store %4, %2
+		%5 = load %2
+		%6 = icmp slt %5 0
+		br %6, %7, %10
+	7:
+		%8 = load %2
+		%9 = sub i32 0, %8
+		store %9, %1
+		br %12
+	10:
+		%11 = load %2
+		store %11, %1
+		br %12
+	12:
+		%13 = load %1
+		ret %13
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 27
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i16, align 2
+		%3 = alloca i64, align 8
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i16 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %3)
+		%4 = call i32 @gettablesize()
+		%5 = sext i32 %4 to i64
+		store %5, %3
+		store 0, %2
+		br %6
+	6:
+		%7 = load %2
+		%8 = zext i16 %7 to i64
+		%9 = load %3
+		%10 = icmp ult %8 %9
+		br %10, %11, %15
+	11:
+		br %12
+	12:
+		%13 = load %2
+		%14 = add i16 %13, 1
+		store %14, %2
+		br %6
+	15:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 12 rulesP rules:
+f_242(v76, v77, v78, 90000, v82, v80, 1, v83, v84, v85, 0, 3, 7, 4, 2, 8) -> f_243(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 4, 2, 8) :|: 0 = 0
+f_243(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 4, 2, 8) -> f_244(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 4, 2, 8) :|: 0 = 0
+f_244(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 4, 2, 8) -> f_245(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) :|: v82 < 90000 && v80 <= 89998
+f_245(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) -> f_247(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) :|: 0 = 0
+f_247(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) -> f_249(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) :|: TRUE
+f_249(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) -> f_251(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) :|: TRUE
+f_251(v76, v77, v78, 90000, v82, 1, v80, v83, v84, v85, 0, 3, 7, 89998, 89999, 4, 2, 8) -> f_252(v76, v77, v78, 90000, v82, 1, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) :|: 0 = 0
+f_252(v76, v77, v78, 90000, v82, 1, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) -> f_253(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) :|: v87 = 1 + v82 && 2 <= v87 && v87 <= 90000
+f_253(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) -> f_254(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) :|: TRUE
+f_254(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) -> f_255(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) :|: TRUE
+f_255(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 89999, 4, 2, 8) -> f_241(v76, v77, v78, 90000, v82, 1, v87, v83, v84, v85, 0, 3, 7, 4, 2, 8) :|: TRUE
+f_241(v76, v77, v78, 90000, v80, 1, v82, v83, v84, v85, 0, 3, 7, 4, 2, 8) -> f_242(v76, v77, v78, 90000, v82, v80, 1, v83, v84, v85, 0, 3, 7, 4, 2, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_242(v76:0, v77:0, v78:0, 90000, v82:0, v80:0, 1, v83:0, v84:0, v85:0, 0, 3, 7, 4, 2, 8) -> f_242(v76:0, v77:0, v78:0, 90000, 1 + v82:0, v82:0, 1, v83:0, v84:0, v85:0, 0, 3, 7, 4, 2, 8) :|: v80:0 < 89999 && v82:0 < 90000 && v82:0 > 0
+Filtered unneeded arguments:
+   f_242(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) -> f_242(x5, x6)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_242(v82:0, v80:0) -> f_242(1 + v82:0, v82:0) :|: v82:0 < 90000 && v82:0 > 0 && v80:0 < 89999
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_242(v82:0, v80:0) -> f_242(1 + v82:0, v82:0) :|: v82:0 < 90000 && v82:0 > 0 && v80:0 < 89999
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_242(v82:0:0, v80:0:0) -> f_242(1 + v82:0:0, v82:0:0) :|: v82:0:0 < 90000 && v82:0:0 > 0 && v80:0:0 < 89999
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_242 ] = -1*f_242_1
+
+The following rules are decreasing:
+f_242(v82:0:0, v80:0:0) -> f_242(1 + v82:0:0, v82:0:0) :|: v82:0:0 < 90000 && v82:0:0 > 0 && v80:0:0 < 89999
+
+The following rules are bounded:
+f_242(v82:0:0, v80:0:0) -> f_242(1 + v82:0:0, v82:0:0) :|: v82:0:0 < 90000 && v82:0:0 > 0 && v80:0:0 < 89999
+
+
+----------------------------------------
+
+(12)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.001s
+Runtime: 4610 milliseconds

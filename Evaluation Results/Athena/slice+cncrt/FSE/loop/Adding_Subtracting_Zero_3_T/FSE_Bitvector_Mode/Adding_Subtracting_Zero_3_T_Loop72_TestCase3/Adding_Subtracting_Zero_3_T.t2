@@ -1,0 +1,85 @@
+///*** 1_main ***///
+START: main_bb7;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb7;
+flag := 0;
+flag := 0;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(1 <= 0);
+TO: main_bb12;
+
+FROM: main_bb7_end;
+assume(0 <= 0);
+TO: main_bb8;
+
+FROM: main_bb8;
+v12 := flag;
+var__temp_v__fc_errno_0.0 := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb9;
+
+FROM: main_bb9;
+v__fc_errno_0.0 := var__temp_v__fc_errno_0.0;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(vpos.0 slt 10);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb9_end;
+assume(vpos.0 sge 10);
+TO: main_bb12;
+
+FROM: main_read_slice_1.exit;
+v14 := 10 - vpos.0;
+TO: main_read_slice_1.exit_v__retres.0.i;
+FROM: main_read_slice_1.exit_v__retres.0.i;
+assume((v12 != 1) && (vpos.0 slt v14));
+v__retres.0.i := -1;
+TO: main_read_slice_1.exit_sv__retres.0.i;
+
+FROM: main_read_slice_1.exit_v__retres.0.i;
+assume((v12 == 1) || (vpos.0 sge v14));
+v__retres.0.i := 0;
+TO: main_read_slice_1.exit_sv__retres.0.i;
+
+FROM: main_read_slice_1.exit_sv__retres.0.i;
+TO: main_read_slice_1.exit_end;
+
+FROM: main_read_slice_1.exit_end;
+assume((v12 != 1) && (vpos.0 slt v14));
+TO: main_bb10;
+
+FROM: main_read_slice_1.exit_end;
+assume((v12 == 1) || (vpos.0 sge v14));
+TO: main_bb11;
+
+FROM: main_bb10;
+v17 := v__fc_errno_0.0 + 1;
+var__temp_v__fc_errno_0.0 := v17;
+var__temp_vpos.0 := vpos.0;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v17 == 5);
+TO: main_bb12;
+
+FROM: main_bb10_end;
+assume(v17 != 5);
+TO: main_bb9;
+
+FROM: main_bb11;
+v19 := v__retres.0.i + 1;
+v20 := vpos.0 + v19;
+var__temp_v__fc_errno_0.0 := v__fc_errno_0.0;
+var__temp_vpos.0 := v20;
+TO: main_bb9;
+
+FROM: main_bb12;
+TO: main_bb12_ret;
+

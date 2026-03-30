@@ -1,0 +1,35 @@
+///*** 1_main ***///
+START: main_bb8;
+
+
+
+FROM: main_bb8;
+errno := 0;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(0 <= 0);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(1 <= 0);
+TO: main_bb11;
+
+FROM: main_bb9;
+v14 := errno;
+TO: main_bb10;
+
+FROM: main_bb10;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(1 <= 0);
+TO: main_bb10;
+
+FROM: main_bb10_end;
+assume(0 <= 0);
+TO: main_bb11;
+
+FROM: main_bb11;
+TO: main_bb11_ret;
+

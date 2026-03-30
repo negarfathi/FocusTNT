@@ -1,0 +1,22 @@
+line 7:	N2 -{int res = 0;}-> N3
+	res == 0;
+line 8:	N3 -{int pkt = 5;}-> N4
+	pkt == 5;
+line 9:	N4 -{while}-> N5
+line 9:	N5 -{[pkt < 10]}-> N6
+	pkt == 5;
+line 10:	N6 -{while}-> N8
+line 10:	N8 -{[res == 0]}-> N9
+	res == 0;
+line 11:	N9 -{res = 7;}-> N11
+	__CPAchecker_TMP_0 == 5;
+	res == 7;
+line 12:	N12 -{pkt = pkt + 1;}-> N13
+	pkt == 6;
+none:	N14 -{}-> N8
+line 10:	N8 -{[!(res == 0)]}-> N10
+	res == 7;
+none:	N10 -{}-> N5
+line 9:	N5 -{[pkt < 10]}-> N6
+	pkt == 6;
+line 10:	N6 -{while}-> N8

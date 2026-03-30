@@ -1,0 +1,41 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %retval = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %retval = alloca i32, align 4 + 0
+NODE   3:   %ui = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %ui = alloca i32, align 4 + 0
+NODE   4:   %size = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %size = alloca i32, align 4 + 0
+NODE   5:   %BUFFSIZE = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %BUFFSIZE = alloca i32, align 4 + 0
+NODE   6:   store i32 0, i32* %retval, align 4 (points-to size: 0)
+NODE   7:   store i32 1, i32* %ui, align 4 (points-to size: 0)
+NODE   8:   store i32 -294967296, i32* %size, align 4 (points-to size: 0)
+NODE   9:   store i32 1, i32* %BUFFSIZE, align 4 (points-to size: 0)
+NODE  10:   %0 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  11:   %1 = load i32, i32* %BUFFSIZE, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  12:   %2 = load i32, i32* %BUFFSIZE, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  13:   store i32 %2, i32* %size, align 4 (points-to size: 0)
+NODE  14:   %3 = load i32, i32* %ui, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  15:   %4 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  16:   %5 = load i32, i32* %ui, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  17:   %mul = mul i32 %5, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  18:   %6 = load i32, i32* %ui, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  19:   %7 = phi i1 [ false, %while.cond ], [ %cmp2, %land.rhs ] (points-to size: 1)
+    -> null + 0
+NODE  20:   %8 = load i32, i32* %ui, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   %mul3 = mul i32 %8, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  22:   store i32 %mul3, i32* %ui, align 4 (points-to size: 0)
+NODE  23:   ret i32 0 (points-to size: 1)
+    -> null + 0
+NODE  24: main (points-to size: 1)
+    -> main + 0

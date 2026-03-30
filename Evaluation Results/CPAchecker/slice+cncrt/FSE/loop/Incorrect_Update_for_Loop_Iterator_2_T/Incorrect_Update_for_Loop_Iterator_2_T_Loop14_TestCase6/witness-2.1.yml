@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "94a79852-8c28-37bd-931a-c93dad6736a0"
+    creation_time: "2025-12-20T11:29:17Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_T_Loop14_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_T_Loop14_TestCase6.c: "f4c7e837a393d3a81040b0a31445c8b5b2567f14f74f8cf6d94c6fdccebdface"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_T_Loop14_TestCase6.c"
+        line: 8
+        column: 3
+        function: "main"
+      value: "(l == (1U) || l == (0U))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_T_Loop14_TestCase6.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

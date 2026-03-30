@@ -1,0 +1,27 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+var__temp_vmul.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vmul.0 := var__temp_vmul.0;
+v1 := vmul.0 + 1;
+TO: main_bb1_v.;
+FROM: main_bb1_v.;
+assume(vmul.0 ule 255);
+v. := v1;
+TO: main_bb1_sv.;
+
+FROM: main_bb1_v.;
+assume(vmul.0 ugt 255);
+v. := 0;
+TO: main_bb1_sv.;
+
+FROM: main_bb1_sv.;
+var__temp_vmul.0 := v.;
+TO: main_bb1;
+

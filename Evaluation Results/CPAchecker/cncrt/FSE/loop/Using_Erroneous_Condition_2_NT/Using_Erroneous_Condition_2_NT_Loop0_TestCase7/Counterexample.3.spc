@@ -1,0 +1,48 @@
+CONTROL AUTOMATON ErrorPath3
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG10_1_1;
+STATE USEFIRST ARG10_0_1 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG10_1_1;
+STATE USEFIRST ARG10_1_1 :
+    MATCH "int main()" -> GOTO ARG10_2_1;
+STATE USEFIRST ARG10_2_1 :
+    MATCH "" -> GOTO ARG10_3_1;
+STATE USEFIRST ARG10_3_1 :
+    MATCH "int reg_count = -1;" -> GOTO ARG10;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG10 :
+    MATCH "[[!(reg_count > 65534)]]" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "" -> GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "int i = 0 ;" -> GOTO ARG21;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG21 :
+    MATCH "[[reg_count]]" -> GOTO ARG34;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG34 :
+    MATCH "" -> GOTO ARG42;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG42 :
+    MATCH "i++" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG190 :
+    TRUE -> STOP;
+
+END AUTOMATON

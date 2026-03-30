@@ -1,0 +1,175 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 87 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 242 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__fc_vla_alloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i64, align 8
+		%2 = alloca i32, align 4
+		%3 = alloca *i32, align 8
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 0, %2
+		%6 = load %2
+		%7 = icmp sle %6 0
+		br %7, %8, %9
+	8:
+		br %56
+	9:
+		%10 = load %2
+		%11 = icmp sgt %10 1000
+		br %11, %12, %13
+	12:
+		br %56
+	13:
+		br %14
+	14:
+		%15 = load %2
+		%16 = sext i32 %15 to i64
+		store %16, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i32 %3)
+		%17 = load %1
+		%18 = mul i64 4, %17
+		%19 = call *i8 @__fc_vla_alloc(i64 %18)
+		%20 = bitcast *i8 %19 to *i32
+		store %20, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		br %21
+	21:
+		%22 = load %4
+		%23 = load %2
+		%24 = icmp slt %22 %23
+		br %24, %25, %33
+	25:
+		%26 = call i32 @__VERIFIER_nondet_int()
+		%27 = load %3
+		%28 = load %4
+		%29 = sext i32 %28 to i64
+		%30 = getelementptr %27, %29
+		store %26, %30
+		%31 = load %4
+		%32 = add i32 %31, 1
+		store %32, %4
+		br %21
+	33:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 0, %5
+		%34 = load %5
+		%35 = icmp slt %34 0
+		br %35, %36, %37
+	36:
+		br %56
+	37:
+		br %38
+	38:
+		%39 = load %5
+		%40 = load %2
+		%41 = icmp sge %39 %40
+		br %41, %42, %43
+	42:
+		br %56
+	43:
+		%44 = load %3
+		%45 = load %5
+		%46 = sext i32 %45 to i64
+		%47 = getelementptr %44, %46
+		%48 = load %47
+		%49 = icmp ne %48 0
+		br %49, %50, %53
+	50:
+		%51 = load %5
+		%52 = add i32 %51, 1
+		store %52, %5
+		br %54
+	53:
+		br %55
+	54:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		br %38
+	55:
+		br %56
+	56:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c:6:17: warning: unknown attribute '__FC_BUILTIN__' ignored [-Wunknown-attributes]
+ __attribute__((__FC_BUILTIN__)) void *__fc_vla_alloc(unsigned long size);
+                ^
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c:8:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_T_Loop22_TestCase1.c:8:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+Runtime: 2828 milliseconds

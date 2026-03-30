@@ -1,0 +1,79 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_NT_Loop18_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 103 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_NT_Loop18_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_NT_Loop18_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		%2 = call i32 @__VERIFIER_nondet_int()
+		store %2, %1
+		br %3
+	3:
+		%4 = load %1
+		%5 = ashr i32 %4, 6
+		store %5, %1
+		%6 = load %1
+		%7 = icmp ne %6 0
+		br %7, %9, %8
+	8:
+		br %10
+	9:
+		br %3
+	10:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_NT_Loop18_TestCase0.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_NT_Loop18_TestCase0.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Aborted 1766084519Exec. 4, LLVMToSEGraph with some error. Reason: java.lang.UnsupportedOperationException: Not yet implemented!.
+Runtime: 2381 milliseconds

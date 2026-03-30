@@ -1,0 +1,15 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %mul = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %mul = alloca i32, align 4 + 0
+NODE   3:   store i32 0, i32* %mul, align 4 (points-to size: 0)
+NODE   4:   %0 = load i32, i32* %mul, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE   5:   %1 = load i32, i32* %mul, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE   6:   %inc = add i32 %1, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE   7:   store i32 %inc, i32* %mul, align 4 (points-to size: 0)
+NODE   8: main (points-to size: 1)
+    -> main + 0

@@ -1,0 +1,178 @@
+YES
+proof of /FILES_DIR/concretizer/Using_Erroneous_Condition_2_T_Loop15_TestCase8.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 98 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 875 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 102 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 7 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 84 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Using_Erroneous_Condition_2_T_Loop15_TestCase8.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Using_Erroneous_Condition_2_T_Loop15_TestCase8.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 5, %2
+		%4 = load %2
+		%5 = icmp sgt %4 65534
+		br %5, %6, %7
+	6:
+		store 0, %1
+		br %16
+	7:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %8
+	8:
+		%9 = load %3
+		%10 = load %2
+		%11 = icmp slt %9 %10
+		br %11, %12, %15
+	12:
+		%13 = load %3
+		%14 = add i32 %13, 1
+		store %14, %3
+		br %8
+	15:
+		br %16
+	16:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_142(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) -> f_143(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) :|: 0 = 0
+f_143(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) -> f_144(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) :|: v53 < 5 && v51 <= 3
+f_144(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) -> f_146(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) :|: 0 = 0
+f_146(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) -> f_148(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) :|: TRUE
+f_148(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) -> f_150(v46, v47, v48, 5, 0, v53, 1, v54, v55, v56, 3, 4) :|: 0 = 0
+f_150(v46, v47, v48, 5, 0, v53, 1, v54, v55, v56, 3, 4) -> f_152(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) :|: v57 = 1 + v53 && 2 <= v57 && v57 <= 5
+f_152(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) -> f_154(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) :|: TRUE
+f_154(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) -> f_155(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) :|: TRUE
+f_155(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4, 2) -> f_141(v46, v47, v48, 5, 0, v53, 1, v57, v54, v55, v56, 3, 4) :|: TRUE
+f_141(v46, v47, v48, 5, 0, v51, 1, v53, v54, v55, v56, 3, 4) -> f_142(v46, v47, v48, 5, 0, v53, 1, v51, v54, v55, v56, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_142(v46:0, v47:0, v48:0, 5, 0, v53:0, 1, v51:0, v54:0, v55:0, v56:0, 3, 4) -> f_142(v46:0, v47:0, v48:0, 5, 0, 1 + v53:0, 1, v53:0, v54:0, v55:0, v56:0, 3, 4) :|: v51:0 < 4 && v53:0 < 5 && v53:0 > 0
+Filtered unneeded arguments:
+   f_142(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13) -> f_142(x6, x8)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_142(v53:0, v51:0) -> f_142(1 + v53:0, v53:0) :|: v53:0 < 5 && v53:0 > 0 && v51:0 < 4
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_142(v53:0, v51:0) -> f_142(1 + v53:0, v53:0) :|: v53:0 < 5 && v53:0 > 0 && v51:0 < 4
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_142(v53:0:0, v51:0:0) -> f_142(1 + v53:0:0, v53:0:0) :|: v53:0:0 < 5 && v53:0:0 > 0 && v51:0:0 < 4
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_142 ] = -1*f_142_1
+
+The following rules are decreasing:
+f_142(v53:0:0, v51:0:0) -> f_142(1 + v53:0:0, v53:0:0) :|: v53:0:0 < 5 && v53:0:0 > 0 && v51:0:0 < 4
+
+The following rules are bounded:
+f_142(v53:0:0, v51:0:0) -> f_142(1 + v53:0:0, v53:0:0) :|: v53:0:0 < 5 && v53:0:0 > 0 && v51:0:0 < 4
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Using_Erroneous_Condition_2_T_Loop15_TestCase8.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Using_Erroneous_Condition_2_T_Loop15_TestCase8.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 4293 milliseconds

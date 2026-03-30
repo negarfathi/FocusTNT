@@ -1,0 +1,88 @@
+CONTROL AUTOMATON ErrorPath1
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "void main(void)" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int res = 0;" -> ASSUME {res == (0);} GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int pkt = __VERIFIER_nondet_int();" -> GOTO ARG10;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG10 :
+    MATCH "int pkt = __VERIFIER_nondet_int();" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "" -> GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "[pkt < 10]" -> GOTO ARG23;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG23 :
+    MATCH "" -> GOTO ARG28;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG28 :
+    MATCH "[res == 0]" -> ASSUME {res == (0);} GOTO ARG29;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG29 :
+    MATCH "res = __VERIFIER_nondet_int();" -> GOTO ARG30;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG30 :
+    MATCH "pkt ++;" -> GOTO ARG31;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG31 :
+    MATCH "pkt ++;" -> GOTO ARG32;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG32 :
+    MATCH "pkt ++;" -> GOTO ARG33;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG33 :
+    MATCH "" -> GOTO ARG34;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG34 :
+    MATCH "[!(res == 0)]" -> ASSUME {res == (1);} GOTO ARG55;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG55 :
+    MATCH "" -> GOTO ARG56;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG56 :
+    MATCH "[pkt < 10]" -> GOTO ARG59;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG59 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG64 :
+    TRUE -> STOP;
+
+END AUTOMATON

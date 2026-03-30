@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "388e0084-3dc1-3b68-9a5b-edffb53677a8"
+    creation_time: "2025-12-20T01:41:17Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Adding_Subtracting_Zero_1_NT_Loop0_TestCase5.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Adding_Subtracting_Zero_1_NT_Loop0_TestCase5.c: "661244f4ac6f24c65fe4988138049a48bf7ca180a53e3ade9f6a79b4c91b4e05"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_1_NT_Loop0_TestCase5.c"
+        line: 16
+        column: 5
+        function: "main"
+      value: "((((h == (0) && linesToRead == (1))) || ((h == (4) && linesToRead == (1)))) || (((h == (1) && linesToRead == (1))) || (((h == (2) && linesToRead == (1))) || ((h == (3) && linesToRead == (1))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_1_NT_Loop0_TestCase5.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "86748756-4132-3cfc-8c85-72fd81705f85"
+    creation_time: "2025-12-20T06:17:55Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_2_T_Loop0_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_2_T_Loop0_TestCase6.c: "67580a5aee6a179ea682902b40eb13b0c447c51159b111b8759512c845815a9a"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_2_T_Loop0_TestCase6.c"
+        line: 19
+        column: 9
+        function: "main"
+      value: "((((((i == (2) && (j == (3) && num == (5)))) || ((i == (1) && (j == (1) && num == (5))))) || (((i == (4) && (j == (2) && num == (5)))) || (((i == (2) && (j == (1) && num == (5)))) || ((i == (2) && (j == (2) && num == (5))))))) || ((((i == (1) && (j == (0) && num == (5)))) || ((i == (0) && (j == (3) && num == (5))))) || (((i == (2) && (j == (0) && num == (5)))) || (((i == (3) && (j == (0) && num == (5)))) || ((i == (0) && (j == (2) && num == (5)))))))) || (((((i == (4) && (j == (0) && num == (5)))) || ((i == (4) && (j == (3) && num == (5))))) || (((i == (0) && (j == (1) && num == (5)))) || (((i == (3) && (j == (3) && num == (5)))) || ((i == (4) && (j == (1) && num == (5))))))) || ((((i == (1) && (j == (3) && num == (5)))) || ((i == (3) && (j == (1) && num == (5))))) || (((i == (1) && (j == (2) && num == (5)))) || (((i == (0) && (j == (0) && num == (5)))) || ((i == (3) && (j == (2) && num == (5)))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_2_T_Loop0_TestCase6.c"
+        line: 16
+        column: 5
+        function: "main"
+      value: "((((i == (1) && num == (5))) || (((i == (0) && num == (5))) || ((i == (3) && num == (5))))) || (((i == (5) && num == (5))) || (((i == (4) && num == (5))) || ((i == (2) && num == (5))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_2_T_Loop0_TestCase6.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

@@ -1,0 +1,327 @@
+///*** 1_main ***///
+START: main_bb6;
+
+
+
+FROM: main_bb6;
+memory0_freeIndex := 1;
+vmemory0 := nondet();
+v15 := memory0_freeIndex;
+v16 := memory0_freeIndex;
+v17 := v16 + 16;
+memory0_freeIndex := v17;
+v18 := v15;
+v19 := select_array(vmemory0, v18);
+v20v0 := select_tuple(v19, 0, 2);
+v20v2 := constr_tuple(v20v0, -1);
+vmemory0 := store_array(vmemory0, v18, v20v2);
+v21 := v15;
+v22 := select_array(vmemory0, v21);
+v23v1 := select_tuple(v22, 1, 2);
+v23v2 := constr_tuple(6, v23v1);
+vmemory0 := store_array(vmemory0, v21, v23v2);
+v24 := v15;
+v25 := select_array(vmemory0, v24);
+v27 := select_tuple(v25, 1, 2);
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v27 <= -2);
+TO: main_bb29;
+
+FROM: main_bb6_end;
+assume(v27 > -2);
+TO: main_bb7;
+
+FROM: main_bb7;
+v29 := v15;
+v30 := select_array(vmemory0, v29);
+v32 := select_tuple(v30, 0, 2);
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v32 < 1);
+TO: main_bb29;
+
+FROM: main_bb7_end;
+assume(v32 >= 1);
+TO: main_bb8;
+
+FROM: main_bb8;
+v34 := v15;
+v35 := select_array(vmemory0, v34);
+v37 := select_tuple(v35, 1, 2);
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v37 >= 1);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v37 < 1);
+TO: main_bb13;
+
+FROM: main_bb9;
+v40 := v37 - 1;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v40 > 2147483647);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v40 <= 2147483647);
+TO: main_bb11;
+
+FROM: main_bb10;
+v42 := v40 - 2147483647;
+v43 := v42 - 1;
+v44 := v43 % 4294967296;
+v45 := -2147483648 + v44;
+var__temp_vdirection.0 := -1;
+var__temp_vpos.0 := v45;
+TO: main_wrap_around.exit8;
+
+FROM: main_bb11;
+var__temp_vdirection.0 := -1;
+var__temp_vpos.0 := v40;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(v40 < -2147483648);
+TO: main_bb12;
+
+FROM: main_bb11_end;
+assume(v40 >= -2147483648);
+TO: main_wrap_around.exit8;
+
+FROM: main_bb12;
+v47 := -2147483648 - v40;
+v48 := v47 - 1;
+v49 := v48 % 4294967296;
+v50 := 2147483647 - v49;
+var__temp_vdirection.0 := -1;
+var__temp_vpos.0 := v50;
+TO: main_wrap_around.exit8;
+
+FROM: main_bb13;
+v51 := v37 + 1;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v51 > 2147483647);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v51 <= 2147483647);
+TO: main_bb15;
+
+FROM: main_bb14;
+v53 := v51 - 2147483647;
+v54 := v53 - 1;
+v55 := v54 % 4294967296;
+v56 := -2147483648 + v55;
+var__temp_vdirection.0 := 1;
+var__temp_vpos.0 := v56;
+TO: main_wrap_around.exit8;
+
+FROM: main_bb15;
+var__temp_vdirection.0 := 1;
+var__temp_vpos.0 := v51;
+TO: main_bb15_end;
+
+FROM: main_bb15_end;
+assume(v51 < -2147483648);
+TO: main_bb16;
+
+FROM: main_bb15_end;
+assume(v51 >= -2147483648);
+TO: main_wrap_around.exit8;
+
+FROM: main_bb16;
+v58 := -2147483648 - v51;
+v59 := v58 - 1;
+v60 := v59 % 4294967296;
+v61 := 2147483647 - v60;
+var__temp_vdirection.0 := 1;
+var__temp_vpos.0 := v61;
+TO: main_wrap_around.exit8;
+
+FROM: main_wrap_around.exit8;
+vdirection.0 := var__temp_vdirection.0;
+vpos.0 := var__temp_vpos.0;
+v62 := v15;
+v63 := select_array(vmemory0, v62);
+v65 := select_tuple(v63, 0, 2);
+v66 := vpos.0 % v65;
+TO: main_wrap_around.exit8_end;
+
+FROM: main_wrap_around.exit8_end;
+assume(v66 > 2147483647);
+TO: main_bb17;
+
+FROM: main_wrap_around.exit8_end;
+assume(v66 <= 2147483647);
+TO: main_bb18;
+
+FROM: main_bb17;
+v68 := v66 - 2147483647;
+v69 := v68 - 1;
+v70 := v69 % 4294967296;
+v71 := -2147483648 + v70;
+var__temp_v.0.i3 := v71;
+TO: main_wrap_around.exit4;
+
+FROM: main_bb18;
+var__temp_v.0.i3 := v66;
+TO: main_bb18_end;
+
+FROM: main_bb18_end;
+assume(v66 < -2147483648);
+TO: main_bb19;
+
+FROM: main_bb18_end;
+assume(v66 >= -2147483648);
+TO: main_wrap_around.exit4;
+
+FROM: main_bb19;
+v73 := -2147483648 - v66;
+v74 := v73 - 1;
+v75 := v74 % 4294967296;
+v76 := 2147483647 - v75;
+var__temp_v.0.i3 := v76;
+TO: main_wrap_around.exit4;
+
+FROM: main_wrap_around.exit4;
+v.0.i3 := var__temp_v.0.i3;
+v77 := v15;
+v78 := select_array(vmemory0, v77);
+v80 := select_tuple(v78, 0, 2);
+v81 := v15;
+v82 := select_array(vmemory0, v81);
+v84 := select_tuple(v82, 0, 2);
+var__temp_vpos.1 := v.0.i3;
+TO: main_bb20;
+
+FROM: main_bb20;
+vpos.1 := var__temp_vpos.1;
+v85 := vpos.1 + vdirection.0;
+TO: main_bb20_end;
+
+FROM: main_bb20_end;
+assume(v85 > 2147483647);
+TO: main_bb21;
+
+FROM: main_bb20_end;
+assume(v85 <= 2147483647);
+TO: main_bb22;
+
+FROM: main_bb21;
+v87 := v85 - 2147483647;
+v88 := v87 - 1;
+v89 := v88 % 4294967296;
+v90 := -2147483648 + v89;
+var__temp_v.0.i1 := v90;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb22;
+var__temp_v.0.i1 := v85;
+TO: main_bb22_end;
+
+FROM: main_bb22_end;
+assume(v85 < -2147483648);
+TO: main_bb23;
+
+FROM: main_bb22_end;
+assume(v85 >= -2147483648);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb23;
+v92 := -2147483648 - v85;
+v93 := v92 - 1;
+v94 := v93 % 4294967296;
+v95 := 2147483647 - v94;
+var__temp_v.0.i1 := v95;
+TO: main_wrap_around.exit2;
+
+FROM: main_wrap_around.exit2;
+v.0.i1 := var__temp_v.0.i1;
+var__temp_vpos.3 := 0;
+TO: main_wrap_around.exit2_end;
+
+FROM: main_wrap_around.exit2_end;
+assume(v.0.i1 == v80);
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit2_end;
+assume(v.0.i1 != v80);
+TO: main_bb24;
+
+FROM: main_bb24;
+var__temp_vpos.3 := v.0.i1;
+TO: main_bb24_end;
+
+FROM: main_bb24_end;
+assume(v.0.i1 < 0);
+TO: main_bb25;
+
+FROM: main_bb24_end;
+assume(v.0.i1 >= 0);
+TO: main_wrap_around.exit;
+
+FROM: main_bb25;
+v98 := v84 - 1;
+TO: main_bb25_end;
+
+FROM: main_bb25_end;
+assume(v98 > 2147483647);
+TO: main_bb26;
+
+FROM: main_bb25_end;
+assume(v98 <= 2147483647);
+TO: main_bb27;
+
+FROM: main_bb26;
+v100 := v98 - 2147483647;
+v101 := v100 - 1;
+v102 := v101 % 4294967296;
+v103 := -2147483648 + v102;
+var__temp_vpos.3 := v103;
+TO: main_wrap_around.exit;
+
+FROM: main_bb27;
+var__temp_vpos.3 := v98;
+TO: main_bb27_end;
+
+FROM: main_bb27_end;
+assume(v98 < -2147483648);
+TO: main_bb28;
+
+FROM: main_bb27_end;
+assume(v98 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb28;
+v105 := -2147483648 - v98;
+v106 := v105 - 1;
+v107 := v106 % 4294967296;
+v108 := 2147483647 - v107;
+var__temp_vpos.3 := v108;
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit;
+vpos.3 := var__temp_vpos.3;
+var__temp_vpos.1 := vpos.3;
+TO: main_wrap_around.exit_end;
+
+FROM: main_wrap_around.exit_end;
+assume(vpos.3 != v.0.i3);
+TO: main_bb20;
+
+FROM: main_wrap_around.exit_end;
+assume(vpos.3 == v.0.i3);
+TO: main_bb29;
+
+FROM: main_bb29;
+TO: main_bb29_ret;
+

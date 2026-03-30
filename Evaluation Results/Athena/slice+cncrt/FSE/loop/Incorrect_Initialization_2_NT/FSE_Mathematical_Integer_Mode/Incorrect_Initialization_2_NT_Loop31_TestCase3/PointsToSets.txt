@@ -1,0 +1,104 @@
+NODE   2: <2> PSNodeType::ENTRY (points-to size: 0)
+NODE   3:   %tmpVar0 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmpVar0 = alloca i32, align 4 + 0
+NODE   4:   %matroska = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %matroska = alloca i32, align 4 + 0
+NODE   5:   %res = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %res = alloca i32, align 4 + 0
+NODE   6:   %id = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %id = alloca i32, align 4 + 0
+NODE   7:   %tmp_1 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmp_1 = alloca i32, align 4 + 0
+NODE   8:   %tmp_2 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmp_2 = alloca i32, align 4 + 0
+NODE   9:   store i32 3, i32* %matroska, align 4 (points-to size: 0)
+NODE  10:   store i32 0, i32* %res, align 4 (points-to size: 0)
+NODE  11:   %0 = load i32, i32* %matroska, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  12: <12> PSNodeType::CALL (points-to size: 0)
+NODE  13: <13> PSNodeType::ENTRY (points-to size: 0)
+NODE  14: i32 %q (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  15:   %q.addr = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %q.addr = alloca i32, align 4 + 0
+NODE  16:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE  17:   store i32 %q, i32* %q.addr, align 4 (points-to size: 0)
+NODE  18:   %0 = load i32, i32* %q.addr, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  19:   store i32 0, i32* %__retres, align 4 (points-to size: 0)
+NODE  20:   %1 = load i32, i32* %__retres, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  21:   ret i32 %1 (points-to size: 0)
+NODE  22:   store i32 1, i32* %__retres, align 4 (points-to size: 0)
+NODE  23: matroska_deliver_packet_slice_1 (points-to size: 1)
+    -> matroska_deliver_packet_slice_1 + 0
+NODE  24: main (points-to size: 1)
+    -> main + 0
+NODE  25:   %call = call i32 @matroska_deliver_packet_slice_1(i32 %0) (points-to size: 0)
+NODE  26:   store i32 %call, i32* %tmpVar0, align 4 (points-to size: 0)
+NODE  27:   %1 = load i32, i32* %tmpVar0, align 4 (points-to size: 0)
+NODE  28:   %2 = load i32, i32* %res, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  29:   ret void (points-to size: 0)
+NODE  30:   store i32 1, i32* %id, align 4 (points-to size: 0)
+NODE  31:   %3 = load i32, i32* %id, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  32:   %8 = load i32, i32* %res, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  33: <33> PSNodeType::CALL (points-to size: 0)
+NODE  34: <34> PSNodeType::ENTRY (points-to size: 0)
+NODE  35:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE  36:   %tmp_0 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmp_0 = alloca i32, align 4 + 0
+NODE  37:   %tmp = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmp = alloca i32, align 4 + 0
+NODE  38:   %0 = load i32, i32* @flag, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  39:   store i32 %0, i32* %tmp_0, align 4 (points-to size: 0)
+NODE  40:   %1 = load i32, i32* @flag, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  41:   %inc = add nsw i32 %1, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  42:   store i32 %inc, i32* @flag, align 4 (points-to size: 0)
+NODE  43:   %2 = load i32, i32* %tmp_0, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  44:   store i32 -1, i32* %tmp, align 4 (points-to size: 0)
+NODE  45:   %3 = load i32, i32* %tmp, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  46:   store i32 %3, i32* %__retres, align 4 (points-to size: 0)
+NODE  47:   %4 = load i32, i32* %__retres, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  48:   ret i32 %4 (points-to size: 0)
+NODE  49:   store i32 -1, i32* %__retres, align 4 (points-to size: 0)
+NODE  50: res_return_slice_1 (points-to size: 1)
+    -> res_return_slice_1 + 0
+NODE  51:   %call15 = call i32 @res_return_slice_1() (points-to size: 0)
+NODE  52:   store i32 %call15, i32* %res, align 4 (points-to size: 0)
+NODE  53: <53> PSNodeType::CALL (points-to size: 0)
+NODE  54:   %call3 = call i32 @res_return_slice_1() (points-to size: 0)
+NODE  55:   store i32 %call3, i32* %tmp_1, align 4 (points-to size: 0)
+NODE  56:   %4 = load i32, i32* %tmp_1, align 4 (points-to size: 0)
+NODE  57:   %conv = zext i1 %cmp4 to i32 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  58:   store i32 %conv, i32* %res, align 4 (points-to size: 0)
+NODE  59:   %5 = load i32, i32* %res, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  60:   store i32 1, i32* %matroska, align 4 (points-to size: 0)
+NODE  61: <61> PSNodeType::CALL (points-to size: 0)
+NODE  62:   %call8 = call i32 @res_return_slice_1() (points-to size: 0)
+NODE  63:   store i32 %call8, i32* %tmp_2, align 4 (points-to size: 0)
+NODE  64:   %6 = load i32, i32* %tmp_2, align 4 (points-to size: 0)
+NODE  65:   %conv10 = zext i1 %cmp9 to i32 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  66:   store i32 %conv10, i32* %res, align 4 (points-to size: 0)
+NODE  67:   %7 = load i32, i32* %res, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  68:   store i32 1, i32* %res, align 4 (points-to size: 0)

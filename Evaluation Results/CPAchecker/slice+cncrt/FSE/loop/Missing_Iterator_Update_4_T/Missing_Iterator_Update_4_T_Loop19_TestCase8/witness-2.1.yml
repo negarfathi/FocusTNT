@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "ac84de28-fa22-3d7d-86cd-d10e8a114265"
+    creation_time: "2025-12-20T13:56:16Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase8.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase8.c: "1e4eb30937c65bdb2a997fd76a4c8693ff229757e1aac10d8e689c9df17d5bf1"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase8.c"
+        line: 31
+        column: 3
+        function: "main"
+      value: "(((((mat_colSize == (10) && (mat_rowSize == (10) && x == (3)))) || ((mat_colSize == (10) && (mat_rowSize == (10) && x == (1))))) || (((mat_colSize == (10) && (mat_rowSize == (10) && x == (5)))) || (((mat_colSize == (10) && (mat_rowSize == (10) && x == (4)))) || ((mat_colSize == (10) && (mat_rowSize == (10) && x == (7))))))) || ((((mat_colSize == (10) && (mat_rowSize == (10) && x == (8)))) || (((mat_colSize == (10) && (mat_rowSize == (10) && x == (9)))) || ((mat_colSize == (10) && (mat_rowSize == (10) && x == (2)))))) || (((mat_colSize == (10) && (mat_rowSize == (10) && x == (0)))) || (((mat_colSize == (10) && (mat_rowSize == (10) && x == (6)))) || ((mat_colSize == (10) && (mat_rowSize == (10) && x == (10))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase8.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

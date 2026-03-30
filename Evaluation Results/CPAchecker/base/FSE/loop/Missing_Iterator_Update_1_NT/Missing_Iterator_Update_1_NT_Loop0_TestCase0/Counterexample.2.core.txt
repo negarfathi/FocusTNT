@@ -1,0 +1,30 @@
+line 13:	N34 -{int errno = 0;}-> N35
+	errno == 0;
+line 31:	N20 -{int ret;}-> N21
+line 31:	N21 -{waitpid()}-> N1
+line 16:	N3 -{num = __VERIFIER_nondet_int();}-> N4
+line 17:	N4 -{while}-> N5
+line 17:	N5 -{[!(num < 0)]}-> N7
+line 32:	N22 -{Label: again}-> N23
+line 33:	N23 -{[ret == 0]}-> N25
+	ret == 0;
+line 35:	N25 -{waitpid()}-> N1
+line 16:	N3 -{num = __VERIFIER_nondet_int();}-> N4
+line 17:	N4 -{while}-> N5
+line 17:	N5 -{[num < 0]}-> N6
+lines 19-22:	N12 -{__CPAchecker_TMP_0 = __VERIFIER_nondet_int();}-> N13
+line 19:	N13 -{[!(__CPAchecker_TMP_0 == 0)]}-> N11
+	__CPAchecker_TMP_0 == 1;
+line 19:	N11 -{[errno != 1]}-> N9
+	errno == 0;
+line 20:	N9 -{errno = 1;}-> N14
+	errno == 1;
+line 37:	N24 -{[ret < 0]}-> N28
+line 38:	N28 -{[errno == 1]}-> N30
+	errno == 1;
+line 39:	N30 -{Goto: again}-> N23
+line 33:	N23 -{[!(ret == 0)]}-> N24
+line 37:	N24 -{[ret < 0]}-> N28
+line 38:	N28 -{[errno == 1]}-> N30
+	errno == 1;
+line 39:	N30 -{Goto: again}-> N23

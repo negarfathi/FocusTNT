@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "7d5d0a13-3107-3b0a-9632-ff047a630cd5"
+    creation_time: "2025-12-20T15:12:06Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop14_TestCase10.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop14_TestCase10.c: "7f17cf0050f9f0318dad23d600e855c3dfe377bc61d6b8b0952330ca22fa8950"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop14_TestCase10.c"
+        line: 8
+        column: 3
+        function: "main"
+      value: "(((number == (2050000000U) || number == (2U)) || (number == (205U) || (number == (20500000U) || number == (2050U)))) || ((number == (20U) || number == (20500U)) || (number == (205000000U) || (number == (2050000U) || number == (205000U)))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_3_T_Loop14_TestCase10.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

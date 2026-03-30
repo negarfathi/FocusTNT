@@ -1,0 +1,28 @@
+line 12:	N2 -{unsigned int best = 2147483648L;}-> N3
+	best == 2147483648U;
+line 15:	N5 -{unsigned int st_max = 4294967295L;}-> N6
+	st_max == 4294967295U;
+line 16:	N6 -{unsigned int it_min = 0;}-> N7
+	it_min == 0U;
+line 17:	N7 -{[!(st_max <= it_min)]}-> N8
+	st_max == 4294967295U;
+	it_min == 0U;
+line 19:	N8 -{[!(best == 0)]}-> N11
+	best == 2147483648U;
+lines 21-27:	N14 -{cur = best;}-> N15
+	cur == 2147483648U;
+line 23:	N17 -{[!(st_max < cur)]}-> N19
+	st_max == 4294967295U;
+	cur == 2147483648U;
+line 25:	N19 -{[!(it_min > cur)]}-> N22
+	it_min == 0U;
+	cur == 2147483648U;
+lines 21-27:	N16 -{cur = cur + best;}-> N15
+	cur == 0U;
+line 23:	N17 -{[!(st_max < cur)]}-> N19
+	st_max == 4294967295U;
+	cur == 0U;
+line 25:	N19 -{[!(it_min > cur)]}-> N22
+	cur == 2147483648U;
+	it_min == 0U;
+	cur == 0U;

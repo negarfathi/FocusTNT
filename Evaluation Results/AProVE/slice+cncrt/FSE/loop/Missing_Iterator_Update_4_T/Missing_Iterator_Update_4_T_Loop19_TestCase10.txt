@@ -1,0 +1,208 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase10.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 92 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1055 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 81 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 67 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase10.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase10.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 65534, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 65534, %4
+		%5 = load %3
+		%6 = icmp slt %5 0
+		br %6, %7, %8
+	7:
+		store 0, %1
+		br %32
+	8:
+		%9 = load %4
+		%10 = icmp slt %9 0
+		br %10, %11, %12
+	11:
+		store 0, %1
+		br %32
+	12:
+		%13 = load %3
+		%14 = icmp sgt %13 65534
+		br %14, %15, %16
+	15:
+		store 0, %1
+		br %32
+	16:
+		%17 = load %4
+		%18 = icmp sgt %17 65534
+		br %18, %19, %20
+	19:
+		store 0, %1
+		br %32
+	20:
+		br %21
+	21:
+		br %22
+	22:
+		br %23
+	23:
+		store 0, %2
+		br %24
+	24:
+		%25 = load %2
+		%26 = load %3
+		%27 = icmp slt %25 %26
+		br %27, %28, %31
+	28:
+		%29 = load %2
+		%30 = add i32 %29, 1
+		store %30, %2
+		br %24
+	31:
+		br %32
+	32:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_235(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 4) -> f_236(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 4) :|: 0 = 0
+f_236(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 4) -> f_237(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) :|: v77 < 65534 && v75 <= 65532
+f_237(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) -> f_239(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) :|: 0 = 0
+f_239(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) -> f_241(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) :|: TRUE
+f_241(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 65532, 65533, 4) -> f_243(v69, v70, v71, v72, 65534, 0, v77, 1, v78, v79, v80, v81, 3, 65533, 4) :|: 0 = 0
+f_243(v69, v70, v71, v72, 65534, 0, v77, 1, v78, v79, v80, v81, 3, 65533, 4) -> f_245(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) :|: v82 = 1 + v77 && 2 <= v82 && v82 <= 65534
+f_245(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) -> f_247(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) :|: TRUE
+f_247(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) -> f_248(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) :|: TRUE
+f_248(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 65533, 4, 2) -> f_234(v69, v70, v71, v72, 65534, 0, v77, 1, v82, v78, v79, v80, v81, 3, 4) :|: TRUE
+f_234(v69, v70, v71, v72, 65534, 0, v75, 1, v77, v78, v79, v80, v81, 3, 4) -> f_235(v69, v70, v71, v72, 65534, 0, v77, 1, v75, v78, v79, v80, v81, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_235(v69:0, v70:0, v71:0, v72:0, 65534, 0, v77:0, 1, v75:0, v78:0, v79:0, v80:0, v81:0, 3, 4) -> f_235(v69:0, v70:0, v71:0, v72:0, 65534, 0, 1 + v77:0, 1, v77:0, v78:0, v79:0, v80:0, v81:0, 3, 4) :|: v75:0 < 65533 && v77:0 < 65534 && v77:0 > 0
+Filtered unneeded arguments:
+   f_235(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_235(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_235(v77:0, v75:0) -> f_235(1 + v77:0, v77:0) :|: v77:0 < 65534 && v77:0 > 0 && v75:0 < 65533
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_235(v77:0, v75:0) -> f_235(1 + v77:0, v77:0) :|: v77:0 < 65534 && v77:0 > 0 && v75:0 < 65533
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_235(v77:0:0, v75:0:0) -> f_235(1 + v77:0:0, v77:0:0) :|: v77:0:0 < 65534 && v77:0:0 > 0 && v75:0:0 < 65533
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_235 ] = -1*f_235_1
+
+The following rules are decreasing:
+f_235(v77:0:0, v75:0:0) -> f_235(1 + v77:0:0, v77:0:0) :|: v77:0:0 < 65534 && v77:0:0 > 0 && v75:0:0 < 65533
+
+The following rules are bounded:
+f_235(v77:0:0, v75:0:0) -> f_235(1 + v77:0:0, v77:0:0) :|: v77:0:0 < 65534 && v77:0:0 > 0 && v75:0:0 < 65533
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase10.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop19_TestCase10.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 4585 milliseconds

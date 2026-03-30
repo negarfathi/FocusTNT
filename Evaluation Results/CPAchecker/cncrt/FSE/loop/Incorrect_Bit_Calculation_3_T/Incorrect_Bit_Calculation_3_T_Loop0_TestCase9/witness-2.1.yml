@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "936d62e9-8b6b-34f6-a191-5785c1e0a5fe"
+    creation_time: "2025-12-20T02:06:23Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_T_Loop0_TestCase9.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_T_Loop0_TestCase9.c: "6e59e77b4129f2ff85fd4350d8116f4d09105d8e4435f4ab04e85017bf6dd630"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_T_Loop0_TestCase9.c"
+        line: 14
+        column: 5
+        function: "main"
+      value: "((((mask == (67108863) && wc == (255))) || (((mask == (67108863) && wc == (-100))) || ((mask == (67108863) && wc == (67108862))))) || (((mask == (67108863) && wc == (1048575))) || (((mask == (67108863) && wc == (16383))) || ((mask == (67108863) && wc == (3))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_3_T_Loop0_TestCase9.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

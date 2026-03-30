@@ -1,0 +1,64 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG6;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG6 :
+    MATCH "void main(void)" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int linesToRead = __VERIFIER_nondet_int();" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int linesToRead = __VERIFIER_nondet_int();" -> GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "[!(linesToRead < 0)]" -> GOTO ARG20;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG20 :
+    MATCH "int h = __VERIFIER_nondet_int();" -> GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "int h = __VERIFIER_nondet_int();" -> GOTO ARG24;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG24 :
+    MATCH "" -> GOTO ARG25;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG25 :
+    MATCH "[h > 0]" -> GOTO ARG26;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG26 :
+    MATCH "[!(linesToRead > h)]" -> GOTO ARG31;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG31 :
+    MATCH "h -= linesToRead;" -> GOTO ARG32;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG32 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG33 :
+    TRUE -> STOP;
+
+END AUTOMATON

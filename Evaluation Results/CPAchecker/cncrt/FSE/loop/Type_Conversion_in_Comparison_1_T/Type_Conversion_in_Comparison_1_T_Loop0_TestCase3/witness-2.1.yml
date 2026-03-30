@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "b763e407-b9e0-3316-ba6e-22e2e36f7ea3"
+    creation_time: "2025-12-20T07:07:51Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase3.c: "40cc1279057a32ecdc5ab9fe42888ea753d974bcbcd77acc2d55d297ada2e587"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase3.c"
+        line: 17
+        column: 5
+        function: "main"
+      value: "((((((i == (5) && len == (10)) && (s == (15U) && seqnum == (10U)))) || (((i == (4) && len == (10)) && (s == (14U) && seqnum == (10U))))) || ((((i == (8) && len == (10)) && (s == (18U) && seqnum == (10U)))) || ((((i == (7) && len == (10)) && (s == (17U) && seqnum == (10U)))) || (((i == (1) && len == (10)) && (s == (11U) && seqnum == (10U))))))) || (((((i == (3) && len == (10)) && (s == (13U) && seqnum == (10U)))) || ((((i == (9) && len == (10)) && (s == (19U) && seqnum == (10U)))) || (((i == (0) && len == (10)) && (s == (10U) && seqnum == (10U)))))) || ((((i == (10) && len == (10)) && (s == (20U) && seqnum == (10U)))) || ((((i == (6) && len == (10)) && (s == (16U) && seqnum == (10U)))) || (((i == (2) && len == (10)) && (s == (12U) && seqnum == (10U))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase3.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

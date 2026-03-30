@@ -1,0 +1,44 @@
+///*** 1_main ***///
+START: main_bb1;
+
+FROM: main_bb1;
+__fc_errno := 0;
+v1 := nondet();
+var__temp_vret.0 := v1;
+TO: main_bb2;
+
+FROM: main_bb2;
+vret.0 := var__temp_vret.0;
+var__temp_vret.1 := vret.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(vret.0 == 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(vret.0 != 0);
+TO: main_bb4;
+
+FROM: main_bb3;
+v3 := nondet();
+var__temp_vret.1 := v3;
+TO: main_bb4;
+
+FROM: main_bb4;
+vret.1 := var__temp_vret.1;
+v5 := __fc_errno;
+var__temp_vret.0 := vret.1;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume((vret.1 slt 0) && (v5 == 1));
+TO: main_bb2;
+
+FROM: main_bb4_end;
+assume((vret.1 sge 0) || (v5 != 1));
+TO: main_bb5;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

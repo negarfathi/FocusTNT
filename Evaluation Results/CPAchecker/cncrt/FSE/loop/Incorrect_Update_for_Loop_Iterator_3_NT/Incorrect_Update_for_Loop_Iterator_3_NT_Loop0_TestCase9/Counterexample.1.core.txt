@@ -1,0 +1,64 @@
+line 14:	N2 -{int nfds = 10;}-> N3
+	nfds == 10;
+line 15:	N3 -{int nr = 500;}-> N4
+	nr == 500;
+line 16:	N4 -{int NR_OPEN = 250;}-> N5
+	NR_OPEN == 250;
+line 17:	N5 -{while}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 10;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 20;
+line 20:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 20;
+	NR_OPEN == 250;
+none:	N10 -{}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 20;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 40;
+line 20:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 40;
+	NR_OPEN == 250;
+none:	N10 -{}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 40;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 80;
+line 20:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 80;
+	NR_OPEN == 250;
+none:	N10 -{}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 80;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 160;
+line 20:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 160;
+	NR_OPEN == 250;
+none:	N10 -{}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 160;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 320;
+line 20:	N9 -{[nfds > NR_OPEN]}-> N11
+	nfds == 320;
+	NR_OPEN == 250;
+line 21:	N11 -{nfds = NR_OPEN;}-> N12
+	nfds == 250;
+none:	N10 -{}-> N6
+line 17:	N6 -{[nfds <= nr]}-> N7
+	nfds == 250;
+	nr == 500;
+line 19:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 500;
+line 20:	N9 -{[nfds > NR_OPEN]}-> N11
+	nfds == 250;
+	nfds == 500;
+	NR_OPEN == 250;
+none:	N10 -{}-> N6

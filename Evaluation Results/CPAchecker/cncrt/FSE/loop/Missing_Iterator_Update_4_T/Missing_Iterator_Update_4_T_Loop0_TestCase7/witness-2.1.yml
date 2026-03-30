@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "b6210ef1-8c13-33b5-9679-dcd7da2d39b0"
+    creation_time: "2025-12-20T05:30:32Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase7.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase7.c: "99327cd8027983effd2b0310e8c85d3833b8adbf59f12cb3db9d3661b38ca6c0"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase7.c"
+        line: 20
+        column: 9
+        function: "main"
+      value: "((((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (3) && z == (3))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (5) && z == (3))))) || (((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (4) && z == (3))))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (1) && z == (4))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (1) && z == (3))))) || (((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (2) && z == (4)))))))) || (((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (3) && z == (4))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (0) && z == (3))))) || (((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (5) && z == (4))))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (0) && z == (4))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (2) && z == (3))))) || (((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (4) && z == (4)))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase7.c"
+        line: 18
+        column: 5
+        function: "main"
+      value: "((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (1) && (y == (5) && z == (4))))) || ((((mat_colSize == (2) && mat_rowSize == (5)) && (x == (2) && (y == (5) && z == (5))))) || (((mat_colSize == (2) && mat_rowSize == (5)) && (x == (0) && (y == (2) && z == (3)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase7.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

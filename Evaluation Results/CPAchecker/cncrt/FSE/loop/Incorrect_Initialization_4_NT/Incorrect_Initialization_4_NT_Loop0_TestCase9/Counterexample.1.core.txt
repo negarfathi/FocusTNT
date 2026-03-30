@@ -1,0 +1,29 @@
+line 11:	N2 -{int h = 18;}-> N3
+	h == 18;
+line 12:	N3 -{int hash = 21;}-> N4
+	hash == 21;
+line 13:	N4 -{int rehash = 6;}-> N5
+	rehash == 6;
+line 14:	N5 -{[!(h < 0)]}-> N10
+	h == 18;
+line 14:	N10 -{[!(hash <= 0)]}-> N9
+	hash == 21;
+line 14:	N9 -{[!(rehash <= 0)]}-> N8
+	rehash == 6;
+line 14:	N8 -{[!(rehash > hash)]}-> N6
+	rehash == 6;
+	hash == 21;
+line 16:	N6 -{int i = h % hash;}-> N12
+	i == 18;
+line 17:	N12 -{int r;}-> N13
+line 18:	N13 -{while}-> N14
+line 18:	N14 -{[i < hash]}-> N15
+	i == 18;
+	hash == 21;
+line 20:	N15 -{[!(r == 0)]}-> N17
+line 21:	N17 -{i = i + r;}-> N20
+none:	N20 -{}-> N14
+line 18:	N14 -{[i < hash]}-> N15
+	hash == 21;
+line 20:	N15 -{[!(r == 0)]}-> N17
+none:	N20 -{}-> N14

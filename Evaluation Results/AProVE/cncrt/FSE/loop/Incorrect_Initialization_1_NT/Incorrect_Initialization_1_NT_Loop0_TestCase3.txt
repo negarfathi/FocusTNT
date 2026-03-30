@@ -1,0 +1,189 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop0_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 71 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop0_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop0_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: .str initVal: \0A\00 type: [2 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "strcspn" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 *i8, 1 *i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%3 = alloca i32, align 4
+		%4 = alloca *i8, align 8
+		%5 = alloca *i8, align 8
+		%6 = alloca *i8, align 8
+		%7 = alloca *i8, align 8
+		store %0, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		store %1, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %6)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %7)
+		%8 = load %4
+		store %8, %7
+		br %9
+	9:
+		%10 = load %7
+		%11 = load %10
+		%12 = sext i8 %11 to i32
+		%13 = icmp ne %12 0
+		br %13, %14, %42
+	14:
+		%15 = load %5
+		store %15, %6
+		br %16
+	16:
+		%17 = load %6
+		%18 = load %17
+		%19 = sext i8 %18 to i32
+		%20 = icmp ne %19 0
+		br %20, %21, %39
+	21:
+		%22 = load %7
+		%23 = load %22
+		%24 = sext i8 %23 to i32
+		%25 = load %6
+		%26 = load %25
+		%27 = sext i8 %26 to i32
+		%28 = icmp eq %24 %27
+		br %28, %29, %36
+	29:
+		%30 = load %7
+		%31 = load %4
+		%32 = ptrtoint *i8 %30 to i64
+		%33 = ptrtoint *i8 %31 to i64
+		%34 = sub i64 %32, %33
+		%35 = trunc i64 %34 to i32
+		store %35, %3
+		br %43
+	36:
+		%37 = load %6
+		%38 = getelementptr %37, 1
+		store %38, %6
+		br %16
+	39:
+		%40 = load %7
+		%41 = getelementptr %40, 1
+		store %41, %7
+		br %9
+	42:
+		store 0, %3
+		br %43
+	43:
+		%44 = load %3
+		ret %44
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 55
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [100 x i8], align 16
+		%3 = alloca i32, align 4
+		%4 = alloca *i8, align 8
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[100 x i8] %2)
+		%6 = bitcast *[100 x i8] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %6, i8 0, i64 100, i1 0)
+		%7 = bitcast *i8 %6 to *[100 x i8]
+		%8 = getelementptr %7, 0, 0
+		store 97, %8
+		%9 = getelementptr %7, 0, 1
+		store 10, %9
+		%10 = getelementptr %7, 0, 2
+		store 97, %10
+		%11 = getelementptr %7, 0, 3
+		store 10, %11
+		%12 = getelementptr %7, 0, 4
+		store 97, %12
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %13
+	13:
+		%14 = load %3
+		%15 = icmp slt %14 99
+		br %15, %16, %20
+	16:
+		br %17
+	17:
+		%18 = load %3
+		%19 = add i32 %18, 1
+		store %19, %3
+		br %13
+	20:
+		%21 = getelementptr %2, 0, 99
+		store 0, %21
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		%22 = getelementptr %2, 0, 0
+		store %22, %4
+		br %23
+	23:
+		%24 = load %4
+		%25 = load %24
+		%26 = icmp ne %25 0
+		br %26, %27, %34
+	27:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%28 = load %4
+		%29 = call i32 @strcspn(*i8 %28, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@3cedfa20)
+		store %29, %5
+		%30 = load %5
+		%31 = load %4
+		%32 = sext i32 %30 to i64
+		%33 = getelementptr %31, %32
+		store %33, %4
+		br %23
+	34:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop0_TestCase3.c:11:5: warning: incompatible redeclaration of library function 'strcspn' [-Wincompatible-library-redeclaration]
+int strcspn(const char *strSrc, const char *str)
+    ^
+/FILES_DIR/concretizer/Incorrect_Initialization_1_NT_Loop0_TestCase3.c:11:5: note: 'strcspn' is a builtin with type 'unsigned long (const char *, const char *)'
+1 warning generated.
+
+Aborted 1766098650Exec. 4, LLVMToSEGraph with some error. Reason: InconsistentStateException [integerState=vals:
+{v3506=[1,+inf){-inf,+inf}, v3507=[1,+inf){-inf,+inf}, v3508=[1,+inf){-inf,+inf}, v3509=[1,+inf){-inf,+inf}, v3510=[1,+inf){-inf,+inf}, v3511=[1,+inf){-inf,+inf}, v3512=[1,+inf){-inf,+inf}, v3513=[2,+inf){0,+inf}, v3514=[10,97](u2), v3516=[1,+inf){-inf,+inf}, v3517=#\{0}, v3518=[1,+inf){-inf,+inf}, v3519=[10,97](l1), v3524=[1,+inf){-inf,+inf}, v3525=[1,+inf){-inf,+inf}, v3526=[1,+inf){-inf,+inf}, v3527=[1,+inf){-inf,+inf}, v3528=[1,+inf){-inf,+inf}, v3529=[2,+inf){0,+inf}, v3530=[3,+inf){0,+inf}, v3531=[4,+inf){0,+inf}, v3532=[5,+inf){0,+inf}, v3535=[100,+inf){0,+inf}, v3537=[2,+inf){0,+inf}, v3538=[4,+inf){0,+inf}, v3539=[4,+inf){0,+inf}, v3540=[8,+inf){0,+inf}, v3541=[4,+inf){0,+inf}, v3542=[4,+inf){0,+inf}, v3543=[8,+inf){0,+inf}, v3544=[8,+inf){0,+inf}, v3545=[8,+inf){0,+inf}, v3546=[8,+inf){0,+inf}, v3547=#, v3548=#\{0}, v3549=[10,97](l2), v3800=[2,+inf){0,+inf}, v4047=[3,+inf){0,+inf}}
+associations:
+{v3506=0, v3537=0, v3525=1, v3538=1, v3507=2, v3524=2, v3518=2, v3535=2, v3526=3, v3539=3, v3527=4, v3540=4, v3528=5, v3541=5, v3513=2, v3529=2, v3530=2, v3531=2, v3532=2, v3508=6, v3542=6, v3509=7, v3543=7, v3510=8, v3544=8, v3511=9, v3545=9, v3512=10, v3546=10, v4047=2}
+Runtime: 17419 milliseconds

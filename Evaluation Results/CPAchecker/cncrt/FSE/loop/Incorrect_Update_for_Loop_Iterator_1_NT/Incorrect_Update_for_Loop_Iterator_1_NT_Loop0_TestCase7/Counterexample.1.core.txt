@@ -1,0 +1,75 @@
+line 12:	N2 -{int max_msg_size = 1024;}-> N3
+	max_msg_size == 1024;
+line 13:	N3 -{int buffer_read_offset = 900;}-> N4
+	buffer_read_offset == 900;
+line 14:	N4 -{int buffer_bytes_left = 0;}-> N5
+	buffer_bytes_left == 0;
+line 15:	N5 -{[!(max_msg_size < -1)]}-> N9
+	max_msg_size == 1024;
+line 15:	N9 -{[!(buffer_read_offset <= 0)]}-> N8
+	buffer_read_offset == 900;
+line 15:	N8 -{[!(buffer_bytes_left < 0)]}-> N6
+	buffer_bytes_left == 0;
+line 17:	N6 -{int size = 64;}-> N11
+	size == 64;
+line 18:	N11 -{while}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == 0;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 128;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 1024;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 128;
+	max_msg_size == 1024;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -772;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -772;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 256;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 1024;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 256;
+	max_msg_size == 1024;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -644;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -644;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 512;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 1024;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 512;
+	max_msg_size == 1024;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == -388;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == -388;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 1024;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 1024;
+line 21:	N18 -{[!(size > max_msg_size)]}-> N16
+	size == 1024;
+	max_msg_size == 1024;
+line 23:	N16 -{buffer_bytes_left = size - buffer_read_offset;}-> N20
+	buffer_bytes_left == 124;
+none:	N20 -{}-> N12
+line 18:	N12 -{[buffer_bytes_left < (size / 2)]}-> N13
+	buffer_bytes_left == 124;
+line 20:	N13 -{size = size * 2;}-> N15
+	size == 2048;
+line 21:	N15 -{[max_msg_size != -1]}-> N18
+	max_msg_size == 1024;
+line 21:	N18 -{[size > max_msg_size]}-> N17
+	buffer_bytes_left == 124;
+	size == 1024;
+	size == 2048;
+	max_msg_size == 1024;
+none:	N20 -{}-> N12

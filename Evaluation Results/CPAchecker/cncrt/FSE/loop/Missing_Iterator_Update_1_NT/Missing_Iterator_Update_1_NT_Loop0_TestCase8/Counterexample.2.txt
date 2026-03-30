@@ -1,0 +1,36 @@
+none:	N16 -{INIT GLOBAL VARS}-> N30
+line 1:	N30 -{int __VERIFIER_nondet_int();}-> N31
+line 13:	N31 -{int errno = 0;}-> N32
+	errno == 0;
+lines 14-26:	N32 -{int waitpid();}-> N33
+lines 28-41:	N33 -{int main();}-> N34
+none:	N34 -{Function start dummy edge}-> N17
+line 31:	N17 -{int ret;}-> N18
+line 31:	N18 -{waitpid()}-> N1
+none:	N1 -{Function start dummy edge}-> N2
+line 16:	N2 -{int num = -10;}-> N3
+	num == -10;
+line 17:	N3 -{while}-> N4
+line 17:	N4 -{[num < 0]}-> N5
+	num == -10;
+	num == -10;
+line 19:	N5 -{}-> N10
+line 19:	N10 -{[errno != 1]}-> N8
+	errno == 0;
+	errno == 0;
+line 20:	N8 -{errno = 1;}-> N11
+	errno == 1;
+none:	N11 -{}-> N7
+line 23:	N7 -{return num;}-> N0
+line 31:	N0 -{Return edge from waitpid to main: ret = waitpid();}-> N19
+line 32:	N19 -{Label: again}-> N20
+line 33:	N20 -{[!(ret == 0)]}-> N21
+	ret == -10;
+	ret == -10;
+line 37:	N21 -{[ret < 0]}-> N25
+	ret == -10;
+	ret == -10;
+line 38:	N25 -{[errno == 1]}-> N27
+	errno == 1;
+	errno == 1;
+line 39:	N27 -{Goto: again}-> N20

@@ -1,0 +1,39 @@
+///*** 1_main ***///
+START: main_bb14;
+
+FROM: main_bb14;
+flag := 0;
+count := 0;
+v31 := count;
+TO: main_bb15;
+
+FROM: main_bb15;
+v32 := flag;
+TO: main_bb15_end;
+
+FROM: main_bb15_end;
+assume((v32 == 1) || (v31 > 100));
+TO: main_read.exit;
+
+FROM: main_bb15_end;
+assume((v32 != 1) && (v31 <= 100));
+TO: main_bb16;
+
+FROM: main_bb16;
+flag := 1;
+TO: main_read.exit;
+
+FROM: main_read.exit;
+TO: main_read.exit_end;
+
+FROM: main_read.exit_end;
+assume(1 <= 0);
+TO: main_bb17;
+
+FROM: main_read.exit_end;
+assume(0 <= 0);
+TO: main_bb15;
+
+FROM: main_bb17;
+TO: main_bb17_ret;
+

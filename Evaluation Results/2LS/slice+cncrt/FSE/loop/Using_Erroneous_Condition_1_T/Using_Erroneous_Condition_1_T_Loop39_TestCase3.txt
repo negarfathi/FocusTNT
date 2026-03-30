@@ -1,0 +1,100 @@
+2LS version 0.10.0
+Parsing /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop39_TestCase3.c
+Converting
+Type-checking Using_Erroneous_Condition_1_T_Loop39_TestCase3
+file /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop39_TestCase3.c line 13 function main: function 'malloc' is not declared
+Generating GOTO Program
+Adding CPROVER library
+file <builtin-library-malloc> line 8: warning: implicit function declaration "malloc"
+old definition in module Using_Erroneous_Condition_1_T_Loop39_TestCase3 file /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop39_TestCase3.c line 13 function main
+void * (void)
+new definition in module <built-in-library> file <builtin-library-malloc> line 8
+void * (__CPROVER_size_t malloc_size)
+Function Pointer Removal
+Generic Property Instrumentation
+Constant Propagation
+Using intervals domain with binary search solver
+Computing SSA of main
+Simplifying
+Computing SSA of __CPROVER_initialize
+Simplifying
+Computing SSA of __CPROVER__start
+Simplifying
+
+Summarizing function __CPROVER__start
+Checking precondition of __CPROVER_initialize
+Function __CPROVER_initialize not analyzed yet
+Recursively summarizing function __CPROVER_initialize
+Analyzing function __CPROVER_initialize
+Computing summary
+Computing termination argument for __CPROVER_initialize
+Function trivially terminates
+
+Summary for function __CPROVER_initialize
+params: 
+globals_in: __CPROVER_threads_exited __CPROVER_thread_key_dtors __CPROVER_thread_keys __CPROVER_malloc_is_new_array __CPROVER_alloca_object'obj __CPROVER_dead_object'obj __CPROVER_deallocated'obj __CPROVER_new_object'obj __CPROVER_alloca_object __CPROVER_dead_object __CPROVER_deallocated __CPROVER_new_object __CPROVER_rounding_mode __CPROVER_pipe_count __CPROVER_max_malloc_size __CPROVER_next_thread_id __CPROVER_next_thread_key __CPROVER_thread_id 
+globals_out: __CPROVER_threads_exited#111 __CPROVER_thread_key_dtors#109 __CPROVER_thread_keys#110 __CPROVER_malloc_is_new_array#101 __CPROVER_alloca_object'obj __CPROVER_dead_object'obj __CPROVER_deallocated'obj __CPROVER_new_object'obj __CPROVER_alloca_object#98 __CPROVER_dead_object#99 __CPROVER_deallocated#100 __CPROVER_new_object#103 __CPROVER_rounding_mode#107 __CPROVER_pipe_count#106 __CPROVER_max_malloc_size#102 __CPROVER_next_thread_id#104 __CPROVER_next_thread_key#105 __CPROVER_thread_id#108 
+forward precondition: TRUE
+forward transformer: __CPROVER_rounding_mode#107 <= 0 && -((signed __CPROVER_bitvector[33])__CPROVER_rounding_mode#107) <= 0 && __CPROVER_pipe_count#106 <= 0u && -((signed __CPROVER_bitvector[33])__CPROVER_pipe_count#106) <= 0 && __CPROVER_max_malloc_size#102 <= 36028797018963968ul && -((signed __CPROVER_bitvector[65])__CPROVER_max_malloc_size#102) <= -36028797018963968 && __CPROVER_next_thread_id#104 <= 0ul && -((signed __CPROVER_bitvector[65])__CPROVER_next_thread_id#104) <= 0 && __CPROVER_next_thread_key#105 <= 0ul && -((signed __CPROVER_bitvector[65])__CPROVER_next_thread_key#105) <= 0 && __CPROVER_thread_id#108 <= 0ul && -((signed __CPROVER_bitvector[65])__CPROVER_thread_id#108) <= 0
+forward invariant: TRUE
+backward precondition: not computed
+backward postcondition: not computed
+backward transformer: not computed
+backward invariant: not computed
+termination argument: not computed
+terminates: yes
+
+Checking precondition of main
+Function main not analyzed yet
+Recursively summarizing function main
+Analyzing function main
+Computing summary
+Computing termination argument for main
+Synthesizing ranking function to prove termination
+
+Summary for function main
+params: 
+globals_in: __CPROVER_malloc_is_new_array __CPROVER_deallocated'obj __CPROVER_memory_leak$44'obj return_value_malloc'obj malloc#return_value'obj malloc_value'obj malloc_res'obj __CPROVER_deallocated __CPROVER_memory_leak$44 menu'obj.selected menu'obj.size dynamic_object$32.selected dynamic_object$32.size menu'obj dynamic_object$32 __CPROVER_max_malloc_size 
+globals_out: __CPROVER_malloc_is_new_array#phi55 __CPROVER_deallocated'obj __CPROVER_memory_leak$44'obj return_value_malloc'obj malloc#return_value'obj malloc_value'obj malloc_res'obj __CPROVER_deallocated#phi55 __CPROVER_memory_leak$44#phi55 menu'obj.selected#60 menu'obj.size#61 dynamic_object$32.selected#60 dynamic_object$32.size#61 menu'obj dynamic_object$32 __CPROVER_max_malloc_size 
+forward precondition: TRUE
+forward transformer: dynamic_object$32.selected#60 <= 3 && -((signed __CPROVER_bitvector[33])dynamic_object$32.selected#60) <= -3 && dynamic_object$32.size#61 <= 10 && -((signed __CPROVER_bitvector[33])dynamic_object$32.size#61) <= -10 && __CPROVER_max_malloc_size <= 18446744073709551615ul && -((signed __CPROVER_bitvector[65])__CPROVER_max_malloc_size) <= 0
+forward invariant: ($guard#82 && $guard#ls90 ==> pos#lb90 <= 2147483647) && ($guard#82 && $guard#ls90 ==> -((signed __CPROVER_bitvector[33])pos#lb90) <= 0) && __CPROVER_max_malloc_size <= 18446744073709551615ul && -((signed __CPROVER_bitvector[65])__CPROVER_max_malloc_size) <= 0
+backward precondition: not computed
+backward postcondition: not computed
+backward transformer: not computed
+backward invariant: not computed
+termination argument: $guard#82 && $guard#90 && $cond#90 ==> TRUE
+
+terminates: unknown
+
+Analyzing function __CPROVER__start
+Computing summary
+Computing termination argument for __CPROVER__start
+
+Summary for function __CPROVER__start
+params: 
+globals_in: 
+globals_out: 
+forward precondition: TRUE
+forward transformer: TRUE
+forward invariant: TRUE
+backward precondition: not computed
+backward postcondition: not computed
+backward transformer: not computed
+backward invariant: not computed
+termination argument: not computed
+terminates: unknown
+
+** statistics: 
+  number of solver instances: 4234564411
+  number of solver calls: 218772
+  number of summaries used: 2
+  number of termination arguments computed: 1
+
+
+** Termination: 
+[main]: unknown
+[__CPROVER_initialize]: yes
+[__CPROVER__start]: unknown
+VERIFICATION INCONCLUSIVE
+Runtime: 779 milliseconds

@@ -1,0 +1,52 @@
+CONTROL AUTOMATON ErrorPath1
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG6;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG6 :
+    MATCH "int wc = __VERIFIER_nondet_int();" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int wc = __VERIFIER_nondet_int();" -> GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "1" -> GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "wc >>= 6;" -> GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "[!(! wc)]" -> GOTO ARG19;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG19 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG20 :
+    TRUE -> STOP;
+
+END AUTOMATON

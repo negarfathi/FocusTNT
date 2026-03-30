@@ -1,0 +1,47 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "a6438cba-de6f-3014-9443-c4283b524968"
+    creation_time: "2025-12-20T12:31:12Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop35_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop35_TestCase6.c: "3205ed765745d8df62326ef7d70126d4c3a1c202b1cb660942837f370c001021"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop35_TestCase6.c"
+        line: 16
+        column: 5
+        function: "waitpid"
+      value: "num == (-5)"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop35_TestCase6.c"
+        line: 13
+        column: 1
+        function: "waitpid"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (-5)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop35_TestCase6.c"
+        line: 27
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

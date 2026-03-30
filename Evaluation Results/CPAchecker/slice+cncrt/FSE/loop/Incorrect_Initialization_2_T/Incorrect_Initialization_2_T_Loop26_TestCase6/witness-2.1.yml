@@ -1,0 +1,66 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "e2cadb0e-6f92-36e7-9b81-6e06ce4d7adb"
+    creation_time: "2025-12-20T10:15:19Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c: "d09f5acb7a43f70f7a5764f45c1111df11b12de1589f46ef580223df3c7c812b"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+        line: 38
+        column: 5
+        function: "main"
+      value: "(((matroska == (2) && (res == (0) && tmpVar0 == (1)))) || (((matroska == (2) && (res == (5) && tmpVar0 == (1)))) || ((matroska == (2) && (res == (-1) && tmpVar0 == (1))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+        line: 34
+        column: 3
+        function: "main"
+      value: "(((matroska == (2) && (res == (5) && tmpVar0 == (1)))) || (((matroska == (1) && (res == (-1) && tmpVar0 == (1)))) || matroska == (2)))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+        line: 29
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+        line: 5
+        column: 1
+        function: "matroska_deliver_packet_slice_1"
+      requires: "(q == (2) || q == (1))"
+      ensures: "(!(\\old(q) == (2)) || (\\result == (1))) && (!(\\old(q) == (1)) || (\\result == (0)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase6.c"
+        line: 13
+        column: 1
+        function: "res_return_slice_1"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (5))) && (!(1) || (\\result == (-1)))"
+      format: "acsl_expression"

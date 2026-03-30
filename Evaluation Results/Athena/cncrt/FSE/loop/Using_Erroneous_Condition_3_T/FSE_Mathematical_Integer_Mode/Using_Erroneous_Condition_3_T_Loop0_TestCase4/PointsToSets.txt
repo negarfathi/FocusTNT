@@ -1,0 +1,96 @@
+NODE   3: <3> PSNodeType::ENTRY (points-to size: 0)
+NODE   4:   %retval = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %retval = alloca i32, align 4 + 0
+NODE   5:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE   6:   %base = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %base = alloca i32, align 4 + 0
+NODE   7:   %count = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %count = alloca i32, align 4 + 0
+NODE   8:   %old_ = alloca [10 x i32], align 16 [size: 40, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %old_ = alloca [10 x i32], align 16 + 0
+NODE   9:   %new_ = alloca [10 x i32], align 16 [size: 40, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %new_ = alloca [10 x i32], align 16 + 0
+NODE  10:   %j = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %j = alloca i32, align 4 + 0
+NODE  11:   %number = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %number = alloca i32, align 4 + 0
+NODE  12:   store i32 0, i32* %retval, align 4 (points-to size: 0)
+NODE  13:   store i32 0, i32* %i, align 4 (points-to size: 0)
+NODE  14:   store i32 50, i32* %base, align 4 (points-to size: 0)
+NODE  15:   store i32 55, i32* %count, align 4 (points-to size: 0)
+NODE  16:   %0 = bitcast [10 x i32]* %old_ to i8* (points-to size: 1)
+    ->   %old_ = alloca [10 x i32], align 16 + 0
+NODE  17: i8* bitcast ([10 x i32]* @__const.main.old_ to i8*) (points-to size: 1)
+    -> @__const.main.old_ = private unnamed_addr constant [10 x i32] [i32 1,  ... + 0
+NODE  18:   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %0, i8* align 16 b ... (points-to size: 0)
+NODE  19:   %1 = bitcast [10 x i32]* %new_ to i8* (points-to size: 1)
+    ->   %new_ = alloca [10 x i32], align 16 + 0
+NODE  20: i8* bitcast ([10 x i32]* @__const.main.new_ to i8*) (points-to size: 1)
+    -> @__const.main.new_ = private unnamed_addr constant [10 x i32] [i32 2,  ... + 0
+NODE  21:   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %1, i8* align 16 b ... (points-to size: 0)
+NODE  22:   store i32 0, i32* %j, align 4 (points-to size: 0)
+NODE  23:   %2 = load i32, i32* %j, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  24:   %arrayidx = getelementptr inbounds [10 x i32], [10 x i32]* %old_, i6 ... (points-to size: 1)
+    ->   %old_ = alloca [10 x i32], align 16 + 36
+NODE  25:   store i32 0, i32* %arrayidx, align 4 (points-to size: 0)
+NODE  26:   %arrayidx1 = getelementptr inbounds [10 x i32], [10 x i32]* %new_, i ... (points-to size: 1)
+    ->   %new_ = alloca [10 x i32], align 16 + 36
+NODE  27:   store i32 0, i32* %arrayidx1, align 4 (points-to size: 0)
+NODE  28:   %3 = load i32, i32* %j, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  29:   %inc = add nsw i32 %3, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  30:   store i32 %inc, i32* %j, align 4 (points-to size: 0)
+NODE  31:   %4 = load i32, i32* %base, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  32:   %5 = load i32, i32* %count, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  33:   %6 = load i32, i32* %base, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  34:   store i32 %6, i32* %number, align 4 (points-to size: 0)
+NODE  35:   ret i32 0 (points-to size: 1)
+    -> null + 0
+NODE  36:   %7 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  37:   %idxprom = sext i32 %7 to i64 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  38:   %arrayidx4 = getelementptr inbounds [10 x i32], [10 x i32]* %old_, i ... (points-to size: 1)
+    ->   %old_ = alloca [10 x i32], align 16 + Offset::UNKNOWN
+NODE  39:   %8 = load i32, i32* %arrayidx4, align 4 (points-to size: 1)
+    -> null + 0
+NODE  40:   %9 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  41:   %idxprom5 = sext i32 %9 to i64 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  42:   %arrayidx6 = getelementptr inbounds [10 x i32], [10 x i32]* %new_, i ... (points-to size: 1)
+    ->   %new_ = alloca [10 x i32], align 16 + Offset::UNKNOWN
+NODE  43:   %10 = load i32, i32* %arrayidx6, align 4 (points-to size: 1)
+    -> null + 0
+NODE  44:   %11 = load i32, i32* %number, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  45:   %inc9 = add nsw i32 %11, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  46:   store i32 %inc9, i32* %number, align 4 (points-to size: 0)
+NODE  47:   %12 = load i32, i32* %count, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  48:   %13 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  49:   %inc11 = add nsw i32 %13, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  50:   store i32 %inc11, i32* %i, align 4 (points-to size: 0)
+NODE  51:   %14 = load i32, i32* %base, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  52:   %add = add nsw i32 %14, 8 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  53:   store i32 %add, i32* %base, align 4 (points-to size: 0)
+NODE  54: main (points-to size: 1)
+    -> main + 0

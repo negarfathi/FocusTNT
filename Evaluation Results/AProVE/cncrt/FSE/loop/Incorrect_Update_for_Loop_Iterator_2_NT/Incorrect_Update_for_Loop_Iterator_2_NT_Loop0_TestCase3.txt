@@ -1,0 +1,226 @@
+YES
+proof of /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_NT_Loop0_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 107 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 687 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SEGraph to IRS [EQUIVALENT, 345 ms]
+(6) IntTRS
+(7) IRSToKoat [EQUIVALENT, 0 ms]
+(8) Koat Problem
+(9) KoAT2 [EQUIVALENT, 195 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_NT_Loop0_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_2_NT_Loop0_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i8, align 1
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i8 %2)
+		store 4, %2
+		br %3
+	3:
+		%4 = load %2
+		%5 = add i8 %4, -1
+		store %5, %2
+		%6 = icmp ne %4 0
+		br %6, %7, %13
+	7:
+		%8 = load %2
+		%9 = add i8 %8, -1
+		store %9, %2
+		%10 = icmp ne %8 0
+		br %10, %11, %12
+	11:
+		br %12
+	12:
+		br %3
+	13:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SEGraph to IRS (EQUIVALENT)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 54 rulesP rules:
+f_60 -> f_61(v1, v2, 3, 1, 4) :|: 1 <= v1 && v2 = 3 + v1 && 4 <= v2
+f_61(v1, v2, 3, 1, 4) -> f_62(v1, v3, v2, 3, 1, 4, 0) :|: 1 <= v3
+f_62(v1, v3, v2, 3, 1, 4, 0) -> f_63(v1, v3, v2, 0, 3, 1, 4) :|: TRUE
+f_63(v1, v3, v2, 0, 3, 1, 4) -> f_64(v1, v3, v2, 0, 3, 1, 4) :|: TRUE
+f_64(v1, v3, v2, 0, 3, 1, 4) -> f_65(v1, v3, v2, 0, 4, 3, 1) :|: TRUE
+f_65(v1, v3, v2, 0, 4, 3, 1) -> f_66(v1, v3, v2, 0, 4, 3, 1) :|: TRUE
+f_66(v1, v3, v2, 0, 4, 3, 1) -> f_67(v1, v3, 4, v2, 0, 3, 1) :|: 0 = 0
+f_67(v1, v3, 4, v2, 0, 3, 1) -> f_68(v1, v3, 4, 3, v2, 0, 1) :|: 0 = 0
+f_68(v1, v3, 4, 3, v2, 0, 1) -> f_69(v1, v3, 4, 3, v2, 0, 1) :|: TRUE
+f_69(v1, v3, 4, 3, v2, 0, 1) -> f_70(v1, v3, 4, 3, 1, v2, 0) :|: 0 = 0
+f_70(v1, v3, 4, 3, 1, v2, 0) -> f_71(v1, v3, 4, 3, 1, v2, 0) :|: TRUE
+f_71(v1, v3, 4, 3, 1, v2, 0) -> f_72(v1, v3, 4, 3, 1, v2, 0) :|: 0 = 0
+f_72(v1, v3, 4, 3, 1, v2, 0) -> f_73(v1, v3, 4, 3, 1, 2, v2, 0) :|: 0 = 0
+f_73(v1, v3, 4, 3, 1, 2, v2, 0) -> f_74(v1, v3, 4, 3, 1, 2, v2, 0) :|: TRUE
+f_74(v1, v3, 4, 3, 1, 2, v2, 0) -> f_75(v1, v3, 4, 3, 1, 2, v2, 0) :|: 0 = 0
+f_75(v1, v3, 4, 3, 1, 2, v2, 0) -> f_76(v1, v3, 4, 3, 1, 2, v2, 0) :|: TRUE
+f_76(v1, v3, 4, 3, 1, 2, v2, 0) -> f_77(v1, v3, 4, 3, 1, 2, v2, 0) :|: TRUE
+f_77(v1, v3, 4, 3, 1, 2, v2, 0) -> f_78(v1, v3, 4, 3, 1, 2, v2, 0) :|: TRUE
+f_78(v1, v3, 4, 3, 1, 2, v2, 0) -> f_91(v1, v3, 4, 3, 1, 2, v2, 0, 3, 2, 4) :|: TRUE
+f_91(v4, v5, v6, v7, 1, v9, v10, 0, 3, 2, 4) -> f_126(v4, v5, v6, v7, 1, v9, v10, 0, 3, 4, 2) :|: TRUE
+f_126(v54, v55, v56, v57, 1, v59, v60, 0, 3, 4, 2) -> f_148(v54, v55, v56, v57, 1, v59, v60, 0, 3, 4, 2) :|: TRUE
+f_148(v79, v80, v81, v82, 1, v84, v85, 0, 3, 4, 2) -> f_149(v79, v80, v84, v82, 1, v85, 0, 3, 2, 4) :|: 0 = 0
+f_149(v79, v80, v84, v82, 1, v85, 0, 3, 2, 4) -> f_150(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) :|: 1 + v92 = v84 && v92 <= 1
+f_150(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_151(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) :|: TRUE
+f_151(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_152(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) :|: v84 != 0
+f_151(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_153(v79, v80, 0, -1, 1, v85, 3, 4) :|: v84 = 0 && 1 + v92 = 0 && 0 = 0
+f_152(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_154(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) :|: 0 = 0
+f_153(v79, v80, 0, -1, 1, v85, 3, 4) -> f_155(v79, v80, 0, -1, 1, v85, 3, 4) :|: 0 = 0
+f_154(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_156(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) :|: TRUE
+f_155(v79, v80, 0, -1, 1, v85, 3, 4) -> f_157(v79, v80, 0, -1, 1, v85, 3, 4) :|: TRUE
+f_156(v79, v80, v84, v92, 1, v82, v85, 0, 3, 2, 4) -> f_158(v79, v80, v84, v92, 1, v85, 0, 3, 2, 4) :|: 0 = 0
+f_158(v79, v80, v84, v92, 1, v85, 0, 3, 2, 4) -> f_159(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: 1 + v94 = v92 && v94 <= 0
+f_159(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_160(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: TRUE
+f_160(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_161(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: v92 != 0
+f_160(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_162(v79, v80, 1, 0, -1, v85, 3, 4) :|: v92 = 0 && 1 + v94 = 0 && 0 = 0
+f_161(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_163(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: 0 = 0
+f_162(v79, v80, 1, 0, -1, v85, 3, 4) -> f_164(v79, v80, 1, 0, -1, v85, 3, 4) :|: 0 = 0
+f_163(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_165(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: TRUE
+f_164(v79, v80, 1, 0, -1, v85, 3, 4) -> f_166(v79, v80, 1, 0, -1, v85, 3, 4) :|: TRUE
+f_165(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_167(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: TRUE
+f_166(v79, v80, 1, 0, -1, v85, 3, 4) -> f_168(v79, v80, 1, 0, -1, v85, 3, 4) :|: TRUE
+f_167(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_169(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) :|: TRUE
+f_168(v79, v80, 1, 0, -1, v85, 3, 4) -> f_170(v79, v80, -1, 0, 1, v85, 3, 4) :|: 0 = 0
+f_169(v79, v80, v84, v92, 1, v94, v85, 0, 3, 2, 4) -> f_148(v79, v80, v84, v92, 1, v94, v85, 0, 3, 4, 2) :|: TRUE
+f_170(v79, v80, -1, 0, 1, v85, 3, 4) -> f_171(v79, v80, -1, -2, 1, 0, v85, 3, 4) :|: 0 = 0
+f_171(v79, v80, -1, -2, 1, 0, v85, 3, 4) -> f_172(v79, v80, -1, -2, 1, 0, v85, 3, 4) :|: TRUE
+f_172(v79, v80, -1, -2, 1, 0, v85, 3, 4) -> f_173(v79, v80, -1, -2, 1, 0, v85, 3, 4) :|: 0 = 0
+f_173(v79, v80, -1, -2, 1, 0, v85, 3, 4) -> f_174(v79, v80, -1, -2, 1, 0, v85, 3, 4) :|: TRUE
+f_174(v79, v80, -1, -2, 1, 0, v85, 3, 4) -> f_175(v79, v80, -1, -2, 1, 0, v85, 3, 4) :|: 0 = 0
+f_175(v79, v80, -1, -2, 1, 0, v85, 3, 4) -> f_176(v79, v80, -1, -2, 1, -3, 0, v85, 3, 4) :|: 0 = 0
+f_176(v79, v80, -1, -2, 1, -3, 0, v85, 3, 4) -> f_177(v79, v80, -1, -2, 1, -3, 0, v85, 3, 4) :|: TRUE
+f_177(v79, v80, -1, -2, 1, -3, 0, v85, 3, 4) -> f_178(v79, v80, -1, -2, 1, -3, v85, 0, 3, 4) :|: 0 = 0
+f_178(v79, v80, -1, -2, 1, -3, v85, 0, 3, 4) -> f_179(v79, v80, -1, -2, 1, -3, v85, 0, 3, 4) :|: TRUE
+f_179(v79, v80, -1, -2, 1, -3, v85, 0, 3, 4) -> f_165(v79, v80, -1, -2, 1, -3, v85, 0, 3, 2, 4) :|: TRUE
+Combined rules. Obtained 8 rulesP rules:
+f_60 -> f_151(v1:0, v3:0, 2, 1, 1, 3, 3 + v1:0, 0, 3, 2, 4) :|: v1:0 > 0 && v3:0 > 0
+f_151(v79:0, v80:0, v84:0, 0, 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, -3, -4, 1, -2, v85:0, 0, 3, 2, 4) :|: v84:0 < 0
+f_151(v79:0, v80:0, v84:0, 0, 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, -3, -4, 1, -2, v85:0, 0, 3, 2, 4) :|: v84:0 > 0
+f_151(v79:0, v80:0, v84:0, 1 + (1 + v92:1), 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, 1 + v92:1, v92:1, 1, 1 + (1 + v92:1), v85:0, 0, 3, 2, 4) :|: v84:0 < 0 && v92:1 < 0 && v92:1 < 2 && v92:1 < -2
+f_151(v79:0, v80:0, v84:0, 1 + (1 + v92:1), 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, 1 + v92:1, v92:1, 1, 1 + (1 + v92:1), v85:0, 0, 3, 2, 4) :|: v84:0 < 0 && v92:1 < 0 && v92:1 < 2 && v92:1 > -2
+f_151(v79:0, v80:0, v84:0, 1 + (1 + v92:1), 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, 1 + v92:1, v92:1, 1, 1 + (1 + v92:1), v85:0, 0, 3, 2, 4) :|: v84:0 > 0 && v92:1 < 0 && v92:1 < 2 && v92:1 < -2
+f_151(v79:0, v80:0, v84:0, 1 + (1 + v92:1), 1, v82:0, v85:0, 0, 3, 2, 4) -> f_151(v79:0, v80:0, 1 + v92:1, v92:1, 1, 1 + (1 + v92:1), v85:0, 0, 3, 2, 4) :|: v84:0 > 0 && v92:1 < 0 && v92:1 < 2 && v92:1 > -2
+f_151(v79:0, v80:0, 0, -1, 1, v82:0, v85:0, 0, 3, 2, 4) -> f_157(v79:0, v80:0, 0, -1, 1, v85:0, 3, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_151(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11) -> f_151(x3, x4)
+Removed division, modulo operations, cleaned up constraints. Obtained 8 rules.P rules:
+f_60 -> f_151(2, 1) :|: TRUE
+f_151(v84:0, cons_0) -> f_151(-3, -4) :|: v84:0 < 0 && cons_0 = 0
+f_151(v84:0, cons_0) -> f_151(-3, -4) :|: v84:0 > 0 && cons_0 = 0
+f_151(v84:0, sum~cons_1~sum~cons_1~v92:1) -> f_151(1 + v92:1, v92:1) :|: v92:1 < 0 && v84:0 < 0 && v92:1 < -2 && v92:1 < 2 && sum~cons_1~sum~cons_1~v92:1 = 1 + (1 + v92:1)
+f_151(v84:0, sum~cons_1~sum~cons_1~v92:1) -> f_151(1 + v92:1, v92:1) :|: v92:1 < 0 && v84:0 < 0 && v92:1 > -2 && v92:1 < 2 && sum~cons_1~sum~cons_1~v92:1 = 1 + (1 + v92:1)
+f_151(v84:0, sum~cons_1~sum~cons_1~v92:1) -> f_151(1 + v92:1, v92:1) :|: v92:1 < 0 && v84:0 > 0 && v92:1 < -2 && v92:1 < 2 && sum~cons_1~sum~cons_1~v92:1 = 1 + (1 + v92:1)
+f_151(v84:0, sum~cons_1~sum~cons_1~v92:1) -> f_151(1 + v92:1, v92:1) :|: v92:1 < 0 && v84:0 > 0 && v92:1 > -2 && v92:1 < 2 && sum~cons_1~sum~cons_1~v92:1 = 1 + (1 + v92:1)
+f_151(cons_0, cons_-1) -> f_157(v79:0, v80:0, 0, -1, 1, v85:0, 3, 4) :|: TRUE && cons_0 = 0 && cons_-1 = -1
+
+----------------------------------------
+
+(6)
+Obligation:
+Rules:
+f_60 -> f_151(2, 1) :|: TRUE
+f_151(v84:0, cons_0) -> f_151(-3, -4) :|: v84:0 < 0 && cons_0 = 0
+f_151(x, x1) -> f_151(-3, -4) :|: x > 0 && x1 = 0
+f_151(x2, x3) -> f_151(1 + x4, x4) :|: x4 < 0 && x2 < 0 && x4 < -2 && x4 < 2 && x3 = 1 + (1 + x4)
+f_151(x5, x6) -> f_151(1 + x7, x7) :|: x7 < 0 && x5 < 0 && x7 > -2 && x7 < 2 && x6 = 1 + (1 + x7)
+f_151(x8, x9) -> f_151(1 + x10, x10) :|: x10 < 0 && x8 > 0 && x10 < -2 && x10 < 2 && x9 = 1 + (1 + x10)
+f_151(x11, x12) -> f_151(1 + x13, x13) :|: x13 < 0 && x11 > 0 && x13 > -2 && x13 < 2 && x12 = 1 + (1 + x13)
+f_151(x14, x15) -> f_157(x16, x17, 0, -1, 1, x18, 3, 4) :|: TRUE && x14 = 0 && x15 = -1
+Start term: f_60
+
+----------------------------------------
+
+(7) IRSToKoat (EQUIVALENT)
+Convert an IRS to a koat problem
+----------------------------------------
+
+(8)
+Obligation:
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f_60))
+(VAR x46 x47 x48 x49 x42 x43 x44 x45 x40 x41 k20 x39 x35 x36 x37 x38 x31 x32 x33 x34 k18 k19 x30 x70 x68 x69 x64 x65 x66 x67 x60 x61 x62 x63 k7 k8 k5 k6 k9 k0 k3 k4 k1 k2 x57 x58 x59 x53 x54 x55 x56 x50 x51 x52 x86 x87 x88 x89 x x82 x83 x84 x85 x80 x81 x79 x75 x76 x'' x77 x78 x71 x72 x73 x74 k14 k15 k16 k17 k10 k11 k12 k13 x4 x28 x5 x29 x2 x3 x8 x24 x9 x25 x6 x26 x7 x27 x20 x21 x22 x23 x1 x' x17 x18 x19 x13 x14 x15 x16 x10 x11 x12)
+(RULES
+  f_151(k11, k13, x36, x37, x38, x39, x40, x41) -> f_157(k15, k3, 0, -1, 1, k5, 3, 4) :|: 0 = 0 && k11 = 0 && k13 = -1
+  f_151(k17, k18, x24, x25, x26, x27, x28, x29) -> f_151(1 + k9, k9, x30, x31, x32, x33, x34, x35) :|: k9 < 0 && k17 > 0 && k9 > -2 && k9 < 2 && k18 = 1 + (1 + k9)
+  f_151(k4, k12, x66, x67, x68, x69, x70, x71) -> f_151(1 + k14, k14, x72, x73, x74, x75, x76, x77) :|: k14 < 0 && k4 < 0 && k14 > -2 && k14 < 2 && k12 = 1 + (1 + k14)
+  f_60(x, x', x'', x1, x2, x3, x4, x5) -> f_151(2, 1, x6, x7, x8, x9, x10, x11) :|: 0 = 0
+  f_151(k8, k10, x42, x43, x44, x45, x46, x47) -> f_151(1 + k16, k16, x48, x49, x50, x51, x52, x53) :|: k16 < 0 && k8 > 0 && k16 < -2 && k16 < 2 && k10 = 1 + (1 + k16)
+  f_151(k6, k7, x78, x79, x80, x81, x82, x83) -> f_151(1 + k2, k2, x84, x85, x86, x87, x88, x89) :|: k2 < 0 && k6 < 0 && k2 < -2 && k2 < 2 && k7 = 1 + (1 + k2)
+  f_151(k19, k20, x54, x55, x56, x57, x58, x59) -> f_151(-3, -4, x60, x61, x62, x63, x64, x65) :|: k19 > 0 && k20 = 0
+  f_151(k0, k1, x12, x13, x14, x15, x16, x17) -> f_151(-3, -4, x18, x19, x20, x21, x22, x23) :|: k0 < 0 && k1 = 0
+)
+
+----------------------------------------
+
+(9) KoAT2 (EQUIVALENT)
+KoAT2 was called with the following command:
+
+/aprove/bin/koat2 analyse --termination --cfr=pe -d5 --local=mprf,twn -rtermcomp -i /tmp/aprove.InputModules.Programs.koat2_769775538221149024.koat 
+
+KoAT2's output was:
+
+YES
+
+----------------------------------------
+
+(10)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 4484 milliseconds

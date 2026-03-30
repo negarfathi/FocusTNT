@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "0b915532-b2ef-33eb-aaca-3500d8473bce"
+    creation_time: "2025-12-20T03:26:37Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop0_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Initialization_1_T_Loop0_TestCase6.c: "3712ae1e828d2493e0e297bcc4067cd33d6164faa2e3625e60084838453aa0d6"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop0_TestCase6.c"
+        line: 16
+        column: 9
+        function: "main"
+      value: "((((((pkt == (6) && res == (3))) || ((pkt == (1) && res == (3)))) || (((pkt == (3) && res == (3))) || (((pkt == (9) && res == (0))) || ((pkt == (7) && res == (0)))))) || ((((pkt == (9) && res == (3))) || ((pkt == (2) && res == (3)))) || (((pkt == (2) && res == (0))) || (((pkt == (7) && res == (3))) || ((pkt == (5) && res == (3))))))) || (((((pkt == (5) && res == (0))) || ((pkt == (10) && res == (3)))) || (((pkt == (0) && res == (0))) || (((pkt == (3) && res == (0))) || ((pkt == (1) && res == (0)))))) || ((((pkt == (4) && res == (3))) || ((pkt == (8) && res == (0)))) || (((pkt == (4) && res == (0))) || (((pkt == (6) && res == (0))) || ((pkt == (8) && res == (3))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop0_TestCase6.c"
+        line: 13
+        column: 5
+        function: "main"
+      value: "(((((pkt == (5) && res == (3))) || ((pkt == (10) && res == (3)))) || (((pkt == (9) && res == (3))) || (((pkt == (1) && res == (3))) || pkt == (0)))) || ((((pkt == (6) && res == (3))) || (((pkt == (7) && res == (3))) || ((pkt == (2) && res == (3))))) || (((pkt == (3) && res == (3))) || (((pkt == (8) && res == (3))) || ((pkt == (4) && res == (3)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop0_TestCase6.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

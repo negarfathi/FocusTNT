@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "4404a943-1983-30b9-a544-97aeb911e43c"
+    creation_time: "2025-12-20T12:26:53Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase9.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase9.c: "a86a1565518deb50c704acb04bed58528da14dd7a0ff398cf8dbd537f43ec8ab"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase9.c"
+        line: 9
+        column: 3
+        function: "main"
+      value: "(((((pkt == (7) && res == (0))) || ((pkt == (3) && res == (0)))) || (((pkt == (4) && res == (0))) || ((pkt == (5) && res == (0))))) || ((((pkt == (8) && res == (0))) || ((pkt == (9) && res == (0)))) || (((pkt == (6) && res == (0))) || (pkt == (2) || ((pkt == (10) && res == (0)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase9.c"
+        line: 11
+        column: 5
+        function: "main"
+      value: "(((((pkt == (7) && res == (0))) || ((pkt == (9) && res == (0)))) || (((pkt == (2) && res == (0))) || ((pkt == (3) && res == (0))))) || ((((pkt == (5) && res == (0))) || ((pkt == (8) && res == (0)))) || (((pkt == (4) && res == (0))) || ((pkt == (6) && res == (0))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase9.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

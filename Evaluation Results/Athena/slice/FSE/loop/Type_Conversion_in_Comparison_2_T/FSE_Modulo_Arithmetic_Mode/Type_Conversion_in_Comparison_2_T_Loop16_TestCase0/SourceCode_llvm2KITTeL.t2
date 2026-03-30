@@ -1,0 +1,35 @@
+///*** 1_main ***///
+START: main_bb5;
+
+FROM: main_bb5;
+v12 := nondet_uchar();
+v13 := nondet_char();
+v14 := v13;
+v15 := v14;
+var__temp_vac.0 := v12;
+TO: main_bb6;
+
+FROM: main_bb6;
+vac.0 := var__temp_vac.0;
+v16 := vac.0;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v16 != v15);
+TO: main_bb7;
+
+FROM: main_bb6_end;
+assume(v16 == v15);
+TO: main_bb8;
+
+FROM: main_bb7;
+v18 := vac.0;
+v19 := v18 + 1;
+v20 := v19;
+v21 := v20;
+var__temp_vac.0 := v21;
+TO: main_bb6;
+
+FROM: main_bb8;
+TO: main_bb8_ret;
+

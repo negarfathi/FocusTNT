@@ -1,0 +1,35 @@
+///*** 1_main ***///
+START: main_bb5;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb5;
+errno := 0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(1 <= 0);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(0 <= 0);
+TO: main_bb8;
+
+FROM: main_bb6;
+v4 := errno;
+TO: main_bb7;
+
+FROM: main_bb7;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(1 <= 0);
+TO: main_bb7;
+
+FROM: main_bb7_end;
+assume(0 <= 0);
+TO: main_bb8;
+
+FROM: main_bb8;
+TO: main_bb8_ret;
+

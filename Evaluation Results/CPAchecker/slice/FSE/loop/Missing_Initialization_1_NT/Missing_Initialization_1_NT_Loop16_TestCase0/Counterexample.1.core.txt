@@ -1,0 +1,16 @@
+line 7:	N2 -{int res = 0;}-> N3
+	res == 0;
+line 8:	N4 -{pkt = __VERIFIER_nondet_int();}-> N5
+line 9:	N5 -{while}-> N6
+line 9:	N6 -{[pkt < 10]}-> N7
+line 10:	N7 -{while}-> N9
+line 10:	N9 -{[res == 0]}-> N10
+	res == 0;
+line 11:	N10 -{res = __VERIFIER_nondet_int();}-> N12
+line 12:	N13 -{pkt = pkt + 1;}-> N14
+none:	N15 -{}-> N9
+line 10:	N9 -{[!(res == 0)]}-> N11
+	res == 1;
+none:	N11 -{}-> N6
+line 9:	N6 -{[pkt < 10]}-> N7
+line 10:	N7 -{while}-> N9

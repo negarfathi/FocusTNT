@@ -1,0 +1,48 @@
+CONTROL AUTOMATON ErrorPath3
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "extern unsigned char __VERIFIER_nondet_uchar(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_0_1 :
+    MATCH "extern unsigned char __VERIFIER_nondet_uchar(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_1_1 :
+    MATCH "extern char __VERIFIER_nondet_char(void);" -> GOTO ARG11_2_1;
+STATE USEFIRST ARG11_2_1 :
+    MATCH "int main()" -> GOTO ARG11_3_1;
+STATE USEFIRST ARG11_3_1 :
+    MATCH "" -> GOTO ARG11_4_1;
+STATE USEFIRST ARG11_4_1 :
+    MATCH "unsigned char c1 = 200;" -> GOTO ARG11_5_1;
+STATE USEFIRST ARG11_5_1 :
+    MATCH "char c2 = -100;" -> GOTO ARG11_6_1;
+STATE USEFIRST ARG11_6_1 :
+    MATCH "unsigned char ac;" -> GOTO ARG11_7_1;
+STATE USEFIRST ARG11_7_1 :
+    MATCH "" -> GOTO ARG11;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG11 :
+    MATCH "ac = c1" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "[[ac != c2]]" -> GOTO ARG30;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG30 :
+    MATCH "" -> GOTO ARG40;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG40 :
+    MATCH "ac++" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG167 :
+    TRUE -> STOP;
+
+END AUTOMATON

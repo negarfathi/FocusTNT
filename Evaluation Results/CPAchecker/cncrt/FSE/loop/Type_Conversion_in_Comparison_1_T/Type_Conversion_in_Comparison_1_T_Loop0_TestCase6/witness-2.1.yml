@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "9cabf59a-48dc-3957-95b2-fa4275100c5a"
+    creation_time: "2025-12-20T07:01:47Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase6.c: "08a8ae18eeda9cd20cf2d6c521d6882398a5e99dcda0f74c00319e235588f024"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase6.c"
+        line: 17
+        column: 5
+        function: "main"
+      value: "((((((i == (6) && len == (10)) && (s == (0U) && seqnum == (65530U)))) || (((i == (10) && len == (10)) && (s == (4U) && seqnum == (65530U))))) || ((((i == (2) && len == (10)) && (s == (65532U) && seqnum == (65530U)))) || ((((i == (3) && len == (10)) && (s == (65533U) && seqnum == (65530U)))) || (((i == (4) && len == (10)) && (s == (65534U) && seqnum == (65530U))))))) || (((((i == (7) && len == (10)) && (s == (1U) && seqnum == (65530U)))) || ((((i == (1) && len == (10)) && (s == (65531U) && seqnum == (65530U)))) || (((i == (9) && len == (10)) && (s == (3U) && seqnum == (65530U)))))) || ((((i == (8) && len == (10)) && (s == (2U) && seqnum == (65530U)))) || ((((i == (5) && len == (10)) && (s == (65535U) && seqnum == (65530U)))) || (((i == (0) && len == (10)) && (s == (65530U) && seqnum == (65530U))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop0_TestCase6.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

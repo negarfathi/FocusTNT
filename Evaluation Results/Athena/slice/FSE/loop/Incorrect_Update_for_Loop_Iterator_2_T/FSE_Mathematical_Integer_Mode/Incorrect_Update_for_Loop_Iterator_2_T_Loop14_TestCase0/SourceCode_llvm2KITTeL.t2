@@ -1,0 +1,45 @@
+///*** 1_main ***///
+START: main_bb0;
+
+FROM: main_bb0;
+v0 := nondet();
+var__temp_vl.0 := v0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vl.0 := var__temp_vl.0;
+v1 := zero_extend(8, 32, vl.0);
+v2 := v1 - 1;
+v3 := extract(7, 0, v2);
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vl.0 != 0);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vl.0 == 0);
+TO: main_bb4;
+
+FROM: main_bb2;
+var__temp_vl.0 := v3;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(v3 != 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(v3 == 0);
+TO: main_bb1;
+
+FROM: main_bb3;
+v6 := zero_extend(8, 32, v3);
+v7 := v6 - 1;
+v8 := extract(7, 0, v7);
+var__temp_vl.0 := v8;
+TO: main_bb1;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

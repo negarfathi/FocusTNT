@@ -1,0 +1,37 @@
+///*** 1_main ***///
+START: main_bb1;
+
+FROM: main_bb1;
+__fc_errno := 0;
+v0 := __fc_errno;
+var__temp_vret.0 := 1;
+TO: main_bb2;
+
+FROM: main_bb2;
+vret.0 := var__temp_vret.0;
+TO: main_bb2_v.ret.0;
+FROM: main_bb2_v.ret.0;
+assume(vret.0 == 0);
+v.ret.0 := 1;
+TO: main_bb2_sv.ret.0;
+
+FROM: main_bb2_v.ret.0;
+assume(vret.0 != 0);
+v.ret.0 := vret.0;
+TO: main_bb2_sv.ret.0;
+
+FROM: main_bb2_sv.ret.0;
+var__temp_vret.0 := v.ret.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume((v.ret.0 slt 0) && (v0 == 1));
+TO: main_bb2;
+
+FROM: main_bb2_end;
+assume((v.ret.0 sge 0) || (v0 != 1));
+TO: main_bb3;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

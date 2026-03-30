@@ -1,0 +1,123 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %direction = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %direction = alloca i32, align 4 + 0
+NODE   3:   %menu = alloca %struct.Node*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %menu = alloca %struct.Node*, align 8 + 0
+NODE   4:   %pos = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %pos = alloca i32, align 4 + 0
+NODE   5:   %action_id = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %action_id = alloca i32, align 4 + 0
+NODE   6:   %start = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %start = alloca i32, align 4 + 0
+NODE   7:   %call = call i8* @malloc(i64 8) [size: 8, heap: 1, zeroed: 0] (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE   8:   %0 = bitcast i8* %call to %struct.Node* (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE   9:   store %struct.Node* %0, %struct.Node** %menu, align 8 (points-to size: 0)
+NODE  10:   %call1 = call i32 @__VERIFIER_nondet_int() (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  11:   %1 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  12:   %selected = getelementptr inbounds %struct.Node, %struct.Node* %1, i ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 4
+NODE  13:   store i32 %call1, i32* %selected, align 4 (points-to size: 0)
+NODE  14:   %call2 = call i32 @__VERIFIER_nondet_int() (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  15:   %2 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  16:   %size = getelementptr inbounds %struct.Node, %struct.Node* %2, i32 0 ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  17:   store i32 %call2, i32* %size, align 4 (points-to size: 0)
+NODE  18:   %3 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  19:   %selected3 = getelementptr inbounds %struct.Node, %struct.Node* %3,  ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 4
+NODE  20:   %4 = load i32, i32* %selected3, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   ret void (points-to size: 0)
+NODE  22:   %5 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  23:   %size4 = getelementptr inbounds %struct.Node, %struct.Node* %5, i32  ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  24:   %6 = load i32, i32* %size4, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  25:   %7 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  26:   %selected8 = getelementptr inbounds %struct.Node, %struct.Node* %7,  ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 4
+NODE  27:   %8 = load i32, i32* %selected8, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  28:   store i32 %8, i32* %pos, align 4 (points-to size: 0)
+NODE  29:   %call9 = call i32 @__VERIFIER_nondet_int() (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  30:   store i32 %call9, i32* %action_id, align 4 (points-to size: 0)
+NODE  31:   %9 = load i32, i32* %action_id, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  32:   %10 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  33:   %13 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  34:   %size18 = getelementptr inbounds %struct.Node, %struct.Node* %13, i3 ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  35:   %14 = load i32, i32* %size18, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  36:   %15 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  37:   %rem = srem i32 %15, %14 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  38:   store i32 %rem, i32* %pos, align 4 (points-to size: 0)
+NODE  39:   %16 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  40:   store i32 %16, i32* %start, align 4 (points-to size: 0)
+NODE  41:   %12 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  42:   %inc = add nsw i32 %12, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  43:   store i32 %inc, i32* %pos, align 4 (points-to size: 0)
+NODE  44:   store i32 1, i32* %direction, align 4 (points-to size: 0)
+NODE  45:   %11 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  46:   %dec = add nsw i32 %11, -1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  47:   store i32 %dec, i32* %pos, align 4 (points-to size: 0)
+NODE  48:   store i32 -1, i32* %direction, align 4 (points-to size: 0)
+NODE  49:   %17 = load i32, i32* %direction, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  50:   %18 = load i32, i32* %pos, align 4 (points-to size: 3)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+    -> unknown + Offset::UNKNOWN
+NODE  51:   %add = add nsw i32 %18, %17 (points-to size: 2)
+    -> null + Offset::UNKNOWN
+    -> unknown + Offset::UNKNOWN
+NODE  52:   store i32 %add, i32* %pos, align 4 (points-to size: 0)
+NODE  53:   %19 = load i32, i32* %pos, align 4 (points-to size: 2)
+    -> null + Offset::UNKNOWN
+    -> unknown + Offset::UNKNOWN
+NODE  54:   %20 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  55:   %size19 = getelementptr inbounds %struct.Node, %struct.Node* %20, i3 ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  56:   %21 = load i32, i32* %size19, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  57:   store i32 0, i32* %pos, align 4 (points-to size: 0)
+NODE  58:   %25 = load i32, i32* %pos, align 4 (points-to size: 3)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+    -> unknown + Offset::UNKNOWN
+NODE  59:   %26 = load i32, i32* %start, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  60:   %22 = load i32, i32* %pos, align 4 (points-to size: 2)
+    -> null + Offset::UNKNOWN
+    -> unknown + Offset::UNKNOWN
+NODE  61:   %23 = load %struct.Node*, %struct.Node** %menu, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  62:   %size25 = getelementptr inbounds %struct.Node, %struct.Node* %23, i3 ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  63:   %24 = load i32, i32* %size25, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  64:   %sub = sub nsw i32 %24, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  65:   store i32 %sub, i32* %pos, align 4 (points-to size: 0)
+NODE  66: main (points-to size: 1)
+    -> main + 0

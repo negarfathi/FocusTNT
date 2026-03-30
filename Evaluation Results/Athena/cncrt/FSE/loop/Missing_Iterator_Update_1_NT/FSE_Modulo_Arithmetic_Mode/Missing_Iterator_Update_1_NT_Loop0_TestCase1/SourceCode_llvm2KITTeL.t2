@@ -1,0 +1,37 @@
+///*** 1_main ***///
+START: main_bb8;
+
+FROM: main_bb8;
+errno := 0;
+v13 := errno;
+var__temp_vret.0 := 1;
+TO: main_bb9;
+
+FROM: main_bb9;
+vret.0 := var__temp_vret.0;
+TO: main_bb9_v.ret.0;
+FROM: main_bb9_v.ret.0;
+assume(vret.0 == 0);
+v.ret.0 := 1;
+TO: main_bb9_sv.ret.0;
+
+FROM: main_bb9_v.ret.0;
+assume(vret.0 != 0);
+v.ret.0 := vret.0;
+TO: main_bb9_sv.ret.0;
+
+FROM: main_bb9_sv.ret.0;
+var__temp_vret.0 := v.ret.0;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume((v.ret.0 < 0) && (v13 == 1));
+TO: main_bb9;
+
+FROM: main_bb9_end;
+assume((v.ret.0 >= 0) || (v13 != 1));
+TO: main_bb10;
+
+FROM: main_bb10;
+TO: main_bb10_ret;
+

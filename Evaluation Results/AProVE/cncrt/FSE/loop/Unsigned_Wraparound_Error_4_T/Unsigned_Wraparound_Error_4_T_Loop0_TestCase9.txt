@@ -1,0 +1,173 @@
+YES
+proof of /FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop0_TestCase9.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 101 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 877 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 175 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) PolynomialOrderProcessor [EQUIVALENT, 34 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop0_TestCase9.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop0_TestCase9.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1000, %2
+		br %4
+	4:
+		%5 = load %2
+		%6 = icmp ugt %5 0
+		br %6, %7, %16
+	7:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%8 = load %2
+		store %8, %3
+		%9 = load %3
+		%10 = icmp ugt %9 16
+		br %10, %11, %12
+	11:
+		store 16, %3
+		br %12
+	12:
+		%13 = load %3
+		%14 = load %2
+		%15 = sub i32 %14, %13
+		store %15, %2
+		br %4
+	16:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 18 rulesP rules:
+f_150(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_151(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: 0 = 0
+f_151(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_152(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: TRUE
+f_152(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_153(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: TRUE
+f_153(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_154(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: 0 = 0
+f_154(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_155(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: TRUE
+f_155(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_156(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: 0 = 0
+f_156(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_157(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: 16 < v41 && 33 <= v38
+f_157(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_159(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: 0 = 0
+f_159(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_161(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: TRUE
+f_161(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_163(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: TRUE
+f_163(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_165(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: TRUE
+f_165(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_167(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) :|: 0 = 0
+f_167(v35, v36, v37, v41, 1, 16, v38, v42, v43, v44, 0, 3, 33, 1000, 17, 984, 4) -> f_169(v35, v36, v37, v41, 1, 16, v42, v43, v44, 0, 3, 17, 984, 4) :|: 0 = 0
+f_169(v35, v36, v37, v41, 1, 16, v42, v43, v44, 0, 3, 17, 984, 4) -> f_171(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) :|: 16 + v50 = v41 && 1 <= v50 && v50 <= 968
+f_171(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) -> f_173(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) :|: TRUE
+f_173(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) -> f_175(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) :|: TRUE
+f_175(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 984, 4, 968) -> f_149(v35, v36, v37, v41, 1, 16, v50, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: TRUE
+f_149(v35, v36, v37, v38, 1, 16, v41, v42, v43, v44, 0, 3, 17, 1000, 984, 4) -> f_150(v35, v36, v37, v41, 1, v38, 16, v42, v43, v44, 0, 3, 17, 1000, 984, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_150(v35:0, v36:0, v37:0, 16 + v50:0, 1, v38:0, 16, v42:0, v43:0, v44:0, 0, 3, 17, 1000, 984, 4) -> f_150(v35:0, v36:0, v37:0, v50:0, 1, 16 + v50:0, 16, v42:0, v43:0, v44:0, 0, 3, 17, 1000, 984, 4) :|: v38:0 > 32 && v50:0 > 0 && v50:0 < 969
+Filtered unneeded arguments:
+   f_150(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) -> f_150(x4, x6)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_150(sum~cons_16~v50:0, v38:0) -> f_150(v50:0, 16 + v50:0) :|: v50:0 > 0 && v50:0 < 969 && v38:0 > 32 && sum~cons_16~v50:0 = 16 + v50:0
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_150(sum~cons_16~v50:0, v38:0) -> f_150(v50:0, 16 + v50:0) :|: v50:0 > 0 && v50:0 < 969 && v38:0 > 32 && sum~cons_16~v50:0 = 16 + v50:0
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_150(sum~cons_16~v50:0:0, v38:0:0) -> f_150(v50:0:0, 16 + v50:0:0) :|: v50:0:0 > 0 && v50:0:0 < 969 && v38:0:0 > 32 && sum~cons_16~v50:0:0 = 16 + v50:0:0
+
+----------------------------------------
+
+(11) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_150(x, x1)] = -15 + x
+
+The following rules are decreasing:
+f_150(sum~cons_16~v50:0:0, v38:0:0) -> f_150(v50:0:0, 16 + v50:0:0) :|: v50:0:0 > 0 && v50:0:0 < 969 && v38:0:0 > 32 && sum~cons_16~v50:0:0 = 16 + v50:0:0
+The following rules are bounded:
+f_150(sum~cons_16~v50:0:0, v38:0:0) -> f_150(v50:0:0, 16 + v50:0:0) :|: v50:0:0 > 0 && v50:0:0 < 969 && v38:0:0 > 32 && sum~cons_16~v50:0:0 = 16 + v50:0:0
+
+----------------------------------------
+
+(12)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 4462 milliseconds

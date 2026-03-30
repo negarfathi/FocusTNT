@@ -1,0 +1,16 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %i = alloca i64, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i64, align 8 + 0
+NODE   3:   store i64 1, i64* %i, align 8 (points-to size: 0)
+NODE   4:   %0 = load i64, i64* %i, align 8 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   5:   %1 = load i64, i64* %i, align 8 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   6:   ret void (points-to size: 0)
+NODE   7:   %2 = load i64, i64* %i, align 8 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   8:   %shl = shl i64 %2, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   9:   store i64 %shl, i64* %i, align 8 (points-to size: 0)
+NODE  10: main (points-to size: 1)
+    -> main + 0

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "9507b983-9b75-3af8-8ec6-af9f93bdc64e"
+    creation_time: "2025-12-20T15:49:04Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Undefined_Behavior_1_T_Loop15_TestCase1.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Undefined_Behavior_1_T_Loop15_TestCase1.c: "ee90e500e6cac4aa628c04009e2893b3603c5137f9e59b79d193d6196984e0f6"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Undefined_Behavior_1_T_Loop15_TestCase1.c"
+        line: 9
+        column: 3
+        function: "main"
+      value: "num == (2U)"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Undefined_Behavior_1_T_Loop15_TestCase1.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

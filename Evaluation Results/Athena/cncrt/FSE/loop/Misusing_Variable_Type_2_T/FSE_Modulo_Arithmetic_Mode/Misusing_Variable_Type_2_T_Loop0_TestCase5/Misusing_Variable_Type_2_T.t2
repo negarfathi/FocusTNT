@@ -1,0 +1,29 @@
+///*** 1_main ***///
+START: main_bb10;
+
+
+
+FROM: main_bb10;
+var__temp_vi.0 := 0;
+TO: main_bb11;
+
+FROM: main_bb11;
+vi.0 := var__temp_vi.0;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(vi.0 < 65535);
+TO: main_bb12;
+
+FROM: main_bb11_end;
+assume(vi.0 >= 65535);
+TO: main_bb13;
+
+FROM: main_bb12;
+v26 := vi.0 + 1;
+var__temp_vi.0 := v26;
+TO: main_bb11;
+
+FROM: main_bb13;
+TO: main_bb13_ret;
+

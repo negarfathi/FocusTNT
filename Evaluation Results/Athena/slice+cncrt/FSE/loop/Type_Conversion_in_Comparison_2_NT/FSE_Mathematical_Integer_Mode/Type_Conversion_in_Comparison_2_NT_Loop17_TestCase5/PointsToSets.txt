@@ -1,0 +1,32 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %ac = alloca i8, align 1 [size: 1, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %ac = alloca i8, align 1 + 0
+NODE   3:   %c1 = alloca i8, align 1 [size: 1, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %c1 = alloca i8, align 1 + 0
+NODE   4:   %c2 = alloca i8, align 1 [size: 1, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %c2 = alloca i8, align 1 + 0
+NODE   5:   store i8 25, i8* %c1, align 1 (points-to size: 0)
+NODE   6:   store i8 12, i8* %c2, align 1 (points-to size: 0)
+NODE   7:   %0 = load i8, i8* %c1, align 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   8:   store i8 %0, i8* %ac, align 1 (points-to size: 0)
+NODE   9:   %1 = load i8, i8* %ac, align 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  10:   %conv = zext i8 %1 to i32 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  11:   %2 = load i8, i8* %c2, align 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  12:   %conv1 = sext i8 %2 to i32 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  13:   %3 = load i8, i8* %ac, align 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  14:   %conv3 = zext i8 %3 to i32 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  15:   %add = add nsw i32 %conv3, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  16:   %conv4 = trunc i32 %add to i8 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  17:   store i8 %conv4, i8* %ac, align 1 (points-to size: 0)
+NODE  18:   ret void (points-to size: 0)
+NODE  19: main (points-to size: 1)
+    -> main + 0

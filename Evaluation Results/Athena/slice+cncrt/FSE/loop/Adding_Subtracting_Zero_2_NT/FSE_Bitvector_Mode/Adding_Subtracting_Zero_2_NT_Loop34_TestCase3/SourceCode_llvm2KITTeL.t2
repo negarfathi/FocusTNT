@@ -1,0 +1,61 @@
+///*** 1_main ***///
+START: main_bb5;
+
+FROM: main_bb5;
+flag := 0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(1 <= 0);
+TO: main_bb8;
+
+FROM: main_bb5_end;
+assume(0 <= 0);
+TO: main_bb6;
+
+FROM: main_bb6;
+v8 := flag;
+var__temp_vb.0 := 0;
+TO: main_bb7;
+
+FROM: main_bb7;
+vb.0 := var__temp_vb.0;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(vb.0 slt 2);
+TO: main_ff_subtitles_next_line_slice_1.exit;
+
+FROM: main_bb7_end;
+assume(vb.0 sge 2);
+TO: main_bb8;
+
+FROM: main_ff_subtitles_next_line_slice_1.exit;
+TO: main_ff_subtitles_next_line_slice_1.exit_v.;
+FROM: main_ff_subtitles_next_line_slice_1.exit_v.;
+assume(v8 == 1);
+v. := 0;
+TO: main_ff_subtitles_next_line_slice_1.exit_sv.;
+
+FROM: main_ff_subtitles_next_line_slice_1.exit_v.;
+assume(v8 != 1);
+v. := 1;
+TO: main_ff_subtitles_next_line_slice_1.exit_sv.;
+
+FROM: main_ff_subtitles_next_line_slice_1.exit_sv.;
+v11 := vb.0 + v.;
+v12 := 2 - 4;
+var__temp_vb.0 := v11;
+TO: main_ff_subtitles_next_line_slice_1.exit_end;
+
+FROM: main_ff_subtitles_next_line_slice_1.exit_end;
+assume(v11 sge v12);
+TO: main_bb8;
+
+FROM: main_ff_subtitles_next_line_slice_1.exit_end;
+assume(v11 slt v12);
+TO: main_bb7;
+
+FROM: main_bb8;
+TO: main_bb8_ret;
+

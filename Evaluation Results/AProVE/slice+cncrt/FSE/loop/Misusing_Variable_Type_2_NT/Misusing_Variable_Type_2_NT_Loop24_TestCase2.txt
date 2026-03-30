@@ -1,0 +1,114 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop24_TestCase2.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 91 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop24_TestCase2.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop24_TestCase2.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "gettablesize_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 11
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		%3 = load %2
+		%4 = srem i32 %3, 99999
+		store %4, %2
+		%5 = load %2
+		%6 = icmp slt %5 0
+		br %6, %7, %10
+	7:
+		%8 = load %2
+		%9 = sub i32 0, %8
+		store %9, %1
+		br %12
+	10:
+		%11 = load %2
+		store %11, %1
+		br %12
+	12:
+		%13 = load %1
+		ret %13
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 32
+	0:
+		%1 = alloca i16, align 2
+		%2 = alloca i32, align 4
+		%3 = alloca i64, align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i16 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%4 = call i32 @gettablesize_slice_1()
+		store %4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %3)
+		%5 = load %2
+		%6 = sext i32 %5 to i64
+		store %6, %3
+		store 0, %1
+		br %7
+	7:
+		%8 = load %1
+		%9 = zext i16 %8 to i64
+		%10 = load %3
+		%11 = icmp ult %9 %10
+		br %11, %12, %17
+	12:
+		%13 = load %1
+		%14 = zext i16 %13 to i32
+		%15 = add i32 %14, 1
+		%16 = trunc i32 %15 to i16
+		store %16, %1
+		br %7
+	17:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop24_TestCase2.c:14:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop24_TestCase2.c:14:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Trying to do unsigned comparison for unbounded negative values (node 182).
+Runtime: 2864 milliseconds

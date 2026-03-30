@@ -1,0 +1,240 @@
+///*** 1_main ***///
+START: main_bb21;
+
+FROM: main_bb21;
+flag := 0;
+flag := 0;
+TO: main_bb21_end;
+
+FROM: main_bb21_end;
+assume(1 <= 0);
+TO: main_bb38;
+
+FROM: main_bb21_end;
+assume(0 <= 0);
+TO: main_bb22;
+
+FROM: main_bb22;
+v54 := flag;
+var__temp_verrno.0 := 0;
+var__temp_vpos.0 := 0;
+TO: main_wrap_around.exit2;
+
+FROM: main_wrap_around.exit2;
+verrno.0 := var__temp_verrno.0;
+vpos.0 := var__temp_vpos.0;
+TO: main_wrap_around.exit2_end;
+
+FROM: main_wrap_around.exit2_end;
+assume(vpos.0 < 10);
+TO: main_bb23;
+
+FROM: main_wrap_around.exit2_end;
+assume(vpos.0 >= 10);
+TO: main_bb38;
+
+FROM: main_bb23;
+v56 := 10 - vpos.0;
+TO: main_bb23_end;
+
+FROM: main_bb23_end;
+assume(v56 > 2147483647);
+TO: main_bb24;
+
+FROM: main_bb23_end;
+assume(v56 <= 2147483647);
+TO: main_bb25;
+
+FROM: main_bb24;
+v58 := v56 - 2147483647;
+v59 := v58 - 1;
+v60 := v59 % 4294967296;
+v61 := -2147483648 + v60;
+var__temp_v.0.i := v61;
+TO: main_wrap_around.exit;
+
+FROM: main_bb25;
+var__temp_v.0.i := v56;
+TO: main_bb25_end;
+
+FROM: main_bb25_end;
+assume(v56 < -2147483648);
+TO: main_bb26;
+
+FROM: main_bb25_end;
+assume(v56 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb26;
+v63 := -2147483648 - v56;
+v64 := v63 - 1;
+v65 := v64 % 4294967296;
+v66 := 2147483647 - v65;
+var__temp_v.0.i := v66;
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit;
+v.0.i := var__temp_v.0.i;
+TO: main_wrap_around.exit_v.0.i7;
+FROM: main_wrap_around.exit_v.0.i7;
+assume((v54 != 1) && (vpos.0 < v.0.i));
+v.0.i7 := -1;
+TO: main_wrap_around.exit_sv.0.i7;
+
+FROM: main_wrap_around.exit_v.0.i7;
+assume((v54 == 1) || (vpos.0 >= v.0.i));
+v.0.i7 := 0;
+TO: main_wrap_around.exit_sv.0.i7;
+
+FROM: main_wrap_around.exit_sv.0.i7;
+TO: main_wrap_around.exit_end;
+
+FROM: main_wrap_around.exit_end;
+assume((v54 != 1) && (vpos.0 < v.0.i));
+TO: main_bb27;
+
+FROM: main_wrap_around.exit_end;
+assume((v54 == 1) || (vpos.0 >= v.0.i));
+TO: main_bb31;
+
+FROM: main_bb27;
+v69 := verrno.0 + 1;
+TO: main_bb27_end;
+
+FROM: main_bb27_end;
+assume(v69 > 2147483647);
+TO: main_bb28;
+
+FROM: main_bb27_end;
+assume(v69 <= 2147483647);
+TO: main_bb29;
+
+FROM: main_bb28;
+v71 := v69 - 2147483647;
+v72 := v71 - 1;
+v73 := v72 % 4294967296;
+v74 := -2147483648 + v73;
+var__temp_v.0.i5 := v74;
+TO: main_wrap_around.exit6;
+
+FROM: main_bb29;
+var__temp_v.0.i5 := v69;
+TO: main_bb29_end;
+
+FROM: main_bb29_end;
+assume(v69 < -2147483648);
+TO: main_bb30;
+
+FROM: main_bb29_end;
+assume(v69 >= -2147483648);
+TO: main_wrap_around.exit6;
+
+FROM: main_bb30;
+v76 := -2147483648 - v69;
+v77 := v76 - 1;
+v78 := v77 % 4294967296;
+v79 := 2147483647 - v78;
+var__temp_v.0.i5 := v79;
+TO: main_wrap_around.exit6;
+
+FROM: main_wrap_around.exit6;
+v.0.i5 := var__temp_v.0.i5;
+var__temp_verrno.0 := v.0.i5;
+var__temp_vpos.0 := vpos.0;
+TO: main_wrap_around.exit6_end;
+
+FROM: main_wrap_around.exit6_end;
+assume(v.0.i5 == 5);
+TO: main_bb38;
+
+FROM: main_wrap_around.exit6_end;
+assume(v.0.i5 != 5);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb31;
+v81 := v.0.i7 + 1;
+TO: main_bb31_end;
+
+FROM: main_bb31_end;
+assume(v81 > 2147483647);
+TO: main_bb32;
+
+FROM: main_bb31_end;
+assume(v81 <= 2147483647);
+TO: main_bb33;
+
+FROM: main_bb32;
+v83 := v81 - 2147483647;
+v84 := v83 - 1;
+v85 := v84 % 4294967296;
+v86 := -2147483648 + v85;
+var__temp_vrc.0 := v86;
+TO: main_wrap_around.exit4;
+
+FROM: main_bb33;
+var__temp_vrc.0 := v81;
+TO: main_bb33_end;
+
+FROM: main_bb33_end;
+assume(v81 < -2147483648);
+TO: main_bb34;
+
+FROM: main_bb33_end;
+assume(v81 >= -2147483648);
+TO: main_wrap_around.exit4;
+
+FROM: main_bb34;
+v88 := -2147483648 - v81;
+v89 := v88 - 1;
+v90 := v89 % 4294967296;
+v91 := 2147483647 - v90;
+var__temp_vrc.0 := v91;
+TO: main_wrap_around.exit4;
+
+FROM: main_wrap_around.exit4;
+vrc.0 := var__temp_vrc.0;
+v92 := vpos.0 + vrc.0;
+TO: main_wrap_around.exit4_end;
+
+FROM: main_wrap_around.exit4_end;
+assume(v92 > 2147483647);
+TO: main_bb35;
+
+FROM: main_wrap_around.exit4_end;
+assume(v92 <= 2147483647);
+TO: main_bb36;
+
+FROM: main_bb35;
+v94 := v92 - 2147483647;
+v95 := v94 - 1;
+v96 := v95 % 4294967296;
+v97 := -2147483648 + v96;
+var__temp_verrno.0 := verrno.0;
+var__temp_vpos.0 := v97;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb36;
+var__temp_verrno.0 := verrno.0;
+var__temp_vpos.0 := v92;
+TO: main_bb36_end;
+
+FROM: main_bb36_end;
+assume(v92 < -2147483648);
+TO: main_bb37;
+
+FROM: main_bb36_end;
+assume(v92 >= -2147483648);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb37;
+v99 := -2147483648 - v92;
+v100 := v99 - 1;
+v101 := v100 % 4294967296;
+v102 := 2147483647 - v101;
+var__temp_verrno.0 := verrno.0;
+var__temp_vpos.0 := v102;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb38;
+TO: main_bb38_ret;
+

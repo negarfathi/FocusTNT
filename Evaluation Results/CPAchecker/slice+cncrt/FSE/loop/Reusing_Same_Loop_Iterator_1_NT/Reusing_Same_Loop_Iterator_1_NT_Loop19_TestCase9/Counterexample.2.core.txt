@@ -1,0 +1,29 @@
+line 9:	N4 -{int num_crtc = 50;}-> N5
+	num_crtc == 50;
+line 10:	N5 -{int num_output = 0;}-> N6
+	num_output == 0;
+line 11:	N6 -{[!(num_crtc > 65534)]}-> N9
+	num_crtc == 50;
+line 13:	N9 -{[!(num_output > 65534)]}-> N11
+	num_output == 0;
+line 17:	N7 -{i = 0;}-> N15
+	i == 0;
+line 18:	N15 -{while}-> N16
+line 18:	N16 -{[i < num_crtc]}-> N17
+	i == 0;
+	num_crtc == 50;
+line 19:	N17 -{i = 0;}-> N19
+	i == 0;
+line 20:	N19 -{while}-> N20
+line 20:	N20 -{[!(i < num_output)]}-> N22
+	__CPAchecker_TMP_1 == 0;
+	i == 0;
+	num_output == 0;
+line 21:	N26 -{i = i + 1;}-> N27
+	i == 1;
+none:	N28 -{}-> N16
+line 18:	N16 -{[i < num_crtc]}-> N17
+	i == 0;
+	i == 1;
+	num_crtc == 50;
+line 20:	N19 -{while}-> N20

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "787e0e34-12bf-3885-9269-b494313bdde1"
+    creation_time: "2025-12-20T15:43:24Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase3.c: "5d60509246723f2465e1c1d87bb7f3f98fa23ad6f8a356fe1000cf6167600eb6"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase3.c"
+        line: 11
+        column: 3
+        function: "main"
+      value: "(((((i == (8) && len == (10))) || ((i == (3) && len == (10)))) || (((i == (1) && len == (10))) || (((i == (5) && len == (10))) || ((i == (0) && len == (10)))))) || ((((i == (2) && len == (10))) || (((i == (6) && len == (10))) || ((i == (7) && len == (10))))) || (((i == (4) && len == (10))) || (((i == (9) && len == (10))) || ((i == (10) && len == (10)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase3.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

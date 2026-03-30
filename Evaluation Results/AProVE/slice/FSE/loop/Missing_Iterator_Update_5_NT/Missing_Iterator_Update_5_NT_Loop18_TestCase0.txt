@@ -1,0 +1,194 @@
+NO
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 96 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 3230 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 1115 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__fc_vla_alloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__fc_vla_free" returnParam: BasicVoidType parameters: (*i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 10
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i64, align 8
+		%3 = alloca i32, align 4
+		%4 = alloca *i32, align 8
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%7 = call i32 @__VERIFIER_nondet_int()
+		store %7, %3
+		%8 = load %3
+		%9 = icmp sle %8 0
+		br %9, %10, %11
+	10:
+		store 0, %1
+		br %59
+	11:
+		%12 = load %3
+		%13 = icmp sgt %12 1000
+		br %13, %14, %15
+	14:
+		store 0, %1
+		br %59
+	15:
+		br %16
+	16:
+		%17 = load %3
+		%18 = sext i32 %17 to i64
+		store %18, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i32 %4)
+		%19 = load %2
+		%20 = mul i64 4, %19
+		%21 = call *i8 @__fc_vla_alloc(i64 %20)
+		%22 = bitcast *i8 %21 to *i32
+		store %22, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 0, %5
+		br %23
+	23:
+		%24 = load %5
+		%25 = load %3
+		%26 = icmp slt %24 %25
+		br %26, %27, %35
+	27:
+		%28 = call i32 @__VERIFIER_nondet_int()
+		%29 = load %4
+		%30 = load %5
+		%31 = sext i32 %30 to i64
+		%32 = getelementptr %29, %31
+		store %28, %32
+		%33 = load %5
+		%34 = add i32 %33, 1
+		store %34, %5
+		br %23
+	35:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		%36 = call i32 @__VERIFIER_nondet_int()
+		store %36, %6
+		%37 = load %6
+		%38 = icmp slt %37 0
+		br %38, %39, %40
+	39:
+		br %59
+	40:
+		br %41
+	41:
+		%42 = load %6
+		%43 = load %3
+		%44 = icmp sge %42 %43
+		br %44, %45, %48
+	45:
+		store 0, %1
+		%46 = load %4
+		%47 = bitcast *i32 %46 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @__fc_vla_free(*i8 %47)
+		br %59
+	48:
+		%49 = load %4
+		%50 = load %6
+		%51 = sext i32 %50 to i64
+		%52 = getelementptr %49, %51
+		%53 = load %52
+		%54 = icmp ne %53 0
+		br %54, %55, %58
+	55:
+		%56 = load %6
+		%57 = add i32 %56, 1
+		store %57, %6
+		br %58
+	58:
+		br %41
+	59:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #244 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #244 yields value 1149.
+Nondeterministic instruction %2 = alloca i64, align 8 in node #245 yields value 4616.
+Nondeterministic instruction %3 = alloca i32, align 4 in node #246 yields value 32.
+Nondeterministic instruction %4 = alloca *i32, align 8 in node #247 yields value 8185.
+Nondeterministic instruction %5 = alloca i32, align 4 in node #248 yields value 5.
+Nondeterministic instruction %6 = alloca i32, align 4 in node #249 yields value 7421.
+Nondeterministic instruction %7 = call i32 @__VERIFIER_nondet_int() in node #253 yields value 512.
+Nondeterministic instruction %21 = call *i8 @__fc_vla_alloc(i64 %20) in node #282 yields value 0.
+Nondeterministic instruction %28 = call i32 @__VERIFIER_nondet_int() in node #292 yields value 0.
+Nondeterministic instruction %36 = call i32 @__VERIFIER_nondet_int() in node #345 yields value 448.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c:6:17: warning: unknown attribute '__FC_BUILTIN__' ignored [-Wunknown-attributes]
+ __attribute__((__FC_BUILTIN__)) void __fc_vla_free(void *p);
+                ^
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c:9:17: warning: unknown attribute '__FC_BUILTIN__' ignored [-Wunknown-attributes]
+ __attribute__((__FC_BUILTIN__)) void *__fc_vla_alloc(unsigned long size);
+                ^
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c:11:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Missing_Iterator_Update_5_NT_Loop18_TestCase0.c:11:1: note: change return type to 'int'
+Runtime: 10377 milliseconds

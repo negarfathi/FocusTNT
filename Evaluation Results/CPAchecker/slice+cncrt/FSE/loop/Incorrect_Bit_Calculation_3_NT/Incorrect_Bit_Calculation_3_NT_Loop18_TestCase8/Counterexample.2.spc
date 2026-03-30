@@ -1,0 +1,64 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "int wc = -64;" -> ASSUME {wc == (-64);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "" -> GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "1" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "wc >>= 6;" -> ASSUME {wc == (-1);} GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "[!(! wc)]" -> ASSUME {wc == (-1);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG18;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG18 :
+    MATCH "1" -> GOTO ARG31;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG31 :
+    MATCH "wc >>= 6;" -> ASSUME {wc == (-1);} GOTO ARG36;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG36 :
+    MATCH "[!(! wc)]" -> ASSUME {wc == (-1);} GOTO ARG39;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG39 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG40 :
+    TRUE -> STOP;
+
+END AUTOMATON

@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "b99ef301-84e0-38f7-a512-0d28588d703c"
+    creation_time: "2025-12-20T05:24:27Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase6.c: "5e2bbc47357e04d208abc577e1c82259c860484f6105ed84fa33bf696a0da4ff"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase6.c"
+        line: 20
+        column: 9
+        function: "main"
+      value: "((((mat_colSize == (1) && mat_rowSize == (1)) && (x == (0) && (y == (0) && z == (0))))) || (((mat_colSize == (1) && mat_rowSize == (1)) && (x == (0) && (y == (1) && z == (0))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase6.c"
+        line: 18
+        column: 5
+        function: "main"
+      value: "((((mat_colSize == (1) && mat_rowSize == (1)) && (x == (0) && (y == (0) && z == (0))))) || (((mat_colSize == (1) && mat_rowSize == (1)) && (x == (1) && (y == (1) && z == (1))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_4_T_Loop0_TestCase6.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

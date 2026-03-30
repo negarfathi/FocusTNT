@@ -1,0 +1,84 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "int main()" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int wc = -999;" -> ASSUME {wc == (-999);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "" -> GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "" -> GOTO ARG15;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG15 :
+    MATCH "wc >>= 6" -> ASSUME {wc == (-16);} GOTO ARG16;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG16 :
+    MATCH "[wc >>= 6]" -> ASSUME {wc == (-16);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "" -> GOTO ARG18;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG18 :
+    MATCH "" -> GOTO ARG19;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG19 :
+    MATCH "wc >>= 6" -> ASSUME {wc == (-1);} GOTO ARG38;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG38 :
+    MATCH "[wc >>= 6]" -> ASSUME {wc == (-1);} GOTO ARG39;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG39 :
+    MATCH "" -> GOTO ARG40;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG40 :
+    MATCH "" -> GOTO ARG41;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG41 :
+    MATCH "wc >>= 6" -> ASSUME {wc == (-1);} GOTO ARG42;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG42 :
+    MATCH "[wc >>= 6]" -> ASSUME {wc == (-1);} GOTO ARG43;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG43 :
+    MATCH "" -> GOTO ARG44;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG44 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG50 :
+    TRUE -> STOP;
+
+END AUTOMATON
