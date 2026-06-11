@@ -146,11 +146,3 @@ The file is created in the repository root:
 ```
 
 This file aggregates the results from all experiments and provides a tabular summary suitable for further analysis.
-
-
-
-## Under Review
-
-This repository is based on the following work:
-
-N. Fathi, H. Unno, T. Terauchi, and R. Purandare, “Loop-Based Slicing and Input-Driven Concretization: An Empirical Study of Termination and Non-Termination Analysis,” under review at the ACM SIGPLAN Conference on Object-Oriented Programming, Systems, Languages, and Applications (OOPSLA), 2026.
