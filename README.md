@@ -146,3 +146,9 @@ The file is created in the repository root:
 ```
 
 This file aggregates the results from all experiments and provides a tabular summary suitable for further analysis.
+
+## Related Papers
+
+This repository is based on the following work:
+
+N. Fathi, H. Unno, T. Terauchi, and R. Purandare, “Loop-Based Slicing and Input-Driven Concretization: An Empirical Study of Termination and Non-Termination Analysis,” *arXiv preprint* [arXiv:2607.08988](https://doi.org/10.48550/arXiv.2607.08988), 2026. [Under review at *IEEE Transactions on Software Engineering*.]
