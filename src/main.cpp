@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #include "clang/Tooling/Tooling.h"
 

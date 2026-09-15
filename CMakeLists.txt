@@ -40,7 +40,6 @@ find_package(nlohmann_json CONFIG REQUIRED)
 
 # CURL
 find_package(CURL REQUIRED)
-
 message(STATUS "Found CURL ${CURL_VERSION_STRING}")
 
 add_executable(FocusTNT
@@ -68,9 +67,9 @@ add_executable(FocusTNT
         include/slicer/visitor_and_rewriter.h
         src/slicer/visitor_and_rewriter.cpp
         include/slicer/fix_framac_bugs.h
-        src/slicer/merge_sliced_programs.cpp
-        include/slicer/merge_sliced_program.h
         src/slicer/fix_framac_bugs.cpp
+        include/slicer/merge_sliced_program.h
+        src/slicer/merge_sliced_programs.cpp
 
         include/concretizer/nondet_assignment.h
         include/concretizer/action.h
@@ -84,14 +83,31 @@ add_executable(FocusTNT
         src/result_recorder/result_recorder.cpp
 )
 
+# XLNT
 set(XLNT_ROOT ${CMAKE_SOURCE_DIR}/tools/XLNT/xlnt)
-set(XLNT_LIB ${XLNT_ROOT}/build/source/libxlnt.dylib)
 
-include_directories(${XLNT_ROOT}/include)
+if(NOT EXISTS "${XLNT_ROOT}/include/xlnt/xlnt.hpp")
+    message(FATAL_ERROR
+            "XLNT is not installed. Run ./tools/XLNT/install_xlnt.sh first."
+    )
+endif()
+
+if(APPLE)
+    set(XLNT_LIB ${XLNT_ROOT}/build/source/libxlnt.dylib)
+else()
+    set(XLNT_LIB ${XLNT_ROOT}/build/source/libxlnt.so)
+endif()
+
+if(NOT EXISTS "${XLNT_LIB}")
+    message(FATAL_ERROR
+            "XLNT library not found at ${XLNT_LIB}. Run ./tools/XLNT/install_xlnt.sh first."
+    )
+endif()
 
 target_include_directories(FocusTNT
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${XLNT_ROOT}/include
 )
 
 # Link against LLVM, Clang, JSON, CURL, and XLNT

@@ -6,6 +6,7 @@
 #include <clang/Tooling/Tooling.h>
 #include <clang/Rewrite/Core/Rewriter.h>
 #include <clang/AST/RecursiveASTVisitor.h>
+#include <clang/Frontend/CompilerInstance.h>
 
 void mergeSlicedPrograms(std::string &slicedProgram1, std::string &slicedProgram2, std::string &functionName, std::filesystem::path &mergedSlicedProgram);
 

@@ -30,14 +30,14 @@ namespace FunctionBodyExtractor {
 
     class Consumer : public clang::ASTConsumer {
     public:
-        explicit Consumer(clang::ASTContext *Context, clang::Rewriter &Rewriter, std::string &functionName, std::string &extractedFunctionBody) : Visitor(Context, Rewriter, functionName, extractedFunctionBody), Rewriter(Rewriter) {}
+        explicit Consumer(clang::ASTContext *Context, clang::Rewriter &Rewriter, std::string &functionName, std::string &extractedFunctionBody) : visitor(Context, Rewriter, functionName, extractedFunctionBody), Rewriter(Rewriter) {}
 
         void HandleTranslationUnit(clang::ASTContext &Context) override {
-            Visitor.TraverseDecl(Context.getTranslationUnitDecl());
+            visitor.TraverseDecl(Context.getTranslationUnitDecl());
         }
 
     private:
-        Visitor Visitor;
+        Visitor visitor;
         clang::Rewriter &Rewriter;
     };
 
@@ -85,10 +85,10 @@ namespace FunctionBodyReplacer {
 
     class Consumer : public clang::ASTConsumer {
     public:
-        explicit Consumer(clang::ASTContext *Context, clang::Rewriter &Rewriter, std::string &functionName, std::string &extractedFunctionBody, std::filesystem::path &mergedSlicedProgram) : Visitor(Context, Rewriter, functionName, extractedFunctionBody), Rewriter(Rewriter), mergedSlicedProgram(mergedSlicedProgram) {}
+        explicit Consumer(clang::ASTContext *Context, clang::Rewriter &Rewriter, std::string &functionName, std::string &extractedFunctionBody, std::filesystem::path &mergedSlicedProgram) : visitor(Context, Rewriter, functionName, extractedFunctionBody), Rewriter(Rewriter), mergedSlicedProgram(mergedSlicedProgram) {}
 
         void HandleTranslationUnit(clang::ASTContext &Context) override {
-            Visitor.TraverseDecl(Context.getTranslationUnitDecl());
+            visitor.TraverseDecl(Context.getTranslationUnitDecl());
             std::error_code EC;
             llvm::raw_fd_ostream stream(mergedSlicedProgram.string(), EC, llvm::sys::fs::OF_Text);
             Rewriter.getEditBuffer(Rewriter.getSourceMgr().getMainFileID()).write(stream);
@@ -96,7 +96,7 @@ namespace FunctionBodyReplacer {
         }
 
     private:
-        Visitor Visitor;
+        Visitor visitor;
         clang::Rewriter &Rewriter;
         std::filesystem::path &mergedSlicedProgram;
     };
