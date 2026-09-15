@@ -231,6 +231,11 @@ int runInputGenerator(int argc, char *argv[]) {
     std::filesystem::remove_all(generatedProgramsDirectory, ec);
     std::filesystem::create_directories(generatedProgramsDirectory);
 
+    std::string header = "#include \"stdlib.h\"\n";
+    if (sourceCodeFile.find(header) == std::string::npos) {
+        sourceCodeFile = header + sourceCodeFile;
+    }
+
     std::string sourceCodeClass;
     if (sourceCodeName.ends_with("_NT")) {
         sourceCodeClass = "NT";
@@ -244,7 +249,7 @@ int runInputGenerator(int argc, char *argv[]) {
     }
 
     if (numInputs <= 0 || (sourceCodeClass == "NT" && numInputs % 2 != 0)) {
-        std::cout << "--inputs must be greater than 0 and must be even for NT programs.\n";
+        std::cout << "--num-inputs must be greater than 0 and must be even for NT programs.\n";
         return 1;
     }
 
@@ -272,6 +277,8 @@ int runInputGenerator(int argc, char *argv[]) {
     generationConfigurationStream << "ReasoningEffort=" << reasoningEffort << "\n";
     generationConfigurationStream << "Timeout=" << timeout << "\n";
     generationConfigurationStream << "MaxAttempts=" << maxAttempts << "\n";
+    int maxAttemptsT = sourceCodeClass == "T" ? maxAttempts : maxAttempts / 2;
+    int maxAttemptsNT = sourceCodeClass == "NT" ? maxAttempts - maxAttemptsT : 0;
     generationConfigurationStream << "ProgramClass=" << sourceCodeClass << "\n";
     generationConfigurationStream << "RequestedInputs=" << numInputs << "\n";
     generationConfigurationStream << "RequiredT=" << requiredT << "\n";
@@ -291,6 +298,9 @@ int runInputGenerator(int argc, char *argv[]) {
     int acceptedT = 0;
     int acceptedLikelyNT = 0;
     int candidateIndex = 0;
+
+    int attemptsT = 0;
+    int attemptsNT = 0;
 
     std::vector<std::string> seenAssignmentKeys;
     std::vector<std::vector<NondetAssignment>> previousAssignments;
@@ -313,20 +323,20 @@ int runInputGenerator(int argc, char *argv[]) {
         return escaped;
     };
 
-    while ((acceptedT < requiredT || acceptedLikelyNT < requiredNT) && candidateIndex < maxAttempts) {
+    while (acceptedT < requiredT && attemptsT < maxAttemptsT) {
+        ++attemptsT;
         ++candidateIndex;
 
-        GenerationTarget generationTarget = acceptedT < requiredT ? GenerationTarget::Terminating : GenerationTarget::NonTerminating;
-        std::string generationTargetStr = acceptedT < requiredT ? "T" : "NT";
+        GenerationTarget generationTarget = GenerationTarget::Terminating;
 
-        std::cout << "Generating candidate " << candidateIndex << " for target " << generationTargetStr << "..." << std::endl;
+        std::cout << "Generating candidate " << candidateIndex << " for target T..." << std::endl;
 
         std::vector<NondetAssignment> assignments;
         try {
             assignments = inputGenerator.Generate(sourceCodePath.string(), inputs, generationTarget, previousAssignments);
         }
         catch (const std::exception &ex) {
-            generationHistoryStream << candidateIndex << "," << generationTargetStr << "," << csvEscape(ex.what()) << ",,GENERATION_ERROR,,false\n";
+            generationHistoryStream << candidateIndex << ",T," << csvEscape(ex.what()) << ",,GENERATION_ERROR,,false\n";
             generationHistoryStream.flush();
             continue;
         }
@@ -338,7 +348,7 @@ int runInputGenerator(int argc, char *argv[]) {
 
         std::string assignmentKey = assignmentKeyStream.str();
         if (std::find(seenAssignmentKeys.begin(), seenAssignmentKeys.end(), assignmentKey) != seenAssignmentKeys.end()) {
-            generationHistoryStream << candidateIndex << "," << generationTargetStr << "," << csvEscape(assignmentKey) << ",,DUPLICATE,,false\n";
+            generationHistoryStream << candidateIndex << ",T," << csvEscape(assignmentKey) << ",,DUPLICATE,,false\n";
             generationHistoryStream.flush();
             continue;
         }
@@ -359,7 +369,7 @@ int runInputGenerator(int argc, char *argv[]) {
         if (result != 0 || !std::filesystem::exists(executablePath)) {
             std::error_code removeCandidateError;
             std::filesystem::remove(candidatePath, removeCandidateError);
-            generationHistoryStream << candidateIndex << "," << generationTargetStr << "," << csvEscape(assignmentKey) << ",,COMPILE_ERROR,,false\n";
+            generationHistoryStream << candidateIndex << ",T," << csvEscape(assignmentKey) << ",,COMPILE_ERROR,,false\n";
             generationHistoryStream.flush();
             continue;
         }
@@ -417,21 +427,13 @@ int runInputGenerator(int argc, char *argv[]) {
         bool accepted = false;
         if (terminated) {
             label = "T";
-            if (generationTarget == GenerationTarget::Terminating) {
-                accepted = true;
-                ++acceptedT;
-                acceptedAssignments.push_back({assignments, "T"});
-            }
+            accepted = true;
+            ++acceptedT;
+            acceptedAssignments.push_back({assignments, "T"});
         }
         else if (timedOut) {
             label = "LIKELY_NT";
-            if (generationTarget == GenerationTarget::NonTerminating) {
-                accepted = true;
-                ++acceptedLikelyNT;
-                acceptedAssignments.push_back({assignments, "LIKELY_NT"});
-            }
         }
-
         std::string programPath;
         if (accepted) {
             programPath = candidatePath.string();
@@ -441,7 +443,132 @@ int runInputGenerator(int argc, char *argv[]) {
             std::filesystem::remove(candidatePath, removeCandidateError);
         }
 
-        generationHistoryStream << candidateIndex << "," << generationTargetStr << "," << csvEscape(assignmentKey) << "," << csvEscape(programPath) << "," << executionResult << "," << label << "," << (accepted ? "true" : "false") << "\n";
+        generationHistoryStream << candidateIndex << ",T," << csvEscape(assignmentKey) << "," << csvEscape(programPath) << "," << executionResult << "," << label << "," << (accepted ? "true" : "false") << "\n";
+        generationHistoryStream.flush();
+    }
+
+    while (acceptedLikelyNT < requiredNT && attemptsNT < maxAttemptsNT) {
+        ++attemptsNT;
+        ++candidateIndex;
+
+        GenerationTarget generationTarget = GenerationTarget::NonTerminating;
+
+        std::cout << "Generating candidate " << candidateIndex << " for target NT..." << std::endl;
+
+        std::vector<NondetAssignment> assignments;
+        try {
+            assignments = inputGenerator.Generate(sourceCodePath.string(), inputs, generationTarget, previousAssignments);
+        }
+        catch (const std::exception &ex) {
+            generationHistoryStream << candidateIndex << ",NT," << csvEscape(ex.what()) << ",,GENERATION_ERROR,,false\n";
+            generationHistoryStream.flush();
+            continue;
+        }
+
+        std::ostringstream assignmentKeyStream;
+        for (const auto &assignment : assignments) {
+            assignmentKeyStream << assignment.id << "=" << assignment.value << "\n";
+        }
+
+        std::string assignmentKey = assignmentKeyStream.str();
+        if (std::find(seenAssignmentKeys.begin(), seenAssignmentKeys.end(), assignmentKey) != seenAssignmentKeys.end()) {
+            generationHistoryStream << candidateIndex << ",NT," << csvEscape(assignmentKey) << ",,DUPLICATE,,false\n";
+            generationHistoryStream.flush();
+            continue;
+        }
+
+        seenAssignmentKeys.push_back(assignmentKey);
+        previousAssignments.push_back(assignments);
+
+        std::string assignmentIndex = std::to_string(candidateIndex);
+        clang::tooling::runToolOnCode(std::make_unique<concretizer::Action>(assignments, assignmentIndex), sourceCodeFile);
+        std::filesystem::path generatedCandidatePath = sourceCodeDirectory / (sourceCodeName + "_TestCase" + assignmentIndex + sourceCodeExtension);
+        std::filesystem::path candidatePath = generatedProgramsDirectory / (sourceCodeName + "_TestCase" + assignmentIndex + sourceCodeExtension);
+        std::filesystem::rename(generatedCandidatePath, candidatePath);
+
+        std::filesystem::path executablePath = generatedProgramsDirectory / (sourceCodeName + "_TestCase" + std::to_string(candidateIndex) + "_executable");
+        std::string compiler = (sourceCodeExtension == ".cpp" || sourceCodeExtension == ".cc" || sourceCodeExtension == ".cxx") ? "clang++" : "clang";
+        std::string command = compiler + " \"" + candidatePath.string() + "\" -O0 -o \"" + executablePath.string() + "\"";
+        int result = system(command.c_str());
+        if (result != 0 || !std::filesystem::exists(executablePath)) {
+            std::error_code removeCandidateError;
+            std::filesystem::remove(candidatePath, removeCandidateError);
+            generationHistoryStream << candidateIndex << ",NT," << csvEscape(assignmentKey) << ",,COMPILE_ERROR,,false\n";
+            generationHistoryStream.flush();
+            continue;
+        }
+
+        bool terminated = false;
+        bool timedOut = false;
+        bool runtimeError = false;
+        pid_t pid = fork();
+        if (pid < 0) {
+            throw std::runtime_error("fork() failed.");
+        }
+        if (pid == 0) {
+            execl(executablePath.c_str(), executablePath.c_str(), static_cast<char *>(nullptr));
+            _exit(127);
+        }
+        auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(timeout);
+        int status = 0;
+        while (true) {
+            pid_t waitResult = waitpid(pid, &status, WNOHANG);
+            if (waitResult == pid) {
+                if (WIFEXITED(status) && WEXITSTATUS(status) == 0) {
+                    terminated = true;
+                }
+                else {
+                    runtimeError = true;
+                }
+                break;
+            }
+            if (waitResult < 0) {
+                runtimeError = true;
+                break;
+            }
+            if (std::chrono::steady_clock::now() >= deadline) {
+                kill(pid, SIGKILL);
+                waitpid(pid, &status, 0);
+                timedOut = true;
+                break;
+            }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        std::error_code removeExecutableError;
+        std::filesystem::remove(executablePath, removeExecutableError);
+        std::string executionResult;
+        if (terminated) {
+            executionResult = "COMPLETED";
+        }
+        else if (timedOut) {
+            executionResult = "TIMEOUT";
+        }
+        else {
+            executionResult = "RUNTIME_ERROR";
+        }
+
+        std::string label;
+        bool accepted = false;
+        if (terminated) {
+            label = "T";
+        }
+        else if (timedOut) {
+            label = "LIKELY_NT";
+            accepted = true;
+            ++acceptedLikelyNT;
+            acceptedAssignments.push_back({assignments, "LIKELY_NT"});
+        }
+        std::string programPath;
+        if (accepted) {
+            programPath = candidatePath.string();
+        }
+        else {
+            std::error_code removeCandidateError;
+            std::filesystem::remove(candidatePath, removeCandidateError);
+        }
+
+        generationHistoryStream << candidateIndex << ",NT," << csvEscape(assignmentKey) << "," << csvEscape(programPath) << "," << executionResult << "," << label << "," << (accepted ? "true" : "false") << "\n";
         generationHistoryStream.flush();
     }
 

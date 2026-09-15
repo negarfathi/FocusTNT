@@ -1,80 +1,103 @@
 #!/bin/bash
 
+set -Eeuo pipefail
+
 root_directory="$(cd "$(dirname "$0")" && pwd)"
 benchmarks_directory="$root_directory/Benchmarks"
-results_directory="$root_directory/ReproducedResults"
 tool_directory="$root_directory/cmake-build-debug/FocusTNT"
+venv_directory="$root_directory/.venv"
+model_directory="$root_directory/models/gpt-oss-20b"
 
-modes=("base" "slice" "cncrt" "slice+cncrt" "cncrt+slice")
+model="gpt-oss-20b"
+temperature="1"
+reasoning_effort="medium"
+max_attempts=10
+num_inputs=4
+execution_timeout=60
 
-rm -rf "$results_directory"
-cp -r "$benchmarks_directory" "$results_directory"
+host="127.0.0.1"
+port=8000
+server_log="$root_directory/vllm.log"
 
-mkdir -p "$results_directory/base"
+if [[ ! -x "$tool_directory" ]]; then
+    echo "FocusTNT executable not found: $tool_directory"
+    exit 1
+fi
 
-for item in "$results_directory"/*; do
-    if [[ "$(basename "$item")" != "base" ]]; then
-        mv "$item" "$results_directory/base/" 2>/dev/null
+if [[ ! -x "$venv_directory/bin/vllm" ]]; then
+    echo "vLLM not found: $venv_directory/bin/vllm"
+    exit 1
+fi
+
+if [[ ! -f "$model_directory/config.json" ]]; then
+    echo "Model not found: $model_directory"
+    exit 1
+fi
+
+if curl -sf "http://$host:$port/v1/models" >/dev/null 2>&1; then
+    echo "A vLLM server is already running on $host:$port."
+    exit 1
+fi
+
+echo "Starting vLLM..."
+
+VLLM_USE_FLASHINFER_SAMPLER=0 \
+"$venv_directory/bin/vllm" serve "$model_directory" \
+    --served-model-name "$model" \
+    --host "$host" \
+    --port "$port" \
+    --reasoning-parser openai_gptoss \
+    > "$server_log" 2>&1 &
+
+vllm_pid=$!
+
+cleanup() {
+    if kill -0 "$vllm_pid" 2>/dev/null; then
+        echo "Stopping vLLM..."
+        kill "$vllm_pid"
+        wait "$vllm_pid" 2>/dev/null || true
     fi
-done
+}
 
-for mode in "${modes[@]}"; do
-    if [[ "$mode" != "base" ]]; then
-        cp -r "$results_directory/base" "$results_directory/$mode"
+trap cleanup EXIT INT TERM
+
+echo "Waiting for vLLM..."
+
+for ((i = 0; i < 180; i++)); do
+    if curl -sf "http://$host:$port/v1/models" >/dev/null 2>&1; then
+        echo "vLLM is ready."
+        break
     fi
+
+    if ! kill -0 "$vllm_pid" 2>/dev/null; then
+        echo "vLLM failed to start."
+        echo "See: $server_log"
+        exit 1
+    fi
+
+    sleep 5
 done
 
-tools=("Athena" "PROTON" "UAutomizer" "AProVE" "CPAchecker" "2LS")
+if ! curl -sf "http://$host:$port/v1/models" >/dev/null 2>&1; then
+    echo "Timed out waiting for vLLM."
+    echo "See: $server_log"
+    exit 1
+fi
 
-for tool in "${tools[@]}"; do
-    mkdir -p "$results_directory/$tool"
+find "$benchmarks_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name "*_T.cpp" -o -name "*_NT.cpp" \) | sort | while read -r source_code; do
+    echo "Generating inputs: $source_code"
 
-    for mode in "${modes[@]}"; do
-        cp -r "$results_directory/$mode" "$results_directory/$tool/"
-    done
-done
-
-for mode in "${modes[@]}"; do
-    rm -rf "$results_directory/$mode"
-done
-
-for tool in "${tools[@]}"; do
-    for mode in "${modes[@]}"; do
-
-        if [[ "$mode" == "base" ]]; then
-            configuration="base"
-        elif [[ "$mode" == "slice" ]]; then
-            configuration="slice"
-        elif [[ "$mode" == "cncrt" ]]; then
-            configuration="cncrt"
-        elif [[ "$mode" == "slice+cncrt" ]]; then
-            configuration="slice_cncrt"
-        elif [[ "$mode" == "cncrt+slice" ]]; then
-            configuration="cncrt_slice"
-        else
-            continue
-        fi
-
-        find "$results_directory/$tool/$mode" -type f \( -name "*.c" -o -name "*.cpp" \) | sort | while read -r source_code; do
-            echo "Running: $source_code"
-
-            source_directory="$(dirname "$source_code")"
-            test_cases="$source_directory/test_cases.csv"
-            ground_truth="$source_directory/ground_truth.csv"
-
-            "$tool_directory" \
-                --analysis \
-                "$source_code" \
-                "$test_cases" \
-                "$ground_truth" \
-                --tool="$tool" \
-                --benchmark=FSE \
-                --configuration="$configuration" \
-                --timeout=300
-
-            sleep 5
-            docker container prune -f
-        done
-
-    done
+    if ! VLLM_BASE_URL="http://$host:$port" \
+        "$tool_directory" \
+            --input-generation \
+            "$source_code" \
+            --model="$model" \
+            --temperature="$temperature" \
+            --reasoning-effort="$reasoning_effort" \
+            --max-attempts="$max_attempts" \
+            --num-inputs="$num_inputs" \
+            --execution-timeout="$execution_timeout"; then
+        echo "Input generation failed or was skipped: $source_code"
+        echo "Continuing with the next program..."
+    fi
 done

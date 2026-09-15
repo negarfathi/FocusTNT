@@ -1,19 +1,25 @@
 #!/bin/bash
 
+set -Eeuo pipefail
+
 root_directory="$(cd "$(dirname "$0")" && pwd)"
 benchmarks_directory="$root_directory/Benchmarks"
 results_directory="$root_directory/ReproducedResults"
 tool_directory="$root_directory/cmake-build-debug/FocusTNT"
 
-modes=("base" "slice" "cncrt" "slice+cncrt")
+modes=("base" "slice" "cncrt" "slice+cncrt" "cncrt+slice")
+
 rm -rf "$results_directory"
 cp -r "$benchmarks_directory" "$results_directory"
+
 mkdir -p "$results_directory/base"
+
 for item in "$results_directory"/*; do
     if [[ "$(basename "$item")" != "base" ]]; then
         mv "$item" "$results_directory/base/" 2>/dev/null
     fi
 done
+
 for mode in "${modes[@]}"; do
     if [[ "$mode" != "base" ]]; then
         cp -r "$results_directory/base" "$results_directory/$mode"
@@ -21,12 +27,15 @@ for mode in "${modes[@]}"; do
 done
 
 tools=("Athena" "PROTON" "UAutomizer" "AProVE" "CPAchecker" "2LS")
+
 for tool in "${tools[@]}"; do
     mkdir -p "$results_directory/$tool"
+
     for mode in "${modes[@]}"; do
         cp -r "$results_directory/$mode" "$results_directory/$tool/"
     done
 done
+
 for mode in "${modes[@]}"; do
     rm -rf "$results_directory/$mode"
 done
@@ -34,27 +43,42 @@ done
 for tool in "${tools[@]}"; do
     for mode in "${modes[@]}"; do
         if [[ "$mode" == "base" ]]; then
-            slicer=false
-            concretizer=false
+            configuration="base"
         elif [[ "$mode" == "slice" ]]; then
-            slicer=true
-            concretizer=false
+            configuration="slice"
         elif [[ "$mode" == "cncrt" ]]; then
-            slicer=false
-            concretizer=true
+            configuration="cncrt"
         elif [[ "$mode" == "slice+cncrt" ]]; then
-            slicer=true
-            concretizer=true
+            configuration="slice_cncrt"
+        elif [[ "$mode" == "cncrt+slice" ]]; then
+            configuration="cncrt_slice"
         else
             continue
         fi
-        find "$results_directory/$tool/$mode" -type f \( -name "*.c" -o -name "*.cpp" \) | sort | while read -r source_code; do
-            echo "Running: $source_code"
-            test_cases="$(dirname "$source_code")/TestCases.csv"
-            "$tool_directory" "$source_code" "$test_cases" --tool="$tool" --benchmark=FSE --slicer=$slicer --concretizer=$concretizer --timeout=300
-            sleep 5
-            docker container prune -f
-        done
 
+        find "$results_directory/$tool/$mode" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name "*_T.cpp" -o -name "*_NT.cpp" \) | sort | while read -r source_code; do
+            echo "Running: $source_code"
+
+            source_directory="$(dirname "$source_code")"
+            test_cases="$source_directory/test_cases.csv"
+            ground_truth="$source_directory/ground_truth.csv"
+
+            if ! "$tool_directory" \
+                --analysis \
+                "$source_code" \
+                "$test_cases" \
+                "$ground_truth" \
+                --tool="$tool" \
+                --benchmark=FSE \
+                --configuration="$configuration" \
+                --timeout=300; then
+                echo "Analysis failed or was skipped: $source_code"
+                echo "Tool: $tool"
+                echo "Configuration: $configuration"
+                echo "Continuing with the next program..."
+            fi
+
+            docker container prune -f || true
+        done
     done
 done
