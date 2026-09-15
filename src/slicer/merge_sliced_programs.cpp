@@ -1,8 +1,4 @@
-#include <filesystem>
-
-#include <clang/Tooling/Tooling.h>
-#include <clang/Rewrite/Core/Rewriter.h>
-#include <clang/AST/RecursiveASTVisitor.h>
+#include "../../include/slicer/merge_sliced_program.h"
 
 namespace FunctionBodyExtractor {
 

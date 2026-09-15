@@ -1,5 +1,5 @@
-#ifndef CONCRETIZER_VISITOR_AND_REWRITER_H
-#define CONCRETIZER_VISITOR_AND_REWRITER_H
+#ifndef NONDET_EXTRACTOR_VISITOR_AND_REWRITER_H
+#define NONDET_EXTRACTOR_VISITOR_AND_REWRITER_H
 
 #include <unordered_map>
 #include <unordered_set>
@@ -9,10 +9,9 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/AST/RecursiveASTVisitor.h"
 
-#include "../file/info.h"
-#include "nondet_assignment.h"
+#include "nondet_input.h"
 
-namespace concretizer {
+namespace nondet_extractor {
 
     class VisitorAndRewriter : public clang::RecursiveASTVisitor<VisitorAndRewriter> {
         std::string currentFunctionName;
@@ -23,15 +22,13 @@ namespace concretizer {
         struct ArrayDeclaration {
             std::string name;
             std::string elementType;
-            bool isConstantSize;
+            bool isConstantSize = false;
             std::string sizeExpression;
-            clang::SourceRange declarationRange;
         };
         std::map<std::string, ArrayDeclaration> arrayDeclarations;
-        std::unordered_map<std::string, std::string> resolvedArraySizeValues;
 
     public:
-        explicit VisitorAndRewriter(clang::ASTContext *Context, clang::Rewriter &Rewriter, std::vector<NondetAssignment> &assignments, std::string &assignmentIndex) : Context(Context), Rewriter(Rewriter), assignments(assignments), assignmentIndex(assignmentIndex) {}
+        explicit VisitorAndRewriter(clang::ASTContext *Context, std::vector<NondetInput> &inputs) : Context(Context), inputs(inputs) {}
 
         bool VisitFunctionDecl(clang::FunctionDecl *FD);
         bool VisitVarDecl(clang::VarDecl *VD);
@@ -45,11 +42,9 @@ namespace concretizer {
 
     private:
         clang::ASTContext *Context;
-        clang::Rewriter &Rewriter;
-        std::string &assignmentIndex;
-        std::vector<NondetAssignment> &assignments;
+        std::vector<NondetInput> &inputs;
     };
 
 }
 
-#endif //CONCRETIZER_VISITOR_AND_REWRITER_H
+#endif // NONDET_EXTRACTOR_VISITOR_AND_REWRITER_H

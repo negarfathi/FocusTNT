@@ -11,7 +11,7 @@ namespace concretizer {
 
     class Consumer : public clang::ASTConsumer {
     public:
-        explicit Consumer(ASTContext *Context, Rewriter &Rewriter, std::vector<VariableAssignment> &assignments, std::string &assignmentIndex) : Visitor(Context, Rewriter, assignments, assignmentIndex), Rewriter(Rewriter), assignmentIndex(assignmentIndex) {}
+        explicit Consumer(ASTContext *Context, Rewriter &Rewriter, std::vector<NondetAssignment> &assignments, std::string &assignmentIndex) : Visitor(Context, Rewriter, assignments, assignmentIndex), Rewriter(Rewriter), assignmentIndex(assignmentIndex) {}
 
         virtual void HandleTranslationUnit(clang::ASTContext &Context);
 

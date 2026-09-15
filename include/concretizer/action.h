@@ -11,14 +11,14 @@ namespace concretizer {
 
     class Action : public clang::ASTFrontendAction {
     public:
-        explicit Action(std::vector<VariableAssignment> &assignments, std::string &assignmentIndex) : assignments(assignments), assignmentIndex(assignmentIndex) {}
+        explicit Action(std::vector<NondetAssignment> &assignments, std::string &assignmentIndex) : assignments(assignments), assignmentIndex(assignmentIndex) {}
 
         virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &Compiler, llvm::StringRef InFile);
 
     private:
         clang::Rewriter Rewriter;
         std::string &assignmentIndex;
-        std::vector<VariableAssignment> &assignments;
+        std::vector<NondetAssignment> &assignments;
     };
 
 }

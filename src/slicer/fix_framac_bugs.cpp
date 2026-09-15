@@ -1,8 +1,4 @@
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <unordered_map>
+#include "../../include/slicer/fix_framac_bugs.h"
 
 void fixFramacBugs(const std::string &fileName, const std::filesystem::path &filePath) {
     const std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> patches = {
