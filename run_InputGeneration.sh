@@ -96,5 +96,5 @@ find "$benchmarks_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name
             --reasoning-effort="$reasoning_effort" \
             --max-attempts="$max_attempts" \
             --num-inputs="$num_inputs" \
-            --execution-timeout="$execution_timeout"
+            --execution-timeout="$execution_timeout" || true
 done
