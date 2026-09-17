@@ -264,6 +264,8 @@ int runInputGenerator(int argc, char *argv[]) {
         requiredNT = numInputs / 2;
     }
 
+    std::ofstream testCasesStream(testCasesPath, std::ios::trunc);
+
     std::vector<NondetInput> inputs;
     clang::tooling::runToolOnCode(std::make_unique<nondet_extractor::Action>(inputs), sourceCodeFile);
     if (inputs.empty()) {
@@ -576,7 +578,6 @@ int runInputGenerator(int argc, char *argv[]) {
         std::cout << "Generated " << acceptedT << "/" << requiredT << " terminating inputs and " << acceptedLikelyNT << "/" << requiredNT << " non-terminating inputs.\n";
     }
 
-    std::ofstream testCasesStream(testCasesPath, std::ios::trunc);
     for (std::size_t i = 0; i < inputs.size(); ++i) {
         if (i > 0) {
             testCasesStream << ",";
