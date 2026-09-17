@@ -108,6 +108,16 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                 valueSchema = {
                     {"type", "string"}
                 };
+                if (input.type == "char") {
+                    valueSchema["minLength"] = 1;
+                    valueSchema["maxLength"] = 1;
+                }
+                else if (input.type == "float" || input.type == "double" || input.type == "long double") {
+                    valueSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
+                }
+                else {
+                    valueSchema["pattern"] = "^[+-]?[0-9]+$";
+                }
             }
             assignmentItems.push_back({
                 {"type", "object"},
@@ -311,6 +321,26 @@ static std::vector<NondetAssignment> parseAssignments(const std::string& respons
                 throw std::runtime_error("Model returned a non-string value for ID: " + id);
             }
             value = item.at("value").get<std::string>();
+            if (inputIterator->type == "char") {
+                if (value == "\n") {
+                    value = "'\\n'";
+                }
+                else if (value == "\r") {
+                    value = "'\\r'";
+                }
+                else if (value == "\t") {
+                    value = "'\\t'";
+                }
+                else if (value == "\\") {
+                    value = "'\\\\'";
+                }
+                else if (value == "'") {
+                    value = "'\\''";
+                }
+                else {
+                    value = "'" + value + "'";
+                }
+            }
         }
         auto [iterator, inserted] = returnedValues.emplace(id, value);
         if (!inserted) {
