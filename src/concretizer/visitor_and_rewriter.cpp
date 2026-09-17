@@ -109,17 +109,13 @@ bool concretizer::VisitorAndRewriter::VisitBinaryOperator(clang::BinaryOperator 
                                     if (iterator2->second.isConstantSize) {
                                         arraySize = iterator2->second.sizeExpression;
                                     } else {
+                                        arraySize = iterator2->second.sizeExpression;
                                         auto iterator3 = resolvedArraySizeValues.find(currentFunctionName + ":" + arraySize);
                                         if (iterator3 != resolvedArraySizeValues.end()) {
                                             arraySize = iterator3->second;
                                         }
                                     }
-                                    std::string arrayInitializer;
-                                    if (iterator2->second.elementType.find("char") != std::string::npos) {
-                                        arrayInitializer = "\"" + iterator1->value + "\"";
-                                    } else {
-                                        arrayInitializer = iterator1->value;
-                                    }
+                                    std::string arrayInitializer = iterator1->value;
                                     std::string newArrayDeclaration = iterator2->second.elementType + " " + iterator2->second.name + "[" + arraySize + "] = " + arrayInitializer;
                                     Rewriter.ReplaceText(BO->getSourceRange(), "");
                                     Rewriter.ReplaceText(iterator2->second.declarationRange, newArrayDeclaration);

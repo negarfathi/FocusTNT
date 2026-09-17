@@ -42,27 +42,27 @@ bool nondet_extractor::VisitorAndRewriter::VisitVarDecl(clang::VarDecl *VD) {
                 processedNondetCalls.insert(initCallExpr);
             }
         }
-    }
-    else {
-        if (auto *AT = llvm::dyn_cast<clang::ArrayType>(VD->getType().getTypePtr())) {
-            ArrayDeclaration arrayDeclaration;
-            arrayDeclaration.name = VD->getNameAsString();
-            arrayDeclaration.elementType = VD->getType()->getAsArrayTypeUnsafe()->getElementType().getAsString();
-            if (llvm::dyn_cast<clang::ConstantArrayType>(AT)) {
-                arrayDeclaration.isConstantSize = true;
+        else {
+            if (auto *AT = llvm::dyn_cast<clang::ArrayType>(VD->getType().getTypePtr())) {
+                ArrayDeclaration arrayDeclaration;
+                arrayDeclaration.name = VD->getNameAsString();
+                arrayDeclaration.elementType = VD->getType()->getAsArrayTypeUnsafe()->getElementType().getAsString();
+                if (llvm::dyn_cast<clang::ConstantArrayType>(AT)) {
+                    arrayDeclaration.isConstantSize = true;
+                }
+                else {
+                    arrayDeclaration.isConstantSize = false;
+                }
+                std::string arrayDeclarationStr = clang::Lexer::getSourceText(clang::CharSourceRange::getTokenRange(VD->getSourceRange()), SM, Context->getLangOpts()).str();
+                std::string arrSize;
+                auto leftPos = arrayDeclarationStr.find('[');
+                auto rightPos = arrayDeclarationStr.find(']');
+                if (leftPos != std::string::npos && rightPos != std::string::npos && rightPos > leftPos) {
+                    arrSize = arrayDeclarationStr.substr(leftPos + 1, rightPos - leftPos - 1);
+                }
+                arrayDeclaration.sizeExpression = arrSize;
+                arrayDeclarations[currentFunctionName + ":" + arrayDeclaration.name] = arrayDeclaration;
             }
-            else {
-                arrayDeclaration.isConstantSize = false;
-            }
-            std::string arrayDeclarationStr = clang::Lexer::getSourceText(clang::CharSourceRange::getTokenRange(VD->getSourceRange()), SM, Context->getLangOpts()).str();
-            std::string arrSize;
-            auto leftPos = arrayDeclarationStr.find('[');
-            auto rightPos = arrayDeclarationStr.find(']');
-            if (leftPos != std::string::npos && rightPos != std::string::npos && rightPos > leftPos) {
-                arrSize = arrayDeclarationStr.substr(leftPos + 1, rightPos - leftPos - 1);
-            }
-            arrayDeclaration.sizeExpression = arrSize;
-            arrayDeclarations[currentFunctionName + ":" + arrayDeclaration.name] = arrayDeclaration;
         }
     }
     return true;

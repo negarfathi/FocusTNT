@@ -11,18 +11,13 @@ static std::string buildPrompt(const std::string& sourceCode, const std::vector<
         << "1. Return a value for EVERY listed nondeterministic input ID.\n"
         << "2. Use each ID exactly once.\n"
         << "3. Respect the declared C/C++ type.\n"
-        << "4. For an array, return the whole array as a C initializer, for example {1, 2, 3}.\n"
-        << "5. If an array size is a variable, make the generated array length consistent with the generated value of that size variable.\n"
-        << "6. For char arrays, return the string content without adding extra explanation.\n"
-        << "7. Do not return code, Markdown, comments, or explanations.\n"
-        << "8. Return exactly one JSON object in this shape:\n"
-        << R"({"assignments":[{"id":"...","value":"..."}]})"
-        << "\n\n"
-        << "Nondeterministic inputs:\n";
+        << "4. For an array, return the value as an array containing exactly the required number of elements.\n"
+        << "5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.\n"
+        << "\nNondeterministic inputs:\n";
     for (const auto& input : inputs) {
         prompt << "- id: " << input.id << ", type: " << input.type;
         if (input.isArray) {
-            prompt << ", array: true, size: " << input.arraySizeExpresion;
+            prompt << ", array: true, size: " << input.arraySizeExpresion << ", required elements: " << input.arraySizeExpresion;
         }
         prompt << '\n';
     }
@@ -40,7 +35,8 @@ static std::string buildPrompt(const std::string& sourceCode, const std::vector<
     return prompt.str();
 }
 
-static std::string sendRequest(const GenerationConfiguration& configuration, const std::string& prompt) {
+
+static std::string sendRequest(const GenerationConfiguration& configuration, const std::string& prompt, const std::vector<NondetInput>& inputs) {
     nlohmann::json request;
     std::string url;
     std::string authorizationHeader;
@@ -74,6 +70,71 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
         while (!baseUrl.empty() && baseUrl.back() == '/') {
             baseUrl.pop_back();
         }
+        nlohmann::json assignmentItems = nlohmann::json::array();
+        for (const auto& input : inputs) {
+            nlohmann::json valueSchema;
+            if (input.isArray) {
+                nlohmann::json itemSchema = {
+                    {"type", "string"}
+                };
+
+                if (input.type == "char") {
+                    itemSchema["minLength"] = 1;
+                    itemSchema["maxLength"] = 1;
+                }
+                else if (input.type == "float" || input.type == "double" || input.type == "long double") {
+                    itemSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
+                }
+                else {
+                    itemSchema["pattern"] = "^[+-]?[0-9]+$";
+                }
+                try {
+                    std::size_t arraySize = std::stoul(input.arraySizeExpresion);
+                    valueSchema = {
+                        {"type", "array"},
+                        {"items", itemSchema},
+                        {"minItems", arraySize},
+                        {"maxItems", arraySize}
+                    };
+                }
+                catch (...) {
+                    valueSchema = {
+                        {"type", "array"},
+                        {"items", itemSchema}
+                    };
+                }
+            }
+            else {
+                valueSchema = {
+                    {"type", "string"}
+                };
+            }
+            assignmentItems.push_back({
+                {"type", "object"},
+                {"properties", {
+                    {"id", {
+                        {"type", "string"},
+                        {"const", input.id}
+                    }},
+                    {"value", valueSchema}
+                }},
+                {"required", {"id", "value"}},
+                {"additionalProperties", false}
+            });
+        }
+        nlohmann::json schema = {
+            {"type", "object"},
+            {"properties", {
+            {"assignments", {
+                {"type", "array"},
+                {"prefixItems", assignmentItems},
+                {"minItems", inputs.size()},
+                {"maxItems", inputs.size()}
+            }}
+            }},
+            {"required", {"assignments"}},
+            {"additionalProperties", false}
+        };
         request = {
             {"model", configuration.model},
             {"messages", nlohmann::json::array({
@@ -83,7 +144,14 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                 }
             })},
             {"temperature", configuration.temperature},
-            {"reasoning_effort", configuration.reasoningEffort}
+            {"reasoning_effort", configuration.reasoningEffort},
+            {"response_format", {
+            {"type", "json_schema"},
+            {"json_schema", {
+                {"name", "nondeterministic_assignments"},
+                {"schema", schema}
+            }}
+            }}
         };
         url = baseUrl + "/v1/chat/completions";
     }
@@ -187,7 +255,63 @@ static std::vector<NondetAssignment> parseAssignments(const std::string& respons
             throw std::runtime_error("Invalid assignment object in model output:\n" + responseText);
         }
         const std::string id = item.at("id").get<std::string>();
-        const std::string value = item.at("value").is_string() ? item.at("value").get<std::string>() : item.at("value").dump();
+        auto inputIterator = std::find_if(inputs.begin(), inputs.end(), [&](const NondetInput& input) {
+            return input.id == id;
+        });
+        if (inputIterator == inputs.end()) {
+            throw std::runtime_error("Model returned unknown ID: " + id);
+        }
+        std::string value;
+        if (inputIterator->isArray) {
+            if (!item.at("value").is_array()) {
+                throw std::runtime_error("Model returned a non-array value for array ID: " + id);
+            }
+            std::ostringstream initializer;
+            initializer << "{";
+            for (std::size_t i = 0; i < item.at("value").size(); ++i) {
+                if (!item.at("value").at(i).is_string()) {
+                    throw std::runtime_error("Model returned a non-string array element for ID: " + id);
+                }
+                if (i > 0) {
+                    initializer << ",";
+                }
+                std::string element = item.at("value").at(i).get<std::string>();
+                if (inputIterator->type == "char") {
+                    if (element.size() == 1 && element[0] == '\0') {
+                        initializer << "'\\0'";
+                    }
+                    else if (element == "\n") {
+                        initializer << "'\\n'";
+                    }
+                    else if (element == "\r") {
+                        initializer << "'\\r'";
+                    }
+                    else if (element == "\t") {
+                        initializer << "'\\t'";
+                    }
+                    else if (element == "\\") {
+                        initializer << "'\\\\'";
+                    }
+                    else if (element == "'") {
+                        initializer << "'\\''";
+                    }
+                    else {
+                        initializer << "'" << element << "'";
+                    }
+                }
+                else {
+                    initializer << element;
+                }
+            }
+            initializer << "}";
+            value = initializer.str();
+        }
+        else {
+            if (!item.at("value").is_string()) {
+                throw std::runtime_error("Model returned a non-string value for ID: " + id);
+            }
+            value = item.at("value").get<std::string>();
+        }
         auto [iterator, inserted] = returnedValues.emplace(id, value);
         if (!inserted) {
             throw std::runtime_error("Model returned duplicate ID: " + id);
@@ -223,7 +347,7 @@ InputGenerator::InputGenerator(GenerationConfiguration configuration) : configur
     }
 }
 
-std::vector<NondetAssignment> InputGenerator::Generate(const std::string& sourceFile, const std::vector<NondetInput>& inputs, GenerationTarget target, const std::vector<std::vector<NondetAssignment>>& previousAssignments) const {
+std::vector<NondetAssignment> InputGenerator::Generate(const std::string& sourceFile, const std::vector<NondetInput>& inputs, GenerationTarget target, const std::vector<std::vector<NondetAssignment>>& previousAssignments, std::string& prompt) {
     if (inputs.empty()) {
         return {};
     }
@@ -233,7 +357,7 @@ std::vector<NondetAssignment> InputGenerator::Generate(const std::string& source
     }
     std::ostringstream sourceBuffer;
     sourceBuffer << sourceStream.rdbuf();
-    const std::string prompt = buildPrompt(sourceBuffer.str(), inputs, target, previousAssignments);
-    const std::string response = sendRequest(configuration, prompt);
+    prompt = buildPrompt(sourceBuffer.str(), inputs, target, previousAssignments);
+    const std::string response = sendRequest(configuration, prompt, inputs);
     return parseAssignments(response, inputs);
 }

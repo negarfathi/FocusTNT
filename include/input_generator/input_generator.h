@@ -17,8 +17,8 @@ enum class GenerationTarget {
 
 struct GenerationConfiguration {
     std::string model;
-    double temperature = 0.2;
-    std::string reasoningEffort = "medium";
+    double temperature;
+    std::string reasoningEffort;
     std::string vllmBaseUrl;
 };
 
@@ -26,7 +26,7 @@ class InputGenerator {
 public:
     explicit InputGenerator(GenerationConfiguration configuration);
 
-    std::vector<NondetAssignment> Generate(const std::string& sourceFile, const std::vector<NondetInput>& inputs, GenerationTarget target, const std::vector<std::vector<NondetAssignment>>& previousAssignments = {}) const;
+    std::vector<NondetAssignment> Generate(const std::string& sourceFile, const std::vector<NondetInput>& inputs, GenerationTarget target, const std::vector<std::vector<NondetAssignment>>& previousAssignments, std::string& prompt);
 
 private:
     GenerationConfiguration configuration;

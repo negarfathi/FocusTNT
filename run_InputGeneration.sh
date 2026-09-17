@@ -87,7 +87,7 @@ fi
 find "$benchmarks_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name "*_T.cpp" -o -name "*_NT.cpp" \) | sort | while read -r source_code; do
     echo "Generating inputs: $source_code"
 
-    if ! VLLM_BASE_URL="http://$host:$port" \
+    VLLM_BASE_URL="http://$host:$port" \
         "$tool_directory" \
             --input-generation \
             "$source_code" \
@@ -96,8 +96,5 @@ find "$benchmarks_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name
             --reasoning-effort="$reasoning_effort" \
             --max-attempts="$max_attempts" \
             --num-inputs="$num_inputs" \
-            --execution-timeout="$execution_timeout"; then
-        echo "Input generation failed or was skipped: $source_code"
-        echo "Continuing with the next program..."
-    fi
+            --execution-timeout="$execution_timeout"
 done
