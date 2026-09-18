@@ -77,10 +77,10 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                 nlohmann::json itemSchema = {
                     {"type", "string"}
                 };
-
                 if (input.type == "char") {
                     itemSchema["minLength"] = 1;
                     itemSchema["maxLength"] = 1;
+                    itemSchema["pattern"] = "^[\\x00-\\x7F]$";
                 }
                 else if (input.type == "float" || input.type == "double" || input.type == "long double") {
                     itemSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
@@ -111,6 +111,7 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                 if (input.type == "char") {
                     valueSchema["minLength"] = 1;
                     valueSchema["maxLength"] = 1;
+                    valueSchema["pattern"] = "^[\\x00-\\x7F]$";
                 }
                 else if (input.type == "float" || input.type == "double" || input.type == "long double") {
                     valueSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
@@ -322,7 +323,10 @@ static std::vector<NondetAssignment> parseAssignments(const std::string& respons
             }
             value = item.at("value").get<std::string>();
             if (inputIterator->type == "char") {
-                if (value == "\n") {
+                if (value.size() == 1 && value[0] == '\0') {
+                    value = "'\\0'";
+                }
+                else if (value == "\n") {
                     value = "'\\n'";
                 }
                 else if (value == "\r") {

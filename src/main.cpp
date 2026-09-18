@@ -250,16 +250,16 @@ int runInputGenerator(int argc, char *argv[]) {
 
     std::ofstream testCasesStream(testCasesPath, std::ios::trunc);
 
+    std::string header = "#include \"stdlib.h\"\n";
+    if (sourceCodeFile.find(header) == std::string::npos) {
+        sourceCodeFile = header + sourceCodeFile;
+    }
+
     std::vector<NondetInput> inputs;
     clang::tooling::runToolOnCode(std::make_unique<nondet_extractor::Action>(inputs), sourceCodeFile);
     if (inputs.empty()) {
         std::cout << "No __VERIFIER_nondet_* inputs were found.\n";
         return 1;
-    }
-
-    std::string header = "#include \"stdlib.h\"\n";
-    if (sourceCodeFile.find(header) == std::string::npos) {
-        sourceCodeFile = header + sourceCodeFile;
     }
 
     int requiredT;
