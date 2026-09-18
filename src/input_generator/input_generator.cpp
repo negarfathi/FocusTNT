@@ -13,6 +13,7 @@ static std::string buildPrompt(const std::string& sourceCode, const std::vector<
         << "3. Respect the declared C/C++ type.\n"
         << "4. For an array, return the value as an array containing exactly the required number of elements.\n"
         << "5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.\n"
+        << "6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.\n"
         << "\nNondeterministic inputs:\n";
     for (const auto& input : inputs) {
         prompt << "- id: " << input.id << ", type: " << input.type;
@@ -86,7 +87,7 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                     itemSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
                 }
                 else {
-                    itemSchema["pattern"] = "^[+-]?[0-9]+$";
+                    itemSchema["pattern"] = "^[+-]?(0|[1-9][0-9]*)$";
                 }
                 try {
                     std::size_t arraySize = std::stoul(input.arraySizeExpresion);
@@ -117,7 +118,7 @@ static std::string sendRequest(const GenerationConfiguration& configuration, con
                     valueSchema["pattern"] = "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?$";
                 }
                 else {
-                    valueSchema["pattern"] = "^[+-]?[0-9]+$";
+                    valueSchema["pattern"] = "^[+-]?(0|[1-9][0-9]*)$";
                 }
             }
             assignmentItems.push_back({

@@ -12,9 +12,9 @@ model_directory="$root_directory/models/gpt-oss-20b"
 model="gpt-oss-20b"
 temperature="1"
 reasoning_effort="medium"
-max_attempts=10
-num_inputs=4
-execution_timeout=60
+max_attempts=100
+num_inputs=20
+execution_timeout=300
 
 host="127.0.0.1"
 port=8000
