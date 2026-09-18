@@ -3,7 +3,8 @@
 set -Eeuo pipefail
 
 root_directory="$(cd "$(dirname "$0")" && pwd)"
-benchmarks_directory="$root_directory/Benchmarks"
+benchmarks_directory="$root_directory/benchmarks"
+results_directory="$root_directory/results_InputGeneration"
 tool_directory="$root_directory/cmake-build-debug/FocusTNT"
 venv_directory="$root_directory/.venv"
 model_directory="$root_directory/models/gpt-oss-20b"
@@ -33,6 +34,14 @@ if [[ ! -f "$model_directory/config.json" ]]; then
     echo "Model not found: $model_directory"
     exit 1
 fi
+
+if [[ ! -d "$benchmarks_directory" ]]; then
+    echo "Benchmarks directory not found: $benchmarks_directory"
+    exit 1
+fi
+
+rm -rf "$results_directory"
+cp -a "$benchmarks_directory" "$results_directory"
 
 if curl -sf "http://$host:$port/v1/models" >/dev/null 2>&1; then
     echo "A vLLM server is already running on $host:$port."
@@ -84,7 +93,7 @@ if ! curl -sf "http://$host:$port/v1/models" >/dev/null 2>&1; then
     exit 1
 fi
 
-find "$benchmarks_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name "*_T.cpp" -o -name "*_NT.cpp" \) | sort | while read -r source_code; do
+find "$results_directory" -type f \( -name "*_T.c" -o -name "*_NT.c" -o -name "*_T.cpp" -o -name "*_NT.cpp" \) | sort | while read -r source_code; do
     echo "Generating inputs: $source_code"
 
     VLLM_BASE_URL="http://$host:$port" \
