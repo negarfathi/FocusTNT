@@ -1,0 +1,1486 @@
+Candidate,Target,Assignments,ProgramPath,ExecutionResult,Label,Accepted,Error,Prompt
+1,T,"waitpid:num:1=1
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase1.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+2,T,"waitpid:num:1=0
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase2.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+3,T,"waitpid:num:1=-1
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase3.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+4,T,"waitpid:num:1=2
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase4.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+5,T,"waitpid:num:1=-1
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase5.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+6,T,"waitpid:num:1=3
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase6.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+7,T,"waitpid:num:1=2
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase7.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+8,T,"waitpid:num:1=4
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase8.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+9,T,"waitpid:num:1=4
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase9.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+10,T,"waitpid:num:1=0
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase10.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+11,T,"waitpid:num:1=1
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase11.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+12,T,"waitpid:num:1=5
+waitpid:NONDET_IF:1=1
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase12.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+13,T,"waitpid:num:1=-1
+waitpid:NONDET_IF:1=2
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase13.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+14,T,"waitpid:num:1=6
+waitpid:NONDET_IF:1=2
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase14.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+15,T,"waitpid:num:1=3
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase15.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+16,T,"waitpid:num:1=+0
+waitpid:NONDET_IF:1=+2
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase16.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+17,T,"waitpid:num:1=3
+waitpid:NONDET_IF:1=0
+",,DUPLICATE,,false,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+Previous 16: waitpid:num:1=+0; waitpid:NONDET_IF:1=+2; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+18,T,"waitpid:num:1=8
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase17.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+Previous 16: waitpid:num:1=+0; waitpid:NONDET_IF:1=+2; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+19,T,"waitpid:num:1=0
+waitpid:NONDET_IF:1=2
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase18.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+Previous 16: waitpid:num:1=+0; waitpid:NONDET_IF:1=+2; 
+Previous 17: waitpid:num:1=8; waitpid:NONDET_IF:1=0; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+20,T,"waitpid:num:1=0
+waitpid:NONDET_IF:1=3
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase19.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+Previous 16: waitpid:num:1=+0; waitpid:NONDET_IF:1=+2; 
+Previous 17: waitpid:num:1=8; waitpid:NONDET_IF:1=0; 
+Previous 18: waitpid:num:1=0; waitpid:NONDET_IF:1=2; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"
+21,T,"waitpid:num:1=7
+waitpid:NONDET_IF:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/loop/Missing_Iterator_Update_1_T/input_generator_artifacts/generated_programs/Missing_Iterator_Update_1_T_TestCase20.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: waitpid:num:1, type: int
+- id: waitpid:NONDET_IF:1, type: int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: waitpid:num:1=1; waitpid:NONDET_IF:1=0; 
+Previous 2: waitpid:num:1=0; waitpid:NONDET_IF:1=0; 
+Previous 3: waitpid:num:1=-1; waitpid:NONDET_IF:1=0; 
+Previous 4: waitpid:num:1=2; waitpid:NONDET_IF:1=1; 
+Previous 5: waitpid:num:1=-1; waitpid:NONDET_IF:1=1; 
+Previous 6: waitpid:num:1=3; waitpid:NONDET_IF:1=1; 
+Previous 7: waitpid:num:1=2; waitpid:NONDET_IF:1=0; 
+Previous 8: waitpid:num:1=4; waitpid:NONDET_IF:1=0; 
+Previous 9: waitpid:num:1=4; waitpid:NONDET_IF:1=1; 
+Previous 10: waitpid:num:1=0; waitpid:NONDET_IF:1=1; 
+Previous 11: waitpid:num:1=1; waitpid:NONDET_IF:1=1; 
+Previous 12: waitpid:num:1=5; waitpid:NONDET_IF:1=1; 
+Previous 13: waitpid:num:1=-1; waitpid:NONDET_IF:1=2; 
+Previous 14: waitpid:num:1=6; waitpid:NONDET_IF:1=2; 
+Previous 15: waitpid:num:1=3; waitpid:NONDET_IF:1=0; 
+Previous 16: waitpid:num:1=+0; waitpid:NONDET_IF:1=+2; 
+Previous 17: waitpid:num:1=8; waitpid:NONDET_IF:1=0; 
+Previous 18: waitpid:num:1=0; waitpid:NONDET_IF:1=2; 
+Previous 19: waitpid:num:1=0; waitpid:NONDET_IF:1=3; 
+
+Program:
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
+Project Name: dbus
+License: GPL2
+termination: TRUE
+
+*/
+#define EINTR 1
+#define OTHER 2
+int errno;
+int waitpid()
+{
+    int num = __VERIFIER_nondet_int();
+    while( num < 0 )
+    {
+        if( __VERIFIER_nondet_int() && errno != EINTR )
+            errno = EINTR;
+        else
+            errno = OTHER;
+        return num;
+    }
+    return num;
+}
+
+int main()
+{
+
+    int ret = waitpid();
+again:
+    if( ret == 0 )
+    {
+        do{
+            ret = waitpid();
+        }while( ret < 0 && errno == EINTR );
+    }
+    return 0;
+}
+
+"

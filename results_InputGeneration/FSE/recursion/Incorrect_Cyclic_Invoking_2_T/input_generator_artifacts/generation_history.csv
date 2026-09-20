@@ -1,0 +1,3489 @@
+Candidate,Target,Assignments,ProgramPath,ExecutionResult,Label,Accepted,Error,Prompt
+1,T,"main:addr:1=0
+main:omap2.revision:1=0
+main:omap2.config:1=0
+main:omap2.ints:1=0
+main:omap2.mask:1=0
+main:omap2.wumask:1=0
+main:omap2.dir:1=0
+main:omap2.inputs:1=0
+main:omap2.outputs:1=0
+main:omap2.level:1=0
+main:omap2.edge:1=0
+main:omap2.debounce:1=0
+main:omap2.delay:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase1.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+2,T,"main:addr:1=0
+main:omap2.revision:1=1
+main:omap2.config:1=0
+main:omap2.ints:1=1
+main:omap2.mask:1=0
+main:omap2.wumask:1=0
+main:omap2.dir:1=0
+main:omap2.inputs:1=0
+main:omap2.outputs:1=0
+main:omap2.level:1=0
+main:omap2.edge:1=0
+main:omap2.debounce:1=0
+main:omap2.delay:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase2.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+3,T,"main:addr:1=7
+main:omap2.revision:1=13
+main:omap2.config:1=5
+main:omap2.ints:1=2
+main:omap2.mask:1=4
+main:omap2.wumask:1=8
+main:omap2.dir:1=16
+main:omap2.inputs:1=12
+main:omap2.outputs:1=28
+main:omap2.level:1=9
+main:omap2.edge:1=18
+main:omap2.debounce:1=7
+main:omap2.delay:1=24
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase3.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+4,T,"main:addr:1=16
+main:omap2.revision:1=2
+main:omap2.config:1=7
+main:omap2.ints:1=3
+main:omap2.mask:1=1
+main:omap2.wumask:1=4
+main:omap2.dir:1=5
+main:omap2.inputs:1=6
+main:omap2.outputs:1=9
+main:omap2.level:1=8
+main:omap2.edge:1=11
+main:omap2.debounce:1=12
+main:omap2.delay:1=13
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase4.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+5,T,"main:addr:1=4
+main:omap2.revision:1=3
+main:omap2.config:1=4
+main:omap2.ints:1=5
+main:omap2.mask:1=6
+main:omap2.wumask:1=7
+main:omap2.dir:1=8
+main:omap2.inputs:1=9
+main:omap2.outputs:1=10
+main:omap2.level:1=11
+main:omap2.edge:1=12
+main:omap2.debounce:1=13
+main:omap2.delay:1=14
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase5.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+6,T,"main:addr:1=0
+main:omap2.revision:1=2
+main:omap2.config:1=4
+main:omap2.ints:1=8
+main:omap2.mask:1=12
+main:omap2.wumask:1=16
+main:omap2.dir:1=20
+main:omap2.inputs:1=24
+main:omap2.outputs:1=28
+main:omap2.level:1=32
+main:omap2.edge:1=36
+main:omap2.debounce:1=40
+main:omap2.delay:1=44
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase6.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+7,T,"main:addr:1=3
+main:omap2.revision:1=1
+main:omap2.config:1=2
+main:omap2.ints:1=3
+main:omap2.mask:1=4
+main:omap2.wumask:1=5
+main:omap2.dir:1=6
+main:omap2.inputs:1=7
+main:omap2.outputs:1=8
+main:omap2.level:1=9
+main:omap2.edge:1=10
+main:omap2.debounce:1=11
+main:omap2.delay:1=12
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase7.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+8,T,"main:addr:1=1
+main:omap2.revision:1=0
+main:omap2.config:1=0
+main:omap2.ints:1=0
+main:omap2.mask:1=0
+main:omap2.wumask:1=0
+main:omap2.dir:1=0
+main:omap2.inputs:1=0
+main:omap2.outputs:1=0
+main:omap2.level:1=0
+main:omap2.edge:1=0
+main:omap2.debounce:1=0
+main:omap2.delay:1=0
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase8.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+9,T,"main:addr:1=42
+main:omap2.revision:1=42
+main:omap2.config:1=42
+main:omap2.ints:1=42
+main:omap2.mask:1=42
+main:omap2.wumask:1=42
+main:omap2.dir:1=42
+main:omap2.inputs:1=42
+main:omap2.outputs:1=42
+main:omap2.level:1=42
+main:omap2.edge:1=42
+main:omap2.debounce:1=42
+main:omap2.delay:1=42
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase9.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+10,T,"main:addr:1=40
+main:omap2.revision:1=17
+main:omap2.config:1=23
+main:omap2.ints:1=62
+main:omap2.mask:1=7
+main:omap2.wumask:1=13
+main:omap2.dir:1=19
+main:omap2.inputs:1=29
+main:omap2.outputs:1=31
+main:omap2.level:1=11
+main:omap2.edge:1=37
+main:omap2.debounce:1=43
+main:omap2.delay:1=41
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase10.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+11,T,"main:addr:1=2
+main:omap2.revision:1=5
+main:omap2.config:1=6
+main:omap2.ints:1=9
+main:omap2.mask:1=11
+main:omap2.wumask:1=10
+main:omap2.dir:1=12
+main:omap2.inputs:1=13
+main:omap2.outputs:1=14
+main:omap2.level:1=15
+main:omap2.edge:1=16
+main:omap2.debounce:1=17
+main:omap2.delay:1=18
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase11.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+12,T,"main:addr:1=8
+main:omap2.revision:1=10
+main:omap2.config:1=12
+main:omap2.ints:1=14
+main:omap2.mask:1=16
+main:omap2.wumask:1=18
+main:omap2.dir:1=20
+main:omap2.inputs:1=22
+main:omap2.outputs:1=24
+main:omap2.level:1=26
+main:omap2.edge:1=28
+main:omap2.debounce:1=30
+main:omap2.delay:1=32
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase12.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+13,T,"main:addr:1=9
+main:omap2.revision:1=17
+main:omap2.config:1=33
+main:omap2.ints:1=5
+main:omap2.mask:1=11
+main:omap2.wumask:1=22
+main:omap2.dir:1=4
+main:omap2.inputs:1=28
+main:omap2.outputs:1=31
+main:omap2.level:1=25
+main:omap2.edge:1=7
+main:omap2.debounce:1=14
+main:omap2.delay:1=18
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase13.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+14,T,"main:addr:1=5
+main:omap2.revision:1=6
+main:omap2.config:1=7
+main:omap2.ints:1=8
+main:omap2.mask:1=9
+main:omap2.wumask:1=10
+main:omap2.dir:1=11
+main:omap2.inputs:1=12
+main:omap2.outputs:1=13
+main:omap2.level:1=14
+main:omap2.edge:1=15
+main:omap2.debounce:1=16
+main:omap2.delay:1=17
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase14.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+15,T,"main:addr:1=44
+main:omap2.revision:1=0
+main:omap2.config:1=3
+main:omap2.ints:1=5
+main:omap2.mask:1=7
+main:omap2.wumask:1=9
+main:omap2.dir:1=11
+main:omap2.inputs:1=13
+main:omap2.outputs:1=15
+main:omap2.level:1=17
+main:omap2.edge:1=19
+main:omap2.debounce:1=21
+main:omap2.delay:1=23
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase15.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+16,T,"main:addr:1=9
+main:omap2.revision:1=0
+main:omap2.config:1=1
+main:omap2.ints:1=2
+main:omap2.mask:1=2
+main:omap2.wumask:1=3
+main:omap2.dir:1=4
+main:omap2.inputs:1=5
+main:omap2.outputs:1=6
+main:omap2.level:1=7
+main:omap2.edge:1=8
+main:omap2.debounce:1=9
+main:omap2.delay:1=10
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase16.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+Previous 15: main:addr:1=44; main:omap2.revision:1=0; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+17,T,"main:addr:1=0
+main:omap2.revision:1=1
+main:omap2.config:1=3
+main:omap2.ints:1=5
+main:omap2.mask:1=7
+main:omap2.wumask:1=9
+main:omap2.dir:1=11
+main:omap2.inputs:1=13
+main:omap2.outputs:1=15
+main:omap2.level:1=17
+main:omap2.edge:1=19
+main:omap2.debounce:1=21
+main:omap2.delay:1=23
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase17.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+Previous 15: main:addr:1=44; main:omap2.revision:1=0; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 16: main:addr:1=9; main:omap2.revision:1=0; main:omap2.config:1=1; main:omap2.ints:1=2; main:omap2.mask:1=2; main:omap2.wumask:1=3; main:omap2.dir:1=4; main:omap2.inputs:1=5; main:omap2.outputs:1=6; main:omap2.level:1=7; main:omap2.edge:1=8; main:omap2.debounce:1=9; main:omap2.delay:1=10; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+18,T,"main:addr:1=11
+main:omap2.revision:1=11
+main:omap2.config:1=11
+main:omap2.ints:1=11
+main:omap2.mask:1=13
+main:omap2.wumask:1=11
+main:omap2.dir:1=13
+main:omap2.inputs:1=14
+main:omap2.outputs:1=16
+main:omap2.level:1=12
+main:omap2.edge:1=12
+main:omap2.debounce:1=18
+main:omap2.delay:1=15
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase18.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+Previous 15: main:addr:1=44; main:omap2.revision:1=0; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 16: main:addr:1=9; main:omap2.revision:1=0; main:omap2.config:1=1; main:omap2.ints:1=2; main:omap2.mask:1=2; main:omap2.wumask:1=3; main:omap2.dir:1=4; main:omap2.inputs:1=5; main:omap2.outputs:1=6; main:omap2.level:1=7; main:omap2.edge:1=8; main:omap2.debounce:1=9; main:omap2.delay:1=10; 
+Previous 17: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+19,T,"main:addr:1=18
+main:omap2.revision:1=5
+main:omap2.config:1=0
+main:omap2.ints:1=1
+main:omap2.mask:1=2
+main:omap2.wumask:1=3
+main:omap2.dir:1=4
+main:omap2.inputs:1=6
+main:omap2.outputs:1=7
+main:omap2.level:1=8
+main:omap2.edge:1=9
+main:omap2.debounce:1=10
+main:omap2.delay:1=11
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase19.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+Previous 15: main:addr:1=44; main:omap2.revision:1=0; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 16: main:addr:1=9; main:omap2.revision:1=0; main:omap2.config:1=1; main:omap2.ints:1=2; main:omap2.mask:1=2; main:omap2.wumask:1=3; main:omap2.dir:1=4; main:omap2.inputs:1=5; main:omap2.outputs:1=6; main:omap2.level:1=7; main:omap2.edge:1=8; main:omap2.debounce:1=9; main:omap2.delay:1=10; 
+Previous 17: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 18: main:addr:1=11; main:omap2.revision:1=11; main:omap2.config:1=11; main:omap2.ints:1=11; main:omap2.mask:1=13; main:omap2.wumask:1=11; main:omap2.dir:1=13; main:omap2.inputs:1=14; main:omap2.outputs:1=16; main:omap2.level:1=12; main:omap2.edge:1=12; main:omap2.debounce:1=18; main:omap2.delay:1=15; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
+20,T,"main:addr:1=0
+main:omap2.revision:1=0
+main:omap2.config:1=1
+main:omap2.ints:1=2
+main:omap2.mask:1=3
+main:omap2.wumask:1=4
+main:omap2.dir:1=5
+main:omap2.inputs:1=6
+main:omap2.outputs:1=7
+main:omap2.level:1=8
+main:omap2.edge:1=9
+main:omap2.debounce:1=10
+main:omap2.delay:1=11
+",/home/quasar/Documents/FocusTNT/results_InputGeneration/FSE/recursion/Incorrect_Cyclic_Invoking_2_T/input_generator_artifacts/generated_programs/Incorrect_Cyclic_Invoking_2_T_TestCase20.c,COMPLETED,T,true,,"You generate concrete values for nondeterministic inputs in a C/C++ program.
+Your goal is to produce ONE complete assignment set that is likely to make the program terminate.
+
+Important rules:
+1. Return a value for EVERY listed nondeterministic input ID.
+2. Use each ID exactly once.
+3. Respect the declared C/C++ type.
+4. For an array, return the value as an array containing exactly the required number of elements.
+5. For char arrays, each element must be exactly one character. Return the character itself without C single quotes.
+6. Prefer small-magnitude values unless larger values are necessary to achieve the requested execution behavior.
+
+Nondeterministic inputs:
+- id: main:addr:1, type: unsigned int
+- id: main:omap2.revision:1, type: unsigned int
+- id: main:omap2.config:1, type: unsigned int
+- id: main:omap2.ints:1, type: unsigned int
+- id: main:omap2.mask:1, type: unsigned int
+- id: main:omap2.wumask:1, type: unsigned int
+- id: main:omap2.dir:1, type: unsigned int
+- id: main:omap2.inputs:1, type: unsigned int
+- id: main:omap2.outputs:1, type: unsigned int
+- id: main:omap2.level:1, type: unsigned int
+- id: main:omap2.edge:1, type: unsigned int
+- id: main:omap2.debounce:1, type: unsigned int
+- id: main:omap2.delay:1, type: unsigned int
+
+Previously generated assignment sets are listed below. Generate a materially different set and do not duplicate any of them.
+Previous 1: main:addr:1=0; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 2: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 3: main:addr:1=7; main:omap2.revision:1=13; main:omap2.config:1=5; main:omap2.ints:1=2; main:omap2.mask:1=4; main:omap2.wumask:1=8; main:omap2.dir:1=16; main:omap2.inputs:1=12; main:omap2.outputs:1=28; main:omap2.level:1=9; main:omap2.edge:1=18; main:omap2.debounce:1=7; main:omap2.delay:1=24; 
+Previous 4: main:addr:1=16; main:omap2.revision:1=2; main:omap2.config:1=7; main:omap2.ints:1=3; main:omap2.mask:1=1; main:omap2.wumask:1=4; main:omap2.dir:1=5; main:omap2.inputs:1=6; main:omap2.outputs:1=9; main:omap2.level:1=8; main:omap2.edge:1=11; main:omap2.debounce:1=12; main:omap2.delay:1=13; 
+Previous 5: main:addr:1=4; main:omap2.revision:1=3; main:omap2.config:1=4; main:omap2.ints:1=5; main:omap2.mask:1=6; main:omap2.wumask:1=7; main:omap2.dir:1=8; main:omap2.inputs:1=9; main:omap2.outputs:1=10; main:omap2.level:1=11; main:omap2.edge:1=12; main:omap2.debounce:1=13; main:omap2.delay:1=14; 
+Previous 6: main:addr:1=0; main:omap2.revision:1=2; main:omap2.config:1=4; main:omap2.ints:1=8; main:omap2.mask:1=12; main:omap2.wumask:1=16; main:omap2.dir:1=20; main:omap2.inputs:1=24; main:omap2.outputs:1=28; main:omap2.level:1=32; main:omap2.edge:1=36; main:omap2.debounce:1=40; main:omap2.delay:1=44; 
+Previous 7: main:addr:1=3; main:omap2.revision:1=1; main:omap2.config:1=2; main:omap2.ints:1=3; main:omap2.mask:1=4; main:omap2.wumask:1=5; main:omap2.dir:1=6; main:omap2.inputs:1=7; main:omap2.outputs:1=8; main:omap2.level:1=9; main:omap2.edge:1=10; main:omap2.debounce:1=11; main:omap2.delay:1=12; 
+Previous 8: main:addr:1=1; main:omap2.revision:1=0; main:omap2.config:1=0; main:omap2.ints:1=0; main:omap2.mask:1=0; main:omap2.wumask:1=0; main:omap2.dir:1=0; main:omap2.inputs:1=0; main:omap2.outputs:1=0; main:omap2.level:1=0; main:omap2.edge:1=0; main:omap2.debounce:1=0; main:omap2.delay:1=0; 
+Previous 9: main:addr:1=42; main:omap2.revision:1=42; main:omap2.config:1=42; main:omap2.ints:1=42; main:omap2.mask:1=42; main:omap2.wumask:1=42; main:omap2.dir:1=42; main:omap2.inputs:1=42; main:omap2.outputs:1=42; main:omap2.level:1=42; main:omap2.edge:1=42; main:omap2.debounce:1=42; main:omap2.delay:1=42; 
+Previous 10: main:addr:1=40; main:omap2.revision:1=17; main:omap2.config:1=23; main:omap2.ints:1=62; main:omap2.mask:1=7; main:omap2.wumask:1=13; main:omap2.dir:1=19; main:omap2.inputs:1=29; main:omap2.outputs:1=31; main:omap2.level:1=11; main:omap2.edge:1=37; main:omap2.debounce:1=43; main:omap2.delay:1=41; 
+Previous 11: main:addr:1=2; main:omap2.revision:1=5; main:omap2.config:1=6; main:omap2.ints:1=9; main:omap2.mask:1=11; main:omap2.wumask:1=10; main:omap2.dir:1=12; main:omap2.inputs:1=13; main:omap2.outputs:1=14; main:omap2.level:1=15; main:omap2.edge:1=16; main:omap2.debounce:1=17; main:omap2.delay:1=18; 
+Previous 12: main:addr:1=8; main:omap2.revision:1=10; main:omap2.config:1=12; main:omap2.ints:1=14; main:omap2.mask:1=16; main:omap2.wumask:1=18; main:omap2.dir:1=20; main:omap2.inputs:1=22; main:omap2.outputs:1=24; main:omap2.level:1=26; main:omap2.edge:1=28; main:omap2.debounce:1=30; main:omap2.delay:1=32; 
+Previous 13: main:addr:1=9; main:omap2.revision:1=17; main:omap2.config:1=33; main:omap2.ints:1=5; main:omap2.mask:1=11; main:omap2.wumask:1=22; main:omap2.dir:1=4; main:omap2.inputs:1=28; main:omap2.outputs:1=31; main:omap2.level:1=25; main:omap2.edge:1=7; main:omap2.debounce:1=14; main:omap2.delay:1=18; 
+Previous 14: main:addr:1=5; main:omap2.revision:1=6; main:omap2.config:1=7; main:omap2.ints:1=8; main:omap2.mask:1=9; main:omap2.wumask:1=10; main:omap2.dir:1=11; main:omap2.inputs:1=12; main:omap2.outputs:1=13; main:omap2.level:1=14; main:omap2.edge:1=15; main:omap2.debounce:1=16; main:omap2.delay:1=17; 
+Previous 15: main:addr:1=44; main:omap2.revision:1=0; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 16: main:addr:1=9; main:omap2.revision:1=0; main:omap2.config:1=1; main:omap2.ints:1=2; main:omap2.mask:1=2; main:omap2.wumask:1=3; main:omap2.dir:1=4; main:omap2.inputs:1=5; main:omap2.outputs:1=6; main:omap2.level:1=7; main:omap2.edge:1=8; main:omap2.debounce:1=9; main:omap2.delay:1=10; 
+Previous 17: main:addr:1=0; main:omap2.revision:1=1; main:omap2.config:1=3; main:omap2.ints:1=5; main:omap2.mask:1=7; main:omap2.wumask:1=9; main:omap2.dir:1=11; main:omap2.inputs:1=13; main:omap2.outputs:1=15; main:omap2.level:1=17; main:omap2.edge:1=19; main:omap2.debounce:1=21; main:omap2.delay:1=23; 
+Previous 18: main:addr:1=11; main:omap2.revision:1=11; main:omap2.config:1=11; main:omap2.ints:1=11; main:omap2.mask:1=13; main:omap2.wumask:1=11; main:omap2.dir:1=13; main:omap2.inputs:1=14; main:omap2.outputs:1=16; main:omap2.level:1=12; main:omap2.edge:1=12; main:omap2.debounce:1=18; main:omap2.delay:1=15; 
+Previous 19: main:addr:1=18; main:omap2.revision:1=5; main:omap2.config:1=0; main:omap2.ints:1=1; main:omap2.mask:1=2; main:omap2.wumask:1=3; main:omap2.dir:1=4; main:omap2.inputs:1=6; main:omap2.outputs:1=7; main:omap2.level:1=8; main:omap2.edge:1=9; main:omap2.debounce:1=10; main:omap2.delay:1=11; 
+
+Program:
+extern unsigned int __VERIFIER_nondet_uint(void);
+/*
+Commit Number: e1556ad5b8143a15c26067c3862fe20631c0053f
+URL: https://github.com/qemu/qemu/commit/e1556ad5b8143a15c26067c3862fe20631c0053f
+Project Name: qemu
+License: GPL-2.0
+termination: TRUE
+*/
+struct omap2_gpio_s {
+    unsigned int revision;
+    unsigned int config;
+    unsigned int ints;
+    unsigned int mask;
+    unsigned int wumask;
+    unsigned int dir;
+    unsigned int inputs;
+    unsigned int outputs;
+    unsigned int level;
+    unsigned int edge;
+    unsigned int debounce;
+    unsigned int delay;
+}omap2_gpio_s;
+
+static unsigned int omap2_gpio_module_read(void *opaque, unsigned int addr)
+{
+    struct omap2_gpio_s *s = (struct omap2_gpio_s *) opaque;
+
+    switch (addr) {
+    case 0x00:	/* GPIO_REVISION */
+        return s->revision;
+
+    case 0x10:	/* GPIO_SYSCONFIG */
+        return s->config;
+
+    case 0x14:	/* GPIO_SYSSTATUS */
+        return 0x01;
+
+    case 0x18:	/* GPIO_IRQSTATUS1 */
+        return s->ints;
+
+    case 0x1c:	/* GPIO_IRQENABLE1 */
+    case 0x60:	/* GPIO_CLEARIRQENABLE1 */
+    case 0x64:	/* GPIO_SETIRQENABLE1 */
+        return s->mask;
+
+    case 0x20:	/* GPIO_WAKEUPENABLE */
+    case 0x80:	/* GPIO_CLEARWKUENA */
+    case 0x84:	/* GPIO_SETWKUENA */
+        return s->wumask;
+
+    case 0x28:	/* GPIO_IRQSTATUS2 */
+        return s->ints;
+
+    case 0x2c:	/* GPIO_IRQENABLE2 */
+    case 0x70:	/* GPIO_CLEARIRQENABLE2 */
+    case 0x74:	/* GPIO_SETIREQNEABLE2 */
+        return s->mask;
+
+    case 0x30:	/* GPIO_CTRL */
+        return s->config;
+
+    case 0x34:	/* GPIO_OE */
+        return s->dir;
+
+    case 0x38:	/* GPIO_DATAIN */
+        return s->inputs;
+
+    case 0x3c:	/* GPIO_DATAOUT */
+    case 0x90:	/* GPIO_CLEARDATAOUT */
+    case 0x94:	/* GPIO_SETDATAOUT */
+        return s->outputs;
+
+    case 0x40:	/* GPIO_LEVELDETECT0 */
+        return s->level;
+
+    case 0x44:	/* GPIO_LEVELDETECT1 */
+        return s->level;
+
+    case 0x48:	/* GPIO_RISINGDETECT */
+        return s->edge;
+
+    case 0x4c:	/* GPIO_FALLINGDETECT */
+        return s->edge;
+
+    case 0x50:	/* GPIO_DEBOUNCENABLE */
+        return s->debounce;
+
+    case 0x54:	/* GPIO_DEBOUNCINGTIME */
+        return s->delay;
+    }
+
+    return 0;
+}
+
+static unsigned int omap2_gpio_module_readp(void *opaque, unsigned int addr)
+{
+    return omap2_gpio_module_read(opaque, addr & ~3) >> ((addr & 3) << 3);
+}
+
+
+int main()
+{
+
+    unsigned int addr = __VERIFIER_nondet_uint();
+    struct omap2_gpio_s omap2;
+    omap2.revision = __VERIFIER_nondet_uint();
+    omap2.config = __VERIFIER_nondet_uint();
+    omap2.ints = __VERIFIER_nondet_uint();
+    omap2.mask = __VERIFIER_nondet_uint();
+    omap2.wumask = __VERIFIER_nondet_uint();
+    omap2.dir = __VERIFIER_nondet_uint();
+    omap2.inputs = __VERIFIER_nondet_uint();
+    omap2.outputs = __VERIFIER_nondet_uint();
+    omap2.level = __VERIFIER_nondet_uint();
+    omap2.edge = __VERIFIER_nondet_uint();
+    omap2.debounce = __VERIFIER_nondet_uint();
+    omap2.delay = __VERIFIER_nondet_uint();
+    void* opaque = &omap2;
+    unsigned int rc = omap2_gpio_module_readp( opaque, addr );
+    return 0;
+}
+
+"
