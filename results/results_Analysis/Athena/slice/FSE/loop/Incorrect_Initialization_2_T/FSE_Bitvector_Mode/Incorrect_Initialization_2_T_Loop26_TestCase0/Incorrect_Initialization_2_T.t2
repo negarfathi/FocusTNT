@@ -1,0 +1,215 @@
+///*** 1_main ***///
+START: main_bb4;
+
+TYPE v6: bv(32);
+TYPE v9: bv(32);
+TYPE v14: bv(32);
+
+FROM: main_bb4;
+flag := 0;
+v6 := nondet();
+var__temp_vmatroska.0 := v6;
+TO: main_bb5;
+
+FROM: main_bb5;
+vmatroska.0 := var__temp_vmatroska.0;
+TO: main_bb5_v..i;
+FROM: main_bb5_v..i;
+assume(vmatroska.0 == 1);
+v..i := 0;
+TO: main_bb5_sv..i;
+
+FROM: main_bb5_v..i;
+assume(vmatroska.0 != 1);
+v..i := 1;
+TO: main_bb5_sv..i;
+
+FROM: main_bb5_sv..i;
+var__temp_vres.0 := 0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(v..i != 0);
+TO: main_res_return_slice_1.exit;
+
+FROM: main_bb5_end;
+assume(v..i == 0);
+TO: main_bb14;
+
+FROM: main_res_return_slice_1.exit;
+vres.0 := var__temp_vres.0;
+TO: main_NodeBlock;
+
+FROM: main_NodeBlock;
+TO: main_NodeBlock_end;
+
+FROM: main_NodeBlock_end;
+assume(vres.0 slt 0);
+TO: main_LeafBlock;
+
+FROM: main_NodeBlock_end;
+assume(vres.0 sge 0);
+TO: main_LeafBlock5;
+
+FROM: main_LeafBlock;
+TO: main_LeafBlock_end;
+
+FROM: main_LeafBlock_end;
+assume(vres.0 == -1);
+TO: main_bb6;
+
+FROM: main_LeafBlock_end;
+assume(vres.0 != -1);
+TO: main_NewDefault;
+
+FROM: main_bb6;
+var__temp_vmatroska.0 := 1;
+TO: main_bb5;
+
+FROM: main_LeafBlock5;
+TO: main_LeafBlock5_end;
+
+FROM: main_LeafBlock5_end;
+assume(vres.0 == 0);
+TO: main_bb7;
+
+FROM: main_LeafBlock5_end;
+assume(vres.0 != 0);
+TO: main_NewDefault;
+
+FROM: main_bb7;
+v9 := nondet();
+v10 := flag;
+v11 := flag;
+v12 := v11 + 1;
+flag := v12;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v9 == 1);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(v9 != 1);
+TO: main_bb12;
+
+FROM: main_bb8;
+var__temp_v__retres.0.i1 := -1;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v10 slt 100);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v10 sge 100);
+TO: main_res_return_slice_1.exit2;
+
+FROM: main_bb9;
+v14 := nondet();
+var__temp_v__retres.0.i1 := v14;
+TO: main_res_return_slice_1.exit2;
+
+FROM: main_res_return_slice_1.exit2;
+v__retres.0.i1 := var__temp_v__retres.0.i1;
+TO: main_res_return_slice_1.exit2_v15;
+
+FROM: main_res_return_slice_1.exit2_v15;
+assume(v__retres.0.i1 slt 0);
+v15 := 1;
+TO: main_res_return_slice_1.exit2_sv15;
+
+FROM: main_res_return_slice_1.exit2_v15;
+assume(v__retres.0.i1 sge 0);
+v15 := 0;
+TO: main_res_return_slice_1.exit2_sv15;
+
+FROM: main_res_return_slice_1.exit2_sv15;
+v16 := zero_extend(1, 32, v15);
+var__temp_vres.0 := v16;
+TO: main_res_return_slice_1.exit2_end;
+
+FROM: main_res_return_slice_1.exit2_end;
+assume(v16 != 0);
+TO: main_res_return_slice_1.exit;
+
+FROM: main_res_return_slice_1.exit2_end;
+assume(v16 == 0);
+TO: main_bb10;
+
+FROM: main_bb10;
+v18 := flag;
+v19 := flag;
+v20 := v19 + 1;
+flag := v20;
+var__temp_v__retres.0.i3 := -1;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v18 slt 100);
+TO: main_bb11;
+
+FROM: main_bb10_end;
+assume(v18 sge 100);
+TO: main_res_return_slice_1.exit4;
+
+FROM: main_bb11;
+v22 := nondet();
+var__temp_v__retres.0.i3 := v22;
+TO: main_res_return_slice_1.exit4;
+
+FROM: main_res_return_slice_1.exit4;
+v__retres.0.i3 := var__temp_v__retres.0.i3;
+TO: main_res_return_slice_1.exit4_v23;
+
+FROM: main_res_return_slice_1.exit4_v23;
+assume(v__retres.0.i3 == 0);
+v23 := 1;
+TO: main_res_return_slice_1.exit4_sv23;
+
+FROM: main_res_return_slice_1.exit4_v23;
+assume(v__retres.0.i3 != 0);
+v23 := 0;
+TO: main_res_return_slice_1.exit4_sv23;
+
+FROM: main_res_return_slice_1.exit4_sv23;
+v24 := zero_extend(1, 32, v23);
+TO: main_res_return_slice_1.exit4_v.;
+FROM: main_res_return_slice_1.exit4_v.;
+assume(v24 != 0);
+v. := 1;
+TO: main_res_return_slice_1.exit4_sv.;
+
+FROM: main_res_return_slice_1.exit4_v.;
+assume(v24 == 0);
+v. := v24;
+TO: main_res_return_slice_1.exit4_sv.;
+
+FROM: main_res_return_slice_1.exit4_sv.;
+var__temp_vres.0 := v.;
+TO: main_res_return_slice_1.exit;
+
+FROM: main_bb12;
+var__temp_vres.0 := -1;
+TO: main_bb12_end;
+
+FROM: main_bb12_end;
+assume(v10 slt 100);
+TO: main_bb13;
+
+FROM: main_bb12_end;
+assume(v10 sge 100);
+TO: main_res_return_slice_1.exit;
+
+FROM: main_bb13;
+v26 := nondet();
+var__temp_vres.0 := v26;
+TO: main_res_return_slice_1.exit;
+
+FROM: main_NewDefault;
+var__temp_vmatroska.0 := vmatroska.0;
+TO: main_bb5;
+
+FROM: main_bb14;
+TO: main_bb14_ret;
+

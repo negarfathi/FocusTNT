@@ -1,0 +1,51 @@
+NODE   3: <3> PSNodeType::ENTRY (points-to size: 0)
+NODE   4:   %tmp = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %tmp = alloca i32, align 4 + 0
+NODE   5: <5> PSNodeType::CALL (points-to size: 0)
+NODE   6: <6> PSNodeType::ENTRY (points-to size: 0)
+NODE   7:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE   8:   %num = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %num = alloca i32, align 4 + 0
+NODE   9:   %0 = load i32, i32* @flag, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  10:   store i32 0, i32* %__retres, align 4 (points-to size: 0)
+NODE  11:   %7 = load i32, i32* %__retres, align 4 (points-to size: 2)
+    -> null + 0
+    -> unknown + Offset::UNKNOWN
+NODE  12:   ret i32 %7 (points-to size: 0)
+NODE  13:   %1 = load i32, i32* @count, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  14:   store i32 0, i32* %__retres, align 4 (points-to size: 0)
+NODE  15:   store i32 0, i32* %num, align 4 (points-to size: 0)
+NODE  16:   %2 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> null + 0
+NODE  17:   store i32 -1, i32* %__retres, align 4 (points-to size: 0)
+NODE  18:   %3 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> null + 0
+NODE  19:   %rem = srem i32 %3, 1000 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  20:   store i32 %rem, i32* %num, align 4 (points-to size: 0)
+NODE  21:   %4 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  22:   %5 = load i32, i32* @count, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  23:   %inc = add nsw i32 %5, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  24:   store i32 %inc, i32* @count, align 4 (points-to size: 0)
+NODE  25:   %6 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  26:   store i32 %6, i32* %__retres, align 4 (points-to size: 0)
+NODE  27:   store i32 1, i32* @flag, align 4 (points-to size: 0)
+NODE  28:   store i32 0, i32* %__retres, align 4 (points-to size: 0)
+NODE  29: read_slice_1 (points-to size: 1)
+    -> read_slice_1 + 0
+NODE  30: main (points-to size: 1)
+    -> main + 0
+NODE  31:   %call = call i32 @read_slice_1() (points-to size: 0)
+NODE  32:   store i32 %call, i32* %tmp, align 4 (points-to size: 0)
+NODE  33:   %0 = load i32, i32* %tmp, align 4 (points-to size: 0)
+NODE  34:   ret void (points-to size: 0)

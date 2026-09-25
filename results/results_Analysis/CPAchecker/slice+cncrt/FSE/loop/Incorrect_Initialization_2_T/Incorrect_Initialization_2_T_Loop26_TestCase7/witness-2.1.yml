@@ -1,0 +1,66 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "c69b7f9d-e621-31ff-a2ed-da1182db36c6"
+    creation_time: "2025-12-20T11:01:36Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c: "b0ff1930f1ecbef9f69bc0d0f7591a14a3bf451849238e7ba0da267979c43f6d"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+        line: 38
+        column: 5
+        function: "main"
+      value: "(((matroska == (5) && (res == (0) && tmpVar0 == (1)))) || (((matroska == (5) && (res == (10) && tmpVar0 == (1)))) || ((matroska == (5) && (res == (-1) && tmpVar0 == (1))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+        line: 34
+        column: 3
+        function: "main"
+      value: "(((matroska == (5) && (res == (10) && tmpVar0 == (1)))) || (((matroska == (1) && (res == (-1) && tmpVar0 == (1)))) || matroska == (5)))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+        line: 29
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+        line: 5
+        column: 1
+        function: "matroska_deliver_packet_slice_1"
+      requires: "(q == (5) || q == (1))"
+      ensures: "(!(\\old(q) == (5)) || (\\result == (1))) && (!(\\old(q) == (1)) || (\\result == (0)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop26_TestCase7.c"
+        line: 13
+        column: 1
+        function: "res_return_slice_1"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (10))) && (!(1) || (\\result == (-1)))"
+      format: "acsl_expression"

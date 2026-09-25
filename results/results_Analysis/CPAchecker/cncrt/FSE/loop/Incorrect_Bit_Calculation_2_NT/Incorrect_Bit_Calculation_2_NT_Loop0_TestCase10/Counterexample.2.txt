@@ -1,0 +1,16 @@
+none:	N1 -{INIT GLOBAL VARS}-> N11
+line 1:	N11 -{int __VERIFIER_nondet_int();}-> N12
+lines 15-25:	N12 -{int main();}-> N13
+none:	N13 -{Function start dummy edge}-> N2
+line 17:	N2 -{int a0 = 0;}-> N3
+	a0 == 0;
+line 18:	N3 -{int a1 = 0;}-> N4
+	a1 == 0;
+line 19:	N4 -{while}-> N5
+line 19:	N5 -{[(a0 & 1) == 0]}-> N6
+	a0 & 1 == 0
+line 21:	N6 -{a0 = (a1 << 31) | (a0 >> 1);}-> N8
+	a0 == 0;
+line 22:	N8 -{a1 = a1 >> 1;}-> N9
+	a1 == 0;
+none:	N9 -{}-> N5

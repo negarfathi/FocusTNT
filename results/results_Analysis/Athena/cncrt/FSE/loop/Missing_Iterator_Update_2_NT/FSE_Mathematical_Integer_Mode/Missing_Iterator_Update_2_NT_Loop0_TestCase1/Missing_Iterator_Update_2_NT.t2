@@ -1,0 +1,43 @@
+///*** 1_main ***///
+START: main_mdb_cursor_get.exit;
+TYPE dummy: bv(32);
+
+
+FROM: main_mdb_cursor_get.exit;
+flag := 0;
+v5 := flag;
+v6 := v5 + 1;
+flag := v6;
+TO: main_bb3;
+
+FROM: main_bb3;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(1 <= 0);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(0 <= 0);
+TO: main_bb5;
+
+FROM: main_bb4;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume(0 <= 0);
+TO: main_bb3;
+
+FROM: main_bb4_end;
+assume(1 <= 0);
+TO: main_mdb_cursor_get.exit1;
+
+FROM: main_mdb_cursor_get.exit1;
+v9 := flag;
+v10 := v9 + 1;
+flag := v10;
+TO: main_bb3;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

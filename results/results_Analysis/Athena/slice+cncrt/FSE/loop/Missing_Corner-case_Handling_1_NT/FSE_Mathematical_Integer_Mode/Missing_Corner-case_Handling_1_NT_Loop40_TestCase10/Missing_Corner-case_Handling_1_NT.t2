@@ -1,0 +1,43 @@
+///*** 1_main ***///
+START: main_bb6;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb6;
+flag := 0;
+count := 0;
+v9 := flag;
+TO: main_bb7;
+
+FROM: main_bb7;
+v11 := count;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume((v9 == 1) || (v11 sgt 100));
+TO: main_read_slice_1.exit;
+
+FROM: main_bb7_end;
+assume((v9 != 1) && (v11 sle 100));
+TO: main_bb8;
+
+FROM: main_bb8;
+v13 := count;
+v14 := v13 + 1;
+count := v14;
+TO: main_read_slice_1.exit;
+
+FROM: main_read_slice_1.exit;
+TO: main_read_slice_1.exit_end;
+
+FROM: main_read_slice_1.exit_end;
+assume(1 <= 0);
+TO: main_bb9;
+
+FROM: main_read_slice_1.exit_end;
+assume(0 <= 0);
+TO: main_bb7;
+
+FROM: main_bb9;
+TO: main_bb9_ret;
+

@@ -1,0 +1,182 @@
+YES
+proof of /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase4.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 95 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 663 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 182 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 77 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase4.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase4.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 5, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 30, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 40, %3
+		br %4
+	4:
+		%5 = load %1
+		%6 = load %2
+		%7 = icmp sle %5 %6
+		br %7, %8, %17
+	8:
+		%9 = load %1
+		%10 = mul i32 %9, 2
+		store %10, %1
+		%11 = load %1
+		%12 = load %3
+		%13 = icmp sgt %11 %12
+		br %13, %14, %16
+	14:
+		%15 = load %3
+		store %15, %1
+		br %16
+	16:
+		br %4
+	17:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 15 rulesP rules:
+f_130(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) -> f_131(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) :|: 0 = 0
+f_131(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) -> f_132(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) :|: v27 <= 30 && 5 <= v24 && v24 <= 15
+f_132(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) -> f_134(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) :|: 0 = 0
+f_134(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) -> f_136(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) :|: TRUE
+f_136(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 15, 10, 4) -> f_138(v21, v22, v23, v27, 30, 1, 40, 0, v30, v31, v32, 3, 10, 4) :|: 0 = 0
+f_138(v21, v22, v23, v27, 30, 1, 40, 0, v30, v31, v32, 3, 10, 4) -> f_139(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) :|: v33 = 2 * v27 && 20 <= v33 && v33 <= 60
+f_139(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) -> f_140(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) :|: TRUE
+f_140(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) -> f_141(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) :|: 0 = 0
+f_141(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) -> f_142(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) :|: 0 = 0
+f_142(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 4, 20, 60) -> f_144(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) :|: v33 <= 40 && 10 <= v27 && v27 <= 20
+f_144(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) -> f_146(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) :|: 0 = 0
+f_146(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) -> f_148(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) :|: TRUE
+f_148(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) -> f_150(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) :|: TRUE
+f_150(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 10, 20, 4) -> f_129(v21, v22, v23, v27, 30, 1, v33, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) :|: TRUE
+f_129(v21, v22, v23, v24, 30, 1, v27, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) -> f_130(v21, v22, v23, v27, 30, 1, v24, 40, 0, v30, v31, v32, 3, 2, 5, 20, 10, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_130(v21:0, v22:0, v23:0, v27:0, 30, 1, v24:0, 40, 0, v30:0, v31:0, v32:0, 3, 2, 5, 20, 10, 4) -> f_130(v21:0, v22:0, v23:0, 2 * v27:0, 30, 1, v27:0, 40, 0, v30:0, v31:0, v32:0, 3, 2, 5, 20, 10, 4) :|: v24:0 > 4 && v27:0 < 31 && v24:0 < 16 && 2 * v27:0 > 19 && 61 > 2 * v27:0 && v27:0 > 9 && v27:0 < 21 && 41 > 2 * v27:0
+Filtered unneeded arguments:
+   f_130(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18) -> f_130(x4, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_130(v27:0, v24:0) -> f_130(2 * v27:0, v27:0) :|: v27:0 < 31 && v24:0 > 4 && v24:0 < 16 && 2 * v27:0 > 19 && 61 > 2 * v27:0 && v27:0 > 9 && 41 > 2 * v27:0 && v27:0 < 21
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_130(v27:0, v24:0) -> f_130(2 * v27:0, v27:0) :|: v27:0 < 31 && v24:0 > 4 && v24:0 < 16 && 2 * v27:0 > 19 && 61 > 2 * v27:0 && v27:0 > 9 && 41 > 2 * v27:0 && v27:0 < 21
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_130(v27:0:0, v24:0:0) -> f_130(2 * v27:0:0, v27:0:0) :|: 41 > 2 * v27:0:0 && v27:0:0 < 21 && v27:0:0 > 9 && 61 > 2 * v27:0:0 && 2 * v27:0:0 > 19 && v24:0:0 < 16 && v24:0:0 > 4 && v27:0:0 < 31
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_130 ] = -1/5*f_130_1 + 1/5*f_130_2
+
+The following rules are decreasing:
+f_130(v27:0:0, v24:0:0) -> f_130(2 * v27:0:0, v27:0:0) :|: 41 > 2 * v27:0:0 && v27:0:0 < 21 && v27:0:0 > 9 && 61 > 2 * v27:0:0 && 2 * v27:0:0 > 19 && v24:0:0 < 16 && v24:0:0 > 4 && v27:0:0 < 31
+
+The following rules are bounded:
+f_130(v27:0:0, v24:0:0) -> f_130(2 * v27:0:0, v27:0:0) :|: 41 > 2 * v27:0:0 && v27:0:0 < 21 && v27:0:0 > 9 && 61 > 2 * v27:0:0 && 2 * v27:0:0 > 19 && v24:0:0 < 16 && v24:0:0 > 4 && v27:0:0 < 31
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase4.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase4.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 4481 milliseconds

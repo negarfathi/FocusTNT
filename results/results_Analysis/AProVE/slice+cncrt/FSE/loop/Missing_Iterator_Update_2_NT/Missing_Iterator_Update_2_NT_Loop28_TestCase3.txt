@@ -1,0 +1,212 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop28_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 89 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1050 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 238 ms]
+(8) IntTRS
+(9) PolynomialOrderProcessor [EQUIVALENT, 17 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop28_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop28_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "mdb_cursor_get_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 0, %2
+		%3 = load @flag
+		%4 = add i32 %3, 1
+		store %4, @flag
+		%5 = load @flag
+		%6 = icmp sgt %5 1000
+		br %6, %7, %8
+	7:
+		store 1, %1
+		br %14
+	8:
+		%9 = load %2
+		%10 = icmp sge %9 0
+		br %10, %11, %12
+	11:
+		store 0, %1
+		br %13
+	12:
+		store 1, %1
+		br %13
+	13:
+		br %14
+	14:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%15 = load %1
+		ret %15
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 39
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		%3 = call i32 @mdb_cursor_get_slice_1()
+		store %3, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		br %4
+	4:
+		%5 = load %1
+		%6 = icmp eq %5 0
+		br %6, %7, %13
+	7:
+		%8 = load %2
+		%9 = icmp sle %8 0
+		br %9, %10, %11
+	10:
+		br %4
+	11:
+		%12 = call i32 @mdb_cursor_get_slice_1()
+		store %12, %1
+		br %4
+	13:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 31 rulesP rules:
+f_235(v56, v65, v61, v57, v62, v58, v63, v66, v64, 0, 1, 3, 4, 1001) -> f_236(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) :|: 1 <= v67 && v68 = 3 + v67 && 4 <= v68
+f_236(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) -> f_237(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) :|: TRUE
+f_237(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) -> f_238(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) :|: TRUE
+f_238(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) -> f_239(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) :|: TRUE
+f_239(v56, v65, v67, v61, v57, v62, v58, v63, v66, v68, v64, 0, 1, 3, 4, 1001) -> f_240(v56, v65, v67, v64, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001) :|: 0 = 0
+f_240(v56, v65, v67, v64, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001) -> f_241(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) :|: v69 = 1 + v64 && v69 <= 1002
+f_241(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) -> f_242(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) :|: TRUE
+f_242(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) -> f_243(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) :|: 0 = 0
+f_243(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 1001, 1002) -> f_245(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 999, 1000) :|: v69 <= 1000 && v64 <= 999
+f_245(v56, v65, v67, v64, v69, v61, v57, v62, v58, v63, v66, v68, 0, 1, 3, 4, 999, 1000) -> f_247(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) :|: 0 = 0
+f_247(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) -> f_249(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) :|: TRUE
+f_249(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) -> f_251(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) :|: 0 = 0
+f_251(v56, v65, v67, v64, v69, 0, v61, v57, v62, v58, v63, v66, v68, 1, 3, 4, 999, 1000) -> f_253(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: 0 = 0
+f_253(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_255(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: TRUE
+f_255(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_257(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: TRUE
+f_257(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_259(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: TRUE
+f_259(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_261(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: TRUE
+f_261(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_263(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: TRUE
+f_263(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_265(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) :|: 0 = 0
+f_265(v56, v65, v67, v64, v69, 0, 1, v61, v57, v62, v58, v63, v66, v68, 3, 4, 999, 1000) -> f_267(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: 0 = 0
+f_267(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_269(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: TRUE
+f_269(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_270(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: TRUE
+f_270(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_271(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: 0 = 0
+f_271(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_272(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: 0 = 0
+f_272(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_273(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: TRUE
+f_273(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_274(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: 0 = 0
+f_274(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_275(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: 0 = 0
+f_275(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_276(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) :|: TRUE
+f_276(v56, v57, v58, 0, 1, v61, v62, v63, v69, 3, 4, 1000) -> f_277(v56, v61, v57, v62, v58, v63, 1, v69, 0, 3, 4, 1000) :|: TRUE
+f_277(v56, v61, v57, v62, v58, v63, 1, v69, 0, 3, 4, 1000) -> f_234(v56, v61, v57, v62, v58, v63, v69, 0, 1, 3, 4, 1001) :|: TRUE
+f_234(v56, v61, v57, v62, v58, v63, v64, 0, 1, 3, 4, 1001) -> f_235(v56, v65, v61, v57, v62, v58, v63, v66, v64, 0, 1, 3, 4, 1001) :|: 1 <= v65 && v66 = 3 + v65 && 4 <= v66
+Combined rules. Obtained 1 rulesP rules:
+f_235(v56:0, v65:0, v61:0, v57:0, v62:0, v58:0, v63:0, v66:0, v64:0, 0, 1, 3, 4, 1001) -> f_235(v56:0, v65:1, v61:0, v57:0, v62:0, v58:0, v63:0, 3 + v65:1, 1 + v64:0, 0, 1, 3, 4, 1001) :|: v67:0 > 0 && v64:0 < 1002 && v64:0 < 1000 && v65:1 > 0
+Filtered unneeded arguments:
+   f_235(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14) -> f_235(x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_235(v64:0) -> f_235(1 + v64:0) :|: v64:0 < 1002 && v64:0 < 1000
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_235(v64:0) -> f_235(1 + v64:0) :|: v64:0 < 1002 && v64:0 < 1000
+
+----------------------------------------
+
+(9) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_235(x)] = 999 - x
+
+The following rules are decreasing:
+f_235(v64:0) -> f_235(1 + v64:0) :|: v64:0 < 1002 && v64:0 < 1000
+The following rules are bounded:
+f_235(v64:0) -> f_235(1 + v64:0) :|: v64:0 < 1002 && v64:0 < 1000
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop28_TestCase3.c:19:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop28_TestCase3.c:19:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 4572 milliseconds

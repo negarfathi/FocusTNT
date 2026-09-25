@@ -1,0 +1,66 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "e6cbdc82-80dd-36e3-879e-ed287fb7a1ad"
+    creation_time: "2025-12-20T02:35:23Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c: "f4d4956ff3570d58f2eabb9c1e9b6bc67417fa3ad57a0572a5abd2db85261bfa"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+        line: 25
+        column: 5
+        function: "main"
+      value: "(((matroska == (8) && res == (6))) || (((matroska == (8) && res == (0))) || ((matroska == (1) && res == (-1)))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+        line: 28
+        column: 9
+        function: "main"
+      value: "(((matroska == (8) && res == (6))) || (((matroska == (8) && res == (0))) || ((matroska == (8) && res == (-1)))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+        line: 15
+        column: 1
+        function: "res_return"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (6))) && (!(1) || (\\result == (-1)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+        line: 7
+        column: 1
+        function: "matroska_deliver_packet"
+      requires: "(q == (8) || q == (1))"
+      ensures: "(!(\\old(q) == (8)) || (\\result == (1))) && (!(\\old(q) == (1)) || (\\result == (0)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_T_Loop0_TestCase9.c"
+        line: 21
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "f4607988-8f6d-35ca-b861-78c5f20a6a6d"
+    creation_time: "2025-12-20T17:19:40Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop13_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop13_TestCase3.c: "c75fe5c28c286c37f38dbde2d8e3ad157bf61b4a28f5c9f5362458334d26365c"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop13_TestCase3.c"
+        line: 8
+        column: 3
+        function: "main"
+      value: "((n == (0U) || n == (32U)) || (n == (16U) || n == (48U)))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_4_T_Loop13_TestCase3.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

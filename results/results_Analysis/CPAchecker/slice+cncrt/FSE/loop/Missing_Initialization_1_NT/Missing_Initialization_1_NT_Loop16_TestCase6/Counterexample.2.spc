@@ -1,0 +1,84 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG4;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG4 :
+    MATCH "void main(void)" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "int res = 0;" -> ASSUME {res == (0);} GOTO ARG13;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG13 :
+    MATCH "int pkt = 0;" -> ASSUME {pkt == (0);} GOTO ARG14;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG14 :
+    MATCH "" -> GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "[pkt < 10]" -> ASSUME {pkt == (0);} GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "" -> GOTO ARG25;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG25 :
+    MATCH "[res == 0]" -> ASSUME {res == (0);} GOTO ARG26;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG26 :
+    MATCH "res = 3;" -> ASSUME {res == (3);} GOTO ARG27;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG27 :
+    MATCH "pkt ++;" -> ASSUME {__CPAchecker_TMP_0 == (0);} GOTO ARG28;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG28 :
+    MATCH "pkt ++;" -> ASSUME {pkt == (1);} GOTO ARG29;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG29 :
+    MATCH "pkt ++;" -> GOTO ARG30;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG30 :
+    MATCH "" -> GOTO ARG31;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG31 :
+    MATCH "[!(res == 0)]" -> ASSUME {res == (3);} GOTO ARG48;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG48 :
+    MATCH "" -> GOTO ARG50;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG50 :
+    MATCH "[pkt < 10]" -> ASSUME {pkt == (1);} GOTO ARG51;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG51 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG54 :
+    TRUE -> STOP;
+
+END AUTOMATON

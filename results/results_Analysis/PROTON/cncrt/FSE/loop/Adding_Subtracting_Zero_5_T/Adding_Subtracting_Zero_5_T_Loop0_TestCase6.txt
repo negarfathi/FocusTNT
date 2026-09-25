@@ -1,0 +1,147 @@
+TOOL_DIR is /opt/term/proton
+BM_DIR = /tmp/PROTON-benchmark.9pnikh
+
+Input File is : Adding_Subtracting_Zero_5_T_Loop0_TestCase6.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Rewrite Buffer is not NULL
+
+Finished Rewriting  extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 7a611ab32209fb3b79d662110582bc04e1c2c8b1
+URL: https://github.com/gogins/csound-android/commit/7a611ab32209fb3b79d662110582bc04e1c2c8b1
+Project Name: csound-android
+License: GPL-2.0
+termination: true
+*/
+typedef struct NNode{
+    struct NNode * nxtact;
+}INSDS;
+
+
+INSDS * initLink(int n){
+    INSDS* head=(INSDS*)malloc(sizeof(INSDS));
+    head->nxtact=head;
+    INSDS* cyclic=head;
+
+    int i;
+    for (i=2; i<=n; i++) {
+        INSDS * body=(INSDS*)malloc(sizeof(INSDS));
+        body->nxtact=body;
+        cyclic->nxtact=body;
+        cyclic=cyclic->nxtact;
+    }
+    cyclic->nxtact=cyclic;
+    return head;
+}
+
+int main()
+{
+    int num = 1;
+    {if( num <= 0 || num > 65534 )
+        {return 0;}}
+    INSDS* list = initLink( num );
+    INSDS* ip = list;
+    while( ip != 0 )
+    {
+        INSDS *nxt = ip->nxtact;
+        {if( ip == nxt )
+            {break;}}
+        ip = nxt;
+    }
+    return 0;
+}
+./proton: line 26:    91 Aborted                 bracer -in $FILE_NAME -c
+
+Input File is : Adding_Subtracting_Zero_5_T_Loop0_TestCase6_braced.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Finished call to function ParseAST   
+
+ Rewrite Buffer is Not NULL 
+
+Finished Rewriting 
+typedef enum {myFalse, myTrue} myBool; myBool __VERIFIER_nondet_myBool(void);
+extern void __VERIFIER_reached_control(int, char const *);
+extern void __VERIFIER_loop_head(int, char const *);
+extern void __VERIFIER_control_true(int, char const *);
+extern void __VERIFIER_control_false(int, char const *);
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 7a611ab32209fb3b79d662110582bc04e1c2c8b1
+URL: https://github.com/gogins/csound-android/commit/7a611ab32209fb3b79d662110582bc04e1c2c8b1
+Project Name: csound-android
+License: GPL-2.0
+termination: true
+*/
+typedef struct NNode{
+    struct NNode * nxtact;
+}INSDS;
+
+
+INSDS * initLink(int n){
+    INSDS* head=(INSDS*)malloc(sizeof(INSDS));
+    head->nxtact=head;
+    INSDS* cyclic=head;
+
+    int i;
+   myBool pStored0 = myFalse; __VERIFIER_reached_control(20, __func__);
+ for (i=2; i<=n; i++) { __VERIFIER_loop_head(20, __func__);
+printf("CBMC Instrumentation @ line20");myBool flag=__VERIFIER_nondet_myBool();static int oi;static int on;if(pStored0){__CPROVER_assert(!(oi==i && on==n),"recurrent state found");} if(flag){oi=i;on=n;pStored0=myTrue;} 
+        INSDS * body=(INSDS*)malloc(sizeof(INSDS));
+        body->nxtact=body;
+        cyclic->nxtact=body;
+        cyclic=cyclic->nxtact;
+    }
+    cyclic->nxtact=cyclic;
+    return head;
+}
+
+int main()
+{
+    int num = 1;
+    { __VERIFIER_reached_control(33, __func__);
+if( num <= 0 || num > 65534 )
+        { __VERIFIER_control_true(34, __func__);
+return 0;}}
+    INSDS* list = initLink( num );
+    INSDS* ip = list;
+   myBool pStored1 = myFalse; __VERIFIER_reached_control(38, __func__);
+ while( ip != 0 )
+    { __VERIFIER_loop_head(38, __func__);
+printf("CBMC Instrumentation @ line38");myBool flag=__VERIFIER_nondet_myBool();static int onum;if(pStored1){__CPROVER_assert(!(onum==num),"recurrent state found");} if(flag){onum=num;pStored1=myTrue;} 
+        INSDS *nxt = ip->nxtact;
+        { __VERIFIER_reached_control(40, __func__);
+if( ip == nxt )
+            { __VERIFIER_control_true(41, __func__);
+break;}}
+        ip = nxt;
+    }
+    return 0;
+}
+./proton: line 26:   103 Aborted                 instrumenter -in *braced.c -c
+Adding_Subtracting_Zero_5_T_Loop0_TestCase6_braced_instrumented.c
+NTFILE is Adding_Subtracting_Zero_5_T_Loop0_TestCase6_braced_instrumented.c
+
+* *                 CBMC 5.95.0 (n/a) 64-bit                * *
+* *                 Copyright (C) 2001-2018                 * *
+* *              Daniel Kroening, Edmund Clarke             * *
+* * Carnegie Mellon University, Computer Science Department * *
+* *                  kroening@kroening.com                  * *
+* *        Protected in part by U.S. patent 7,225,417       * *
+* *  *****************************************************  * *
+* *                 Built with Llama                        * *
+* *  *****************************************************  * *
+
+NT-CHECKRESULT. GLRV=0. Z3RV=1. NTRES=0
+T-CHECKRESULT. TRES=0
+NTRES=0 TRES=0 for Adding_Subtracting_Zero_5_T_Loop0_TestCase6.c
+FILE=Adding_Subtracting_Zero_5_T_Loop0_TestCase6_braced_instrumented.c GLRES=0 Z3RES=1 NTRES=0 TRES=0 TNT-RESULT=TRUE EXITCODE=0
+TRUE
+Runtime: 7481 milliseconds

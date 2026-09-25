@@ -152,7 +152,7 @@ int runAnalyzer(int argc, char *argv[]) {
         std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
-    std::filesystem::path excelPath = toolDirectory.parent_path() / (benchmarkName + " - Evaluation Results.xlsx");
+    std::filesystem::path excelPath = toolDirectory.parent_path() / ("results_" + benchmarkName + ".xlsx");
 
     std::vector<LoopDescriptor> loops;
     clang::tooling::runToolOnCode(std::make_unique<slicer::Action>(loops), sourceCodeFile);
@@ -222,7 +222,13 @@ int runInputGenerator(int argc, char *argv[]) {
     sourceCodeDirectory = sourceCodePath.parent_path();
 
     std::string sourceCodeClass;
-    if (sourceCodeName.ends_with("_NT")) {
+    if (sourceCodeName == "Incorrect_Initialization_2_T" || sourceCodeName == "Undefined_Behavior_1" || sourceCodeName == "Undefined_Behavior_2" || sourceCodeName == "Undefined_Behavior_3") {
+        sourceCodeClass = "NT";
+    }
+    else if (sourceCodeName == "Signed_Overflow_Error_1_NT") {
+        sourceCodeClass = "T";
+    }
+    else if (sourceCodeName.ends_with("_NT")) {
         sourceCodeClass = "NT";
     }
     else if (sourceCodeName.ends_with("_T")) {
@@ -230,11 +236,6 @@ int runInputGenerator(int argc, char *argv[]) {
     }
     else {
         std::cout << "Source code file name must end with _T or _NT.\n";
-        return 1;
-    }
-
-    if (numInputs <= 0 || (sourceCodeClass == "NT" && numInputs % 2 != 0)) {
-        std::cout << "--num-inputs must be greater than 0 and must be even for NT programs.\n";
         return 1;
     }
 

@@ -1,0 +1,152 @@
+///*** 1_main ***///
+START: main_bb5;
+
+FROM: main_bb5;
+vmcelog_entry := nondet();
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(0 <= 0);
+TO: main_bb12;
+
+FROM: main_bb5_end;
+assume(1 <= 0);
+TO: main_bb6;
+
+FROM: main_bb6;
+var__temp_vi.0 := 0;
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit;
+vi.0 := var__temp_vi.0;
+TO: main_wrap_around.exit_end;
+
+FROM: main_wrap_around.exit_end;
+assume(vi.0 < 1001);
+TO: main_bb7;
+
+FROM: main_wrap_around.exit_end;
+assume(vi.0 >= 1001);
+TO: main_bb11;
+
+FROM: main_bb7;
+v16 := vi.0 + 1;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v16 > 2147483647);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(v16 <= 2147483647);
+TO: main_bb9;
+
+FROM: main_bb8;
+v18 := v16 - 2147483647;
+v19 := v18 - 1;
+v20 := v19 % 4294967296;
+v21 := -2147483648 + v20;
+var__temp_vi.0 := v21;
+TO: main_wrap_around.exit;
+
+FROM: main_bb9;
+var__temp_vi.0 := v16;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v16 < -2147483648);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v16 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb10;
+v23 := -2147483648 - v16;
+v24 := v23 - 1;
+v25 := v24 % 4294967296;
+v26 := 2147483647 - v25;
+var__temp_vi.0 := v26;
+TO: main_wrap_around.exit;
+
+FROM: main_bb11;
+var__temp_ventry.0 := 5;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(1 <= 0);
+TO: main_bb12;
+
+FROM: main_bb11_end;
+assume(0 <= 0);
+TO: main_wrap_around.exit2;
+
+FROM: main_wrap_around.exit2;
+ventry.0 := var__temp_ventry.0;
+TO: main_wrap_around.exit2_end;
+
+FROM: main_wrap_around.exit2_end;
+assume(ventry.0 >= 1001);
+TO: main_bb12;
+
+FROM: main_wrap_around.exit2_end;
+assume(ventry.0 < 1001);
+TO: main_bb13;
+
+FROM: main_bb12;
+TO: main_bb12_ret;
+
+FROM: main_bb13;
+v29 := ventry.0;
+v30 := select_array(vmcelog_entry, v29);
+var__temp_ventry.0 := ventry.0;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v30 != 0);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v30 == 0);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb14;
+v32 := ventry.0 + 1;
+TO: main_bb14_end;
+
+FROM: main_bb14_end;
+assume(v32 > 2147483647);
+TO: main_bb15;
+
+FROM: main_bb14_end;
+assume(v32 <= 2147483647);
+TO: main_bb16;
+
+FROM: main_bb15;
+v34 := v32 - 2147483647;
+v35 := v34 - 1;
+v36 := v35 % 4294967296;
+v37 := -2147483648 + v36;
+var__temp_ventry.0 := v37;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb16;
+var__temp_ventry.0 := v32;
+TO: main_bb16_end;
+
+FROM: main_bb16_end;
+assume(v32 < -2147483648);
+TO: main_bb17;
+
+FROM: main_bb16_end;
+assume(v32 >= -2147483648);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb17;
+v39 := -2147483648 - v32;
+v40 := v39 - 1;
+v41 := v40 % 4294967296;
+v42 := 2147483647 - v41;
+var__temp_ventry.0 := v42;
+TO: main_wrap_around.exit2;
+

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "049d0cda-1b5b-3589-bcef-20e50fb7febe"
+    creation_time: "2025-12-20T08:12:23Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_NT_Loop0_TestCase4.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_NT_Loop0_TestCase4.c: "6862be6f67fe7649bb02a23259c31cd16020e2688ee11e730ea60d2d9c755f7f"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_NT_Loop0_TestCase4.c"
+        line: 19
+        column: 5
+        function: "main"
+      value: "(len == (0U) && (newbufsize == (1024U) && pathlen == (1000U)))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_NT_Loop0_TestCase4.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

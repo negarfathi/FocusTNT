@@ -1,0 +1,391 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_T_Loop0_TestCase5.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 100 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 378 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+    (7) SCC2IRS [SOUND, 130 ms]
+    (8) IntTRS
+        (9) IntTRSNonPeriodicNontermProof [COMPLETE, 133 ms]
+        (10) NO
+    (11) SCC2IRS [SOUND, 44 ms]
+    (12) IntTRS
+        (13) IntTRSCompressionProof [EQUIVALENT, 6 ms]
+        (14) IntTRS
+        (15) IntTRSNonPeriodicNontermProof [COMPLETE, 77 ms]
+        (16) NO
+(17) SEGraph to IRS [SOUND, 248 ms]
+(18) IntTRS
+    (19) IRSToKoat [EQUIVALENT, 0 ms]
+    (20) Koat Problem
+    (21) KoAT2 [EQUIVALENT, 219 ms]
+    (22) MAYBE
+(23) SEGraph to IRS [SOUND, 229 ms]
+(24) IntTRS
+    (25) IRSNoOverapproximation [EQUIVALENT, 0 ms]
+    (26) MAYBE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_T_Loop0_TestCase5.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_T_Loop0_TestCase5.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i8, align 1
+		%3 = alloca i8, align 1
+		%4 = alloca i8, align 1
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i8 %2)
+		store 25, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i8 %3)
+		store 12, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i8 %4)
+		%5 = load %2
+		store %5, %4
+		br %6
+	6:
+		%7 = load %4
+		%8 = zext i8 %7 to i32
+		%9 = load %3
+		%10 = zext i8 %9 to i32
+		%11 = icmp ne %8 %10
+		br %11, %12, %16
+	12:
+		br %13
+	13:
+		%14 = load %4
+		%15 = add i8 %14, 1
+		store %15, %4
+		br %6
+	16:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 12 rulesP rules:
+f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) -> f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) -> f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: v43 = 1 + v40 && 27 <= v43
+f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_138(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4) :|: TRUE
+f_138(v32, v33, v34, v35, 25, v37, 12, 1, v40, v41, 0, 3, 26, 4) -> f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_139(v32:0, v33:0, v34:0, v35:0, 25, v40:0, v37:0, 12, 1, v41:0, 0, 3, 26, 4) -> f_139(v32:0, v33:0, v34:0, v35:0, 25, 1 + v40:0, v40:0, 12, 1, v41:0, 0, 3, 26, 4) :|: v40:0 > 25
+Filtered unneeded arguments:
+   f_139(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14) -> f_139(x6)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_139(v40:0) -> f_139(1 + v40:0) :|: v40:0 > 25
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_139(v40:0) -> f_139(1 + v40:0) :|: v40:0 > 25
+
+----------------------------------------
+
+(9) IntTRSNonPeriodicNontermProof (COMPLETE)
+Normalized system to the following form:
+f(pc, v40:0) -> f(1, 1 + v40:0) :|: pc = 1 && v40:0 > 25
+Proved unsatisfiability of the following formula, indicating that the system is never left after entering:
+(((run2_0 = ((1 * 1)) and run2_1 = ((1 * 1) + (run1_1 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and ((run1_1 * 1)) > ((1 * 25)))) and !(((run2_0 * 1)) = ((1 * 1)) and ((run2_1 * 1)) > ((1 * 25))))
+Proved satisfiability of the following formula, indicating that the system is entered at least once:
+((run2_0 = ((1 * 1)) and run2_1 = ((1 * 1) + (run1_1 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and ((run1_1 * 1)) > ((1 * 25))))
+
+----------------------------------------
+
+(10)
+NO
+
+----------------------------------------
+
+(11) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 12 rulesP rules:
+f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) -> f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) -> f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: v43 = 1 + v40 && 27 <= v43
+f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_138(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4) :|: 1 <= v32 && 1 <= v33 && 1 <= v34 && 1 <= v35 && 25 <= v40 && 26 <= v43 && 4 <= v41 && v32 <= v41 && 0 <= 0
+f_138(v32, v33, v34, v35, 25, v37, 12, 1, v40, v41, 0, 3, 26, 4) -> f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_139(v32:0, v33:0, v34:0, v35:0, 25, v40:0, v37:0, 12, 1, v41:0, 0, 3, 26, 4) -> f_139(v32:0, v33:0, v34:0, v35:0, 25, 1 + v40:0, v40:0, 12, 1, v41:0, 0, 3, 26, 4) :|: v40:0 > 25 && v33:0 > 0 && v32:0 > 0 && v34:0 > 0 && v35:0 > 0 && v41:0 >= v32:0 && v41:0 > 3
+Filtered unneeded arguments:
+   f_139(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14) -> f_139(x1, x2, x3, x4, x6, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_139(v32:0, v33:0, v34:0, v35:0, v40:0, v41:0) -> f_139(v32:0, v33:0, v34:0, v35:0, 1 + v40:0, v41:0) :|: v33:0 > 0 && v40:0 > 25 && v32:0 > 0 && v34:0 > 0 && v35:0 > 0 && v41:0 > 3 && v41:0 >= v32:0
+
+----------------------------------------
+
+(12)
+Obligation:
+Rules:
+f_139(v32:0, v33:0, v34:0, v35:0, v40:0, v41:0) -> f_139(v32:0, v33:0, v34:0, v35:0, 1 + v40:0, v41:0) :|: v33:0 > 0 && v40:0 > 25 && v32:0 > 0 && v34:0 > 0 && v35:0 > 0 && v41:0 > 3 && v41:0 >= v32:0
+
+----------------------------------------
+
+(13) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(14)
+Obligation:
+Rules:
+f_139(v32:0:0, v33:0:0, v34:0:0, v35:0:0, v40:0:0, v41:0:0) -> f_139(v32:0:0, v33:0:0, v34:0:0, v35:0:0, 1 + v40:0:0, v41:0:0) :|: v41:0:0 > 3 && v41:0:0 >= v32:0:0 && v35:0:0 > 0 && v34:0:0 > 0 && v32:0:0 > 0 && v40:0:0 > 25 && v33:0:0 > 0
+
+----------------------------------------
+
+(15) IntTRSNonPeriodicNontermProof (COMPLETE)
+Normalized system to the following form:
+f(pc, v32:0:0, v33:0:0, v34:0:0, v35:0:0, v40:0:0, v41:0:0) -> f(1, v32:0:0, v33:0:0, v34:0:0, v35:0:0, 1 + v40:0:0, v41:0:0) :|: pc = 1 && (v41:0:0 > 3 && v41:0:0 >= v32:0:0 && v35:0:0 > 0 && v34:0:0 > 0 && v32:0:0 > 0 && v40:0:0 > 25 && v33:0:0 > 0)
+Proved unsatisfiability of the following formula, indicating that the system is never left after entering:
+(((run2_0 = ((1 * 1)) and run2_1 = ((run1_1 * 1)) and run2_2 = ((run1_2 * 1)) and run2_3 = ((run1_3 * 1)) and run2_4 = ((run1_4 * 1)) and run2_5 = ((1 * 1) + (run1_5 * 1)) and run2_6 = ((run1_6 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and ((((((((run1_6 * 1)) > ((1 * 3)) and ((run1_6 * 1)) >= ((run1_1 * 1))) and ((run1_4 * 1)) > 0) and ((run1_3 * 1)) > 0) and ((run1_1 * 1)) > 0) and ((run1_5 * 1)) > ((1 * 25))) and ((run1_2 * 1)) > 0))) and !(((run2_0 * 1)) = ((1 * 1)) and ((((((((run2_6 * 1)) > ((1 * 3)) and ((run2_6 * 1)) >= ((run2_1 * 1))) and ((run2_4 * 1)) > 0) and ((run2_3 * 1)) > 0) and ((run2_1 * 1)) > 0) and ((run2_5 * 1)) > ((1 * 25))) and ((run2_2 * 1)) > 0)))
+Proved satisfiability of the following formula, indicating that the system is entered at least once:
+((run2_0 = ((1 * 1)) and run2_1 = ((run1_1 * 1)) and run2_2 = ((run1_2 * 1)) and run2_3 = ((run1_3 * 1)) and run2_4 = ((run1_4 * 1)) and run2_5 = ((1 * 1) + (run1_5 * 1)) and run2_6 = ((run1_6 * 1))) and (((run1_0 * 1)) = ((1 * 1)) and ((((((((run1_6 * 1)) > ((1 * 3)) and ((run1_6 * 1)) >= ((run1_1 * 1))) and ((run1_4 * 1)) > 0) and ((run1_3 * 1)) > 0) and ((run1_1 * 1)) > 0) and ((run1_5 * 1)) > ((1 * 25))) and ((run1_2 * 1)) > 0)))
+
+----------------------------------------
+
+(16)
+NO
+
+----------------------------------------
+
+(17) SEGraph to IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 39 rulesP rules:
+f_78 -> f_79(v1, v2, 3, 1, 4) :|: 1 <= v1 && v2 = 3 + v1 && 4 <= v2
+f_79(v1, v2, 3, 1, 4) -> f_80(v1, v3, v2, 3, 1, 4, 0) :|: 1 <= v3
+f_80(v1, v3, v2, 3, 1, 4, 0) -> f_81(v1, v3, v4, v2, 3, 1, 4, 0) :|: 1 <= v4
+f_81(v1, v3, v4, v2, 3, 1, 4, 0) -> f_82(v1, v3, v4, v5, v2, 3, 1, 4, 0) :|: 1 <= v5
+f_82(v1, v3, v4, v5, v2, 3, 1, 4, 0) -> f_83(v1, v3, v4, v5, v2, 0, 3, 1, 4) :|: TRUE
+f_83(v1, v3, v4, v5, v2, 0, 3, 1, 4) -> f_84(v1, v3, v4, v5, v2, 0, 3, 1, 4) :|: TRUE
+f_84(v1, v3, v4, v5, v2, 0, 3, 1, 4) -> f_85(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) :|: TRUE
+f_85(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) -> f_86(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) :|: TRUE
+f_86(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) -> f_87(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) :|: TRUE
+f_87(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) -> f_88(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) :|: TRUE
+f_88(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) -> f_89(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_89(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_90(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: TRUE
+f_90(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_91(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: TRUE
+f_91(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_92(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_92(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_93(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_93(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_94(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) :|: 0 = 0
+f_94(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) -> f_95(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) :|: 0 = 0
+f_95(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) -> f_96(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: 0 = 0
+f_96(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_97(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: TRUE
+f_97(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_98(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: TRUE
+f_98(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_99(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: 0 = 0
+f_99(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_100(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: 0 = 0
+f_100(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_101(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: TRUE
+f_101(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_102(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: TRUE
+f_102(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_114(v1, v3, v4, v5, 25, 25, 12, 1, 26, v2, 0, 3, 26, 27, 4) :|: TRUE
+f_114(v6, v7, v8, v9, 25, v11, 12, 1, v14, v15, 0, 3, 26, 27, 4) -> f_126(v6, v7, v8, v9, 25, v11, 12, 1, v14, v15, 0, 3, 27, 26, 28, 4) :|: TRUE
+f_126(v19, v20, v21, v22, 25, v24, 12, 1, v27, v28, 0, 3, 27, 26, 28, 4) -> f_138(v19, v20, v21, v22, 25, v24, 12, 1, v27, v28, 0, 3, 26, 4) :|: TRUE
+f_138(v32, v33, v34, v35, 25, v37, 12, 1, v40, v41, 0, 3, 26, 4) -> f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) -> f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) -> f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: v43 = 1 + v40 && 27 <= v43
+f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_138(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4) :|: TRUE
+Combined rules. Obtained 2 rulesP rules:
+f_149(v32:0, v33:0, v34:0, v35:0, 25, v40:0, 12, 1, v43:0, v41:0, 0, 3, 26, 4, 27) -> f_149(v32:0, v33:0, v34:0, v35:0, 25, v43:0, 12, 1, 1 + v43:0, v41:0, 0, 3, 26, 4, 27) :|: v43:0 > 25
+f_78 -> f_149(v1:0, v3:0, v4:0, v5:0, 25, 26, 12, 1, 27, 3 + v1:0, 0, 3, 26, 4, 27) :|: v1:0 > 0 && v3:0 > 0 && v5:0 > 0 && v4:0 > 0
+Filtered unneeded arguments:
+   f_149(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_149(x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 2 rules.P rules:
+f_149(v43:0) -> f_149(1 + v43:0) :|: v43:0 > 25
+f_78 -> f_149(27) :|: TRUE
+
+----------------------------------------
+
+(18)
+Obligation:
+Rules:
+f_149(v43:0) -> f_149(1 + v43:0) :|: v43:0 > 25
+f_78 -> f_149(27) :|: TRUE
+Start term: f_78
+
+----------------------------------------
+
+(19) IRSToKoat (EQUIVALENT)
+Convert an IRS to a koat problem
+----------------------------------------
+
+(20)
+Obligation:
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f_78))
+(VAR k0 x)
+(RULES
+  f_149(k0) -> f_149(1 + k0) :|: k0 > 25
+  f_78(x) -> f_149(27) :|: 0 = 0
+)
+
+----------------------------------------
+
+(21) KoAT2 (EQUIVALENT)
+KoAT2 was called with the following command:
+
+/aprove/bin/koat2 analyse --termination --cfr=pe -d5 --local=mprf,twn -rtermcomp -i /tmp/aprove.InputModules.Programs.koat2_214071490416961068.koat 
+
+KoAT2's output was:
+
+MAYBE
+
+----------------------------------------
+
+(22)
+MAYBE
+
+----------------------------------------
+
+(23) SEGraph to IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 39 rulesP rules:
+f_78 -> f_79(v1, v2, 3, 1, 4) :|: 1 <= v1 && v2 = 3 + v1 && 4 <= v2
+f_79(v1, v2, 3, 1, 4) -> f_80(v1, v3, v2, 3, 1, 4, 0) :|: 1 <= v3
+f_80(v1, v3, v2, 3, 1, 4, 0) -> f_81(v1, v3, v4, v2, 3, 1, 4, 0) :|: 1 <= v4
+f_81(v1, v3, v4, v2, 3, 1, 4, 0) -> f_82(v1, v3, v4, v5, v2, 3, 1, 4, 0) :|: 1 <= v5
+f_82(v1, v3, v4, v5, v2, 3, 1, 4, 0) -> f_83(v1, v3, v4, v5, v2, 0, 3, 1, 4) :|: TRUE
+f_83(v1, v3, v4, v5, v2, 0, 3, 1, 4) -> f_84(v1, v3, v4, v5, v2, 0, 3, 1, 4) :|: TRUE
+f_84(v1, v3, v4, v5, v2, 0, 3, 1, 4) -> f_85(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) :|: TRUE
+f_85(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) -> f_86(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) :|: TRUE
+f_86(v1, v3, v4, v5, v2, 0, 25, 3, 1, 4) -> f_87(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) :|: TRUE
+f_87(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) -> f_88(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) :|: TRUE
+f_88(v1, v3, v4, v5, v2, 0, 25, 12, 3, 1, 4) -> f_89(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_89(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_90(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: TRUE
+f_90(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_91(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: TRUE
+f_91(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_92(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_92(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_93(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) :|: 0 = 0
+f_93(v1, v3, v4, v5, 25, v2, 0, 12, 3, 1, 4) -> f_94(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) :|: 0 = 0
+f_94(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) -> f_95(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) :|: 0 = 0
+f_95(v1, v3, v4, v5, 25, 12, v2, 0, 3, 1, 4) -> f_96(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: 0 = 0
+f_96(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_97(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: TRUE
+f_97(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_98(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: TRUE
+f_98(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_99(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) :|: 0 = 0
+f_99(v1, v3, v4, v5, 25, 12, 1, v2, 0, 3, 4) -> f_100(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: 0 = 0
+f_100(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_101(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: TRUE
+f_101(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_102(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) :|: TRUE
+f_102(v1, v3, v4, v5, 25, 12, 1, 26, v2, 0, 3, 4) -> f_114(v1, v3, v4, v5, 25, 25, 12, 1, 26, v2, 0, 3, 26, 27, 4) :|: TRUE
+f_114(v6, v7, v8, v9, 25, v11, 12, 1, v14, v15, 0, 3, 26, 27, 4) -> f_126(v6, v7, v8, v9, 25, v11, 12, 1, v14, v15, 0, 3, 27, 26, 28, 4) :|: TRUE
+f_126(v19, v20, v21, v22, 25, v24, 12, 1, v27, v28, 0, 3, 27, 26, 28, 4) -> f_138(v19, v20, v21, v22, 25, v24, 12, 1, v27, v28, 0, 3, 26, 4) :|: TRUE
+f_138(v32, v33, v34, v35, 25, v37, 12, 1, v40, v41, 0, 3, 26, 4) -> f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_139(v32, v33, v34, v35, 25, v40, v37, 12, 1, v41, 0, 3, 26, 4) -> f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_140(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_141(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_142(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: 0 = 0
+f_143(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_144(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) :|: TRUE
+f_145(v32, v33, v34, v35, 25, v40, 12, 1, v37, v41, 0, 3, 26, 4) -> f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) :|: 0 = 0
+f_146(v32, v33, v34, v35, 25, v40, 12, 1, v41, 0, 3, 26, 4) -> f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: v43 = 1 + v40 && 27 <= v43
+f_147(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_148(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) :|: TRUE
+f_149(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4, 27) -> f_138(v32, v33, v34, v35, 25, v40, 12, 1, v43, v41, 0, 3, 26, 4) :|: TRUE
+Combined rules. Obtained 2 rulesP rules:
+f_149(v32:0, v33:0, v34:0, v35:0, 25, v40:0, 12, 1, v43:0, v41:0, 0, 3, 26, 4, 27) -> f_149(v32:0, v33:0, v34:0, v35:0, 25, v43:0, 12, 1, 1 + v43:0, v41:0, 0, 3, 26, 4, 27) :|: v43:0 > 25
+f_78 -> f_149(v1:0, v3:0, v4:0, v5:0, 25, 26, 12, 1, 27, 3 + v1:0, 0, 3, 26, 4, 27) :|: v1:0 > 0 && v3:0 > 0 && v5:0 > 0 && v4:0 > 0
+Filtered unneeded arguments:
+   f_149(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_149(x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 2 rules.P rules:
+f_149(v43:0) -> f_149(1 + v43:0) :|: v43:0 > 25
+f_78 -> f_149(27) :|: TRUE
+
+----------------------------------------
+
+(24)
+Obligation:
+Rules:
+f_149(v43:0) -> f_149(1 + v43:0) :|: v43:0 > 25
+f_78 -> f_149(27) :|: TRUE
+Start term: f_78
+
+----------------------------------------
+
+(25) IRSNoOverapproximation (EQUIVALENT)
+Proof of non-termination is aborted since the IRSProblem over-approximates
+----------------------------------------
+
+(26)
+MAYBE
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 4260 milliseconds

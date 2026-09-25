@@ -1,0 +1,174 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop0_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 91 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop0_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop0_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.Node --> BasicStructureType(elementType: i32, elementType: i32)
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "malloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 16
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca *BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32), align 8
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32) %2)
+		%7 = call *i8 @malloc(i64 8)
+		%8 = bitcast *i8 %7 to *BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32)
+		store %8, %2
+		%9 = call i32 @__VERIFIER_nondet_int()
+		%10 = load %2
+		%11 = getelementptr %10, 0, 1
+		store %9, %11
+		%12 = call i32 @__VERIFIER_nondet_int()
+		%13 = load %2
+		%14 = getelementptr %13, 0, 0
+		store %12, %14
+		%15 = load %2
+		%16 = getelementptr %15, 0, 1
+		%17 = load %16
+		%18 = icmp sle %17 -2
+		br %18, %24, %19
+	19:
+		%20 = load %2
+		%21 = getelementptr %20, 0, 0
+		%22 = load %21
+		%23 = icmp slt %22 1
+		br %23, %24, %25
+	24:
+		store 0, %1
+		br %73
+	25:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%26 = load %2
+		%27 = getelementptr %26, 0, 1
+		%28 = load %27
+		store %28, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%29 = call i32 @__VERIFIER_nondet_int()
+		store %29, %5
+		%30 = load %5
+		%31 = icmp sgt %30 0
+		br %31, %32, %38
+	32:
+		%33 = load %3
+		%34 = icmp sge %33 1
+		br %34, %35, %38
+	35:
+		%36 = load %3
+		%37 = add i32 %36, -1
+		store %37, %3
+		store -1, %4
+		br %41
+	38:
+		%39 = load %3
+		%40 = add i32 %39, 1
+		store %40, %3
+		store 1, %4
+		br %41
+	41:
+		%42 = load %2
+		%43 = getelementptr %42, 0, 0
+		%44 = load %43
+		%45 = load %3
+		%46 = srem i32 %45, %44
+		store %46, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		%47 = load %3
+		store %47, %6
+		br %48
+	48:
+		%49 = load %4
+		%50 = load %3
+		%51 = add i32 %50, %49
+		store %51, %3
+		%52 = load %3
+		%53 = load %2
+		%54 = getelementptr %53, 0, 0
+		%55 = load %54
+		%56 = icmp eq %52 %55
+		br %56, %57, %58
+	57:
+		store 0, %3
+		br %67
+	58:
+		%59 = load %3
+		%60 = icmp slt %59 0
+		br %60, %61, %66
+	61:
+		%62 = load %2
+		%63 = getelementptr %62, 0, 0
+		%64 = load %63
+		%65 = sub i32 %64, 1
+		store %65, %3
+		br %66
+	66:
+		br %67
+	67:
+		br %68
+	68:
+		%69 = load %3
+		%70 = load %6
+		%71 = icmp ne %69 %70
+		br %71, %48, %72
+	72:
+		store 0, %1
+		br %73
+	73:
+		%74 = load %1
+		ret %74
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop0_TestCase0.c:18:24: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+    Node* menu =(Node*)malloc(sizeof(Node));
+                       ^
+/FILES_DIR/concretizer/Using_Erroneous_Condition_1_T_Loop0_TestCase0.c:18:24: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+1 warning generated.
+
+Division by zero possible at node 381
+Runtime: 3737 milliseconds

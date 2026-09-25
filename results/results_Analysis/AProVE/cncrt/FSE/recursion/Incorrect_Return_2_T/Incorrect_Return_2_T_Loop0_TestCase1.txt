@@ -1,0 +1,246 @@
+YES
+proof of /FILES_DIR/concretizer/Incorrect_Return_2_T_Loop0_TestCase1.cpp
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 47 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1377 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 110 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 88 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Incorrect_Return_2_T_Loop0_TestCase1.cpp
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Incorrect_Return_2_T_Loop0_TestCase1.cpp to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: .str initVal: Page\00 type: [5 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Name: .str.1 initVal: Pages\00 type: [6 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Name: __const.main.obj initVal: Page\00\00 type: [6 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Name: __const.main.kobj initVal: abcd\00\00 type: [6 x i8] addrSpace: null alignment: 1 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "strlen" returnParam: i64 parameters: (*i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "strcmp" returnParam: i32 parameters: (*i8, *i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 noalias nocapture readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "_Z12loadpagetreePcS_" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: (0 *i8, 1 *i8) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%3 = alloca *i8, align 8
+		%4 = alloca *i8, align 8
+		%5 = alloca *i8, align 8
+		%6 = alloca i32, align 4
+		%7 = alloca i32, align 4
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %5)
+		%8 = load %3
+		store %8, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		%9 = load %3
+		%10 = call i64 @strlen(*i8 %9)
+		%11 = trunc i64 %10 to i32
+		store %11, %6
+		%12 = load %5
+		%13 = call i32 @strcmp(*i8 %12, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@1659adc5)
+		%14 = icmp eq %13 0
+		br %14, %15, %16
+	15:
+		br %38
+	16:
+		%17 = load %5
+		%18 = call i32 @strcmp(*i8 %17, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@21dff373)
+		%19 = icmp eq %18 0
+		br %19, %20, %37
+	20:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		store 0, %7
+		br %21
+	21:
+		%22 = load %7
+		%23 = load %6
+		%24 = icmp slt %22 %23
+		br %24, %25, %36
+	25:
+		%26 = load %4
+		%27 = load %3
+		%28 = icmp eq %26 %27
+		br %28, %29, %30
+	29:
+		br %39
+	30:
+		%31 = load %3
+		%32 = load %4
+		Unnamed Call-Instruction = call BasicVoidType @_Z12loadpagetreePcS_(*i8 %31, *i8 %32)
+		br %33
+	33:
+		%34 = load %7
+		%35 = add i32 %34, 1
+		store %35, %7
+		br %21
+	36:
+		br %37
+	37:
+		br %38
+	38:
+		br %39
+	39:
+		ret void
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 66
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [6 x i8], align 1
+		%3 = alloca [6 x i8], align 1
+		%4 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[6 x i8] %2)
+		%5 = bitcast *[6 x i8] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %5, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@5acb01d6, i64 6, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[6 x i8] %3)
+		%6 = bitcast *[6 x i8] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %6, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@7faf0868, i64 6, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		br %7
+	7:
+		%8 = load %4
+		%9 = icmp slt %8 5
+		br %9, %10, %14
+	10:
+		br %11
+	11:
+		%12 = load %4
+		%13 = add i32 %12, 1
+		store %13, %4
+		br %7
+	14:
+		%15 = getelementptr %2, 0, 5
+		store 0, %15
+		%16 = getelementptr %3, 0, 5
+		store 0, %16
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_305(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_306(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: v93 < 5 && v91 <= 3
+f_306(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_308(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: 0 = 0
+f_308(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_310(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: TRUE
+f_310(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_312(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: TRUE
+f_312(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_314(v85, v86, v87, v88, v89, v90, v93, 1, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: 0 = 0
+f_314(v85, v86, v87, v88, v89, v90, v93, 1, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_316(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) :|: v103 = 1 + v93 && 2 <= v103 && v103 <= 5
+f_316(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) -> f_318(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) :|: TRUE
+f_318(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) -> f_320(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) :|: TRUE
+f_320(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6, 2) -> f_304(v85, v86, v87, v88, v89, v90, v93, 1, v103, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: TRUE
+f_304(v85, v86, v87, v88, v89, v90, v91, 1, v93, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) -> f_305(v85, v86, v87, v88, v89, v90, v93, 1, v91, v94, v95, v96, v97, v98, v99, v100, v101, 0, 5, 3, 4, 6) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_305(v85:0, v86:0, v87:0, v88:0, v89:0, v90:0, v93:0, 1, v91:0, v94:0, v95:0, v96:0, v97:0, v98:0, v99:0, v100:0, v101:0, 0, 5, 3, 4, 6) -> f_305(v85:0, v86:0, v87:0, v88:0, v89:0, v90:0, 1 + v93:0, 1, v93:0, v94:0, v95:0, v96:0, v97:0, v98:0, v99:0, v100:0, v101:0, 0, 5, 3, 4, 6) :|: v91:0 < 4 && v93:0 < 5 && v93:0 > 0
+Filtered unneeded arguments:
+   f_305(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) -> f_305(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_305(v93:0, v91:0) -> f_305(1 + v93:0, v93:0) :|: v93:0 < 5 && v93:0 > 0 && v91:0 < 4
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_305(v93:0, v91:0) -> f_305(1 + v93:0, v93:0) :|: v93:0 < 5 && v93:0 > 0 && v91:0 < 4
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_305(v93:0:0, v91:0:0) -> f_305(1 + v93:0:0, v93:0:0) :|: v93:0:0 < 5 && v93:0:0 > 0 && v91:0:0 < 4
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_305 ] = -1*f_305_1
+
+The following rules are decreasing:
+f_305(v93:0:0, v91:0:0) -> f_305(1 + v93:0:0, v93:0:0) :|: v93:0:0 < 5 && v93:0:0 > 0 && v91:0:0 < 4
+
+The following rules are bounded:
+f_305(v93:0:0, v91:0:0) -> f_305(1 + v93:0:0, v93:0:0) :|: v93:0:0 < 5 && v93:0:0 > 0 && v91:0:0 < 4
+
+
+----------------------------------------
+
+(12)
+YES
+line 143:27 mismatched input 'norecurse' expecting CLOSEC
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 5161 milliseconds

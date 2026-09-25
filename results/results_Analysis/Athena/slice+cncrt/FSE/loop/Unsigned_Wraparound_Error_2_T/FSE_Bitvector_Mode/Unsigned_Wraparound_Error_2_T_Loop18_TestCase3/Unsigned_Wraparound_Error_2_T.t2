@@ -1,0 +1,42 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+TO: main_bb0_v.;
+FROM: main_bb0_v.;
+assume(1 <= 0);
+v. := 50;
+TO: main_bb0_sv.;
+
+FROM: main_bb0_v.;
+assume(0 <= 0);
+v. := 100;
+TO: main_bb0_sv.;
+
+FROM: main_bb0_sv.;
+var__temp_vui.0 := 1;
+TO: main_bb1;
+
+FROM: main_bb1;
+vui.0 := var__temp_vui.0;
+v2 := vui.0 * 2;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume((vui.0 ult v.) && (v2 ugt vui.0));
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume((vui.0 uge v.) || (v2 ule vui.0));
+TO: main_bb3;
+
+FROM: main_bb2;
+v4 := vui.0 * 2;
+var__temp_vui.0 := v4;
+TO: main_bb1;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

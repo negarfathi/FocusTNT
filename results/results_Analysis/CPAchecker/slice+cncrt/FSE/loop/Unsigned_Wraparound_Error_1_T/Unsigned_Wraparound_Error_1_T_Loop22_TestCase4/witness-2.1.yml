@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "df3611c0-02f6-3c13-aa47-6ab2dfe3951f"
+    creation_time: "2025-12-20T16:19:04Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop22_TestCase4.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop22_TestCase4.c: "696e39826077477c35e3bb5c9db746aa29fbf869ae6db22970db08b5603002f7"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop22_TestCase4.c"
+        line: 14
+        column: 3
+        function: "main"
+      value: "((((((best == (10U) && cur == (20U)) && (it_min == (5U) && (pre == (10U) && st_max == (100U))))) || (((best == (10U) && cur == (110U)) && (it_min == (5U) && (pre == (100U) && st_max == (100U)))))) || ((((best == (10U) && cur == (60U)) && (it_min == (5U) && (pre == (50U) && st_max == (100U))))) || ((((best == (10U) && cur == (80U)) && (it_min == (5U) && (pre == (70U) && st_max == (100U))))) || (((best == (10U) && cur == (10U)) && (it_min == (5U) && st_max == (100U))))))) || (((((best == (10U) && cur == (90U)) && (it_min == (5U) && (pre == (80U) && st_max == (100U))))) || ((((best == (10U) && cur == (100U)) && (it_min == (5U) && (pre == (90U) && st_max == (100U))))) || (((best == (10U) && cur == (30U)) && (it_min == (5U) && (pre == (20U) && st_max == (100U))))))) || ((((best == (10U) && cur == (40U)) && (it_min == (5U) && (pre == (30U) && st_max == (100U))))) || ((((best == (10U) && cur == (50U)) && (it_min == (5U) && (pre == (40U) && st_max == (100U))))) || (((best == (10U) && cur == (70U)) && (it_min == (5U) && (pre == (60U) && st_max == (100U)))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_1_T_Loop22_TestCase4.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

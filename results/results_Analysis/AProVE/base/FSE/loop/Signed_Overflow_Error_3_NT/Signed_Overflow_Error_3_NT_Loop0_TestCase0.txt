@@ -1,0 +1,215 @@
+YES
+proof of /FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 96 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1660 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SEGraph to IRS [EQUIVALENT, 289 ms]
+(6) IntTRS
+(7) IRSToKoat [EQUIVALENT, 0 ms]
+(8) Koat Problem
+(9) KoAT2 [EQUIVALENT, 159 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Signed_Overflow_Error_3_NT_Loop0_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%5 = call i32 @__VERIFIER_nondet_int()
+		store %5, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 1, %4
+		store 10, %3
+		br %6
+	6:
+		%7 = load %3
+		%8 = load %2
+		%9 = icmp sle %7 %8
+		br %9, %10, %16
+	10:
+		%11 = load %3
+		%12 = mul i32 %11, 10
+		store %12, %3
+		br %13
+	13:
+		%14 = load %4
+		%15 = add i32 %14, 1
+		store %15, %4
+		br %6
+	16:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SEGraph to IRS (EQUIVALENT)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 52 rulesP rules:
+f_82 -> f_83(v1, v2, 3, 1, 4) :|: 1 <= v1 && v2 = 3 + v1 && 4 <= v2
+f_83(v1, v2, 3, 1, 4) -> f_84(v1, v3, v2, v4, 3, 1, 4) :|: 1 <= v3 && v4 = 3 + v3 && 4 <= v4
+f_84(v1, v3, v2, v4, 3, 1, 4) -> f_85(v1, v3, v5, v2, v4, v6, 3, 1, 4) :|: 1 <= v5 && v6 = 3 + v5 && 4 <= v6
+f_85(v1, v3, v5, v2, v4, v6, 3, 1, 4) -> f_86(v1, v3, v5, v7, v2, v4, v6, v8, 3, 1, 4) :|: 1 <= v7 && v8 = 3 + v7 && 4 <= v8
+f_86(v1, v3, v5, v7, v2, v4, v6, v8, 3, 1, 4) -> f_87(v1, v3, v5, v7, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_87(v1, v3, v5, v7, v2, v4, v6, v8, 0, 3, 1, 4) -> f_88(v1, v3, v5, v7, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_88(v1, v3, v5, v7, v2, v4, v6, v8, 0, 3, 1, 4) -> f_89(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_89(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) -> f_90(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_90(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) -> f_91(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_91(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) -> f_92(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) :|: TRUE
+f_92(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 3, 1, 4) -> f_93(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 3, 4) :|: TRUE
+f_93(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 3, 4) -> f_94(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 10, 3, 4) :|: TRUE
+f_94(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 10, 3, 4) -> f_95(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 10, 3, 4) :|: TRUE
+f_95(v1, v3, v5, v7, v9, v2, v4, v6, v8, 0, 1, 10, 3, 4) -> f_96(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) :|: 0 = 0
+f_96(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) -> f_97(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) :|: 0 = 0
+f_97(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) -> f_98(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) :|: 10 <= v9
+f_97(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) -> f_99(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4, 9) :|: v9 < 10
+f_98(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4) -> f_100(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) :|: 0 = 0
+f_99(v1, v3, v5, v7, v9, 10, v2, v4, v6, v8, 0, 1, 3, 4, 9) -> f_101(v1, v3, v5, v7, v9, 10, 0, v2, v4, v6, v8, 1, 3, 4, 9) :|: 0 = 0
+f_100(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) -> f_102(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) :|: TRUE
+f_101(v1, v3, v5, v7, v9, 10, 0, v2, v4, v6, v8, 1, 3, 4, 9) -> f_103(v1, v3, v5, v7, v9, 10, 0, v2, v4, v6, v8, 1, 3, 4, 9) :|: TRUE
+f_102(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) -> f_104(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) :|: 0 = 0
+f_104(v1, v3, v5, v7, v9, 10, 1, v2, v4, v6, v8, 0, 3, 4) -> f_105(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) :|: 0 = 0
+f_105(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) -> f_106(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) :|: TRUE
+f_106(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) -> f_107(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) :|: TRUE
+f_107(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) -> f_108(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) :|: 0 = 0
+f_108(v1, v3, v5, v7, v9, 10, 1, 100, v2, v4, v6, v8, 0, 3, 4) -> f_109(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) :|: 0 = 0
+f_109(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) -> f_110(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) :|: TRUE
+f_110(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) -> f_111(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) :|: TRUE
+f_111(v1, v3, v5, v7, v9, 10, 1, 100, 2, v2, v4, v6, v8, 0, 3, 4) -> f_128(v1, v3, v5, v7, v9, 10, 1, 100, 1, 2, v2, v4, v6, v8, 0, 3, 10, 100, 1000, 2, 4) :|: TRUE
+f_128(v11, v12, v13, v14, v15, v16, 1, v18, v19, v20, v21, v22, v23, v24, 0, 3, 10, 100, 1000, 2, 4) -> f_145(v11, v12, v13, v14, v15, v16, 1, v18, v19, v20, v21, v22, v23, v24, 0, 3, 10, 1000, 100, 10000, 2, 4) :|: TRUE
+f_145(v30, v31, v32, v33, v34, v35, 1, v37, v38, v39, v40, v41, v42, v43, 0, 3, 10, 1000, 100, 10000, 2, 4) -> f_162(v30, v31, v32, v33, v34, v35, 1, v37, v38, v39, v40, v41, v42, v43, 0, 3, 10, 100, 2, 4) :|: TRUE
+f_162(v49, v50, v51, v52, v53, v54, 1, v56, v57, v58, v59, v60, v61, v62, 0, 3, 10, 100, 2, 4) -> f_179(v49, v50, v51, v52, v53, v54, 1, v56, v57, v58, v59, v60, v61, v62, 0, 3, 10, 100, 2, 4) :|: TRUE
+f_179(v68, v69, v70, v71, v72, v73, 1, v75, v76, v77, v78, v79, v80, v81, 0, 3, 10, 100, 2, 4) -> f_196(v68, v69, v70, v71, v72, v73, 1, v75, v76, v77, v78, v79, v80, v81, 0, 3, 10, 100, 2, 4) :|: TRUE
+f_196(v87, v88, v89, v90, v91, v92, 1, v94, v95, v96, v97, v98, v99, v100, 0, 3, 10, 100, 2, 4) -> f_213(v87, v88, v89, v90, v91, v92, 1, v94, v95, v96, v97, v98, v99, v100, 0, 3, 10, 100, 2, 4) :|: TRUE
+f_213(v106, v107, v108, v109, v110, v111, 1, v113, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_214(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: 0 = 0
+f_214(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_215(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: 0 = 0
+f_215(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_216(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: v113 <= v110 && 100 <= v110
+f_215(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_217(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: v110 < v113
+f_216(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_218(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: 0 = 0
+f_217(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_219(v106, v107, v108, v109, v110, v113, 0, v111, v114, v115, v116, v117, v118, v119, 3, 10, 1, 100, 2, 4) :|: 0 = 0
+f_218(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_220(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: TRUE
+f_219(v106, v107, v108, v109, v110, v113, 0, v111, v114, v115, v116, v117, v118, v119, 3, 10, 1, 100, 2, 4) -> f_221(v106, v107, v108, v109, v110, v113, 0, v111, v114, v115, v116, v117, v118, v119, 3, 10, 1, 100, 2, 4) :|: TRUE
+f_220(v106, v107, v108, v109, v110, v113, 1, v111, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) -> f_222(v106, v107, v108, v109, v110, v113, 1, v114, v115, v116, v117, v118, v119, 0, 3, 100, 2, 4) :|: 0 = 0
+f_222(v106, v107, v108, v109, v110, v113, 1, v114, v115, v116, v117, v118, v119, 0, 3, 100, 2, 4) -> f_223(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: v121 = 10 * v113 && 1000 <= v121
+f_223(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_224(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: TRUE
+f_224(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_225(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: TRUE
+f_225(v106, v107, v108, v109, v110, v113, 1, v121, v114, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_226(v106, v107, v108, v109, v110, v113, 1, v121, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: 0 = 0
+f_226(v106, v107, v108, v109, v110, v113, 1, v121, v115, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_227(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: v123 = 1 + v115 && 3 <= v123
+f_227(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_228(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: TRUE
+f_228(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_229(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) :|: TRUE
+f_229(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4, 1000) -> f_213(v106, v107, v108, v109, v110, v113, 1, v121, v115, v123, v116, v117, v118, v119, 0, 3, 10, 100, 2, 4) :|: TRUE
+Combined rules. Obtained 4 rulesP rules:
+f_215(v106:0, v107:0, v108:0, v109:0, v110:0, v113:0, 1, v111:0, v114:0, v115:0, v116:0, v117:0, v118:0, v119:0, 0, 3, 10, 100, 2, 4) -> f_221(v106:0, v107:0, v108:0, v109:0, v110:0, v113:0, 0, v111:0, v114:0, v115:0, v116:0, v117:0, v118:0, v119:0, 3, 10, 1, 100, 2, 4) :|: v113:0 > v110:0
+f_82 -> f_215(v1:0, v3:0, v5:0, v7:0, v9:0, 100, 1, 10, 1, 2, 3 + v1:0, 3 + v3:0, 3 + v5:0, 3 + v7:0, 0, 3, 10, 100, 2, 4) :|: v3:0 > 0 && v1:0 > 0 && v5:0 > 0 && v7:0 > 0 && v9:0 > 9
+f_82 -> f_103(v1:0, v3:0, v5:0, v7:0, v9:0, 10, 0, 3 + v1:0, 3 + v3:0, 3 + v5:0, 3 + v7:0, 1, 3, 4, 9) :|: v3:0 > 0 && v1:0 > 0 && v5:0 > 0 && v7:0 > 0 && v9:0 < 10
+f_215(v106:0, v107:0, v108:0, v109:0, v110:0, v113:0, 1, v111:0, v114:0, v115:0, v116:0, v117:0, v118:0, v119:0, 0, 3, 10, 100, 2, 4) -> f_215(v106:0, v107:0, v108:0, v109:0, v110:0, 10 * v113:0, 1, v113:0, v115:0, 1 + v115:0, v116:0, v117:0, v118:0, v119:0, 0, 3, 10, 100, 2, 4) :|: v110:0 > 99 && v113:0 <= v110:0 && v115:0 > 1 && 999 < 10 * v113:0
+Filtered unneeded arguments:
+   f_215(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20) -> f_215(x5, x6, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 4 rules.P rules:
+f_215(v110:0, v113:0, v115:0) -> f_221(v106:0, v107:0, v108:0, v109:0, v110:0, v113:0, 0, v111:0, v114:0, v115:0, v116:0, v117:0, v118:0, v119:0, 3, 10, 1, 100, 2, 4) :|: v113:0 > v110:0
+f_82 -> f_215(v9:0, 100, 2) :|: v9:0 > 9
+f_82 -> f_103(v1:0, v3:0, v5:0, v7:0, v9:0, 10, 0, 3 + v1:0, 3 + v3:0, 3 + v5:0, 3 + v7:0, 1, 3, 4, 9) :|: v1:0 > 0 && v3:0 > 0 && v5:0 > 0 && v9:0 < 10 && v7:0 > 0
+f_215(v110:0, v113:0, v115:0) -> f_215(v110:0, 10 * v113:0, 1 + v115:0) :|: v113:0 <= v110:0 && v110:0 > 99 && 999 < 10 * v113:0 && v115:0 > 1
+
+----------------------------------------
+
+(6)
+Obligation:
+Rules:
+f_215(v110:0, v113:0, v115:0) -> f_221(v106:0, v107:0, v108:0, v109:0, v110:0, v113:0, 0, v111:0, v114:0, v115:0, v116:0, v117:0, v118:0, v119:0, 3, 10, 1, 100, 2, 4) :|: v113:0 > v110:0
+f_82 -> f_215(v9:0, 100, 2) :|: v9:0 > 9
+f_82 -> f_103(x, x1, x2, x3, x4, 10, 0, 3 + x, 3 + x1, 3 + x2, 3 + x3, 1, 3, 4, 9) :|: x > 0 && x1 > 0 && x2 > 0 && x4 < 10 && x3 > 0
+f_215(x5, x6, x7) -> f_215(x5, 10 * x6, 1 + x7) :|: x6 <= x5 && x5 > 99 && 999 < 10 * x6 && x7 > 1
+Start term: f_82
+
+----------------------------------------
+
+(7) IRSToKoat (EQUIVALENT)
+Convert an IRS to a koat problem
+----------------------------------------
+
+(8)
+Obligation:
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f_82))
+(VAR x46 x47 x48 x49 x42 x43 x44 x45 x40 x41 k21 k20 x39 x35 x36 x37 x38 x31 x32 x33 x34 k18 k19 x30 x70 x68 x69 x64 x65 x66 x67 x60 x61 x62 x63 k7 k8 k5 k6 k9 k0 k3 k4 k1 k2 x57 x58 x59 x53 x54 x55 x56 x50 x51 x52 x90 x91 x92 x86 x87 x88 x89 x x82 x83 x84 x85 x80 x81 x79 x110 x75 x76 x'' x77 x78 x71 x72 x73 x74 k14 k15 x109 k16 k17 k10 k11 k12 k13 x4 x28 x5 x29 x2 x3 x8 x24 x9 x25 x6 x26 x100 x7 x27 x20 x102 x21 x101 x22 x104 x23 x103 x106 x1 x105 x108 x107 x' x17 x18 x19 x13 x14 x15 x16 x97 x10 x98 x11 x99 x12 x93 x94 x95 x96)
+(RULES
+  f_215(k1, k21, k17, x, x', x'', x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14) -> f_221(k14, k12, k10, k7, k1, k21, 0, k0, k19, k17, k16, k15, k13, k11, 3, 10, 1, 100, 2, 4) :|: k21 > k1
+  f_215(k3, k6, k9, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24, x25, x26, x27, x28, x29, x30, x31) -> f_215(k3, 10 * k6, 1 + k9, x32, x33, x34, x35, x36, x37, x38, x39, x40, x41, x42, x43, x44, x45, x46, x47, x48) :|: k6 <= k3 && k3 > 99 && 999 < 10 * k6 && k9 > 1
+  f_82(x86, x87, x88, x89, x90, x91, x92, x93, x94, x95, x96, x97, x98, x99, x100, x101, x102, x103, x104, x105) -> f_103(k18, k20, k4, k5, k2, 10, 0, 3 + k18, 3 + k20, 3 + k4, 3 + k5, 1, 3, 4, 9, x106, x107, x108, x109, x110) :|: k18 > 0 && k20 > 0 && k4 > 0 && k2 < 10 && k5 > 0
+  f_82(x49, x50, x51, x52, x53, x54, x55, x56, x57, x58, x59, x60, x61, x62, x63, x64, x65, x66, x67, x68) -> f_215(k8, 100, 2, x69, x70, x71, x72, x73, x74, x75, x76, x77, x78, x79, x80, x81, x82, x83, x84, x85) :|: k8 > 9
+)
+
+----------------------------------------
+
+(9) KoAT2 (EQUIVALENT)
+KoAT2 was called with the following command:
+
+/aprove/bin/koat2 analyse --termination --cfr=pe -d5 --local=mprf,twn -rtermcomp -i /tmp/aprove.InputModules.Programs.koat2_6026464302559590624.koat 
+
+KoAT2's output was:
+
+YES
+
+----------------------------------------
+
+(10)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 5347 milliseconds

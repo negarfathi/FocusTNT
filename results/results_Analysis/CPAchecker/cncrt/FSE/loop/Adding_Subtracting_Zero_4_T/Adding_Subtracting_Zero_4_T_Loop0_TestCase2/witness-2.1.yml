@@ -1,0 +1,56 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "588289df-e694-37f0-a251-72a05e6aa0dd"
+    creation_time: "2025-12-20T01:52:39Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c: "61b075d6de5d69e7692110b4af33a2eda32bfc3dd0f70cb81944f75030013c6f"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c"
+        line: 15
+        column: 5
+        function: "read"
+      value: "(count == (0) && (len == (5) && loc == (0)))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c"
+        line: 50
+        column: 5
+        function: "main"
+      value: "(buf == (0) && (count == (5) && tries == (0)))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c"
+        line: 10
+        column: 1
+        function: "read"
+      requires: "(len == (5) && loc == (0))"
+      ensures: "(!((\\old(len) == (5) && \\old(loc) == (0))) || (\\result == (-1)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Adding_Subtracting_Zero_4_T_Loop0_TestCase2.c"
+        line: 42
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

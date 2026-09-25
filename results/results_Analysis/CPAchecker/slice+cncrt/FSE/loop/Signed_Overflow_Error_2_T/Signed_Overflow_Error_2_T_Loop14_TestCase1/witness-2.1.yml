@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "fc9495c6-e4e1-3db6-a097-13b7215e5618"
+    creation_time: "2025-12-20T15:09:32Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop14_TestCase1.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop14_TestCase1.c: "ded21ec9797eb21ee42cc76e4309b6367c1df38ff7c306bc655116a755a569a2"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop14_TestCase1.c"
+        line: 9
+        column: 3
+        function: "main"
+      value: "(needed == (-5) && smallest == (1))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop14_TestCase1.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

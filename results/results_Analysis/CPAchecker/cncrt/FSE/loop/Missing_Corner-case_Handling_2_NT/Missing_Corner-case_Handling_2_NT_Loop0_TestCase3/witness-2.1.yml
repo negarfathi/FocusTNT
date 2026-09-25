@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "fd24c25d-c86c-33d0-84aa-8f549c8aa42e"
+    creation_time: "2025-12-20T03:05:12Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase3.c: "56d10c6d6cf3cf0573787759fbf9115a4e339a540f832a4f70eed84b17c0cd19"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase3.c"
+        line: 16
+        column: 5
+        function: "main"
+      value: "(((bits == (0) && val == (2))) || (((bits == (1) && val == (1))) || ((bits == (2) && val == (0)))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Corner-case_Handling_2_NT_Loop0_TestCase3.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

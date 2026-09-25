@@ -1,0 +1,47 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "271aaad2-04d2-31da-b4de-b235fe93980d"
+    creation_time: "2025-12-20T10:11:23Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_2_NT_Loop31_TestCase1.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_2_NT_Loop31_TestCase1.c: "8484952e95c41f3c77f8d14b2430b794f6f70633408e4f9d0245f1fa960fe6af"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_NT_Loop31_TestCase1.c"
+        line: 34
+        column: 3
+        function: "main"
+      value: "(matroska == (1) && res == (0))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_NT_Loop31_TestCase1.c"
+        line: 29
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_2_NT_Loop31_TestCase1.c"
+        line: 5
+        column: 1
+        function: "matroska_deliver_packet_slice_1"
+      requires: "q == (1)"
+      ensures: "(!(\\old(q) == (1)) || (\\result == (0)))"
+      format: "acsl_expression"

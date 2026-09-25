@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "3e1a6573-cf7e-3dd2-8bff-800ac1c230ab"
+    creation_time: "2025-12-20T12:26:43Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase7.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase7.c: "b90cea206e4a12cdfdf72129c8914ea1b750db8b21af1c9c8e3bd39f6664e349"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase7.c"
+        line: 9
+        column: 3
+        function: "main"
+      value: "((((pkt == (8) && res == (7))) || (((pkt == (10) && res == (7))) || pkt == (5))) || (((pkt == (6) && res == (7))) || (((pkt == (7) && res == (7))) || ((pkt == (9) && res == (7))))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase7.c"
+        line: 11
+        column: 5
+        function: "main"
+      value: "(((((pkt == (8) && res == (7))) || ((pkt == (6) && res == (7)))) || (((pkt == (7) && res == (0))) || (((pkt == (8) && res == (0))) || ((pkt == (7) && res == (7)))))) || ((((pkt == (9) && res == (7))) || ((pkt == (9) && res == (0)))) || (((pkt == (5) && res == (0))) || (((pkt == (10) && res == (7))) || ((pkt == (6) && res == (0)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_T_Loop17_TestCase7.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

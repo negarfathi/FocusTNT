@@ -1,0 +1,148 @@
+CONTROL AUTOMATON ErrorPath2
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "void main(void)" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "int i;" -> GOTO ARG9;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG9 :
+    MATCH "int num = 65534;" -> ASSUME {num == (65534);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "[!(num > 65534)]" -> ASSUME {num == (65534);} GOTO ARG17;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG17 :
+    MATCH "i = 0;" -> ASSUME {i == (0);} GOTO ARG18;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG18 :
+    MATCH "" -> GOTO ARG31;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG31 :
+    MATCH "[i < num]" -> ASSUME {i == (0);num == (65534);} GOTO ARG32;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG32 :
+    MATCH "i = 0;" -> ASSUME {i == (0);} GOTO ARG34;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG34 :
+    MATCH "" -> GOTO ARG36;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG36 :
+    MATCH "[i < 3]" -> ASSUME {i == (0);} GOTO ARG37;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG37 :
+    MATCH "i ++;" -> ASSUME {__CPAchecker_TMP_0 == (0);} GOTO ARG38;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG38 :
+    MATCH "i ++;" -> ASSUME {i == (1);} GOTO ARG39;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG39 :
+    MATCH "i ++;" -> GOTO ARG40;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG40 :
+    MATCH "" -> GOTO ARG41;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG41 :
+    MATCH "[i < 3]" -> ASSUME {i == (1);} GOTO ARG51;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG51 :
+    MATCH "i ++;" -> ASSUME {__CPAchecker_TMP_0 == (1);} GOTO ARG58;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG58 :
+    MATCH "i ++;" -> ASSUME {i == (2);} GOTO ARG59;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG59 :
+    MATCH "i ++;" -> GOTO ARG64;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG64 :
+    MATCH "" -> GOTO ARG65;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG65 :
+    MATCH "[i < 3]" -> ASSUME {i == (2);} GOTO ARG68;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG68 :
+    MATCH "i ++;" -> ASSUME {__CPAchecker_TMP_0 == (2);} GOTO ARG69;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG69 :
+    MATCH "i ++;" -> ASSUME {i == (3);} GOTO ARG73;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG73 :
+    MATCH "i ++;" -> GOTO ARG75;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG75 :
+    MATCH "" -> GOTO ARG76;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG76 :
+    MATCH "[!(i < 3)]" -> ASSUME {i == (3);} GOTO ARG77;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG77 :
+    MATCH "i ++;" -> ASSUME {__CPAchecker_TMP_1 == (3);} GOTO ARG78;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG78 :
+    MATCH "i ++;" -> ASSUME {i == (4);} GOTO ARG79;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG79 :
+    MATCH "i ++;" -> GOTO ARG80;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG80 :
+    MATCH "" -> GOTO ARG87;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG87 :
+    MATCH "[i < num]" -> ASSUME {i == (4);num == (65534);} GOTO ARG89;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG89 :
+    MATCH "i = 0;" -> ASSUME {i == (0);} GOTO ARG90;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG90 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG91 :
+    TRUE -> STOP;
+
+END AUTOMATON

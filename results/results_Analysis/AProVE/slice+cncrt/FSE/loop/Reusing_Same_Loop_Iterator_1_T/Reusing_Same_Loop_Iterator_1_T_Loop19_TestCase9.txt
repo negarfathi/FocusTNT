@@ -1,0 +1,210 @@
+YES
+proof of /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop19_TestCase9.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 113 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1473 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 159 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 61 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop19_TestCase9.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop19_TestCase9.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 50, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 0, %5
+		%6 = load %4
+		%7 = icmp sgt %6 65534
+		br %7, %8, %9
+	8:
+		br %31
+	9:
+		%10 = load %5
+		%11 = icmp sgt %10 65534
+		br %11, %12, %13
+	12:
+		store 0, %1
+		br %31
+	13:
+		br %14
+	14:
+		store 0, %2
+		br %15
+	15:
+		%16 = load %2
+		%17 = load %4
+		%18 = icmp slt %16 %17
+		br %18, %19, %30
+	19:
+		store 0, %3
+		br %20
+	20:
+		%21 = load %3
+		%22 = load %5
+		%23 = icmp slt %21 %22
+		br %23, %24, %27
+	24:
+		%25 = load %3
+		%26 = add i32 %25, 1
+		store %26, %3
+		br %20
+	27:
+		%28 = load %2
+		%29 = add i32 %28, 1
+		store %29, %2
+		br %15
+	30:
+		br %31
+	31:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 16 rulesP rules:
+f_262(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 4) -> f_263(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 4) :|: 0 = 0
+f_263(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 4) -> f_264(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: v88 < 50 && v86 <= 48
+f_264(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_266(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: 0 = 0
+f_266(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_268(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: TRUE
+f_268(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_270(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: TRUE
+f_270(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_272(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: TRUE
+f_272(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_274(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: 0 = 0
+f_274(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_275(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: 0 = 0
+f_275(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_276(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: 0 = 0
+f_276(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_277(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) :|: TRUE
+f_277(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 48, 49, 4) -> f_278(v79, v80, v81, v82, v83, 50, 0, v88, 1, v89, v90, v91, v92, v93, 3, 49, 4) :|: 0 = 0
+f_278(v79, v80, v81, v82, v83, 50, 0, v88, 1, v89, v90, v91, v92, v93, 3, 49, 4) -> f_279(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) :|: v94 = 1 + v88 && 2 <= v94 && v94 <= 50
+f_279(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) -> f_280(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) :|: TRUE
+f_280(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) -> f_281(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) :|: TRUE
+f_281(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 49, 4, 2) -> f_261(v79, v80, v81, v82, v83, 50, 0, v88, 1, v94, v89, v90, v91, v92, v93, 3, 4) :|: TRUE
+f_261(v79, v80, v81, v82, v83, 50, 0, v86, 1, v88, v89, v90, v91, v92, v93, 3, 4) -> f_262(v79, v80, v81, v82, v83, 50, 0, v88, 1, v86, v89, v90, v91, v92, v93, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_262(v79:0, v80:0, v81:0, v82:0, v83:0, 50, 0, v88:0, 1, v86:0, v89:0, v90:0, v91:0, v92:0, v93:0, 3, 4) -> f_262(v79:0, v80:0, v81:0, v82:0, v83:0, 50, 0, 1 + v88:0, 1, v88:0, v89:0, v90:0, v91:0, v92:0, v93:0, 3, 4) :|: v86:0 < 49 && v88:0 < 50 && v88:0 > 0
+Filtered unneeded arguments:
+   f_262(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17) -> f_262(x8, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_262(v88:0, v86:0) -> f_262(1 + v88:0, v88:0) :|: v88:0 < 50 && v88:0 > 0 && v86:0 < 49
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_262(v88:0, v86:0) -> f_262(1 + v88:0, v88:0) :|: v88:0 < 50 && v88:0 > 0 && v86:0 < 49
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_262(v88:0:0, v86:0:0) -> f_262(1 + v88:0:0, v88:0:0) :|: v88:0:0 < 50 && v88:0:0 > 0 && v86:0:0 < 49
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_262 ] = -1*f_262_1
+
+The following rules are decreasing:
+f_262(v88:0:0, v86:0:0) -> f_262(1 + v88:0:0, v88:0:0) :|: v88:0:0 < 50 && v88:0:0 > 0 && v86:0:0 < 49
+
+The following rules are bounded:
+f_262(v88:0:0, v86:0:0) -> f_262(1 + v88:0:0, v88:0:0) :|: v88:0:0 < 50 && v88:0:0 > 0 && v86:0:0 < 49
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop19_TestCase9.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_T_Loop19_TestCase9.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 5335 milliseconds

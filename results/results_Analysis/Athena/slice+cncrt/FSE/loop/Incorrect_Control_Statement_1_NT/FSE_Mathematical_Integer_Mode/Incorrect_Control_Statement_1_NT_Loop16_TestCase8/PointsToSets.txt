@@ -1,0 +1,28 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %array = alloca [101 x i8], align 16 [size: 101, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %array = alloca [101 x i8], align 16 + 0
+NODE   3:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE   4:   %0 = bitcast [101 x i8]* %array to i8* (points-to size: 1)
+    ->   %array = alloca [101 x i8], align 16 + 0
+NODE   5:   %1 = bitcast i8* %0 to [101 x i8]* (points-to size: 1)
+    ->   %array = alloca [101 x i8], align 16 + 0
+NODE   6:   %2 = getelementptr inbounds [101 x i8], [101 x i8]* %1, i32 0, i32 0 (points-to size: 1)
+    ->   %array = alloca [101 x i8], align 16 + 0
+NODE   7:   store i8 58, i8* %2, align 16 (points-to size: 0)
+NODE   8:   %3 = getelementptr inbounds [101 x i8], [101 x i8]* %1, i32 0, i32 1 (points-to size: 1)
+    ->   %array = alloca [101 x i8], align 16 + 1
+NODE   9:   store i8 48, i8* %3, align 1 (points-to size: 0)
+NODE  10:   store i32 0, i32* %i, align 4 (points-to size: 0)
+NODE  11:   %4 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  12:   %5 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  13:   %inc = add nsw i32 %5, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  14:   store i32 %inc, i32* %i, align 4 (points-to size: 0)
+NODE  15:   ret void (points-to size: 0)
+NODE  16: main (points-to size: 1)
+    -> main + 0

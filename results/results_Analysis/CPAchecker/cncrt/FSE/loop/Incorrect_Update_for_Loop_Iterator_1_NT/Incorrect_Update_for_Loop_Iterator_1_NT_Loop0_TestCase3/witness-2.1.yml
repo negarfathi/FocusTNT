@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "bf923cde-b91f-3b80-966e-530f6c29a0c1"
+    creation_time: "2025-12-20T02:50:54Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase3.c: "3e5da163c95cfad79f0393175ed6c44c2d241a8f02f174b5cf0918b054858223"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase3.c"
+        line: 18
+        column: 5
+        function: "main"
+      value: "((((((buffer_bytes_left == (-904) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (4096)))) || (((buffer_bytes_left == (-2952) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (2048))))) || ((((buffer_bytes_left == (-4872) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (128)))) || (((buffer_bytes_left == (-3976) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (1024)))))) || (((((buffer_bytes_left == (11384) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (16384)))) || (((buffer_bytes_left == (-4488) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (512))))) || ((((buffer_bytes_left == (3192) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (8192)))) || ((((buffer_bytes_left == (-4744) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (256)))) || (((buffer_bytes_left == (0) && buffer_read_offset == (5000)) && (max_msg_size == (20000) && size == (64))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase3.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

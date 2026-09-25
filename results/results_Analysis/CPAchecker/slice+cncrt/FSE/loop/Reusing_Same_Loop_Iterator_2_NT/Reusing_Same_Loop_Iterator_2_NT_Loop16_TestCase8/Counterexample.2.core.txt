@@ -1,0 +1,42 @@
+line 9:	N4 -{int num = 100;}-> N5
+	num == 100;
+line 10:	N5 -{[!(num > 65534)]}-> N6
+	num == 100;
+line 14:	N6 -{i = 0;}-> N10
+	i == 0;
+line 15:	N10 -{while}-> N11
+line 15:	N11 -{[i < num]}-> N12
+	i == 0;
+	num == 100;
+line 16:	N12 -{i = 0;}-> N14
+	i == 0;
+line 17:	N14 -{while}-> N15
+line 17:	N15 -{[i < 3]}-> N16
+	__CPAchecker_TMP_0 == 0;
+	i == 0;
+line 17:	N18 -{i = i + 1;}-> N19
+	i == 1;
+none:	N20 -{}-> N15
+line 17:	N15 -{[i < 3]}-> N16
+	__CPAchecker_TMP_0 == 1;
+	i == 1;
+line 17:	N18 -{i = i + 1;}-> N19
+	i == 2;
+none:	N20 -{}-> N15
+line 17:	N15 -{[i < 3]}-> N16
+	__CPAchecker_TMP_0 == 2;
+	i == 2;
+line 17:	N18 -{i = i + 1;}-> N19
+	i == 3;
+none:	N20 -{}-> N15
+line 17:	N15 -{[!(i < 3)]}-> N17
+	__CPAchecker_TMP_1 == 3;
+	i == 3;
+line 18:	N21 -{i = i + 1;}-> N22
+	i == 4;
+none:	N23 -{}-> N11
+line 15:	N11 -{[i < num]}-> N12
+	i == 0;
+	i == 4;
+	num == 100;
+line 17:	N14 -{while}-> N15

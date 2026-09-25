@@ -1,0 +1,252 @@
+YES
+proof of /FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 91 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1349 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) AND
+    (7) LLVM Symbolic Execution SCC
+        (8) SCC2IRS [SOUND, 141 ms]
+        (9) IntTRS
+        (10) IntTRSCompressionProof [EQUIVALENT, 10 ms]
+        (11) IntTRS
+        (12) PolynomialOrderProcessor [EQUIVALENT, 59 ms]
+        (13) YES
+    (14) LLVM Symbolic Execution SCC
+        (15) SCC2IRS [SOUND, 110 ms]
+        (16) IntTRS
+        (17) IntTRSCompressionProof [EQUIVALENT, 10 ms]
+        (18) IntTRS
+        (19) PolynomialOrderProcessor [EQUIVALENT, 62 ms]
+        (20) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_uint" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%4 = call i32 @__VERIFIER_nondet_uint()
+		store %4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%5 = call i32 @__VERIFIER_nondet_uint()
+		store %5, %3
+		%6 = load %2
+		%7 = load %3
+		%8 = icmp ult %6 %7
+		br %8, %9, %11
+	9:
+		%10 = load %3
+		store %10, %2
+		br %11
+	11:
+		br %12
+	12:
+		%13 = load %1
+		%14 = load %2
+		%15 = icmp ult %13 %14
+		br %15, %16, %19
+	16:
+		%17 = load %1
+		%18 = mul i32 %17, 2
+		store %18, %1
+		br %12
+	19:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 2 SCCs.
+----------------------------------------
+
+(6)
+Complex Obligation (AND)
+
+----------------------------------------
+
+(7)
+Obligation:
+SCC
+----------------------------------------
+
+(8) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_219(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) -> f_222(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) :|: 0 = 0
+f_222(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) -> f_225(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) :|: v227 < v224 && 3 <= v224
+f_225(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) -> f_228(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) :|: 0 = 0
+f_228(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) -> f_231(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) :|: TRUE
+f_231(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) -> f_234(v220, v221, v222, v223, v224, 1, v227, v228, v229, v230, 3, 0, 2, 4) :|: 0 = 0
+f_234(v220, v221, v222, v223, v224, 1, v227, v228, v229, v230, 3, 0, 2, 4) -> f_236(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) :|: v281 = 2 * v227 && 4 <= v281
+f_236(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) -> f_237(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) :|: TRUE
+f_237(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) -> f_238(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) :|: TRUE
+f_238(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) -> f_216(v220, v221, v222, v223, v224, 1, v227, v281, v228, v229, v230, 3, 2, 0, 4) :|: TRUE
+f_216(v220, v221, v222, v223, v224, 1, v226, v227, v228, v229, v230, 3, 2, 0, 4) -> f_219(v220, v221, v222, v223, v224, 1, v227, v226, v228, v229, v230, 3, 2, 0, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_219(v220:0, v221:0, v222:0, v223:0, v224:0, 1, v227:0, v226:0, v228:0, v229:0, v230:0, 3, 2, 0, 4) -> f_219(v220:0, v221:0, v222:0, v223:0, v224:0, 1, 2 * v227:0, v227:0, v228:0, v229:0, v230:0, 3, 2, 0, 4) :|: v224:0 > 2 && 3 < 2 * v227:0 && v227:0 < v224:0
+Filtered unneeded arguments:
+   f_219(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_219(x5, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_219(v224:0, v227:0) -> f_219(v224:0, 2 * v227:0) :|: 3 < 2 * v227:0 && v227:0 < v224:0 && v224:0 > 2
+
+----------------------------------------
+
+(9)
+Obligation:
+Rules:
+f_219(v224:0, v227:0) -> f_219(v224:0, 2 * v227:0) :|: 3 < 2 * v227:0 && v227:0 < v224:0 && v224:0 > 2
+
+----------------------------------------
+
+(10) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(11)
+Obligation:
+Rules:
+f_219(v224:0:0, v227:0:0) -> f_219(v224:0:0, 2 * v227:0:0) :|: 3 < 2 * v227:0:0 && v227:0:0 < v224:0:0 && v224:0:0 > 2
+
+----------------------------------------
+
+(12) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_219(x, x1)] = -1 + x - x1
+
+The following rules are decreasing:
+f_219(v224:0:0, v227:0:0) -> f_219(v224:0:0, 2 * v227:0:0) :|: 3 < 2 * v227:0:0 && v227:0:0 < v224:0:0 && v224:0:0 > 2
+The following rules are bounded:
+f_219(v224:0:0, v227:0:0) -> f_219(v224:0:0, 2 * v227:0:0) :|: 3 < 2 * v227:0:0 && v227:0:0 < v224:0:0 && v224:0:0 > 2
+
+----------------------------------------
+
+(13)
+YES
+
+----------------------------------------
+
+(14)
+Obligation:
+SCC
+----------------------------------------
+
+(15) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_212(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) -> f_214(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) :|: 0 = 0
+f_214(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) -> f_217(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) :|: v203 < v198 && 3 <= v198
+f_217(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) -> f_220(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) :|: 0 = 0
+f_220(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) -> f_223(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) :|: TRUE
+f_223(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) -> f_227(v195, v196, v197, v198, v199, 0, v203, 1, v204, v205, v206, 3, 2, 4) :|: 0 = 0
+f_227(v195, v196, v197, v198, v199, 0, v203, 1, v204, v205, v206, 3, 2, 4) -> f_230(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) :|: v243 = 2 * v203 && 4 <= v243
+f_230(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) -> f_233(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) :|: TRUE
+f_233(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) -> f_235(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) :|: TRUE
+f_235(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) -> f_210(v195, v196, v197, v198, v199, 0, v203, 1, v243, v204, v205, v206, 3, 2, 4) :|: TRUE
+f_210(v195, v196, v197, v198, v199, 0, v201, 1, v203, v204, v205, v206, 3, 2, 4) -> f_212(v195, v196, v197, v198, v199, 0, v203, 1, v201, v204, v205, v206, 3, 2, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_212(v195:0, v196:0, v197:0, v198:0, v199:0, 0, v203:0, 1, v201:0, v204:0, v205:0, v206:0, 3, 2, 4) -> f_212(v195:0, v196:0, v197:0, v198:0, v199:0, 0, 2 * v203:0, 1, v203:0, v204:0, v205:0, v206:0, 3, 2, 4) :|: v198:0 > 2 && 3 < 2 * v203:0 && v203:0 < v198:0
+Filtered unneeded arguments:
+   f_212(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_212(x4, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_212(v198:0, v203:0) -> f_212(v198:0, 2 * v203:0) :|: 3 < 2 * v203:0 && v203:0 < v198:0 && v198:0 > 2
+
+----------------------------------------
+
+(16)
+Obligation:
+Rules:
+f_212(v198:0, v203:0) -> f_212(v198:0, 2 * v203:0) :|: 3 < 2 * v203:0 && v203:0 < v198:0 && v198:0 > 2
+
+----------------------------------------
+
+(17) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(18)
+Obligation:
+Rules:
+f_212(v198:0:0, v203:0:0) -> f_212(v198:0:0, 2 * v203:0:0) :|: 3 < 2 * v203:0:0 && v203:0:0 < v198:0:0 && v198:0:0 > 2
+
+----------------------------------------
+
+(19) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_212(x, x1)] = -1 + x - x1
+
+The following rules are decreasing:
+f_212(v198:0:0, v203:0:0) -> f_212(v198:0:0, 2 * v203:0:0) :|: 3 < 2 * v203:0:0 && v203:0:0 < v198:0:0 && v198:0:0 > 2
+The following rules are bounded:
+f_212(v198:0:0, v203:0:0) -> f_212(v198:0:0, 2 * v203:0:0) :|: 3 < 2 * v203:0:0 && v203:0:0 < v198:0:0 && v198:0:0 > 2
+
+----------------------------------------
+
+(20)
+YES
+/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase0.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase0.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 5586 milliseconds

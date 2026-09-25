@@ -1,0 +1,30 @@
+int __VERIFIER_nondet_int();
+int main();
+extern void __VERIFIER_error(void);
+int main_0();
+int main_0() {
+  int i;
+  int j;
+  int num_crtc = 10;
+  int num_output = 5;
+  __CPROVER_assume(!(num_crtc > 65534));
+  __CPROVER_assume(!(num_output > 65534));
+  i = 0;
+  __CPROVER_assume(i < num_crtc);
+  i = 0;
+  __CPROVER_assume(i < num_output);
+  i = i + 1;
+  __CPROVER_assume(i < num_output);
+  i = i + 1;
+  __CPROVER_assume(i < num_output);
+  i = i + 1;
+  __CPROVER_assume(i < num_output);
+  i = i + 1;
+  __CPROVER_assume(i < num_output);
+  i = i + 1;
+  __CPROVER_assume(!(i < num_output));
+  i = i + 1;
+  __CPROVER_assume(i < num_crtc);
+  __VERIFIER_error(); // target state
+  i = 0;
+}

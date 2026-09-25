@@ -1,0 +1,440 @@
+CONTROL AUTOMATON ErrorPath4
+
+INITIAL STATE ARG0;
+
+STATE USEFIRST ARG0 :
+    MATCH "" -> GOTO ARG3;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG3 :
+    MATCH "extern unsigned int __VERIFIER_nondet_uint(void);" -> GOTO ARG5;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG5 :
+    MATCH "void main(void)" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "" -> GOTO ARG8;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG8 :
+    MATCH "unsigned int ui = (unsigned int)1;" -> ASSUME {ui == (1U);} GOTO ARG11;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG11 :
+    MATCH "unsigned int size = 4294967290;" -> ASSUME {size == (4294967290U);} GOTO ARG12;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG12 :
+    MATCH "unsigned int BUFFSIZE = 4294967290;" -> ASSUME {BUFFSIZE == (4294967290U);} GOTO ARG13;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG13 :
+    MATCH "[!(size < BUFFSIZE)]" -> ASSUME {size == (4294967290U);BUFFSIZE == (4294967290U);} GOTO ARG22;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG22 :
+    MATCH "" -> GOTO ARG25;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG25 :
+    MATCH "[ui < size]" -> ASSUME {ui == (1U);size == (4294967290U);} GOTO ARG27;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG27 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (2U);} GOTO ARG28;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG28 :
+    MATCH "" -> GOTO ARG29;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG29 :
+    MATCH "[ui < size]" -> ASSUME {ui == (2U);size == (4294967290U);} GOTO ARG30;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG30 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (4U);} GOTO ARG44;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG44 :
+    MATCH "" -> GOTO ARG51;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG51 :
+    MATCH "[ui < size]" -> ASSUME {ui == (4U);size == (4294967290U);} GOTO ARG56;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG56 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (8U);} GOTO ARG57;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG57 :
+    MATCH "" -> GOTO ARG58;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG58 :
+    MATCH "[ui < size]" -> ASSUME {ui == (8U);size == (4294967290U);} GOTO ARG59;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG59 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (16U);} GOTO ARG60;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG60 :
+    MATCH "" -> GOTO ARG61;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG61 :
+    MATCH "[ui < size]" -> ASSUME {ui == (16U);size == (4294967290U);} GOTO ARG62;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG62 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (32U);} GOTO ARG63;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG63 :
+    MATCH "" -> GOTO ARG64;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG64 :
+    MATCH "[ui < size]" -> ASSUME {ui == (32U);size == (4294967290U);} GOTO ARG72;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG72 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (64U);} GOTO ARG73;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG73 :
+    MATCH "" -> GOTO ARG74;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG74 :
+    MATCH "[ui < size]" -> ASSUME {ui == (64U);size == (4294967290U);} GOTO ARG75;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG75 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (128U);} GOTO ARG76;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG76 :
+    MATCH "" -> GOTO ARG77;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG77 :
+    MATCH "[ui < size]" -> ASSUME {ui == (128U);size == (4294967290U);} GOTO ARG78;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG78 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (256U);} GOTO ARG79;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG79 :
+    MATCH "" -> GOTO ARG80;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG80 :
+    MATCH "[ui < size]" -> ASSUME {ui == (256U);size == (4294967290U);} GOTO ARG81;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG81 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (512U);} GOTO ARG82;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG82 :
+    MATCH "" -> GOTO ARG83;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG83 :
+    MATCH "[ui < size]" -> ASSUME {ui == (512U);size == (4294967290U);} GOTO ARG84;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG84 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (1024U);} GOTO ARG85;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG85 :
+    MATCH "" -> GOTO ARG86;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG86 :
+    MATCH "[ui < size]" -> ASSUME {ui == (1024U);size == (4294967290U);} GOTO ARG87;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG87 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (2048U);} GOTO ARG88;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG88 :
+    MATCH "" -> GOTO ARG89;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG89 :
+    MATCH "[ui < size]" -> ASSUME {ui == (2048U);size == (4294967290U);} GOTO ARG90;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG90 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (4096U);} GOTO ARG91;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG91 :
+    MATCH "" -> GOTO ARG93;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG93 :
+    MATCH "[ui < size]" -> ASSUME {ui == (4096U);size == (4294967290U);} GOTO ARG94;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG94 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (8192U);} GOTO ARG95;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG95 :
+    MATCH "" -> GOTO ARG96;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG96 :
+    MATCH "[ui < size]" -> ASSUME {ui == (8192U);size == (4294967290U);} GOTO ARG97;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG97 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (16384U);} GOTO ARG98;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG98 :
+    MATCH "" -> GOTO ARG99;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG99 :
+    MATCH "[ui < size]" -> ASSUME {ui == (16384U);size == (4294967290U);} GOTO ARG100;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG100 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (32768U);} GOTO ARG101;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG101 :
+    MATCH "" -> GOTO ARG102;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG102 :
+    MATCH "[ui < size]" -> ASSUME {ui == (32768U);size == (4294967290U);} GOTO ARG103;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG103 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (65536U);} GOTO ARG104;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG104 :
+    MATCH "" -> GOTO ARG105;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG105 :
+    MATCH "[ui < size]" -> ASSUME {ui == (65536U);size == (4294967290U);} GOTO ARG106;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG106 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (131072U);} GOTO ARG107;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG107 :
+    MATCH "" -> GOTO ARG108;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG108 :
+    MATCH "[ui < size]" -> ASSUME {ui == (131072U);size == (4294967290U);} GOTO ARG109;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG109 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (262144U);} GOTO ARG110;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG110 :
+    MATCH "" -> GOTO ARG111;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG111 :
+    MATCH "[ui < size]" -> ASSUME {ui == (262144U);size == (4294967290U);} GOTO ARG112;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG112 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (524288U);} GOTO ARG113;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG113 :
+    MATCH "" -> GOTO ARG114;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG114 :
+    MATCH "[ui < size]" -> ASSUME {ui == (524288U);size == (4294967290U);} GOTO ARG115;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG115 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (1048576U);} GOTO ARG116;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG116 :
+    MATCH "" -> GOTO ARG117;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG117 :
+    MATCH "[ui < size]" -> ASSUME {ui == (1048576U);size == (4294967290U);} GOTO ARG118;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG118 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (2097152U);} GOTO ARG119;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG119 :
+    MATCH "" -> GOTO ARG120;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG120 :
+    MATCH "[ui < size]" -> ASSUME {ui == (2097152U);size == (4294967290U);} GOTO ARG121;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG121 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (4194304U);} GOTO ARG122;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG122 :
+    MATCH "" -> GOTO ARG123;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG123 :
+    MATCH "[ui < size]" -> ASSUME {ui == (4194304U);size == (4294967290U);} GOTO ARG124;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG124 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (8388608U);} GOTO ARG125;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG125 :
+    MATCH "" -> GOTO ARG126;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG126 :
+    MATCH "[ui < size]" -> ASSUME {ui == (8388608U);size == (4294967290U);} GOTO ARG127;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG127 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (16777216U);} GOTO ARG128;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG128 :
+    MATCH "" -> GOTO ARG129;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG129 :
+    MATCH "[ui < size]" -> ASSUME {ui == (16777216U);size == (4294967290U);} GOTO ARG130;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG130 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (33554432U);} GOTO ARG131;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG131 :
+    MATCH "" -> GOTO ARG132;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG132 :
+    MATCH "[ui < size]" -> ASSUME {ui == (33554432U);size == (4294967290U);} GOTO ARG133;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG133 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (67108864U);} GOTO ARG134;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG134 :
+    MATCH "" -> GOTO ARG135;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG135 :
+    MATCH "[ui < size]" -> ASSUME {ui == (67108864U);size == (4294967290U);} GOTO ARG136;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG136 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (134217728U);} GOTO ARG137;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG137 :
+    MATCH "" -> GOTO ARG138;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG138 :
+    MATCH "[ui < size]" -> ASSUME {ui == (134217728U);size == (4294967290U);} GOTO ARG139;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG139 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (268435456U);} GOTO ARG140;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG140 :
+    MATCH "" -> GOTO ARG141;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG141 :
+    MATCH "[ui < size]" -> ASSUME {ui == (268435456U);size == (4294967290U);} GOTO ARG142;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG142 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (536870912U);} GOTO ARG143;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG143 :
+    MATCH "" -> GOTO ARG144;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG144 :
+    MATCH "[ui < size]" -> ASSUME {ui == (536870912U);size == (4294967290U);} GOTO ARG145;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG145 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (1073741824U);} GOTO ARG146;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG146 :
+    MATCH "" -> GOTO ARG147;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG147 :
+    MATCH "[ui < size]" -> ASSUME {ui == (1073741824U);size == (4294967290U);} GOTO ARG148;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG148 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (2147483648U);} GOTO ARG149;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG149 :
+    MATCH "" -> GOTO ARG150;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG150 :
+    MATCH "[ui < size]" -> ASSUME {ui == (2147483648U);size == (4294967290U);} GOTO ARG151;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG151 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (0U);} GOTO ARG152;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG152 :
+    MATCH "" -> GOTO ARG153;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG153 :
+    MATCH "[ui < size]" -> ASSUME {ui == (0U);size == (4294967290U);} GOTO ARG154;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG154 :
+    MATCH "ui *= (unsigned int)2;" -> ASSUME {ui == (0U);} GOTO ARG155;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG155 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG156 :
+    TRUE -> STOP;
+
+END AUTOMATON

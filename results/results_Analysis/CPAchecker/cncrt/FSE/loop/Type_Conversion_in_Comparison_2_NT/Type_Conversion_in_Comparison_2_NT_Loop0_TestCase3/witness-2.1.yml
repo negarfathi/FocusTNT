@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "6ae65c87-8c7e-3c59-a46c-3e13f9891058"
+    creation_time: "2025-12-20T07:10:18Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_NT_Loop0_TestCase3.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_NT_Loop0_TestCase3.c: "0ea9b7b194257af9e957ef13c47e24e62542cb4e6896e9d850de8d852721ea30"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_NT_Loop0_TestCase3.c"
+        line: 16
+        column: 2
+        function: "main"
+      value: "(((ac == (255U) && (c1 == (255U) && c2 == (0)))) || ((ac == (0U) && (c1 == (255U) && c2 == (0)))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_2_NT_Loop0_TestCase3.c"
+        line: 11
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

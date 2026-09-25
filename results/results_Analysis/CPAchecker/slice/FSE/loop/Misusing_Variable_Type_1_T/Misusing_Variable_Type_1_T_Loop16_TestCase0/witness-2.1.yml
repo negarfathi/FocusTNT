@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "049ff99c-f018-3e04-97ce-ca2c89bca2e2"
+    creation_time: "2025-12-20T00:53:02Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop16_TestCase0.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop16_TestCase0.c: "3daa8c2aef2a7ee57b4f2bdf9a56ebd176de0c2e73d7ea7a0aa8c102a8160cff"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop16_TestCase0.c"
+        line: 7
+        column: 3
+        function: "main"
+      value: "(((div1 == (0) && div2 == (-1))) || (((div1 == (-1) && div2 == (-1))) || div1 == (1)))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop16_TestCase0.c"
+        line: 9
+        column: 5
+        function: "main"
+      value: "((((((div1 == (1) && div2 == (6))) || ((div1 == (0) && div2 == (-1)))) || (((div1 == (1) && div2 == (2))) || ((div1 == (0) && div2 == (5))))) || ((((div1 == (1) && div2 == (0))) || ((div1 == (1) && div2 == (1)))) || (((div1 == (0) && div2 == (4))) || (((div1 == (1) && div2 == (7))) || ((div1 == (1) && div2 == (3))))))) || (((((div1 == (1) && div2 == (-1))) || ((div1 == (1) && div2 == (4)))) || (((div1 == (0) && div2 == (0))) || ((div1 == (0) && div2 == (7))))) || ((((div1 == (0) && div2 == (3))) || ((div1 == (1) && div2 == (5)))) || (((div1 == (0) && div2 == (6))) || (((div1 == (0) && div2 == (1))) || ((div1 == (0) && div2 == (2))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop16_TestCase0.c"
+        line: 2
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

@@ -1,0 +1,64 @@
+///*** 1_main ***///
+START: main_bb5;
+
+
+
+FROM: main_bb5;
+var__temp_vi.0 := 10;
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit;
+vi.0 := var__temp_vi.0;
+TO: main_wrap_around.exit_end;
+
+FROM: main_wrap_around.exit_end;
+assume(vi.0 <= 2050000000);
+TO: main_bb6;
+
+FROM: main_wrap_around.exit_end;
+assume(vi.0 > 2050000000);
+TO: main_bb10;
+
+FROM: main_bb6;
+v13 := vi.0 * 10;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v13 > 2147483647);
+TO: main_bb7;
+
+FROM: main_bb6_end;
+assume(v13 <= 2147483647);
+TO: main_bb8;
+
+FROM: main_bb7;
+v15 := v13 - 2147483647;
+v16 := v15 - 1;
+v17 := v16 % 4294967296;
+v18 := -2147483648 + v17;
+var__temp_vi.0 := v18;
+TO: main_wrap_around.exit;
+
+FROM: main_bb8;
+var__temp_vi.0 := v13;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v13 < -2147483648);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v13 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb9;
+v20 := -2147483648 - v13;
+v21 := v20 - 1;
+v22 := v21 % 4294967296;
+v23 := 2147483647 - v22;
+var__temp_vi.0 := v23;
+TO: main_wrap_around.exit;
+
+FROM: main_bb10;
+TO: main_bb10_ret;
+

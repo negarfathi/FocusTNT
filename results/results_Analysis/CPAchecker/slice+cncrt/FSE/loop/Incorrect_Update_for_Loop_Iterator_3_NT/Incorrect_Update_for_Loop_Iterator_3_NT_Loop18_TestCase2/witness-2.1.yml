@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "51ebeab9-3feb-32d0-be60-68f650c65c8a"
+    creation_time: "2025-12-20T11:30:23Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase2.c: "b4da1558cae826f973e501fcf3e6e27f4082308c8b2a0b40c5b051ad0d5634bf"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase2.c"
+        line: 10
+        column: 3
+        function: "main"
+      value: "((((NR_OPEN == (100) && (nfds == (12) && nr == (50)))) || (((NR_OPEN == (100) && (nfds == (48) && nr == (50)))) || ((NR_OPEN == (100) && (nfds == (6) && nr == (50)))))) || (((NR_OPEN == (100) && (nfds == (24) && nr == (50)))) || (((NR_OPEN == (100) && (nfds == (96) && nr == (50)))) || ((NR_OPEN == (100) && (nfds == (3) && nr == (50)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_3_NT_Loop18_TestCase2.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

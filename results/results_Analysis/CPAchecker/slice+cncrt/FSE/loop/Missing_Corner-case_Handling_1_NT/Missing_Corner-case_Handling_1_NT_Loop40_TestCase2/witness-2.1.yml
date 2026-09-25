@@ -1,0 +1,47 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "3e40aab9-f10b-3505-9cdd-4b22a1306c67"
+    creation_time: "2025-12-20T11:33:16Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Corner-case_Handling_1_NT_Loop40_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Corner-case_Handling_1_NT_Loop40_TestCase2.c: "f0f991682464ce590980cc71fb4c2e0b11d2d2b998d07bad82cc29af3114ae2b"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Corner-case_Handling_1_NT_Loop40_TestCase2.c"
+        line: 37
+        column: 3
+        function: "main"
+      value: "1"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Corner-case_Handling_1_NT_Loop40_TestCase2.c"
+        line: 35
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Corner-case_Handling_1_NT_Loop40_TestCase2.c"
+        line: 7
+        column: 1
+        function: "read_slice_1"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (-1)))"
+      format: "acsl_expression"

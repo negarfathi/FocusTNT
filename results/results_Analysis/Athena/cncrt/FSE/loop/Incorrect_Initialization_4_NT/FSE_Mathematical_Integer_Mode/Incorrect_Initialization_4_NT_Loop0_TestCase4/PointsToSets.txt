@@ -1,0 +1,61 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %retval = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %retval = alloca i32, align 4 + 0
+NODE   3:   %h = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %h = alloca i32, align 4 + 0
+NODE   4:   %hash = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %hash = alloca i32, align 4 + 0
+NODE   5:   %rehash = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %rehash = alloca i32, align 4 + 0
+NODE   6:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE   7:   %r = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %r = alloca i32, align 4 + 0
+NODE   8:   store i32 0, i32* %retval, align 4 (points-to size: 0)
+NODE   9:   store i32 10, i32* %h, align 4 (points-to size: 0)
+NODE  10:   store i32 0, i32* %hash, align 4 (points-to size: 0)
+NODE  11:   store i32 1, i32* %rehash, align 4 (points-to size: 0)
+NODE  12:   %0 = load i32, i32* %h, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  13:   store i32 0, i32* %retval, align 4 (points-to size: 0)
+NODE  14:   %14 = load i32, i32* %retval, align 4 (points-to size: 1)
+    -> null + 0
+NODE  15:   ret i32 %14 (points-to size: 0)
+NODE  16:   %1 = load i32, i32* %hash, align 4 (points-to size: 1)
+    -> null + 0
+NODE  17:   %2 = load i32, i32* %rehash, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  18:   %3 = load i32, i32* %rehash, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  19:   %4 = load i32, i32* %hash, align 4 (points-to size: 1)
+    -> null + 0
+NODE  20:   %5 = load i32, i32* %h, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   %6 = load i32, i32* %hash, align 4 (points-to size: 1)
+    -> null + 0
+NODE  22:   %rem = srem i32 %5, %6 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  23:   store i32 %rem, i32* %i, align 4 (points-to size: 0)
+NODE  24:   %7 = load i32, i32* %i, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  25:   %8 = load i32, i32* %hash, align 4 (points-to size: 1)
+    -> null + 0
+NODE  26:   %9 = load i32, i32* %r, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  27:   store i32 0, i32* %retval, align 4 (points-to size: 0)
+NODE  28:   %12 = load i32, i32* %r, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  29:   %13 = load i32, i32* %i, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  30:   %add = add nsw i32 %13, %12 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  31:   store i32 %add, i32* %i, align 4 (points-to size: 0)
+NODE  32:   %10 = load i32, i32* %h, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  33:   %11 = load i32, i32* %rehash, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  34:   %rem8 = srem i32 %10, %11 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  35:   store i32 %rem8, i32* %r, align 4 (points-to size: 0)
+NODE  36: main (points-to size: 1)
+    -> main + 0

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "02b5157e-ec26-3038-9d0b-b91096b5c9eb"
+    creation_time: "2025-12-20T06:21:34Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop0_TestCase9.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop0_TestCase9.c: "10b08c0bec411c80a273db29e580e40251a2e05d0c9d87aec96e9f5ff2bb6a79"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop0_TestCase9.c"
+        line: 13
+        column: 5
+        function: "main"
+      value: "(((((((needed == (1500000000) && smallest == (512))) || ((needed == (1500000000) && smallest == (0)))) || (((needed == (1500000000) && smallest == (-2147483648))) || ((needed == (1500000000) && smallest == (1048576))))) || ((((needed == (1500000000) && smallest == (268435456))) || ((needed == (1500000000) && smallest == (4194304)))) || (((needed == (1500000000) && smallest == (2048))) || ((needed == (1500000000) && smallest == (16)))))) || (((((needed == (1500000000) && smallest == (33554432))) || ((needed == (1500000000) && smallest == (4)))) || (((needed == (1500000000) && smallest == (16777216))) || ((needed == (1500000000) && smallest == (524288))))) || ((((needed == (1500000000) && smallest == (8))) || ((needed == (1500000000) && smallest == (65536)))) || (((needed == (1500000000) && smallest == (32))) || ((needed == (1500000000) && smallest == (4096))))))) || ((((((needed == (1500000000) && smallest == (256))) || ((needed == (1500000000) && smallest == (8192)))) || (((needed == (1500000000) && smallest == (64))) || ((needed == (1500000000) && smallest == (67108864))))) || ((((needed == (1500000000) && smallest == (1073741824))) || ((needed == (1500000000) && smallest == (1)))) || (((needed == (1500000000) && smallest == (128))) || ((needed == (1500000000) && smallest == (2097152)))))) || (((((needed == (1500000000) && smallest == (1024))) || ((needed == (1500000000) && smallest == (262144)))) || (((needed == (1500000000) && smallest == (16384))) || ((needed == (1500000000) && smallest == (134217728))))) || ((((needed == (1500000000) && smallest == (8388608))) || ((needed == (1500000000) && smallest == (536870912)))) || (((needed == (1500000000) && smallest == (131072))) || (((needed == (1500000000) && smallest == (32768))) || ((needed == (1500000000) && smallest == (2)))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Signed_Overflow_Error_2_T_Loop0_TestCase9.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

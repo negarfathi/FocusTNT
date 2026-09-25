@@ -1,0 +1,42 @@
+CONTROL AUTOMATON ErrorPath3
+
+INITIAL STATE ARG2;
+
+STATE USEFIRST ARG2 :
+    MATCH "" -> GOTO ARG7;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG7 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_0_1 :
+    MATCH "extern int __VERIFIER_nondet_int(void);" -> GOTO ARG11_1_1;
+STATE USEFIRST ARG11_1_1 :
+    MATCH "void main(void)" -> GOTO ARG11_2_1;
+STATE USEFIRST ARG11_2_1 :
+    MATCH "" -> GOTO ARG11_3_1;
+STATE USEFIRST ARG11_3_1 :
+    MATCH "int mask = __VERIFIER_nondet_int();" -> GOTO ARG11_4_1;
+STATE USEFIRST ARG11_4_1 :
+    MATCH "int mask = __VERIFIER_nondet_int();" -> GOTO ARG11;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG11 :
+    MATCH "" -> GOTO ARG13;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG13 :
+    MATCH "[[mask > 1]]" -> GOTO ARG29;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG29 :
+    MATCH "mask >>= 1;" -> GOTO ARG39;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG39 :
+    MATCH "" -> ERROR;
+    TRUE -> STOP;
+
+STATE USEFIRST ARG187 :
+    TRUE -> STOP;
+
+END AUTOMATON

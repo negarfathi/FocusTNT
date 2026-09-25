@@ -27,20 +27,20 @@ echo "Installing FocusTNT's tool dependencies..."
 "$root_directory/tools/XLNT/install_xlnt.sh"
 "$root_directory/tools/FramaC/install_FramaC.sh"
 
-# if cd "$root_directory/tools" && \
-#    rm -rf Athena && \
-#    git clone https://github.com/negarfarhi/Athena.git; then
-#     "$root_directory/tools/Athena/install_Athena.sh"
-# else
-#     echo "Failed to clone Athena."
-#     exit 1
-# fi
+ if cd "$root_directory/tools" && \
+    rm -rf Athena && \
+    git clone https://github.com/negarfarhi/Athena.git; then
+     "$root_directory/tools/Athena/install_Athena.sh"
+ else
+     echo "Failed to clone Athena."
+     exit 1
+ fi
 
-# "$root_directory/tools/PROTON/install_PROTON.sh"
-# "$root_directory/tools/UAutomizer/install_UAutomizer.sh"
-# "$root_directory/tools/AProVE/install_AProVE.sh"
-# "$root_directory/tools/CPAchecker/install_CPAchecker.sh"
-# "$root_directory/tools/2LS/install_2LS.sh"
+ "$root_directory/tools/PROTON/install_PROTON.sh"
+ "$root_directory/tools/UAutomizer/install_UAutomizer.sh"
+ "$root_directory/tools/AProVE/install_AProVE.sh"
+ "$root_directory/tools/CPAchecker/install_CPAchecker.sh"
+ "$root_directory/tools/2LS/install_2LS.sh"
 
 echo "All FocusTNT's tool dependencies successfully installed."
 

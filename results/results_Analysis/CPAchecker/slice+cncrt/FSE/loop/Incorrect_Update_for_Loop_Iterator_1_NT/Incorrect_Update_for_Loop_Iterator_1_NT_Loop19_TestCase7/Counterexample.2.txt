@@ -1,0 +1,116 @@
+none:	N1 -{INIT GLOBAL VARS}-> N32
+line 3:	N32 -{int __VERIFIER_nondet_int();}-> N33
+lines 5-27:	N33 -{void main();}-> N34
+none:	N34 -{Function start dummy edge}-> N2
+line 7:	N2 -{int __retres;}-> N3
+line 8:	N3 -{int max_msg_size = 1024;}-> N4
+	max_msg_size == 1024;
+line 9:	N4 -{int buffer_read_offset = 900;}-> N5
+	buffer_read_offset == 900;
+line 10:	N5 -{int buffer_bytes_left = 0;}-> N6
+	buffer_bytes_left == 0;
+line 11:	N6 -{[!(max_msg_size < -1)]}-> N9
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 13:	N9 -{[!(buffer_read_offset <= 0)]}-> N13
+	buffer_read_offset == 900;
+	buffer_read_offset == 900;
+line 15:	N13 -{[!(buffer_bytes_left < 0)]}-> N15
+	buffer_bytes_left == 0;
+	buffer_bytes_left == 0;
+none:	N15 -{}-> N7
+line 19:	N7 -{int size = 64;}-> N19
+	size == 64;
+line 20:	N19 -{while}-> N20
+line 20:	N20 -{[buffer_bytes_left < (size / 2)]}-> N21
+	buffer_bytes_left == 0;
+	buffer_bytes_left == 0;
+size / 2 == 32
+line 21:	N21 -{size = size * 2;}-> N23
+	size == 128;
+line 22:	N23 -{[max_msg_size != -1]}-> N25
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 23:	N25 -{[!(size > max_msg_size)]}-> N26
+	size == 128;
+	max_msg_size == 1024;
+	size == 128;
+max_msg_size == 1024;
+none:	N26 -{}-> N24
+line 24:	N24 -{buffer_bytes_left = size - buffer_read_offset;}-> N29
+	buffer_bytes_left == -772;
+none:	N29 -{}-> N20
+line 20:	N20 -{[buffer_bytes_left < (size / 2)]}-> N21
+	buffer_bytes_left == -772;
+	buffer_bytes_left == -772;
+size / 2 == 64
+line 21:	N21 -{size = size * 2;}-> N23
+	size == 256;
+line 22:	N23 -{[max_msg_size != -1]}-> N25
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 23:	N25 -{[!(size > max_msg_size)]}-> N26
+	size == 256;
+	max_msg_size == 1024;
+	size == 256;
+max_msg_size == 1024;
+none:	N26 -{}-> N24
+line 24:	N24 -{buffer_bytes_left = size - buffer_read_offset;}-> N29
+	buffer_bytes_left == -644;
+none:	N29 -{}-> N20
+line 20:	N20 -{[buffer_bytes_left < (size / 2)]}-> N21
+	buffer_bytes_left == -644;
+	buffer_bytes_left == -644;
+size / 2 == 128
+line 21:	N21 -{size = size * 2;}-> N23
+	size == 512;
+line 22:	N23 -{[max_msg_size != -1]}-> N25
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 23:	N25 -{[!(size > max_msg_size)]}-> N26
+	size == 512;
+	max_msg_size == 1024;
+	size == 512;
+max_msg_size == 1024;
+none:	N26 -{}-> N24
+line 24:	N24 -{buffer_bytes_left = size - buffer_read_offset;}-> N29
+	buffer_bytes_left == -388;
+none:	N29 -{}-> N20
+line 20:	N20 -{[buffer_bytes_left < (size / 2)]}-> N21
+	buffer_bytes_left == -388;
+	buffer_bytes_left == -388;
+size / 2 == 256
+line 21:	N21 -{size = size * 2;}-> N23
+	size == 1024;
+line 22:	N23 -{[max_msg_size != -1]}-> N25
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 23:	N25 -{[!(size > max_msg_size)]}-> N26
+	size == 1024;
+	max_msg_size == 1024;
+	size == 1024;
+max_msg_size == 1024;
+none:	N26 -{}-> N24
+line 24:	N24 -{buffer_bytes_left = size - buffer_read_offset;}-> N29
+	buffer_bytes_left == 124;
+none:	N29 -{}-> N20
+line 20:	N20 -{[buffer_bytes_left < (size / 2)]}-> N21
+	buffer_bytes_left == 124;
+	buffer_bytes_left == 124;
+size / 2 == 512
+line 21:	N21 -{size = size * 2;}-> N23
+	size == 2048;
+line 22:	N23 -{[max_msg_size != -1]}-> N25
+	max_msg_size == 1024;
+	max_msg_size == 1024;
+line 23:	N25 -{[size > max_msg_size]}-> N27
+	size == 2048;
+	max_msg_size == 1024;
+	size == 2048;
+max_msg_size == 1024;
+line 23:	N27 -{size = max_msg_size;}-> N28
+	size == 1024;
+none:	N28 -{}-> N24
+line 24:	N24 -{buffer_bytes_left = size - buffer_read_offset;}-> N29
+	buffer_bytes_left == 124;
+none:	N29 -{}-> N20

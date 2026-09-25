@@ -1,0 +1,35 @@
+none:	N16 -{INIT GLOBAL VARS}-> N29
+line 1:	N29 -{int __VERIFIER_nondet_int();}-> N30
+line 9:	N30 -{int flag = 0;}-> N31
+	flag == 0;
+lines 10-20:	N31 -{int mdb_cursor_get();}-> N32
+lines 22-34:	N32 -{int main();}-> N33
+none:	N33 -{Function start dummy edge}-> N17
+line 24:	N17 -{int rc;}-> N18
+line 25:	N18 -{mdb_cursor_get()}-> N1
+none:	N1 -{Function start dummy edge}-> N2
+line 12:	N2 -{int i = 10;}-> N3
+	i == 10;
+line 13:	N3 -{const int __CPAchecker_TMP_0 = flag;}-> N4
+	__CPAchecker_TMP_0 == 0;
+line 13:	N4 -{flag = flag + 1;}-> N5
+	flag == 1;
+line 13:	N5 -{__CPAchecker_TMP_0;}-> N6
+line 14:	N6 -{[!(flag > 1000)]}-> N7
+	flag == 1;
+	flag == 1;
+line 16:	N7 -{[i >= 0]}-> N11
+	i == 10;
+	i == 10;
+line 17:	N11 -{return 0;}-> N0
+line 25:	N0 -{Return edge from mdb_cursor_get to main: rc = mdb_cursor_get();}-> N19
+line 26:	N19 -{int dval_mv_size = 0;}-> N20
+	dval_mv_size == 0;
+line 27:	N20 -{while}-> N21
+line 27:	N21 -{[rc == 0]}-> N22
+	rc == 0;
+	rc == 0;
+line 29:	N22 -{[dval_mv_size <= 0]}-> N25
+	dval_mv_size == 0;
+	dval_mv_size == 0;
+line 30:	N25 -{continue}-> N21

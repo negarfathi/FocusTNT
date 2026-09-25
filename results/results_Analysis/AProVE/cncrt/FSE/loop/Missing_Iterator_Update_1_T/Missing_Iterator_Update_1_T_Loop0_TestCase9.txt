@@ -1,0 +1,143 @@
+YES
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop0_TestCase9.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 84 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 469 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop0_TestCase9.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_1_T_Loop0_TestCase9.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: errno initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: COMMON section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "waitpid" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store -50, %2
+		br %3
+	3:
+		%4 = load %2
+		%5 = icmp slt %4 0
+		br %5, %6, %13
+	6:
+		%7 = load @errno
+		%8 = icmp ne %7 1
+		br %8, %9, %10
+	9:
+		store 1, @errno
+		br %11
+	10:
+		store 2, @errno
+		br %11
+	11:
+		%12 = load %2
+		store %12, %1
+		br %15
+	13:
+		%14 = load %2
+		store %14, %1
+		br %15
+	15:
+		%16 = load %1
+		ret %16
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 33
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%3 = call i32 @waitpid()
+		store %3, %2
+		br %4
+	4:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%5 = load %2
+		%6 = icmp eq %5 0
+		br %6, %7, %19
+	7:
+		br %8
+	8:
+		%9 = call i32 @waitpid()
+		store %9, %2
+		br %10
+	10:
+		%11 = load %2
+		%12 = icmp slt %11 0
+		br %12, %13, %16
+	13:
+		%14 = load @errno
+		%15 = icmp eq %14 1
+		br %16
+	16:
+		%17 = phi [0, %10], [%15, %13]
+		br %17, %8, %18
+	18:
+		br %19
+	19:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 2952 milliseconds

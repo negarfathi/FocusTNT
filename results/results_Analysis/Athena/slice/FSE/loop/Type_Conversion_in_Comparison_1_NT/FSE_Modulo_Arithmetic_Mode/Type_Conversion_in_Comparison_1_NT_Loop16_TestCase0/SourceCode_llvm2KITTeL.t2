@@ -1,0 +1,38 @@
+///*** 1_main ***///
+START: main_bb5;
+
+FROM: main_bb5;
+v12 := nondet_ushort();
+v13 := nondet_ushort();
+v14 := v12;
+v15 := v13;
+var__temp_vs.0 := v12;
+TO: main_bb6;
+
+FROM: main_bb6;
+vs.0 := var__temp_vs.0;
+v16 := vs.0;
+v17 := v16;
+v18 := v14 + v15;
+v19 := v18;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v17 < v19);
+TO: main_bb7;
+
+FROM: main_bb6_end;
+assume(v17 >= v19);
+TO: main_bb8;
+
+FROM: main_bb7;
+v21 := vs.0;
+v22 := v21 + 1;
+v23 := v22;
+v24 := v23;
+var__temp_vs.0 := v24;
+TO: main_bb6;
+
+FROM: main_bb8;
+TO: main_bb8_ret;
+

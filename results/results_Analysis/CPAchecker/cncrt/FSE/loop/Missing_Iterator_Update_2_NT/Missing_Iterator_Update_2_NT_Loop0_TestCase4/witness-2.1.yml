@@ -1,0 +1,47 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "ff08e697-c085-374b-b02f-8d1781485514"
+    creation_time: "2025-12-20T03:40:51Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase4.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase4.c: "a8de1d3f7d2daec4f3fee5e417b328af849413a37e3e48ca7c9038dfbaefb7fc"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase4.c"
+        line: 27
+        column: 5
+        function: "main"
+      value: "(dval_mv_size == (20) && rc == (1))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase4.c"
+        line: 10
+        column: 1
+        function: "mdb_cursor_get"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (1)))"
+      format: "acsl_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase4.c"
+        line: 22
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

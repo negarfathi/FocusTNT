@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "25a57388-4fb8-361c-862e-6a02bb30c50e"
+    creation_time: "2025-12-20T02:51:35Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase2.c: "226407515a18bb42cca890e6dcb663a79760d8cb88ec106329ed2643461c568b"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase2.c"
+        line: 18
+        column: 5
+        function: "main"
+      value: "((((((buffer_bytes_left == (-1808) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (8192)))) || (((buffer_bytes_left == (0) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (64))))) || ((((buffer_bytes_left == (-5904) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (4096)))) || ((((buffer_bytes_left == (20000) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (30000)))) || (((buffer_bytes_left == (6384) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (16384))))))) || (((((buffer_bytes_left == (-8976) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (1024)))) || (((buffer_bytes_left == (-7952) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (2048))))) || ((((buffer_bytes_left == (-9488) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (512)))) || ((((buffer_bytes_left == (-9744) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (256)))) || (((buffer_bytes_left == (-9872) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (128))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop0_TestCase2.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

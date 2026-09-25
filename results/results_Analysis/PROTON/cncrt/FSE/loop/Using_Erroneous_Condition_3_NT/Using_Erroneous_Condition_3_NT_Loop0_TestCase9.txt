@@ -1,0 +1,129 @@
+TOOL_DIR is /opt/term/proton
+BM_DIR = /tmp/PROTON-benchmark.iX5j4z
+
+Input File is : Using_Erroneous_Condition_3_NT_Loop0_TestCase9.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Rewrite Buffer is not NULL
+
+Finished Rewriting  extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 358a11a928cdca474c82472a2ca0d619426439f1
+URL: https://github.com/brltty/brltty/commit/358a11a928cdca474c82472a2ca0d619426439f1
+Project Name: brltty
+License: LGPL-2.1
+termination: FALSE
+*/
+int main()
+{
+    int i = 0;
+    int base = 5;
+    int count = 9;
+    int old_[10] = {7,0,0,0,0,0,0,0,0,0};
+    int new_[10] = {6,0,0,0,0,0,0,0,0,0};
+    for( int j = 0 ; j < 9 ; j++ )
+    {
+        ;
+        ;
+    }
+    old_[9] = 0;
+    new_[9] = 0;
+    while(1)
+    {
+        int number = base;
+        while( old_[i] != new_[i] )
+        {
+            {if( ++number == count )
+                {goto done;}}
+        }
+        i++;
+        base += 8;
+    }
+done:
+    return 0;
+}
+./proton: line 26:    92 Aborted                 bracer -in $FILE_NAME -c
+
+Input File is : Using_Erroneous_Condition_3_NT_Loop0_TestCase9_braced.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Finished call to function ParseAST   
+
+ Rewrite Buffer is Not NULL 
+
+Finished Rewriting 
+typedef enum {myFalse, myTrue} myBool; myBool __VERIFIER_nondet_myBool(void);
+extern void __VERIFIER_reached_control(int, char const *);
+extern void __VERIFIER_loop_head(int, char const *);
+extern void __VERIFIER_control_true(int, char const *);
+extern void __VERIFIER_control_false(int, char const *);
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: 358a11a928cdca474c82472a2ca0d619426439f1
+URL: https://github.com/brltty/brltty/commit/358a11a928cdca474c82472a2ca0d619426439f1
+Project Name: brltty
+License: LGPL-2.1
+termination: FALSE
+*/
+int main()
+{
+    int i = 0;
+    int base = 5;
+    int count = 9;
+    int old_[10] = {7,0,0,0,0,0,0,0,0,0};
+    int new_[10] = {6,0,0,0,0,0,0,0,0,0};
+   myBool pStored0 = myFalse; __VERIFIER_reached_control(17, __func__);
+ for( int j = 0 ; j < 9 ; j++ )
+    { __VERIFIER_loop_head(17, __func__);
+printf("CBMC Instrumentation @ line17");myBool flag=__VERIFIER_nondet_myBool();static int obase;static int ocount;static int oi;static int oj;if(pStored0){__CPROVER_assert(!(obase==base && ocount==count && oi==i && oj==j),"recurrent state found");} if(flag){obase=base;ocount=count;oi=i;oj=j;pStored0=myTrue;} 
+        ;
+        ;
+    }
+    old_[9] = 0;
+    new_[9] = 0;
+   myBool pStored1 = myFalse; __VERIFIER_reached_control(24, __func__);
+ while(1)
+    { __VERIFIER_loop_head(24, __func__);
+printf("CBMC Instrumentation @ line24");myBool flag=__VERIFIER_nondet_myBool();static int obase;static int ocount;static int oi;if(pStored1){__CPROVER_assert(!(obase==base && ocount==count && oi==i),"recurrent state found");} if(flag){obase=base;ocount=count;oi=i;pStored1=myTrue;} 
+        int number = base;
+       myBool pStored2 = myFalse; __VERIFIER_reached_control(27, __func__);
+ while( old_[i] != new_[i] )
+        { __VERIFIER_loop_head(27, __func__);
+printf("CBMC Instrumentation @ line27");myBool flag=__VERIFIER_nondet_myBool();static int obase;static int ocount;static int oi;static int onumber;if(pStored2){__CPROVER_assert(!(obase==base && ocount==count && oi==i && onumber==number),"recurrent state found");} if(flag){obase=base;ocount=count;oi=i;onumber=number;pStored2=myTrue;} 
+            { __VERIFIER_reached_control(28, __func__);
+if( ++number == count )
+                { __VERIFIER_control_true(29, __func__);
+goto done;}}
+        }
+        i++;
+        base += 8;
+    }
+done:
+    return 0;
+}
+./proton: line 26:   104 Aborted                 instrumenter -in *braced.c -c
+Using_Erroneous_Condition_3_NT_Loop0_TestCase9_braced_instrumented.c
+NTFILE is Using_Erroneous_Condition_3_NT_Loop0_TestCase9_braced_instrumented.c
+
+* *                 CBMC 5.95.0 (n/a) 64-bit                * *
+* *                 Copyright (C) 2001-2018                 * *
+* *              Daniel Kroening, Edmund Clarke             * *
+* * Carnegie Mellon University, Computer Science Department * *
+* *                  kroening@kroening.com                  * *
+* *        Protected in part by U.S. patent 7,225,417       * *
+* *  *****************************************************  * *
+* *                 Built with Llama                        * *
+* *  *****************************************************  * *
+
+NT-CHECKRESULT. GLRV=0. Z3RV=1. NTRES=0
+T-CHECKRESULT. TRES=0
+NTRES=0 TRES=0 for Using_Erroneous_Condition_3_NT_Loop0_TestCase9.c
+FILE=Using_Erroneous_Condition_3_NT_Loop0_TestCase9_braced_instrumented.c GLRES=0 Z3RES=1 NTRES=0 TRES=0 TNT-RESULT=TRUE EXITCODE=0
+TRUE
+Runtime: 8780 milliseconds

@@ -1,0 +1,47 @@
+///*** 1_main ***///
+START: main_mdb_cursor_get_slice_1.exit;
+
+FROM: main_mdb_cursor_get_slice_1.exit;
+flag := 0;
+v5 := flag;
+v6 := v5 + 1;
+flag := v6;
+v7 := flag;
+var__temp_v.sink7 := v7;
+TO: main_bb3;
+
+FROM: main_bb3;
+v.sink7 := var__temp_v.sink7;
+TO: main_bb3_v.;
+FROM: main_bb3_v.;
+assume(v.sink7 sgt 1000);
+v. := 1;
+TO: main_bb3_sv.;
+
+FROM: main_bb3_v.;
+assume(v.sink7 sle 1000);
+v. := 0;
+TO: main_bb3_sv.;
+
+FROM: main_bb3_sv.;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(v. == 0);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(v. != 0);
+TO: main_bb5;
+
+FROM: main_bb4;
+v10 := flag;
+v11 := v10 + 1;
+flag := v11;
+v12 := flag;
+var__temp_v.sink7 := v12;
+TO: main_bb3;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

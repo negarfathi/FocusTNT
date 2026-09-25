@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "a6b16494-c6f8-3635-8bd6-ef7376c37b17"
+    creation_time: "2025-12-20T02:01:08Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_2_NT_Loop0_TestCase1.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Bit_Calculation_2_NT_Loop0_TestCase1.c: "2bd43d4dd300908baf5c8b21b6eb2d0121986dd9a62bd0fe3ab88ca99d3473c6"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_2_NT_Loop0_TestCase1.c"
+        line: 19
+        column: 5
+        function: "main"
+      value: "(a0 == (1) && a1 == (0))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Bit_Calculation_2_NT_Loop0_TestCase1.c"
+        line: 15
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

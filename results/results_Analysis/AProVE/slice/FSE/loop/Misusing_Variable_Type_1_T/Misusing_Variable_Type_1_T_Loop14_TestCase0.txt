@@ -1,0 +1,139 @@
+YES
+proof of /FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop14_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 40 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 197 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 136 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 37 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop14_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop14_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		br %2
+	2:
+		%3 = load %1
+		%4 = icmp sge %3 0
+		br %4, %5, %8
+	5:
+		%6 = load %1
+		%7 = add i32 %6, -1
+		store %7, %1
+		br %2
+	8:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 9 rulesP rules:
+f_59(v3, v6, 1, v4, v7, 3, 0, 4) -> f_60(v3, 0, 1, v7, 3, 4) :|: 0 <= v6 && v4 = 1 && v6 = 0 && 0 = 0
+f_60(v3, 0, 1, v7, 3, 4) -> f_62(v3, 0, 1, v7, 3, 4) :|: 0 = 0
+f_62(v3, 0, 1, v7, 3, 4) -> f_64(v3, 0, 1, v7, 3, 4) :|: TRUE
+f_64(v3, 0, 1, v7, 3, 4) -> f_66(v3, 0, 1, v7, 3, 4) :|: 0 = 0
+f_66(v3, 0, 1, v7, 3, 4) -> f_67(v3, 0, 1, -1, v7, 3, 4) :|: 0 = 0
+f_67(v3, 0, 1, -1, v7, 3, 4) -> f_68(v3, 0, 1, -1, v7, 3, 4) :|: TRUE
+f_68(v3, 0, 1, -1, v7, 3, 4) -> f_69(v3, 0, 1, -1, v7, 3, 4) :|: TRUE
+f_69(v3, 0, 1, -1, v7, 3, 4) -> f_58(v3, 0, 1, -1, v7, 3, 0, 4) :|: TRUE
+f_58(v3, v4, 1, v6, v7, 3, 0, 4) -> f_59(v3, v6, 1, v4, v7, 3, 0, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_59(v3:0, 0, 1, 1, v7:0, 3, 0, 4) -> f_59(v3:0, -1, 1, 0, v7:0, 3, 0, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_59(x1, x2, x3, x4, x5, x6, x7, x8) -> f_59(x2, x4)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_59(cons_0, cons_1) -> f_59(-1, 0) :|: TRUE && cons_0 = 0 && cons_1 = 1
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_59(cons_0, cons_1) -> f_59(-1, 0) :|: TRUE && cons_0 = 0 && cons_1 = 1
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop14_TestCase0.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Misusing_Variable_Type_1_T_Loop14_TestCase0.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 3216 milliseconds

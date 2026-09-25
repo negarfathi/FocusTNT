@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <key attr.name="invariant" attr.type="string" for="node" id="invariant"/>
+ <key attr.name="isEntryNode" attr.type="boolean" for="node" id="entry">
+  <default>false</default>
+ </key>
+ <key attr.name="isSinkNode" attr.type="boolean" for="node" id="sink">
+  <default>false</default>
+ </key>
+ <key attr.name="isCycleHead" attr.type="boolean" for="node" id="cyclehead">
+  <default>false</default>
+ </key>
+ <key attr.name="sourcecodeLanguage" attr.type="string" for="graph" id="sourcecodelang"/>
+ <key attr.name="programFile" attr.type="string" for="graph" id="programfile"/>
+ <key attr.name="programHash" attr.type="string" for="graph" id="programhash"/>
+ <key attr.name="specification" attr.type="string" for="graph" id="specification"/>
+ <key attr.name="architecture" attr.type="string" for="graph" id="architecture"/>
+ <key attr.name="producer" attr.type="string" for="graph" id="producer"/>
+ <key attr.name="creationTime" attr.type="string" for="graph" id="creationtime"/>
+ <key attr.name="startline" attr.type="int" for="edge" id="startline"/>
+ <key attr.name="endline" attr.type="int" for="edge" id="endline"/>
+ <key attr.name="originFileName" attr.type="string" for="edge" id="originfile">
+  <default>/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase0.c</default>
+ </key>
+ <key attr.name="control" attr.type="string" for="edge" id="control"/>
+ <key attr.name="enterFunction" attr.type="string" for="edge" id="enterFunction"/>
+ <key attr.name="returnFromFunction" attr.type="string" for="edge" id="returnFrom"/>
+ <key attr.name="witness-type" attr.type="string" for="graph" id="witness-type"/>
+ <key attr.name="inputWitnessHash" attr.type="string" for="graph" id="inputwitnesshash"/>
+ <graph edgedefault="directed">
+  <data key="witness-type">violation_witness</data>
+  <data key="sourcecodelang">C</data>
+  <data key="producer">CPAchecker 4.2.2-87-g286450afe4 / terminationAnalysis</data>
+  <data key="specification">CHECK( init(main()), LTL(F end) )</data>
+  <data key="programfile">/FILES_DIR/concretizer/Missing_Iterator_Update_2_NT_Loop0_TestCase0.c</data>
+  <data key="programhash">58a40fd2b981505d53ae6a27355d275cff8855aa505065494dec67d24312c9ee</data>
+  <data key="architecture">64bit</data>
+  <data key="creationtime">2025-12-19T21:50:17Z</data>
+  <node id="A2479">
+   <data key="entry">true</data>
+  </node>
+  <node id="A2481_4_1"/>
+  <edge source="A2479" target="A2481_4_1">
+   <data key="startline">22</data>
+   <data key="endline">22</data>
+   <data key="enterFunction">main</data>
+  </edge>
+  <node id="A2482"/>
+  <edge source="A2481_4_1" target="A2482">
+   <data key="startline">25</data>
+   <data key="endline">25</data>
+   <data key="enterFunction">mdb_cursor_get</data>
+  </edge>
+  <node id="A2484"/>
+  <edge source="A2482" target="A2484">
+   <data key="startline">14</data>
+   <data key="endline">14</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="sink">
+   <data key="sink">true</data>
+  </node>
+  <edge source="A2482" target="sink">
+   <data key="startline">14</data>
+   <data key="endline">14</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A2485"/>
+  <edge source="A2484" target="A2485">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A2484" target="sink">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A2486"/>
+  <edge source="A2485" target="A2486">
+   <data key="startline">17</data>
+   <data key="endline">17</data>
+   <data key="returnFrom">mdb_cursor_get</data>
+  </edge>
+  <node id="A2490"/>
+  <edge source="A2486" target="A2490">
+   <data key="startline">27</data>
+   <data key="endline">27</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A2486" target="sink">
+   <data key="startline">27</data>
+   <data key="endline">27</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <edge source="A2490" target="sink">
+   <data key="startline">29</data>
+   <data key="endline">29</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A2506">
+   <data key="cyclehead">true</data>
+   <data key="invariant">(dval_mv_size == (0) &amp;&amp; (rc == (0) &amp;&amp; flag == (1)))</data>
+  </node>
+  <edge source="A2490" target="A2506">
+   <data key="startline">29</data>
+   <data key="endline">29</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A2492"/>
+  <edge source="A2506" target="A2492">
+   <data key="startline">27</data>
+   <data key="endline">27</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <edge source="A2506" target="sink">
+   <data key="startline">27</data>
+   <data key="endline">27</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A2494"/>
+  <edge source="A2492" target="A2494">
+   <data key="startline">29</data>
+   <data key="endline">29</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <edge source="A2492" target="A2506">
+   <data key="startline">29</data>
+   <data key="endline">29</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A2495"/>
+  <edge source="A2494" target="A2495">
+   <data key="startline">31</data>
+   <data key="endline">31</data>
+   <data key="enterFunction">mdb_cursor_get</data>
+  </edge>
+  <node id="A2502"/>
+  <edge source="A2495" target="A2502">
+   <data key="startline">14</data>
+   <data key="endline">14</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A2503"/>
+  <edge source="A2495" target="A2503">
+   <data key="startline">14</data>
+   <data key="endline">14</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <node id="A2504"/>
+  <edge source="A2503" target="A2504">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-true</data>
+  </edge>
+  <node id="A2505"/>
+  <edge source="A2503" target="A2505">
+   <data key="startline">16</data>
+   <data key="endline">16</data>
+   <data key="control">condition-false</data>
+  </edge>
+  <edge source="A2505" target="A2506">
+   <data key="startline">19</data>
+   <data key="endline">19</data>
+   <data key="returnFrom">mdb_cursor_get</data>
+  </edge>
+  <edge source="A2504" target="A2506">
+   <data key="startline">17</data>
+   <data key="endline">17</data>
+   <data key="returnFrom">mdb_cursor_get</data>
+  </edge>
+  <edge source="A2502" target="A2506">
+   <data key="startline">15</data>
+   <data key="endline">15</data>
+   <data key="returnFrom">mdb_cursor_get</data>
+  </edge>
+ </graph>
+</graphml>

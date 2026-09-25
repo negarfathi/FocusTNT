@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "300d7361-dc5b-3798-892f-469948a03d7e"
+    creation_time: "2025-12-20T07:15:45Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Undefined_Behavior_1_Loop0_TestCase6.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Undefined_Behavior_1_Loop0_TestCase6.c: "84254233882979f55648f67da4ab65cb3aa779b5f86cc01d175ba549732226e9"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Undefined_Behavior_1_Loop0_TestCase6.c"
+        line: 13
+        column: 5
+        function: "main"
+      value: "((((bytes == (5) && num == (4294967294U))) || ((bytes == (1) && num == (4294967294U)))) || (((bytes == (3) && num == (4294967294U))) || (((bytes == (2) && num == (4294967294U))) || ((bytes == (4) && num == (4294967294U))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Undefined_Behavior_1_Loop0_TestCase6.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

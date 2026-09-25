@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "0e76eea4-e2f9-39ec-b2ac-df5ee1a8d3ee"
+    creation_time: "2025-12-20T08:14:02Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_T_Loop0_TestCase1.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_T_Loop0_TestCase1.c: "20c7012772e18c406625a95d0880288c358206c6abbabff1b953c1d9c867f3ae"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_T_Loop0_TestCase1.c"
+        line: 18
+        column: 5
+        function: "main"
+      value: "((((len == (10U) && (newbufsize == (1U) && pathlen == (5U)))) || ((len == (10U) && (newbufsize == (2U) && pathlen == (5U))))) || (((len == (10U) && (newbufsize == (4U) && pathlen == (5U)))) || (((len == (10U) && (newbufsize == (16U) && pathlen == (5U)))) || ((len == (10U) && (newbufsize == (8U) && pathlen == (5U)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_3_T_Loop0_TestCase1.c"
+        line: 9
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

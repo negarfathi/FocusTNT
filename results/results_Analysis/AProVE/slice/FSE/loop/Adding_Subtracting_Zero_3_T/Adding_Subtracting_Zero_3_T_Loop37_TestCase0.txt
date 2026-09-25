@@ -1,0 +1,209 @@
+MAYBE
+proof of /FILES_DIR/concretizer/Adding_Subtracting_Zero_3_T_Loop37_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 60 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Adding_Subtracting_Zero_3_T_Loop37_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Adding_Subtracting_Zero_3_T_Loop37_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "read_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 i32, 1 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		%7 = alloca i32, align 4
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %8
+	8:
+		%9 = load %3
+		%10 = load %4
+		%11 = icmp slt %9 %10
+		br %11, %12, %37
+	12:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		%13 = call i32 @__VERIFIER_nondet_int()
+		store %13, %7
+		%14 = load %7
+		%15 = icmp eq %14 0
+		br %15, %16, %17
+	16:
+		store -1, %5
+		br %39
+	17:
+		%18 = load %7
+		%19 = icmp slt %18 0
+		br %19, %20, %23
+	20:
+		%21 = load %7
+		%22 = sub i32 0, %21
+		store %22, %7
+		br %23
+	23:
+		%24 = load %7
+		%25 = srem i32 %24, 1000
+		store %25, %7
+		%26 = load %6
+		%27 = add i32 %26, 1
+		store %27, %6
+		%28 = load %7
+		%29 = icmp slt %28 995
+		br %29, %30, %33
+	30:
+		%31 = load %3
+		%32 = add i32 %31, 1
+		store %32, %3
+		br %35
+	33:
+		%34 = load %6
+		store %34, %5
+		br %39
+	35:
+		br %36
+	36:
+		br %8
+	37:
+		%38 = load %6
+		store %38, %5
+		br %39
+	39:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%40 = load %5
+		ret %40
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 68
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%5 = call i32 @__VERIFIER_nondet_int()
+		store %5, %2
+		store 0, @flag
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		%6 = load %2
+		%7 = icmp sle %6 0
+		br %7, %8, %9
+	8:
+		br %45
+	9:
+		%10 = load %2
+		%11 = icmp sgt %10 65536
+		br %11, %12, %13
+	12:
+		br %45
+	13:
+		br %14
+	14:
+		br %15
+	15:
+		%16 = load %1
+		%17 = load %2
+		%18 = icmp slt %16 %17
+		br %18, %19, %44
+	19:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%20 = load %1
+		%21 = load %2
+		%22 = load %1
+		%23 = sub i32 %21, %22
+		%24 = call i32 @read_slice_1(i32 %20, i32 %23)
+		store %24, %4
+		%25 = load %4
+		%26 = icmp eq %25 -1
+		br %26, %27, %34
+	27:
+		%28 = load %3
+		%29 = add i32 %28, 1
+		store %29, %3
+		%30 = load %3
+		%31 = icmp eq %30 5
+		br %31, %32, %33
+	32:
+		br %45
+	33:
+		br %15
+	34:
+		%35 = load %4
+		%36 = icmp eq %35 0
+		br %36, %37, %40
+	37:
+		%38 = load %4
+		%39 = add i32 %38, 1
+		store %39, %4
+		br %40
+	40:
+		%41 = load %4
+		%42 = load %1
+		%43 = add i32 %42, %41
+		store %43, %1
+		br %15
+	44:
+		br %45
+	45:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/concretizer/Adding_Subtracting_Zero_3_T_Loop37_TestCase0.c:33:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Adding_Subtracting_Zero_3_T_Loop37_TestCase0.c:33:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Aborted 1766083755Exec. 4, LLVMToSEGraph with some error. Reason: java.lang.IllegalStateException: Adding two weak inequalities would result in an equation - but this should have been detected earlier!.
+Runtime: 19736 milliseconds

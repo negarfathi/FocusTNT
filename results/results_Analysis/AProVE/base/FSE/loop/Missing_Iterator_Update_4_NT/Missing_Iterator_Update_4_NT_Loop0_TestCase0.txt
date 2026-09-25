@@ -1,0 +1,168 @@
+NO
+proof of /FILES_DIR/concretizer/Missing_Iterator_Update_4_NT_Loop0_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 92 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 3335 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 994 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Missing_Iterator_Update_4_NT_Loop0_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Missing_Iterator_Update_4_NT_Loop0_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%7 = call i32 @__VERIFIER_nondet_int()
+		store %7, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%8 = call i32 @__VERIFIER_nondet_int()
+		store %8, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%9 = call i32 @__VERIFIER_nondet_int()
+		store %9, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%10 = call i32 @__VERIFIER_nondet_int()
+		store %10, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		%11 = call i32 @__VERIFIER_nondet_int()
+		store %11, %6
+		%12 = load %3
+		%13 = icmp slt %12 0
+		br %13, %23, %14
+	14:
+		%15 = load %6
+		%16 = icmp slt %15 0
+		br %16, %23, %17
+	17:
+		%18 = load %3
+		%19 = icmp sgt %18 65534
+		br %19, %23, %20
+	20:
+		%21 = load %6
+		%22 = icmp sgt %21 65534
+		br %22, %23, %24
+	23:
+		store 0, %1
+		br %45
+	24:
+		store 0, %2
+		br %25
+	25:
+		%26 = load %2
+		%27 = load %3
+		%28 = icmp slt %26 %27
+		br %28, %29, %44
+	29:
+		store 0, %4
+		br %30
+	30:
+		%31 = load %4
+		%32 = load %6
+		%33 = icmp slt %31 %32
+		br %33, %34, %38
+	34:
+		br %35
+	35:
+		%36 = load %4
+		%37 = add i32 %36, 1
+		store %37, %4
+		br %30
+	38:
+		%39 = load %5
+		%40 = add i32 %39, 1
+		store %40, %5
+		br %41
+	41:
+		%42 = load %5
+		%43 = add i32 %42, 1
+		store %43, %5
+		br %25
+	44:
+		store 0, %1
+		br %45
+	45:
+		%46 = load %1
+		ret %46
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #199 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #199 yields value 38661.
+Nondeterministic instruction %2 = alloca i32, align 4 in node #200 yields value 1668.
+Nondeterministic instruction %3 = alloca i32, align 4 in node #201 yields value 15360.
+Nondeterministic instruction %4 = alloca i32, align 4 in node #202 yields value 32.
+Nondeterministic instruction %5 = alloca i32, align 4 in node #203 yields value 83133.
+Nondeterministic instruction %6 = alloca i32, align 4 in node #204 yields value 131072.
+Nondeterministic instruction %7 = call i32 @__VERIFIER_nondet_int() in node #207 yields value 0.
+Nondeterministic instruction %8 = call i32 @__VERIFIER_nondet_int() in node #210 yields value 1.
+Nondeterministic instruction %9 = call i32 @__VERIFIER_nondet_int() in node #213 yields value 0.
+Nondeterministic instruction %10 = call i32 @__VERIFIER_nondet_int() in node #216 yields value (-32770).
+Nondeterministic instruction %11 = call i32 @__VERIFIER_nondet_int() in node #219 yields value 1.
+
+----------------------------------------
+
+(6)
+NO
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 9771 milliseconds

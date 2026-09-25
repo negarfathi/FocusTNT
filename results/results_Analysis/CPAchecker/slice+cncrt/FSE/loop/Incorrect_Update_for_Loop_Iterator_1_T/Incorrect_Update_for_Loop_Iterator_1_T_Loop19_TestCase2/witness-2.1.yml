@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "78aa46ae-ecd5-3ccf-b924-ede6fa164275"
+    creation_time: "2025-12-20T11:25:29Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_T_Loop19_TestCase2.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_T_Loop19_TestCase2.c: "471b65f759d120e4d37a6ed506188598c94059a48f26a528423f5371ae26d874"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_T_Loop19_TestCase2.c"
+        line: 20
+        column: 3
+        function: "main"
+      value: "((((buffer_bytes_left == (0) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (64)))) || (((buffer_bytes_left == (128) && buffer_read_offset == (10000)) && (max_msg_size == (30000) && size == (128)))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_T_Loop19_TestCase2.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

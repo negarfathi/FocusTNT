@@ -1,0 +1,50 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %w = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %w = alloca i32, align 4 + 0
+NODE   3:   %n = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %n = alloca i32, align 4 + 0
+NODE   4:   store i32 1024, i32* %w, align 4 (points-to size: 0)
+NODE   5:   %0 = load i32, i32* %w, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   6:   %1 = load i32, i32* %w, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   7: <7> PSNodeType::CALL (points-to size: 0)
+NODE   8: <8> PSNodeType::ENTRY (points-to size: 0)
+NODE   9: i32 %w (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  10:   %w.addr = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %w.addr = alloca i32, align 4 + 0
+NODE  11:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE  12:   store i32 %w, i32* %w.addr, align 4 (points-to size: 0)
+NODE  13:   store i32 1, i32* %i, align 4 (points-to size: 0)
+NODE  14:   %0 = load i32, i32* %w.addr, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  15:   %rem = urem i32 %0, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  16:   %1 = load i32, i32* %i, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  17:   %inc = add nsw i32 %1, 1 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  18:   store i32 %inc, i32* %i, align 4 (points-to size: 0)
+NODE  19:   %2 = load i32, i32* %w.addr, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  20:   %div = udiv i32 %2, 2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   store i32 %div, i32* %w.addr, align 4 (points-to size: 0)
+NODE  22:   %3 = load i32, i32* %i, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  23:   ret i32 %3 (points-to size: 0)
+NODE  24: ffs_slice_1 (points-to size: 1)
+    -> ffs_slice_1 + 0
+NODE  25: main (points-to size: 1)
+    -> main + 0
+NODE  26:   %call = call i32 @ffs_slice_1(i32 %1) (points-to size: 0)
+NODE  27:   store i32 %call, i32* %n, align 4 (points-to size: 0)
+NODE  28:   %2 = load i32, i32* %n, align 4 (points-to size: 0)
+NODE  29:   %3 = load i32, i32* %w, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  30:   %shr = lshr i32 %3, %2 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  31:   store i32 %shr, i32* %w, align 4 (points-to size: 0)
+NODE  32:   ret void (points-to size: 0)

@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "8d7e3d73-e4ba-333a-9b4d-556fdf7914e4"
+    creation_time: "2025-12-20T02:50:08Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop0_TestCase10.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop0_TestCase10.c: "8db52a83121e893e77126518da3043dcb8e59a5cf5870c2f64704ea74af1d769"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop0_TestCase10.c"
+        line: 19
+        column: 5
+        function: "main"
+      value: "(((((h == (10) && hash == (15)) && (i == (13) && (r == (1) && rehash == (5))))) || ((((h == (10) && hash == (15)) && (i == (12) && (r == (1) && rehash == (5))))) || (((h == (10) && hash == (15)) && (i == (15) && (r == (1) && rehash == (5))))))) || ((((h == (10) && hash == (15)) && (i == (11) && (r == (1) && rehash == (5))))) || ((((h == (10) && hash == (15)) && (i == (10) && (r == (0) && rehash == (5))))) || (((h == (10) && hash == (15)) && (i == (14) && (r == (1) && rehash == (5))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Initialization_4_T_Loop0_TestCase10.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

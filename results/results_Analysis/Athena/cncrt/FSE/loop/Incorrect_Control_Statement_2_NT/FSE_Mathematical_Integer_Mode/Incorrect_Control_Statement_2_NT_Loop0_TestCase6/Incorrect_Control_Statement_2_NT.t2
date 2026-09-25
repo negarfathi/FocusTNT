@@ -1,0 +1,136 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+vmain.slots_used := nondet();
+vmain.ereg := nondet();
+vslots_used := nondet();
+vereg := nondet();
+v0 := v1;
+v2 := v3;
+var__temp_vi.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vi.0 := var__temp_vi.0;
+var__temp_vi1.0 := 0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vi.0 slt 10);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vi.0 sge 10);
+TO: main_bb3;
+
+FROM: main_bb2;
+v5 := vi.0 + 1;
+var__temp_vi.0 := v5;
+TO: main_bb1;
+
+FROM: main_bb3;
+vi1.0 := var__temp_vi1.0;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(vi1.0 slt 10);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(vi1.0 sge 10);
+TO: main_bb10;
+
+FROM: main_bb4;
+v7 := sign_extend(32, 64, vi1.0);
+v8 := v7;
+v9 := select_array(vslots_used, v8);
+TO: main_NodeBlock;
+
+FROM: main_NodeBlock;
+TO: main_NodeBlock_end;
+
+FROM: main_NodeBlock_end;
+assume(v9 slt 2);
+TO: main_LeafBlock;
+
+FROM: main_NodeBlock_end;
+assume(v9 sge 2);
+TO: main_LeafBlock1;
+
+FROM: main_LeafBlock;
+TO: main_LeafBlock_end;
+
+FROM: main_LeafBlock_end;
+assume(v9 == 0);
+TO: main_bb5;
+
+FROM: main_LeafBlock_end;
+assume(v9 != 0);
+TO: main_NewDefault;
+
+FROM: main_bb5;
+v10 := sign_extend(32, 64, vi1.0);
+v11 := v10;
+v12 := select_array(vereg, v11);
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(v12 != 0);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(v12 == 0);
+TO: main_bb10;
+
+FROM: main_bb6;
+v14 := sign_extend(32, 64, vi1.0);
+v15 := v14;
+v16 := select_array(vereg, v15);
+var__temp_vtable.0 := v16;
+TO: main_bb8;
+
+FROM: main_LeafBlock1;
+var__temp_vi1.0 := vi1.0;
+TO: main_LeafBlock1_end;
+
+FROM: main_LeafBlock1_end;
+assume(v9 == 2);
+TO: main_bb3;
+
+FROM: main_LeafBlock1_end;
+assume(v9 != 2);
+TO: main_NewDefault;
+
+FROM: main_NewDefault;
+TO: main_bb7;
+
+FROM: main_bb7;
+v17 := sign_extend(32, 64, vi1.0);
+v18 := v17;
+v19 := select_array(vereg, v18);
+var__temp_vtable.0 := v19;
+TO: main_bb8;
+
+FROM: main_bb8;
+vtable.0 := var__temp_vtable.0;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(vtable.0 != 0);
+TO: main_bb10;
+
+FROM: main_bb8_end;
+assume(vtable.0 == 0);
+TO: main_bb9;
+
+FROM: main_bb9;
+v21 := vi1.0 + 1;
+var__temp_vi1.0 := v21;
+TO: main_bb3;
+
+FROM: main_bb10;
+TO: main_bb10_ret;
+

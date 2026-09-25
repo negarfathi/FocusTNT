@@ -1,0 +1,73 @@
+///*** 1_main ***///
+START: main_mdb_cursor_get_slice_1.exit;
+TYPE dummy: bv(32);
+
+
+FROM: main_mdb_cursor_get_slice_1.exit;
+flag := 0;
+v5 := flag;
+v6 := v5 + 1;
+flag := v6;
+v7 := flag;
+TO: main_mdb_cursor_get_slice_1.exit_v.;
+FROM: main_mdb_cursor_get_slice_1.exit_v.;
+assume(v7 sgt 1000);
+v. := 1;
+TO: main_mdb_cursor_get_slice_1.exit_sv.;
+
+FROM: main_mdb_cursor_get_slice_1.exit_v.;
+assume(v7 sle 1000);
+v. := 0;
+TO: main_mdb_cursor_get_slice_1.exit_sv.;
+
+FROM: main_mdb_cursor_get_slice_1.exit_sv.;
+var__temp_vrc.0 := v.;
+TO: main_bb3;
+
+FROM: main_bb3;
+vrc.0 := var__temp_vrc.0;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(vrc.0 == 0);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(vrc.0 != 0);
+TO: main_bb5;
+
+FROM: main_bb4;
+var__temp_vrc.0 := vrc.0;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume(1 <= 0);
+TO: main_bb3;
+
+FROM: main_bb4_end;
+assume(0 <= 0);
+TO: main_mdb_cursor_get_slice_1.exit2;
+
+FROM: main_mdb_cursor_get_slice_1.exit2;
+v11 := flag;
+v12 := v11 + 1;
+flag := v12;
+v13 := flag;
+TO: main_mdb_cursor_get_slice_1.exit2_v.3;
+FROM: main_mdb_cursor_get_slice_1.exit2_v.3;
+assume(v13 sgt 1000);
+v.3 := 1;
+TO: main_mdb_cursor_get_slice_1.exit2_sv.3;
+
+FROM: main_mdb_cursor_get_slice_1.exit2_v.3;
+assume(v13 sle 1000);
+v.3 := 0;
+TO: main_mdb_cursor_get_slice_1.exit2_sv.3;
+
+FROM: main_mdb_cursor_get_slice_1.exit2_sv.3;
+var__temp_vrc.0 := v.3;
+TO: main_bb3;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

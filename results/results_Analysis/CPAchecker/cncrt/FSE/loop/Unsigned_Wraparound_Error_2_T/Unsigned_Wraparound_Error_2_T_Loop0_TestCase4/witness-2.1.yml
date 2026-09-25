@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "af9bafbb-00cd-3d62-816a-d6559c7b0ca2"
+    creation_time: "2025-12-20T08:08:59Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop0_TestCase4.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop0_TestCase4.c: "2e12e6104b6eda127fc8879766d5b222b3b0f22e30694da694a4926a593261fe"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop0_TestCase4.c"
+        line: 17
+        column: 5
+        function: "main"
+      value: "(((((BUFFSIZE == (1024U) && (size == (1024U) && ui == (8U)))) || ((BUFFSIZE == (1024U) && (size == (1024U) && ui == (64U))))) || (((BUFFSIZE == (1024U) && (size == (1024U) && ui == (512U)))) || (((BUFFSIZE == (1024U) && (size == (1024U) && ui == (1024U)))) || ((BUFFSIZE == (1024U) && (size == (1024U) && ui == (2U))))))) || ((((BUFFSIZE == (1024U) && (size == (1024U) && ui == (32U)))) || (((BUFFSIZE == (1024U) && (size == (1024U) && ui == (4U)))) || ((BUFFSIZE == (1024U) && (size == (1024U) && ui == (256U)))))) || (((BUFFSIZE == (1024U) && (size == (1024U) && ui == (16U)))) || (((BUFFSIZE == (1024U) && (size == (1024U) && ui == (128U)))) || ((BUFFSIZE == (1024U) && (size == (1024U) && ui == (1U))))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Unsigned_Wraparound_Error_2_T_Loop0_TestCase4.c"
+        line: 10
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (\\result == (0)))"
+      format: "acsl_expression"

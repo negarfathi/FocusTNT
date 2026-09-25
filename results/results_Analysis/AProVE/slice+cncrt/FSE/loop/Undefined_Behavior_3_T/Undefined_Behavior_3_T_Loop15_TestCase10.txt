@@ -1,0 +1,185 @@
+YES
+proof of /FILES_DIR/concretizer/Undefined_Behavior_3_T_Loop15_TestCase10.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 94 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 665 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 165 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 97 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Undefined_Behavior_3_T_Loop15_TestCase10.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Undefined_Behavior_3_T_Loop15_TestCase10.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store -1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		br %3
+	3:
+		%4 = load %1
+		%5 = load %2
+		%6 = mul i32 %5, 8
+		%7 = lshr i32 %4, %6
+		%8 = icmp ne %7 0
+		br %8, %9, %14
+	9:
+		%10 = load %2
+		%11 = icmp slt %10 4
+		br %11, %13, %12
+	12:
+		br %18
+	13:
+		br %15
+	14:
+		br %18
+	15:
+		%16 = load %2
+		%17 = add i32 %16, 1
+		store %17, %2
+		br %3
+	18:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 17 rulesP rules:
+f_142(v21, v22, -1, v24, v25, v26, 1, v28, v29, v30, 3, 8, 0, 24, 2, 4) -> f_143(v21, v22, -1, v28, v25, v26, 1, v24, v29, v30, 3, 8, 0, 24, 2, 4) :|: 0 = 0
+f_143(v21, v22, -1, v28, v25, v26, 1, v24, v29, v30, 3, 8, 0, 24, 2, 4) -> f_144(v21, v22, -1, v28, v31, v26, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) :|: v31 = 8 * v28 && 16 <= v31 && v31 <= 32
+f_144(v21, v22, -1, v28, v31, v26, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) -> f_145(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 2, 4, 16, 32) :|: 0 = 0
+f_145(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 2, 4, 16, 32) -> f_146(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) :|: v32 != 0
+f_146(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) -> f_148(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) :|: 0 = 0
+f_148(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) -> f_150(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) :|: TRUE
+f_150(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) -> f_152(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) :|: 0 = 0
+f_152(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 32) -> f_154(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: v28 < 4 && v24 <= 2 && v31 <= 24
+f_154(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_156(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: 0 = 0
+f_156(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_158(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: TRUE
+f_158(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_160(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: TRUE
+f_160(v21, v22, -1, v28, v31, v32, 1, v24, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_162(v21, v22, -1, v28, v31, v32, 1, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: 0 = 0
+f_162(v21, v22, -1, v28, v31, v32, 1, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_163(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: v38 = 1 + v28 && 3 <= v38 && v38 <= 4
+f_163(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_164(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: TRUE
+f_164(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_165(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) :|: TRUE
+f_165(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 2, 4, 16, 24) -> f_141(v21, v22, -1, v28, v31, v32, 1, v38, v29, v30, 3, 8, 0, 24, 2, 4) :|: TRUE
+f_141(v21, v22, -1, v24, v25, v26, 1, v28, v29, v30, 3, 8, 0, 24, 2, 4) -> f_142(v21, v22, -1, v24, v25, v26, 1, v28, v29, v30, 3, 8, 0, 24, 2, 4) :|: 0 = 0
+Combined rules. Obtained 2 rulesP rules:
+f_142(v21:0, v22:0, -1, v24:0, v25:0, v26:0, 1, v28:0, v29:0, v30:0, 3, 8, 0, 24, 2, 4) -> f_142(v21:0, v22:0, -1, v28:0, 8 * v28:0, v32:0, 1, 1 + v28:0, v29:0, v30:0, 3, 8, 0, 24, 2, 4) :|: 8 * v28:0 > 15 && 8 * v28:0 < 33 && v32:0 < 0 && v24:0 < 3 && v28:0 < 4 && 8 * v28:0 < 25 && v28:0 > 1
+f_142(v21:0, v22:0, -1, v24:0, v25:0, v26:0, 1, v28:0, v29:0, v30:0, 3, 8, 0, 24, 2, 4) -> f_142(v21:0, v22:0, -1, v28:0, 8 * v28:0, v32:0, 1, 1 + v28:0, v29:0, v30:0, 3, 8, 0, 24, 2, 4) :|: 8 * v28:0 > 15 && 8 * v28:0 < 33 && v32:0 > 0 && v24:0 < 3 && v28:0 < 4 && 8 * v28:0 < 25 && v28:0 > 1
+Filtered unneeded arguments:
+   f_142(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16) -> f_142(x4, x8)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_142(v24:0, v28:0) -> f_142(v28:0, 1 + v28:0) :|: 8 * v28:0 < 33 && 8 * v28:0 > 15 && v24:0 < 3 && v28:0 < 4 && v28:0 > 1 && 8 * v28:0 < 25
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_142(v24:0, v28:0) -> f_142(v28:0, 1 + v28:0) :|: 8 * v28:0 < 33 && 8 * v28:0 > 15 && v24:0 < 3 && v28:0 < 4 && v28:0 > 1 && 8 * v28:0 < 25
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_142(v24:0:0, v28:0:0) -> f_142(v28:0:0, 1 + v28:0:0) :|: v28:0:0 > 1 && 8 * v28:0:0 < 25 && v28:0:0 < 4 && v24:0:0 < 3 && 8 * v28:0:0 > 15 && 8 * v28:0:0 < 33
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_142 ] = -1*f_142_2
+
+The following rules are decreasing:
+f_142(v24:0:0, v28:0:0) -> f_142(v28:0:0, 1 + v28:0:0) :|: v28:0:0 > 1 && 8 * v28:0:0 < 25 && v28:0:0 < 4 && v24:0:0 < 3 && 8 * v28:0:0 > 15 && 8 * v28:0:0 < 33
+
+The following rules are bounded:
+f_142(v24:0:0, v28:0:0) -> f_142(v28:0:0, 1 + v28:0:0) :|: v28:0:0 > 1 && 8 * v28:0:0 < 25 && v28:0:0 < 4 && v24:0:0 < 3 && 8 * v28:0:0 > 15 && 8 * v28:0:0 < 33
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/concretizer/Undefined_Behavior_3_T_Loop15_TestCase10.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/concretizer/Undefined_Behavior_3_T_Loop15_TestCase10.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+Runtime: 3910 milliseconds

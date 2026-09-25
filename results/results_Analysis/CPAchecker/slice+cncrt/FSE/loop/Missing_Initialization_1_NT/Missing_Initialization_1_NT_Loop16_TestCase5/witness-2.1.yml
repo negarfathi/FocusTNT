@@ -1,0 +1,46 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "b502333f-89b9-34a0-8905-8238e1f965d3"
+    creation_time: "2025-12-20T12:01:39Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Missing_Initialization_1_NT_Loop16_TestCase5.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Missing_Initialization_1_NT_Loop16_TestCase5.c: "0784d800d9cb8c32e54a8dfa484222fcc9f3cd07e404cb57e9432e6c71d48b88"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_NT_Loop16_TestCase5.c"
+        line: 9
+        column: 3
+        function: "main"
+      value: "(((pkt == (10) && res == (5))) || ((pkt == (9) && res == (0))))"
+      format: "c_expression"
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_NT_Loop16_TestCase5.c"
+        line: 10
+        column: 5
+        function: "main"
+      value: "(((pkt == (9) && res == (0))) || ((pkt == (10) && res == (5))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Missing_Initialization_1_NT_Loop16_TestCase5.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

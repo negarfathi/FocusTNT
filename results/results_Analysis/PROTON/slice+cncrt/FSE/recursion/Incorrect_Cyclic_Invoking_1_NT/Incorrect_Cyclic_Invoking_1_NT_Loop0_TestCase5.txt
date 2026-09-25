@@ -1,0 +1,163 @@
+TOOL_DIR is /opt/term/proton
+BM_DIR = /tmp/PROTON-benchmark.rZfKKJ
+
+Input File is : Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Rewrite Buffer is not NULL
+
+Finished Rewriting  #include "stdlib.h"
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: f569599ae70f0899035f8d5876a7939f629c5976
+URL: https://github.com/torvalds/linux/commit/f569599ae70f0899035f8d5876a7939f629c5976
+Project Name: linux
+License: GPL-2.0
+termination: FALSE
+*/
+struct cifsTconInfo{
+	int ses;
+}cifsTconInfo;
+static int cifs_reconnect_tcon(struct cifsTconInfo *tcon, int smb_command);
+//1->4
+static int smb_init( int smb_command, struct cifsTconInfo *tcon)
+{
+	int rc = 0;
+	rc = cifs_reconnect_tcon(tcon, smb_command);
+	return rc;
+}
+//2->1
+int CIFSSMBQFSUnixInfo(const int xid, struct cifsTconInfo *tcon)
+{
+	int rc = 0;
+	rc = smb_init(15, tcon);
+	return rc;
+}
+//3->2
+void reset_cifs_unix_caps(int xid, struct cifsTconInfo *tcon)
+{
+	{if (!CIFSSMBQFSUnixInfo(xid, tcon))
+	{
+		//do something
+	}}
+}
+//4->3
+static int cifs_reconnect_tcon(struct cifsTconInfo *tcon, int smb_command)
+{
+	{if( !tcon )
+		{return 0;}}
+	int ses = tcon->ses;
+	{if( ses )
+		{reset_cifs_unix_caps(0, tcon);}}
+	return 1;
+}
+int main()
+{
+	struct cifsTconInfo t1;
+	struct cifsTconInfo* tcon = &t1;
+	tcon->ses =  0;
+	int smb_command =  -2147483648;
+	int rc = smb_init(smb_command,tcon);
+	return 0;
+}
+./proton: line 26:    92 Aborted                 bracer -in $FILE_NAME -c
+
+Input File is : Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5_braced.c
+
+ CBMC instrumentation
+
+Rewriter Init
+
+Finished call to function ParseAST   
+
+ Rewrite Buffer is Not NULL 
+
+Finished Rewriting 
+typedef enum {myFalse, myTrue} myBool; myBool __VERIFIER_nondet_myBool(void);
+extern void __VERIFIER_reached_control(int, char const *);
+extern void __VERIFIER_loop_head(int, char const *);
+extern void __VERIFIER_control_true(int, char const *);
+extern void __VERIFIER_control_false(int, char const *);
+#include "stdlib.h"
+extern int __VERIFIER_nondet_int(void);
+/*
+Commit Number: f569599ae70f0899035f8d5876a7939f629c5976
+URL: https://github.com/torvalds/linux/commit/f569599ae70f0899035f8d5876a7939f629c5976
+Project Name: linux
+License: GPL-2.0
+termination: FALSE
+*/
+struct cifsTconInfo{
+	int ses;
+}cifsTconInfo;
+static int cifs_reconnect_tcon(struct cifsTconInfo *tcon, int smb_command);
+//1->4
+static int smb_init( int smb_command, struct cifsTconInfo *tcon)
+{
+	int rc = 0;
+	rc = cifs_reconnect_tcon(tcon, smb_command);
+	return rc;
+}
+//2->1
+int CIFSSMBQFSUnixInfo(const int xid, struct cifsTconInfo *tcon)
+{
+	int rc = 0;
+	rc = smb_init(15, tcon);
+	return rc;
+}
+//3->2
+void reset_cifs_unix_caps(int xid, struct cifsTconInfo *tcon)
+{
+	{ __VERIFIER_reached_control(31, __func__);
+if (!CIFSSMBQFSUnixInfo(xid, tcon))
+	{ __VERIFIER_control_true(32, __func__);
+
+		//do something
+	}}
+}
+//4->3
+static int cifs_reconnect_tcon(struct cifsTconInfo *tcon, int smb_command)
+{
+	{ __VERIFIER_reached_control(39, __func__);
+if( !tcon )
+		{ __VERIFIER_control_true(40, __func__);
+return 0;}}
+	int ses = tcon->ses;
+	{ __VERIFIER_reached_control(42, __func__);
+if( ses )
+		{ __VERIFIER_control_true(43, __func__);
+reset_cifs_unix_caps(0, tcon);}}
+	return 1;
+}
+int main()
+{
+	struct cifsTconInfo t1;
+	struct cifsTconInfo* tcon = &t1;
+	tcon->ses =  0;
+	int smb_command =  -2147483648;
+	int rc = smb_init(smb_command,tcon);
+	return 0;
+}
+./proton: line 26:   104 Aborted                 instrumenter -in *braced.c -c
+Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5_braced_instrumented.c
+NTFILE is Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5_braced_instrumented.c
+
+* *                 CBMC 5.95.0 (n/a) 64-bit                * *
+* *                 Copyright (C) 2001-2018                 * *
+* *              Daniel Kroening, Edmund Clarke             * *
+* * Carnegie Mellon University, Computer Science Department * *
+* *                  kroening@kroening.com                  * *
+* *        Protected in part by U.S. patent 7,225,417       * *
+* *  *****************************************************  * *
+* *                 Built with Llama                        * *
+* *  *****************************************************  * *
+
+MISSING RSA
+T-CHECKRESULT. TRES=0
+NTRES=0 TRES=0 for Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5.c
+FILE=Incorrect_Cyclic_Invoking_1_NT_Loop0_TestCase5_braced_instrumented.c GLRES=0 Z3RES=0 NTRES=0 TRES=0 TNT-RESULT=TRUE EXITCODE=0
+TRUE
+Runtime: 1687 milliseconds

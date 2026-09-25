@@ -1,0 +1,145 @@
+NO
+proof of /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_NT_Loop0_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 96 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2546 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 909 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_NT_Loop0_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Reusing_Same_Loop_Iterator_1_NT_Loop0_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%6 = call i32 @__VERIFIER_nondet_int()
+		store %6, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%7 = call i32 @__VERIFIER_nondet_int()
+		store %7, %5
+		%8 = load %4
+		%9 = icmp sgt %8 65534
+		br %9, %13, %10
+	10:
+		%11 = load %5
+		%12 = icmp sgt %11 65534
+		br %12, %13, %14
+	13:
+		store 0, %1
+		br %33
+	14:
+		store 0, %2
+		br %15
+	15:
+		%16 = load %2
+		%17 = load %4
+		%18 = icmp slt %16 %17
+		br %18, %19, %32
+	19:
+		store 0, %2
+		br %20
+	20:
+		%21 = load %2
+		%22 = load %5
+		%23 = icmp slt %21 %22
+		br %23, %24, %28
+	24:
+		br %25
+	25:
+		%26 = load %2
+		%27 = add i32 %26, 1
+		store %27, %2
+		br %20
+	28:
+		br %29
+	29:
+		%30 = load %2
+		%31 = add i32 %30, 1
+		store %31, %2
+		br %15
+	32:
+		store 0, %1
+		br %33
+	33:
+		%34 = load %1
+		ret %34
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #148 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #148 yields value 73728.
+Nondeterministic instruction %2 = alloca i32, align 4 in node #149 yields value 131069.
+Nondeterministic instruction %3 = alloca i32, align 4 in node #150 yields value 65536.
+Nondeterministic instruction %4 = alloca i32, align 4 in node #151 yields value 32768.
+Nondeterministic instruction %5 = alloca i32, align 4 in node #152 yields value 98304.
+Nondeterministic instruction %6 = call i32 @__VERIFIER_nondet_int() in node #157 yields value 32768.
+Nondeterministic instruction %7 = call i32 @__VERIFIER_nondet_int() in node #160 yields value 1.
+
+----------------------------------------
+
+(6)
+NO
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+Runtime: 8299 milliseconds

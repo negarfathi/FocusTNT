@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "50d0141d-1752-316f-a3c1-ff0101a161d0"
+    creation_time: "2025-12-20T11:23:43Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop19_TestCase5.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop19_TestCase5.c: "705f1e68d857d6c666ef508ac7604db67f7028533b225ab9ccc91f3a11640206"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop19_TestCase5.c"
+        line: 20
+        column: 3
+        function: "main"
+      value: "(((((buffer_bytes_left == (0) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (64)))) || ((((buffer_bytes_left == (1048) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (2048)))) || (((buffer_bytes_left == (24) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (1024)))))) || ((((buffer_bytes_left == (-872) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (128)))) || ((((buffer_bytes_left == (-744) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (256)))) || (((buffer_bytes_left == (-488) && buffer_read_offset == (1000)) && (max_msg_size == (4096) && size == (512)))))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Incorrect_Update_for_Loop_Iterator_1_NT_Loop19_TestCase5.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

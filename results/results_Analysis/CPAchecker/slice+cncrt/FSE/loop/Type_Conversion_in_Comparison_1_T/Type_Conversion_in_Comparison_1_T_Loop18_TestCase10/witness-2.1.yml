@@ -1,0 +1,37 @@
+- entry_type: "invariant_set"
+  metadata:
+    format_version: "2.1"
+    uuid: "fb0663e6-3503-3ea1-b404-4cd283e48c7c"
+    creation_time: "2025-12-20T15:44:30Z"
+    producer:
+      name: "CPAchecker"
+      version: "4.2.2-87-g286450afe4"
+      configuration: "terminationAnalysis"
+    task:
+      input_files:
+      - "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase10.c"
+      input_file_hashes:
+        /FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase10.c: "a967fd7a61e1479606b723a459857cb9791cf38f6c8f9078bb45e35592e2ac2a"
+      specification: ""
+      data_model: "LP64"
+      language: "C"
+  content:
+  - invariant:
+      type: "loop_invariant"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase10.c"
+        line: 11
+        column: 3
+        function: "main"
+      value: "(((i == (0) && len == (1))) || ((i == (1) && len == (1))))"
+      format: "c_expression"
+  - invariant:
+      type: "function_contract"
+      location:
+        file_name: "/FILES_DIR/concretizer/Type_Conversion_in_Comparison_1_T_Loop18_TestCase10.c"
+        line: 5
+        column: 1
+        function: "main"
+      requires: "1"
+      ensures: "(!(1) || (1))"
+      format: "acsl_expression"

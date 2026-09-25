@@ -1,0 +1,69 @@
+none:	N1 -{INIT GLOBAL VARS}-> N14
+line 3:	N14 -{int __VERIFIER_nondet_int();}-> N15
+lines 5-15:	N15 -{void main();}-> N16
+none:	N16 -{Function start dummy edge}-> N2
+line 7:	N2 -{int nfds = 5;}-> N3
+	nfds == 5;
+line 8:	N3 -{int nr = 30;}-> N4
+	nr == 30;
+line 9:	N4 -{int NR_OPEN = 25;}-> N5
+	NR_OPEN == 25;
+line 10:	N5 -{while}-> N6
+line 10:	N6 -{[nfds <= nr]}-> N7
+	nfds == 5;
+	nr == 30;
+	nfds == 5;
+nr == 30;
+line 11:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 10;
+line 12:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 10;
+	NR_OPEN == 25;
+	nfds == 10;
+NR_OPEN == 25;
+none:	N10 -{}-> N6
+line 10:	N6 -{[nfds <= nr]}-> N7
+	nfds == 10;
+	nr == 30;
+	nfds == 10;
+nr == 30;
+line 11:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 20;
+line 12:	N9 -{[!(nfds > NR_OPEN)]}-> N10
+	nfds == 20;
+	NR_OPEN == 25;
+	nfds == 20;
+NR_OPEN == 25;
+none:	N10 -{}-> N6
+line 10:	N6 -{[nfds <= nr]}-> N7
+	nfds == 20;
+	nr == 30;
+	nfds == 20;
+nr == 30;
+line 11:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 40;
+line 12:	N9 -{[nfds > NR_OPEN]}-> N11
+	nfds == 40;
+	NR_OPEN == 25;
+	nfds == 40;
+NR_OPEN == 25;
+line 12:	N11 -{nfds = NR_OPEN;}-> N12
+	nfds == 25;
+none:	N12 -{}-> N10
+none:	N10 -{}-> N6
+line 10:	N6 -{[nfds <= nr]}-> N7
+	nfds == 25;
+	nr == 30;
+	nfds == 25;
+nr == 30;
+line 11:	N7 -{nfds = nfds * 2;}-> N9
+	nfds == 50;
+line 12:	N9 -{[nfds > NR_OPEN]}-> N11
+	nfds == 50;
+	NR_OPEN == 25;
+	nfds == 50;
+NR_OPEN == 25;
+line 12:	N11 -{nfds = NR_OPEN;}-> N12
+	nfds == 25;
+none:	N12 -{}-> N10
+none:	N10 -{}-> N6

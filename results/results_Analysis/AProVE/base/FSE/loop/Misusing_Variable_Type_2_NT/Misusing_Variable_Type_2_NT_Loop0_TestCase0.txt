@@ -1,0 +1,191 @@
+YES
+proof of /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase0.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 87 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1561 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 2 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 164 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) PolynomialOrderProcessor [EQUIVALENT, 76 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase0.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/concretizer/Misusing_Variable_Type_2_NT_Loop0_TestCase0.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "__VERIFIER_nondet_int" returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "gettablesize" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		%3 = call i32 @__VERIFIER_nondet_int()
+		store %3, %2
+		%4 = load %2
+		%5 = srem i32 %4, 99999
+		store %5, %2
+		%6 = load %2
+		%7 = icmp slt %6 0
+		br %7, %8, %11
+	8:
+		%9 = load %2
+		%10 = sub i32 0, %9
+		store %10, %1
+		br %13
+	11:
+		%12 = load %2
+		store %12, %1
+		br %13
+	13:
+		%14 = load %1
+		ret %14
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 28
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i16, align 2
+		%3 = alloca i64, align 8
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i16 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %3)
+		%4 = call i32 @gettablesize()
+		%5 = sext i32 %4 to i64
+		store %5, %3
+		store 0, %2
+		br %6
+	6:
+		%7 = load %2
+		%8 = zext i16 %7 to i64
+		%9 = load %3
+		%10 = icmp ult %8 %9
+		br %10, %11, %15
+	11:
+		br %12
+	12:
+		%13 = load %2
+		%14 = add i16 %13, 1
+		store %14, %2
+		br %6
+	15:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 12 rulesP rules:
+f_287(v178, v179, v180, v181, v184, v182, 1, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) -> f_288(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) :|: 0 = 0
+f_288(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) -> f_289(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) :|: 0 = 0
+f_289(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) -> f_290(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) :|: v184 < v181 && v184 <= 99997 && 2 <= v181 && v182 <= 99996
+f_290(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) -> f_292(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) :|: 0 = 0
+f_292(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) -> f_294(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) :|: TRUE
+f_294(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) -> f_296(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) :|: TRUE
+f_296(v178, v179, v180, v181, v184, 1, v182, v185, v186, v187, 0, 3, 7, 2, 99998, 99996, 99997, 4, 8) -> f_297(v178, v179, v180, v181, v184, 1, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) :|: 0 = 0
+f_297(v178, v179, v180, v181, v184, 1, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) -> f_298(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) :|: v197 = 1 + v184 && 2 <= v197 && v197 <= 99998
+f_298(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) -> f_299(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) :|: TRUE
+f_299(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) -> f_300(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) :|: TRUE
+f_300(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 2, 99998, 99997, 4, 8) -> f_286(v178, v179, v180, v181, v184, 1, v197, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) :|: TRUE
+f_286(v178, v179, v180, v181, v182, 1, v184, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) -> f_287(v178, v179, v180, v181, v184, v182, 1, v185, v186, v187, 0, 3, 7, 99998, 99997, 4, 2, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_287(v178:0, v179:0, v180:0, v181:0, v184:0, v182:0, 1, v185:0, v186:0, v187:0, 0, 3, 7, 99998, 99997, 4, 2, 8) -> f_287(v178:0, v179:0, v180:0, v181:0, 1 + v184:0, v184:0, 1, v185:0, v186:0, v187:0, 0, 3, 7, 99998, 99997, 4, 2, 8) :|: v184:0 < 99998 && v184:0 < v181:0 && v181:0 > 1 && v182:0 < 99997 && v184:0 > 0
+Filtered unneeded arguments:
+   f_287(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18) -> f_287(x4, x5, x6)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_287(v181:0, v184:0, v182:0) -> f_287(v181:0, 1 + v184:0, v184:0) :|: v184:0 < v181:0 && v184:0 < 99998 && v181:0 > 1 && v184:0 > 0 && v182:0 < 99997
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_287(v181:0, v184:0, v182:0) -> f_287(v181:0, 1 + v184:0, v184:0) :|: v184:0 < v181:0 && v184:0 < 99998 && v181:0 > 1 && v184:0 > 0 && v182:0 < 99997
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_287(v181:0:0, v184:0:0, v182:0:0) -> f_287(v181:0:0, 1 + v184:0:0, v184:0:0) :|: v184:0:0 > 0 && v182:0:0 < 99997 && v181:0:0 > 1 && v184:0:0 < 99998 && v184:0:0 < v181:0:0
+
+----------------------------------------
+
+(11) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_287(x, x1, x2)] = x - x1
+
+The following rules are decreasing:
+f_287(v181:0:0, v184:0:0, v182:0:0) -> f_287(v181:0:0, 1 + v184:0:0, v184:0:0) :|: v184:0:0 > 0 && v182:0:0 < 99997 && v181:0:0 > 1 && v184:0:0 < 99998 && v184:0:0 < v181:0:0
+The following rules are bounded:
+f_287(v181:0:0, v184:0:0, v182:0:0) -> f_287(v181:0:0, 1 + v184:0:0, v184:0:0) :|: v184:0:0 > 0 && v182:0:0 < 99997 && v181:0:0 > 1 && v184:0:0 < 99998 && v184:0:0 < v181:0:0
+
+----------------------------------------
+
+(12)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.002s
+Runtime: 5159 milliseconds

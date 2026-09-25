@@ -1,0 +1,13 @@
+line 8:	N3 -{int val = -2;}-> N4
+	val == -2;
+line 9:	N4 -{[!(val == 0)]}-> N5
+	val == -2;
+line 13:	N5 -{while}-> N9
+line 13:	N9 -{[val != 0]}-> N10
+	val == -2;
+line 13:	N10 -{val = val >> 1;}-> N12
+	val == -1;
+none:	N12 -{}-> N9
+line 13:	N9 -{[val != 0]}-> N10
+	val == -1;
+none:	N12 -{}-> N9

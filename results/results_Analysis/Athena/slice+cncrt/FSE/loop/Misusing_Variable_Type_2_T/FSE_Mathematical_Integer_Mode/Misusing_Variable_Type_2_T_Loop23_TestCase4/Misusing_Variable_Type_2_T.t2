@@ -1,0 +1,30 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+v3 := sign_extend(32, 64, 50000);
+var__temp_vi.0 := 0;
+TO: main_bb2;
+
+FROM: main_bb2;
+vi.0 := var__temp_vi.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(vi.0 slt v3);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(vi.0 sge v3);
+TO: main_bb4;
+
+FROM: main_bb3;
+v5 := vi.0 + 1;
+var__temp_vi.0 := v5;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

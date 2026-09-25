@@ -1,0 +1,23 @@
+none:	N30 -{INIT GLOBAL VARS}-> N31
+line 1:	N31 -{int __VERIFIER_nondet_int();}-> N32
+lines 10-26:	N32 -{int main();}-> N33
+none:	N33 -{Function start dummy edge}-> N34
+line 12:	N34 -{int max_msg_size;}-> N35
+line 12:	N35 -{max_msg_size = __VERIFIER_nondet_int();}-> N36
+line 13:	N36 -{int buffer_read_offset;}-> N37
+line 13:	N37 -{buffer_read_offset = __VERIFIER_nondet_int();}-> N38
+line 14:	N38 -{int buffer_bytes_left;}-> N39
+line 14:	N39 -{buffer_bytes_left = __VERIFIER_nondet_int();}-> N40
+line 15:	N40 -{[!(max_msg_size < -1)]}-> N42
+line 15:	N42 -{[!(buffer_read_offset <= 0)]}-> N43
+line 15:	N43 -{[!(buffer_bytes_left < 0)]}-> N44
+line 17:	N44 -{int size = 64;}-> N46
+line 18:	N46 -{while}-> N47
+line 18:	N47 -{[buffer_bytes_left < (size / 2)]}-> N49
+line 20:	N49 -{size = size * 2;}-> N51
+line 21:	N51 -{[max_msg_size != -1]}-> N52
+line 21:	N52 -{[size > max_msg_size]}-> N54
+line 22:	N54 -{size = max_msg_size;}-> N53
+none:	N53 -{}-> N50
+line 23:	N50 -{buffer_bytes_left = size - buffer_read_offset;}-> N48
+none:	N48 -{}-> N47
