@@ -29,7 +29,7 @@ echo "Installing FocusTNT's tool dependencies..."
 
  if cd "$root_directory/tools" && \
     rm -rf Athena && \
-    git clone https://github.com/negarfarhi/Athena.git; then
+    git clone https://github.com/negarfathi/Athena.git; then
      "$root_directory/tools/Athena/install_Athena.sh"
  else
      echo "Failed to clone Athena."
