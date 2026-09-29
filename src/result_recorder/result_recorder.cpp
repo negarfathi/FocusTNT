@@ -123,19 +123,111 @@ std::tuple<std::string, long long, long long> ReadAnalyzerResult(const std::file
 }
 
 
-long long CountNonEmptyLOC(const std::filesystem::path &path) {
+std::pair<long long, long long> CountLOCAndTokens(const std::filesystem::path &path) {
     std::ifstream stream(path);
-    long long count = 0;
+    if (!stream.is_open()) {
+        return {-1, -1};
+    }
+    std::stringstream buffer;
+    buffer << stream.rdbuf();
+    stream.close();
+    const std::string code = buffer.str();
+    std::string codeWithoutComments;
+    codeWithoutComments.reserve(code.size());
+    bool inLineComment = false;
+    bool inBlockComment = false;
+    bool inString = false;
+    bool inChar = false;
+    bool escaped = false;
+    for (std::size_t i = 0; i < code.size(); i++) {
+        char current = code[i];
+        char next = (i + 1 < code.size()) ? code[i + 1] : '\0';
+        if (inLineComment) {
+            if (current == '\n') {
+                inLineComment = false;
+                codeWithoutComments += '\n';
+            }
+            continue;
+        }
+        if (inBlockComment) {
+            if (current == '*' && next == '/') {
+                inBlockComment = false;
+                i++;
+            }
+            else if (current == '\n') {
+                codeWithoutComments += '\n';
+            }
+            continue;
+        }
+        if (inString) {
+            codeWithoutComments += current;
+            if (escaped) {
+                escaped = false;
+            }
+            else if (current == '\\') {
+                escaped = true;
+            }
+            else if (current == '"') {
+                inString = false;
+            }
+            continue;
+        }
+        if (inChar) {
+            codeWithoutComments += current;
+            if (escaped) {
+                escaped = false;
+            }
+            else if (current == '\\') {
+                escaped = true;
+            }
+            else if (current == '\'') {
+                inChar = false;
+            }
+            continue;
+        }
+        if (current == '/' && next == '/') {
+            inLineComment = true;
+            i++;
+            continue;
+        }
+        if (current == '/' && next == '*') {
+            inBlockComment = true;
+            i++;
+            continue;
+        }
+        if (current == '"') {
+            inString = true;
+            codeWithoutComments += current;
+            continue;
+        }
+        if (current == '\'') {
+            inChar = true;
+            codeWithoutComments += current;
+            continue;
+        }
+        codeWithoutComments += current;
+    }
+    long long loc = 0;
+    std::stringstream lineStream(codeWithoutComments);
     std::string line;
-    while (std::getline(stream, line)) {
+    while (std::getline(lineStream, line)) {
         bool nonEmpty = std::any_of(line.begin(), line.end(), [](unsigned char c) {
             return !std::isspace(c);
         });
         if (nonEmpty) {
-            count++;
+            loc++;
         }
     }
-    return count;
+    std::regex tokenPattern(
+        R"tok("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[A-Za-z_][A-Za-z0-9_]*|0[xX][0-9A-Fa-f]+|[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?|>>=|<<=|\.\.\.|\+\+|--|->|&&|\|\||<=|>=|==|!=|\+=|-=|\*=|/=|%=|&=|\|=|\^=|<<|>>|##|[{}\[\]();,.?:~!+\-*/%<>=&|^#])tok"
+    );
+    long long tokens = 0;
+    for (std::sregex_iterator it(codeWithoutComments.begin(), codeWithoutComments.end(), tokenPattern);
+         it != std::sregex_iterator();
+         ++it) {
+        tokens++;
+    }
+    return {loc, tokens};
 }
 
 
@@ -146,6 +238,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "Program_NumLoops",
         "Program_NumNondetInputs",
         "Program_Loc",
+        "Program_Tokens",
         "Program_GT",
 
         "Feature_Pointer",
@@ -173,6 +266,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "Slice_LoopID",
         "Slice_TestCaseID",
         "Slice_Loc",
+        "Slice_Tokens",
         "Slice_GT",
         "Slice_Verdict",
         "Slice_PreprocessingTime",
@@ -192,6 +286,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "Cncrt_LoopID",
         "Cncrt_TestCaseID",
         "Cncrt_Loc",
+        "Cncrt_Tokens",
         "Cncrt_GT",
         "Cncrt_Verdict",
         "Cncrt_PreprocessingTime",
@@ -211,6 +306,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "SliceCncrt_LoopID",
         "SliceCncrt_TestCaseID",
         "SliceCncrt_Loc",
+        "SliceCncrt_Tokens",
         "SliceCncrt_GT",
         "SliceCncrt_Verdict",
         "SliceCncrt_PreprocessingTime",
@@ -230,6 +326,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "CncrtSlice_LoopID",
         "CncrtSlice_TestCaseID",
         "CncrtSlice_Loc",
+        "CncrtSlice_Tokens",
         "CncrtSlice_GT",
         "CncrtSlice_Verdict",
         "CncrtSlice_PreprocessingTime",
@@ -242,7 +339,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         "CncrtSlice_Solved",
         "CncrtSlice_SolvedRatio",
         "CncrtSlice_TVT",
-        "Cncrt_AVT",
+        "CncrtSlice_AVT",
         "CncrtSlice_MVT",
     };
 
@@ -279,8 +376,8 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         programGT = programGTIterator->second;
     }
 
-    // Program_Loc
-    long long programLoc = CountNonEmptyLOC(sourceCodePath);
+    // Program_Loc and Program_Tokens
+    auto [programLoc, programTokens] = CountLOCAndTokens(sourceCodePath);
 
     // Open Existing Excel or Create New Excel
     xlnt::workbook wb;
@@ -309,6 +406,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         std::vector<std::string> variantTestCaseIDs;
         std::vector<std::string> variantGTs;
         std::vector<long long> variantLocs;
+        std::vector<long long> variantTokens;
         std::vector<std::string> variantVerdicts;
         std::vector<long long> variantPreprocessingTimes;
         std::vector<long long> variantAnalysisTimes;
@@ -339,10 +437,10 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
                 variantGT = variantGTIterator->second;
             }
 
-            // Slice_Loc, Cncrt_Loc, SliceCncrt_Loc, and CncrtSlice_Loc
-            long long variantLoc = CountNonEmptyLOC(variantPath);
+            // Slice_Loc/Slice_Tokens, Cncrt_Loc/Cncrt_Tokens, SliceCncrt_Loc/SliceCncrt_Tokens, and CncrtSlice_Loc/CncrtSlice_Tokens
+            auto [variantLoc, variantTokenCount] = CountLOCAndTokens(variantPath);
 
-            // Base_Verdict, Slice_Verdic, Cncrt_Verdict, SliceCncrt_Verdict, and CncrtSlice_Verdict
+            // Base_Verdict, Slice_Verdict, Cncrt_Verdict, SliceCncrt_Verdict, and CncrtSlice_Verdict
             // Base_PreprocessingTime, Slice_PreprocessingTime, Cncrt_PreprocessingTime, SliceCncrt_PreprocessingTime, and CncrtSlice_PreprocessingTime
             // Base_AnalysisTime, Slice_AnalysisTime, Cncrt_AnalysisTime, SliceCncrt_AnalysisTime, and CncrtSlice_AnalysisTime
             std::filesystem::path resultPath = resultsDirectory / (resultPrefix + variantName + ".txt");
@@ -355,6 +453,7 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
             variantGTs.push_back(variantGT);
             variantVerdicts.push_back(variantVerdict);
             variantLocs.push_back(variantLoc);
+            variantTokens.push_back(variantTokenCount);
             variantPreprocessingTimes.push_back(variantPreprocessingTime);
             variantAnalysisTimes.push_back(variantAnalysisTime);
         }
@@ -392,12 +491,12 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         double tSolvedRatio = totalT > 0 ? static_cast<double>(solvedT) / totalT : 0.0;
         double ntSolvedRatio = totalNT > 0 ? static_cast<double>(solvedNT) / totalNT : -1.0;
 
-        // Compute Solved and Solved-Variant Timing Metrics
+        // Compute Solved and Solved-Variant Analysis-Time Metrics
         int totalVariants = 0;
         int solvedVariants = 0;
         long long tvt = 0;
         double mvt = 0.0;
-        std::vector<long long> solvedVariantTimes;
+        std::vector<long long> solvedVariantAnalysisTimes;
         for (size_t i = 0; i < variantVerdicts.size(); i++) {
             std::string variantGT = configurationFlag == "base" ? programGT : variantGTs[i];
             if (variantGT != "T" && variantGT != "NT") {
@@ -407,25 +506,23 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
             bool solved = (variantGT == "T" && variantVerdicts[i] == "YES") || (variantGT == "NT" && variantVerdicts[i] == "NO");
             if (solved) {
                 solvedVariants++;
-                if (variantPreprocessingTimes[i] >= 0 && variantAnalysisTimes[i] >= 0) {
-                    long long variantTotalTime = variantPreprocessingTimes[i] + variantAnalysisTimes[i];
-                    tvt += variantTotalTime;
-                    solvedVariantTimes.push_back(variantTotalTime);
+                if (variantAnalysisTimes[i] >= 0) {
+                    tvt += variantAnalysisTimes[i];
+                    solvedVariantAnalysisTimes.push_back(variantAnalysisTimes[i]);
                 }
             }
         }
         std::string solved = totalVariants > 0 ? std::to_string(solvedVariants) + "/" + std::to_string(totalVariants) : "";
         double solvedRatio = totalVariants > 0 ? static_cast<double>(solvedVariants) / totalVariants : -1.0;
-        double avt = solvedVariants > 0 ? static_cast<double>(tvt) / solvedVariants : 0.0;
-
-        if (!solvedVariantTimes.empty()) {
-            std::sort(solvedVariantTimes.begin(), solvedVariantTimes.end());
-            size_t middle = solvedVariantTimes.size() / 2;
-            if (solvedVariantTimes.size() % 2 == 0) {
-                mvt = (static_cast<double>(solvedVariantTimes[middle - 1]) + solvedVariantTimes[middle]) / 2.0;
+        double avt = !solvedVariantAnalysisTimes.empty() ? static_cast<double>(tvt) / solvedVariantAnalysisTimes.size() : 0.0;
+        if (!solvedVariantAnalysisTimes.empty()) {
+            std::sort(solvedVariantAnalysisTimes.begin(), solvedVariantAnalysisTimes.end());
+            size_t middle = solvedVariantAnalysisTimes.size() / 2;
+            if (solvedVariantAnalysisTimes.size() % 2 == 0) {
+                mvt = (static_cast<double>(solvedVariantAnalysisTimes[middle - 1]) + solvedVariantAnalysisTimes[middle]) / 2.0;
             }
             else {
-                mvt = solvedVariantTimes[middle];
+                mvt = solvedVariantAnalysisTimes[middle];
             }
         }
 
@@ -450,19 +547,19 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         // Create New Analyzer Sheet
         if (newSheet) {
             // Configuration Group Headers
-            ws.merge_cells("A1:K1");
-            ws.merge_cells("L1:X1");
-            ws.merge_cells("Y1:AP1");
-            ws.merge_cells("AQ1:BH1");
-            ws.merge_cells("BI1:BZ1");
-            ws.merge_cells("CA1:CR1");
+            ws.merge_cells("A1:L1");
+            ws.merge_cells("M1:Y1");
+            ws.merge_cells("Z1:AR1");
+            ws.merge_cells("AS1:BK1");
+            ws.merge_cells("BL1:CD1");
+            ws.merge_cells("CE1:CW1");
 
             ws.cell("A1").value("Program");
-            ws.cell("L1").value("Base");
-            ws.cell("Y1").value("Slice");
-            ws.cell("AQ1").value("Cncrt");
-            ws.cell("BI1").value("SliceCncrt");
-            ws.cell("CA1").value("CncrtSlice");
+            ws.cell("M1").value("Base");
+            ws.cell("Z1").value("Slice");
+            ws.cell("AS1").value("Cncrt");
+            ws.cell("BL1").value("SliceCncrt");
+            ws.cell("CE1").value("CncrtSlice");
 
             // Configuration Group Header Font
             xlnt::font groupFont;
@@ -475,18 +572,18 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
             groupAlignment.vertical(xlnt::vertical_alignment::center);
 
             ws.cell("A1").font(groupFont);
-            ws.cell("L1").font(groupFont);
-            ws.cell("Y1").font(groupFont);
-            ws.cell("AQ1").font(groupFont);
-            ws.cell("BI1").font(groupFont);
-            ws.cell("CA1").font(groupFont);
+            ws.cell("M1").font(groupFont);
+            ws.cell("Z1").font(groupFont);
+            ws.cell("AS1").font(groupFont);
+            ws.cell("BL1").font(groupFont);
+            ws.cell("CE1").font(groupFont);
 
             ws.cell("A1").alignment(groupAlignment);
-            ws.cell("L1").alignment(groupAlignment);
-            ws.cell("Y1").alignment(groupAlignment);
-            ws.cell("AQ1").alignment(groupAlignment);
-            ws.cell("BI1").alignment(groupAlignment);
-            ws.cell("CA1").alignment(groupAlignment);
+            ws.cell("M1").alignment(groupAlignment);
+            ws.cell("Z1").alignment(groupAlignment);
+            ws.cell("AS1").alignment(groupAlignment);
+            ws.cell("BL1").alignment(groupAlignment);
+            ws.cell("CE1").alignment(groupAlignment);
 
             // Column Header Font
             xlnt::font headerFont;
@@ -507,53 +604,53 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
             }
 
             // Freeze Program Columns and Header Rows
-            ws.freeze_panes("F3");
+            ws.freeze_panes("G3");
 
             // Program Column Widths
             ws.column_properties(static_cast<xlnt::column_t>(1)).width = 35.0;
-            for (int column = 2; column <= 96; column++) {
+            for (int column = 2; column <= 101; column++) {
                 ws.column_properties(static_cast<xlnt::column_t>(column)).width = 20.0;
             }
 
             // Slice_Name, Cncrt_Name, SliceCncrt_Name, and CncrtSlice_Name Column Widths
-            ws.column_properties(static_cast<xlnt::column_t>(25)).width = 40.0;
-            ws.column_properties(static_cast<xlnt::column_t>(43)).width = 40.0;
-            ws.column_properties(static_cast<xlnt::column_t>(61)).width = 40.0;
-            ws.column_properties(static_cast<xlnt::column_t>(79)).width = 40.0;
+            ws.column_properties(static_cast<xlnt::column_t>(26)).width = 40.0;
+            ws.column_properties(static_cast<xlnt::column_t>(45)).width = 40.0;
+            ws.column_properties(static_cast<xlnt::column_t>(64)).width = 40.0;
+            ws.column_properties(static_cast<xlnt::column_t>(83)).width = 40.0;
         }
 
         // Find Columns for Current Configuration
         int configurationStartColumn = -1;
         int configurationColumnCount = -1;
 
-        // Base = L:X
+        // Base = M:Y
         if (configurationFlag == "base") {
-            configurationStartColumn = 12;
+            configurationStartColumn = 13;
             configurationColumnCount = 13;
         }
 
-        // Slice = Y:AP
+        // Slice = Z:AR
         else if (configurationFlag == "slice") {
-            configurationStartColumn = 25;
-            configurationColumnCount = 18;
+            configurationStartColumn = 26;
+            configurationColumnCount = 19;
         }
 
-        // Cncrt = AQ:BH
+        // Cncrt = AS:BK
         else if (configurationFlag == "cncrt") {
-            configurationStartColumn = 43;
-            configurationColumnCount = 18;
+            configurationStartColumn = 45;
+            configurationColumnCount = 19;
         }
 
-        // SliceCncrt = BI:BZ
+        // SliceCncrt = BL:CD
         else if (configurationFlag == "slice_cncrt") {
-            configurationStartColumn = 61;
-            configurationColumnCount = 18;
+            configurationStartColumn = 64;
+            configurationColumnCount = 19;
         }
 
-        // CncrtSlice = CA:CR
+        // CncrtSlice = CE:CW
         else if (configurationFlag == "cncrt_slice") {
-            configurationStartColumn = 79;
-            configurationColumnCount = 18;
+            configurationStartColumn = 83;
+            configurationColumnCount = 19;
         }
 
         // Find Current Program in Analyzer Sheet
@@ -620,17 +717,26 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
             ws.cell("D" + std::to_string(programStartRow)).value("");
         }
 
+        // Program_Tokens
+        if (programTokens >= 0) {
+            ws.cell("E" + std::to_string(programStartRow)).value(programTokens);
+        }
+        else {
+            ws.cell("E" + std::to_string(programStartRow)).value("");
+        }
+
         // Program_GT
-        ws.cell("E" + std::to_string(programStartRow)).value(programGT);
+        ws.cell("F" + std::to_string(programStartRow)).value(programGT);
 
         // Keep Program_* Information Only in First Row of Program Block
-        // Feature_* Columns F:K are NOT Changed
+        // Feature_* Columns G:L are NOT Changed
         for (int row = programStartRow + 1; row < programStartRow + existingBlockRows; row++) {
             ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(1), static_cast<xlnt::row_t>(row)));
             ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(2), static_cast<xlnt::row_t>(row)));
             ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(3), static_cast<xlnt::row_t>(row)));
             ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(4), static_cast<xlnt::row_t>(row)));
             ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(5), static_cast<xlnt::row_t>(row)));
+            ws.clear_cell(xlnt::cell_reference(static_cast<xlnt::column_t>(6), static_cast<xlnt::row_t>(row)));
         }
 
         // Clear Previous Results for Current Configuration
@@ -700,43 +806,48 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
                     ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 3), static_cast<xlnt::row_t>(row))).value(variantLocs[variantIndex]);
                 }
 
+                // Slice_Tokens, Cncrt_Tokens, SliceCncrt_Tokens, and CncrtSlice_Tokens
+                if (variantTokens[variantIndex] >= 0) {
+                    ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 4), static_cast<xlnt::row_t>(row))).value(variantTokens[variantIndex]);
+                }
+
                 // Slice_GT, Cncrt_GT, SliceCncrt_GT, and CncrtSlice_GT
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 4), static_cast<xlnt::row_t>(row))).value(variantGTs[variantIndex]);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 5), static_cast<xlnt::row_t>(row))).value(variantGTs[variantIndex]);
 
                 // Slice_Verdict, Cncrt_Verdict, SliceCncrt_Verdict, and CncrtSlice_Verdict
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 5), static_cast<xlnt::row_t>(row))).value(variantVerdicts[variantIndex]);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 6), static_cast<xlnt::row_t>(row))).value(variantVerdicts[variantIndex]);
 
                 // Slice_PreprocessingTime, Cncrt_PreprocessingTime, SliceCncrt_PreprocessingTime, and CncrtSlice_PreprocessingTime
                 if (variantPreprocessingTimes[variantIndex] >= 0) {
-                    ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 6), static_cast<xlnt::row_t>(row))).value(variantPreprocessingTimes[variantIndex]);
+                    ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 7), static_cast<xlnt::row_t>(row))).value(variantPreprocessingTimes[variantIndex]);
                 }
 
                 // Slice_AnalysisTime, Cncrt_AnalysisTime, SliceCncrt_AnalysisTime, and CncrtSlice_AnalysisTime
                 if (variantAnalysisTimes[variantIndex] >= 0) {
-                    ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 7), static_cast<xlnt::row_t>(row))).value(variantAnalysisTimes[variantIndex]);
+                    ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 8), static_cast<xlnt::row_t>(row))).value(variantAnalysisTimes[variantIndex]);
                 }
             }
 
             // Program-Level Evaluation
-            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 8), static_cast<xlnt::row_t>(programStartRow))).value(correctness);
+            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 9), static_cast<xlnt::row_t>(programStartRow))).value(correctness);
             if (programGT == "T" || programGT == "NT") {
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 9), static_cast<xlnt::row_t>(programStartRow))).value(tSolved);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 10), static_cast<xlnt::row_t>(programStartRow))).value(tSolvedRatio);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 10), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 10), static_cast<xlnt::row_t>(programStartRow))).value(tSolved);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 11), static_cast<xlnt::row_t>(programStartRow))).value(tSolvedRatio);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 11), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
             }
             if (programGT == "NT") {
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 11), static_cast<xlnt::row_t>(programStartRow))).value(ntSolved);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 12), static_cast<xlnt::row_t>(programStartRow))).value(ntSolvedRatio);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 12), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 12), static_cast<xlnt::row_t>(programStartRow))).value(ntSolved);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 13), static_cast<xlnt::row_t>(programStartRow))).value(ntSolvedRatio);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 13), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
             }
             if (totalVariants > 0) {
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 13), static_cast<xlnt::row_t>(programStartRow))).value(solved);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 14), static_cast<xlnt::row_t>(programStartRow))).value(solvedRatio);
-                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 14), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 14), static_cast<xlnt::row_t>(programStartRow))).value(solved);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 15), static_cast<xlnt::row_t>(programStartRow))).value(solvedRatio);
+                ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 15), static_cast<xlnt::row_t>(programStartRow))).number_format(xlnt::number_format("0%"));
             }
-            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 15), static_cast<xlnt::row_t>(programStartRow))).value(tvt);
-            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 16), static_cast<xlnt::row_t>(programStartRow))).value(avt);
-            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 17), static_cast<xlnt::row_t>(programStartRow))).value(mvt);
+            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 16), static_cast<xlnt::row_t>(programStartRow))).value(tvt);
+            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 17), static_cast<xlnt::row_t>(programStartRow))).value(avt);
+            ws.cell(xlnt::cell_reference(static_cast<xlnt::column_t>(configurationStartColumn + 18), static_cast<xlnt::row_t>(programStartRow))).value(mvt);
         }
     }
 

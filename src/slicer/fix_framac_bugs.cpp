@@ -1,285 +1,542 @@
 #include "../../include/slicer/fix_framac_bugs.h"
 
-void fixFramacBugs(const std::string &fileName, const std::filesystem::path &filePath) {
-    const std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> patches = {
-        {
-            "Incorrect_Initialization_3_NT",
-            {
-                {
-                    "if ((int)*str == c) {",
-                    "if ((int)*str == '\\n') {"
-                }
-            }
-        },
-        {
-            "Incorrect_Initialization_3_T",
-            {
-                {
-                    "if ((int)*str == c) {",
-                    "if ((int)*str == '\\n') {"
-                }
-            }
-        },
-        {
-            "Incorrect_Initialization_4_NT",
-            {
-                {
-                    "",
-                    R"(extern int __VERIFIER_nondet_int(void);
-/*
-Commit Number: fa741cd4fffbbaa5d4ba9a15f53550ac7817cc92
-URL: https://github.com/behdad/fontconfig/commit/fa741cd4fffbbaa5d4ba9a15f53550ac7817cc92
-Project Name: fontconfig
-License: MIT
-termination: FALSE
-*/
-int main()
-{
-    int h = __VERIFIER_nondet_int();
-    int hash = __VERIFIER_nondet_int();
-    int rehash = __VERIFIER_nondet_int();
-    if( h < 0 || hash <= 0 || rehash <= 0 || rehash > hash)
-        return 0;
-    int i = h % hash;
-    int r;
-    while( i < hash )
-    {
-        if( !r ) r = h % rehash;
-        i += r;
-    }
-    return 0;
-}
-)"
-                }
-            }
-        },
-        {
-            "Incorrect_Initialization_4_T",
-            {
-                {
-                    "",
-                    R"(extern int __VERIFIER_nondet_int(void);
-/*
-
-Commit Number: fa741cd4fffbbaa5d4ba9a15f53550ac7817cc92
-URL: https://github.com/behdad/fontconfig/commit/fa741cd4fffbbaa5d4ba9a15f53550ac7817cc92
-Project Name: fontconfig
-License: MIT
-termination: TRUE
-*/
-int main()
-{
-    int h = __VERIFIER_nondet_int();
-    int hash = __VERIFIER_nondet_int();
-    int rehash = __VERIFIER_nondet_int();
-    if( h < 0 || hash <= 0 || rehash <= 0 || rehash > hash || hash > 65534)
-        return 0;
-    int i = h % hash;
-    int r = 0;
-    while( i < hash )
-    {
-        if( !r ) r = ( h % rehash ) + 1;
-        i += r;
-    }
-    return 0;
-}
-)"
-                }
-            }
-        },
-        {
-            "Missing_Corner-case_Handling_3_NT",
-            {
-                {
-                    "",
-                    R"(extern int __VERIFIER_nondet_int(void);
-/*
-
-Commit Number: fad2eab749cce970fa87fa46186218b2dfe1adc1
-URL: https://github.com/NetHack/NetHack/commit/fad2eab749cce970fa87fa46186218b2dfe1adc1
-Project Name: NetHack
-License: https://github.com/NetHack/NetHack/commit/60df7b2d3b73900481814084be027375b5888765
-termination: FALSE
-
-*/
-int main()
-{
-    int ROWNO = __VERIFIER_nondet_int();
-    int COLNO = __VERIFIER_nondet_int();
-    if( ROWNO <= 0 || COLNO <= 0 || ROWNO > 65534 || COLNO > 65534 )
-        return 0;
-    int levl[ROWNO][COLNO];
-    for( int i = 0 ; i < ROWNO ; i++ )
-    {
-        for( int j = 0 ; j < COLNO ; j++ )
-        {
-            int num = __VERIFIER_nondet_int();
-            if( num > 0 )
-                num = -num;
-            levl[i][j] = num % 4;
+bool replaceNondetValues(std::string &program, const std::string &inputProgram, const std::vector<std::string> &variableNames) {
+    for (const std::string &variableName : variableNames) {
+        std::regex inputPattern("\\bint\\s+" + variableName + R"(\s*=\s*([^;]+)\s*;)");
+        std::smatch inputMatch;
+        if (!std::regex_search(inputProgram, inputMatch, inputPattern)) {
+            return false;
         }
-    }
-    int STONE = 0;
-    int found = 0;
-    for( int xmin = 0; !found ; xmin++ )
-    {
-        for( int y = 0 ; y <= COLNO - 1; y++ )
-        {
-            if( levl[xmin][y] != STONE )
-                found = 1;
+        std::string concreteValue = inputMatch[1].str();
+        if (concreteValue.find("__VERIFIER_nondet_") !=
+            std::string::npos) {
+            return false;
         }
-    }
-    return 0;
-}
-)"
-                }
-            }
-        },
-        {
-            "Missing_Corner-case_Handling_3_T",
-            {
-                {
-                    "",
-                    R"(extern int __VERIFIER_nondet_int(void);
-/*
-Commit Number: fad2eab749cce970fa87fa46186218b2dfe1adc1
-URL: https://github.com/NetHack/NetHack/commit/fad2eab749cce970fa87fa46186218b2dfe1adc1
-Project Name: NetHack
-License: https://github.com/NetHack/NetHack/commit/60df7b2d3b73900481814084be027375b5888765
-termination: TRUE
-
-
-*/
-int main()
-{
-    int ROWNO = __VERIFIER_nondet_int();
-    int COLNO = __VERIFIER_nondet_int();
-    if( ROWNO <= 0 || COLNO <= 0 || ROWNO > 65534 || COLNO > 65534 )
-        return 0;
-    int levl[ROWNO][COLNO];
-    for( int i = 0 ; i < ROWNO ; i++ )
-    {
-        for( int j = 0 ; j < COLNO ; j++ )
-        {
-            int num = __VERIFIER_nondet_int();
-            if( num > 0 )
-                num = -num;
-            levl[i][j] = num % 4;
+        std::regex targetPattern("\\bint\\s+" + variableName + R"(\s*=\s*__VERIFIER_nondet_[A-Za-z0-9_]*\s*\(\s*\)\s*;)");
+        std::smatch targetMatch;
+        if (!std::regex_search(program, targetMatch, targetPattern)) {
+            return false;
         }
+        std::string replacement = "int " + variableName + " = " + concreteValue + ";";
+        program.replace(static_cast<std::size_t>(targetMatch.position()), static_cast<std::size_t>(targetMatch.length()), replacement);
     }
-    int STONE = 0;
-    int found = 0;
-    for( int xmin = 0; !found && xmin < ROWNO; xmin++ )
-    {
-        for( int y = 0 ; y <= COLNO - 1; y++ )
-        {
-            if( levl[xmin][y] != STONE )
-                found = 1;
-        }
-    }
-    return 0;
-}
-)"
-                }
-            }
-        },
-        {
-            "Missing_Iterator_Update_1_NT",
-            {
-                {
-                    "extern int __VERIFIER_nondet_int(void);\n"
-                    "\n"
-                    "int waitpid",
-                    "extern int __VERIFIER_nondet_int(void);\n"
-                    "int __fc_errno;\n"
-                    "int waitpid"
-                }
-            }
-        },
-        {
-            "Missing_Iterator_Update_1_T",
-            {
-                {
-                    "extern int __VERIFIER_nondet_int(void);\n"
-                    "\n"
-                    "int waitpid",
-                    "extern int __VERIFIER_nondet_int(void);\n"
-                    "int __fc_errno;\n"
-                    "int waitpid"
-                },
-                {
-                    "",
-                    R"(extern int __VERIFIER_nondet_int(void);
-/*
-Commit Number: fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
-URL: https://github.com/freedesktop/dbus/commit/fc600b6a8f0dec5642b45c1026dee24c9adb9bc2
-Project Name: dbus
-License: GPL2
-termination: TRUE
-
-*/
-#define EINTR 1
-#define OTHER 2
-int errno;
-int waitpid()
-{
-    int num = __VERIFIER_nondet_int();
-    while( num < 0 )
-    {
-        if( __VERIFIER_nondet_int() && errno != EINTR )
-            errno = EINTR;
-        else
-            errno = OTHER;
-        return num;
-    }
-    return num;
+    return true;
 }
 
-int main()
-{
 
-    int ret = waitpid();
-again:
-    if( ret == 0 )
-    {
-        do{
-            ret = waitpid();
-        }while( ret < 0 && errno == EINTR );
+void fixFramacBugs(const std::filesystem::path &slicedVariantPath, const std::filesystem::path &inputProgramPath) {
+    const std::string fileName = slicedVariantPath.filename().string();
+    std::ifstream inStream(slicedVariantPath);
+    if (!inStream.is_open()) {
+        return;
     }
-    return 0;
-}
-)"
-                }
-            }
-        }
-        //Missing_Iterator_Update_3_NT
-        //Missing_Iterator_Update_3_T
-        //Missing_Iterator_Update_5_NT
-        //Missing_Iterator_Update_5_T
-    };
-    auto it = patches.find(fileName);
-    if (it == patches.end()) return;
-    const auto& replacements = it->second;
-    std::ifstream inStream(filePath);
-    if (!inStream.is_open()) return;
     std::stringstream inBuffer;
     inBuffer << inStream.rdbuf();
     inStream.close();
     std::string inFile = inBuffer.str();
-    for (const auto& [sourceText, destinationText] : replacements) {
-        if (sourceText.empty()) {
-            if (inFile.empty() || it->first == "Incorrect_Initialization_4_NT" || it->first == "Incorrect_Initialization_4_T") {
-                inFile = destinationText;
-            }
-            break;
-        }
-        size_t position = inFile.find(sourceText);
+    bool modified = false;
+    if (fileName.rfind("Incorrect_Initialization_3_NT", 0) == 0 || fileName.rfind("Incorrect_Initialization_3_T", 0) == 0) {
+        const std::string sourceText = "if ((int)*str == c) {";
+        const std::string destinationText = "if ((int)*str == '\\n') {";
+        std::size_t position = inFile.find(sourceText);
         while (position != std::string::npos) {
             inFile.replace(position, sourceText.length(), destinationText);
             position = inFile.find(sourceText, position + destinationText.length());
         }
+        modified = true;
     }
-    std::ofstream outStream(filePath);
+    else if (fileName.rfind("Incorrect_Initialization_4_NT", 0) == 0) {
+        inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int __retres;
+  int h = __VERIFIER_nondet_int();
+  int hash = __VERIFIER_nondet_int();
+  int rehash = __VERIFIER_nondet_int();
+
+  if (h < 0) {
+    __retres = 0;
+    goto return_label;
+  }
+  else
+    if (hash <= 0) {
+      __retres = 0;
+      goto return_label;
+    }
+    else
+      if (rehash <= 0) {
+        __retres = 0;
+        goto return_label;
+      }
+      else
+        if (rehash > hash) {
+          __retres = 0;
+          goto return_label;
+        }
+
+  int i = h % hash;
+  int r;
+
+  while (i < hash) {
+    if (! r)
+      r = h % rehash;
+    i += r;
+  }
+
+  return_label:
+  return;
+}
+)";
+        if (fileName.find("_TestCase") != std::string::npos) {
+            std::ifstream inputStream(inputProgramPath);
+            if (!inputStream.is_open()) {
+                return;
+            }
+            std::stringstream inputBuffer;
+            inputBuffer << inputStream.rdbuf();
+            inputStream.close();
+            std::string inputProgram = inputBuffer.str();
+            if (!replaceNondetValues(inFile, inputProgram, {"h", "hash", "rehash"})) {
+                return;
+            }
+        }
+        modified = true;
+    }
+    else if (fileName.rfind("Incorrect_Initialization_4_T", 0) == 0) {
+        inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int h = __VERIFIER_nondet_int();
+  int hash = __VERIFIER_nondet_int();
+  int rehash = __VERIFIER_nondet_int();
+
+  if (h < 0)
+    goto return_label;
+  else
+    if (hash <= 0)
+      goto return_label;
+    else
+      if (rehash <= 0)
+        goto return_label;
+      else
+        if (rehash > hash)
+          goto return_label;
+        else
+          if (hash > 65534)
+            goto return_label;
+
+  int i = h % hash;
+  int r = 0;
+
+  while (i < hash) {
+    if (! r)
+      r = h % rehash + 1;
+    i += r;
+  }
+
+  return_label:
+  return;
+}
+)";
+        if (fileName.find("_TestCase") != std::string::npos) {
+            std::ifstream inputStream(inputProgramPath);
+            if (!inputStream.is_open()) {
+                return;
+            }
+            std::stringstream inputBuffer;
+            inputBuffer << inputStream.rdbuf();
+            inputStream.close();
+            std::string inputProgram = inputBuffer.str();
+            if (!replaceNondetValues(inFile, inputProgram, {"h", "hash", "rehash"})) {
+                return;
+            }
+        }
+        modified = true;
+    }
+    else if (fileName.rfind("Missing_Corner-case_Handling_3_NT", 0) == 0) {
+        if (fileName.find("Loop19") != std::string::npos || fileName.find("Loop21") != std::string::npos) {
+            inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int ROWNO = __VERIFIER_nondet_int();
+  int COLNO = __VERIFIER_nondet_int();
+
+  if (ROWNO <= 0) goto return_label;
+  else
+    if (COLNO <= 0) goto return_label;
+    else
+      if (ROWNO > 65534) goto return_label;
+      else
+        if (COLNO > 65534) goto return_label;
+
+  int levl[ROWNO][COLNO];
+
+  {
+    int i = 0;
+    while (i < ROWNO) {
+      {
+        int j = 0;
+        while (j < COLNO) {
+          int num = __VERIFIER_nondet_int();
+          if (num > 0)
+            num = -num;
+          levl[i][j] = num % 4;
+          j++;
+        }
+      }
+      i++;
+    }
+  }
+
+return_label:
+  return;
+}
+)";
+            if (fileName.find("_TestCase") != std::string::npos) {
+                std::ifstream inputStream(inputProgramPath);
+                if (!inputStream.is_open()) {
+                    return;
+                }
+                std::stringstream inputBuffer;
+                inputBuffer << inputStream.rdbuf();
+                inputStream.close();
+                std::string inputProgram = inputBuffer.str();
+                if (!replaceNondetValues(inFile, inputProgram, {"ROWNO", "COLNO", "num"})) {
+                    return;
+                }
+            }
+            modified = true;
+        }
+        else if (fileName.find("Loop31") != std::string::npos || fileName.find("Loop33") != std::string::npos) {
+            inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int ROWNO = __VERIFIER_nondet_int();
+  int COLNO = __VERIFIER_nondet_int();
+
+  if (ROWNO <= 0) goto return_label;
+  else
+    if (COLNO <= 0) goto return_label;
+    else
+      if (ROWNO > 65534) goto return_label;
+      else
+        if (COLNO > 65534) goto return_label;
+
+  int levl[ROWNO][COLNO];
+
+  {
+    int i = 0;
+    while (i < ROWNO) {
+      {
+        int j = 0;
+        while (j < COLNO) {
+          int num = __VERIFIER_nondet_int();
+          if (num > 0)
+            num = -num;
+          levl[i][j] = num % 4;
+          j++;
+        }
+      }
+      i++;
+    }
+  }
+
+  int STONE = 0;
+  int found = 0;
+
+  {
+    int xmin = 0;
+    while (! found) {
+      {
+        int y = 0;
+        while (y <= COLNO - 1) {
+          if (levl[xmin][y] != STONE)
+            found = 1;
+          y++;
+        }
+      }
+      xmin++;
+    }
+  }
+
+return_label:
+  return;
+}
+)";
+            if (fileName.find("_TestCase") != std::string::npos) {
+                std::ifstream inputStream(inputProgramPath);
+                if (!inputStream.is_open()) {
+                    return;
+                }
+                std::stringstream inputBuffer;
+                inputBuffer << inputStream.rdbuf();
+                inputStream.close();
+                std::string inputProgram = inputBuffer.str();
+                if (!replaceNondetValues(inFile, inputProgram, {"ROWNO", "COLNO", "num"})) {
+                    return;
+                }
+            }
+            modified = true;
+        }
+    }
+    else if (fileName.rfind("Missing_Corner-case_Handling_3_T", 0) == 0) {
+        if (fileName.find("Loop19") != std::string::npos || fileName.find("Loop21") != std::string::npos) {
+            inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int ROWNO = __VERIFIER_nondet_int();
+  int COLNO = __VERIFIER_nondet_int();
+
+  if (ROWNO <= 0) goto return_label;
+  else
+    if (COLNO <= 0) goto return_label;
+    else
+      if (ROWNO > 65534) goto return_label;
+      else
+        if (COLNO > 65534) goto return_label;
+
+  int levl[ROWNO][COLNO];
+
+  {
+    int i = 0;
+    while (i < ROWNO) {
+      {
+        int j = 0;
+        while (j < COLNO) {
+          int num = __VERIFIER_nondet_int();
+
+          if (num > 0)
+            num = -num;
+
+          levl[i][j] = num % 4;
+          j++;
+        }
+      }
+      i++;
+    }
+  }
+
+return_label:
+  return;
+}
+)";
+            if (fileName.find("_TestCase") != std::string::npos) {
+                std::ifstream inputStream(inputProgramPath);
+                if (!inputStream.is_open()) {
+                    return;
+                }
+                std::stringstream inputBuffer;
+                inputBuffer << inputStream.rdbuf();
+                inputStream.close();
+                std::string inputProgram = inputBuffer.str();
+                if (!replaceNondetValues(inFile, inputProgram, {"ROWNO", "COLNO", "num"})) {
+                    return;
+                }
+            }
+            modified = true;
+        }
+        else if (fileName.find("Loop31") != std::string::npos || fileName.find("Loop33") != std::string::npos) {
+            inFile = R"(/* Generated by Frama-C */
+
+extern int __VERIFIER_nondet_int(void);
+
+void main(void)
+{
+  int ROWNO = __VERIFIER_nondet_int();
+  int COLNO = __VERIFIER_nondet_int();
+
+  if (ROWNO <= 0) goto return_label;
+  else
+    if (COLNO <= 0) goto return_label;
+    else
+      if (ROWNO > 65534) goto return_label;
+      else
+        if (COLNO > 65534) goto return_label;
+
+  int levl[ROWNO][COLNO];
+
+  {
+    int i = 0;
+    while (i < ROWNO) {
+      {
+        int j = 0;
+        while (j < COLNO) {
+          int num = __VERIFIER_nondet_int();
+
+          if (num > 0)
+            num = -num;
+
+          levl[i][j] = num % 4;
+          j++;
+        }
+      }
+      i++;
+    }
+  }
+
+  int STONE = 0;
+  int found = 0;
+
+  {
+    int xmin = 0;
+    while (!found && xmin < ROWNO) {
+      {
+        int y = 0;
+        while (y <= COLNO - 1) {
+          if (levl[xmin][y] != STONE)
+            found = 1;
+
+          y++;
+        }
+      }
+      xmin++;
+    }
+  }
+
+return_label:
+  return;
+}
+)";
+            if (fileName.find("_TestCase") != std::string::npos) {
+                std::ifstream inputStream(inputProgramPath);
+                if (!inputStream.is_open()) {
+                    return;
+                }
+                std::stringstream inputBuffer;
+                inputBuffer << inputStream.rdbuf();
+                inputStream.close();
+                std::string inputProgram = inputBuffer.str();
+                if (!replaceNondetValues(inFile, inputProgram, {"ROWNO", "COLNO", "num"})) {
+                    return;
+                }
+            }
+            modified = true;
+        }
+    }
+    else if (fileName.rfind("Missing_Iterator_Update_1_NT", 0) == 0) {
+        const std::string sourceText = "extern int __VERIFIER_nondet_int(void);\n"
+                                       "\n"
+                                       "int waitpid";
+        const std::string destinationText = "extern int __VERIFIER_nondet_int(void);\n"
+                                            "int __fc_errno;\n"
+                                            "int waitpid";
+        std::size_t position = inFile.find(sourceText);
+        while (position != std::string::npos) {
+            inFile.replace(position, sourceText.length(), destinationText);
+            position = inFile.find(sourceText, position + destinationText.length());
+        }
+        modified = true;
+    }
+    else if (fileName.rfind("Missing_Iterator_Update_1_T", 0) == 0) {
+        if (inFile.empty()) {
+            inFile = R"(/* Generated by Frama-C */
+#include "errno.h"
+
+extern int __VERIFIER_nondet_int(void);
+int __fc_errno;
+int waitpid_slice_1(void)
+{
+  int __retres;
+  int num = __VERIFIER_nondet_int();
+  if (! (num < 0)) goto break_cont_1;
+
+  if (__VERIFIER_nondet_int()) {
+    if (__fc_errno != 1)
+      __fc_errno = 1;
+    else
+      __fc_errno = 2;
+  }
+  else
+    __fc_errno = 2;
+
+  __retres = num;
+  goto return_label;
+  break_cont_1: __retres = num;
+  return_label: return __retres;
+}
+
+void main(void)
+{
+  int ret = waitpid_slice_1();
+  if (ret == 0)
+    while (1) {
+      ret = waitpid_slice_1();
+      if (ret < 0) {
+        if (! (__fc_errno == 1)) break;
+      }
+      else break;
+    }
+  return;
+}
+)";
+            if (fileName.find("_TestCase") != std::string::npos) {
+                std::ifstream inputStream(inputProgramPath);
+                if (!inputStream.is_open()) {
+                    return;
+                }
+                std::stringstream inputBuffer;
+                inputBuffer << inputStream.rdbuf();
+                inputStream.close();
+                std::string inputProgram = inputBuffer.str();
+                if (!replaceNondetValues(inFile, inputProgram, {"num"})) {
+                    return;
+                }
+                std::regex conditionRegex(R"(if\s*\(\s*(-?\d+)\s*&&\s*errno\s*!=\s*EINTR\s*\))");
+                std::smatch conditionMatch;
+                if (!std::regex_search(inputProgram, conditionMatch, conditionRegex)) {
+                    return;
+                }
+                std::string concreteCondition = conditionMatch[1].str();
+                const std::string sourceText = "if (__VERIFIER_nondet_int()) {";
+                const std::string destinationText = "if (" + concreteCondition + ") {";
+                std::size_t position = inFile.find(sourceText);
+                if (position == std::string::npos) {
+                    return;
+                }
+                inFile.replace(position, sourceText.length(), destinationText);
+            }
+        }
+        else {
+            const std::string sourceText = "extern int __VERIFIER_nondet_int(void);\n"
+                                           "\n"
+                                           "int waitpid";
+            const std::string destinationText = "extern int __VERIFIER_nondet_int(void);\n"
+                                                "int __fc_errno;\n"
+                                                "int waitpid";
+            std::size_t position = inFile.find(sourceText);
+            while (position != std::string::npos) {
+                inFile.replace(position, sourceText.length(), destinationText);
+                position = inFile.find(sourceText, position + destinationText.length());
+            }
+        }
+        modified = true;
+    }
+    //Missing_Iterator_Update_3_NT
+    //Missing_Iterator_Update_3_T
+    //Missing_Iterator_Update_5_NT
+    //Missing_Iterator_Update_5_T
+    if (!modified) {
+        return;
+    }
+    std::ofstream outStream(slicedVariantPath);
+    if (!outStream.is_open()) {
+        return;
+    }
     outStream << inFile;
     outStream.close();
 }

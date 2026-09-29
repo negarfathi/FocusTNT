@@ -732,7 +732,7 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(inputProgramName, slicedVariantPath.string());
+                fixFramacBugs(slicedVariantPath, inputProgramPath);
 
                 slicedVariants.push_back(slicedVariantPath);
             }
@@ -759,7 +759,7 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for first slice of " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(inputProgramName, slicedVariant1Path.string());
+                fixFramacBugs(slicedVariant1Path, inputProgramPath);
 
                 std::string command2_FramaC = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + workingDirectory.string() + ":/FILES_DIR framac/frama-c-gui:dev bash -c '"
                                               "cd /FILES_DIR && "
@@ -774,7 +774,7 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for second slice of " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(inputProgramName, slicedVariant2Path.string());
+                fixFramacBugs(slicedVariant2Path, inputProgramPath);
 
                 std::ifstream slicedProgram1InStream(slicedVariant1Path);
                 std::stringstream slicedProgram1Buffer;
