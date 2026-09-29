@@ -396,7 +396,8 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
         int totalVariants = 0;
         int solvedVariants = 0;
         long long tvt = 0;
-        long long mvt = -1;
+        double mvt = -1.0;
+        std::vector<long long> solvedVariantTimes;
         for (size_t i = 0; i < variantVerdicts.size(); i++) {
             std::string variantGT = configurationFlag == "base" ? programGT : variantGTs[i];
             if (variantGT != "T" && variantGT != "NT") {
@@ -409,15 +410,24 @@ void RecordResults(const std::filesystem::path &excelPath, const std::filesystem
                 if (variantPreprocessingTimes[i] >= 0 && variantAnalysisTimes[i] >= 0) {
                     long long variantTotalTime = variantPreprocessingTimes[i] + variantAnalysisTimes[i];
                     tvt += variantTotalTime;
-                    if (variantTotalTime > mvt) {
-                        mvt = variantTotalTime;
-                    }
+                    solvedVariantTimes.push_back(variantTotalTime);
                 }
             }
         }
         std::string solved = totalVariants > 0 ? std::to_string(solvedVariants) + "/" + std::to_string(totalVariants) : "";
         double solvedRatio = totalVariants > 0 ? static_cast<double>(solvedVariants) / totalVariants : -1.0;
         double avt = solvedVariants > 0 ? static_cast<double>(tvt) / solvedVariants : -1.0;
+
+        if (!solvedVariantTimes.empty()) {
+            std::sort(solvedVariantTimes.begin(), solvedVariantTimes.end());
+            size_t middle = solvedVariantTimes.size() / 2;
+            if (solvedVariantTimes.size() % 2 == 0) {
+                mvt = (static_cast<double>(solvedVariantTimes[middle - 1]) + solvedVariantTimes[middle]) / 2.0;
+            }
+            else {
+                mvt = solvedVariantTimes[middle];
+            }
+        }
 
         // Get or Create Analyzer Sheet
         xlnt::worksheet ws;
