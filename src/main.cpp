@@ -1098,7 +1098,9 @@ void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::st
         }
     }
 
-    auto analysisTime_end = std::chrono::steady_clock::now();
-    auto analysisTime = std::chrono::duration_cast<std::chrono::milliseconds>(analysisTime_end - analysisTime_start).count();
-    std::ofstream(resultPath, std::ios::app) << "AnalysisTime: " << analysisTime << " milliseconds" << std::endl;
+    if (toolName != "Athena") {
+        auto analysisTime_end = std::chrono::steady_clock::now();
+        auto analysisTime = std::chrono::duration_cast<std::chrono::milliseconds>(analysisTime_end - analysisTime_start).count();
+        std::ofstream(resultPath, std::ios::app) << "AnalysisTime: " << analysisTime << " milliseconds" << std::endl;
+    }
 }
