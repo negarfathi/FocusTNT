@@ -1074,32 +1074,6 @@ void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::st
     }
 
     else if (toolName == "CPAchecker") {
-        std::string command =
-            "docker run --rm --platform linux/amd64 "
-            "--entrypoint /bin/bash "
-            "-v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR "
-            "-v " + workingDirectory.string() + ":/FILES_DIR "
-            "sosylab/cpachecker:dev -c '"
-            "timeout " + timeout +
-            " /cpachecker/scripts/cpa.sh "
-            "--config /cpachecker/config/terminationAnalysis.properties "
-            "--preprocess "
-            "--heap 10000M "
-            "--64 "
-            "--stats "
-            "--output-disable "
-            "/FILES_DIR/" + inputProgramRelativePath +
-            " > /FILES_DIR/" + resultRelativePath +
-            " 2>&1'";
-
-        int result = system(command.c_str());
-
-        if (result != 0) {
-            std::cerr << toolName << " execution failed.\n";
-        }
-    }
-
-    else if (toolName == "CPAchecker") {
         std::string command = "docker run --rm --platform linux/amd64 --entrypoint /bin/bash -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + workingDirectory.string() + ":/FILES_DIR sosylab/cpachecker:dev -c '"
                               "timeout " + timeout + " /cpachecker/scripts/cpa.sh --config /cpachecker/config/terminationAnalysis.properties --preprocess --heap 10000M --64 --stats /FILES_DIR/" + inputProgramRelativePath + " > /FILES_DIR/" + resultRelativePath + " 2>&1'";
         int result = system(command.c_str());
