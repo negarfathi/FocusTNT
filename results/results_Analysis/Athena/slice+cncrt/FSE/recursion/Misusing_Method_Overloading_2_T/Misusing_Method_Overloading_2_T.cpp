@@ -1,4 +1,3 @@
-#include "stdlib.h"
 
 class resolver_query_base {
     enum flags

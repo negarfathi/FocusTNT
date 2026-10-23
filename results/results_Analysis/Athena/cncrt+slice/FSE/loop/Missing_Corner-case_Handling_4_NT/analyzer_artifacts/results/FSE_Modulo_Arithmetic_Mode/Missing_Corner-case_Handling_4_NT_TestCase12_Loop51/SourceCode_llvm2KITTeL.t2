@@ -1,0 +1,61 @@
+///*** 1_main ***///
+START: main_bb7;
+
+FROM: main_bb7;
+memory0_freeIndex := 1;
+vmemory0 := nondet();
+var__temp_vnode.0 := v25;
+var__temp_vh.0 := 0;
+TO: main_bb8;
+
+FROM: main_bb8;
+vnode.0 := var__temp_vnode.0;
+vh.0 := var__temp_vh.0;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(vnode.0 != 0);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(vnode.0 == 0);
+TO: main_bb12;
+
+FROM: main_bb9;
+v27 := vnode.0;
+v28 := select_array(vmemory0, v27);
+v30 := select_tuple(v28, 0, 2);
+v31 := int2real(v30);
+v32 := int2real(vh.0);
+var__temp_vh.1 := vh.0;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(nondet());
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(nondet());
+TO: main_bb11;
+
+FROM: main_bb10;
+v34 := vnode.0;
+v35 := select_array(vmemory0, v34);
+v37 := select_tuple(v35, 0, 2);
+v38 := int2real(v37);
+v39 := real2int(v38);
+var__temp_vh.1 := v39;
+TO: main_bb11;
+
+FROM: main_bb11;
+vh.1 := var__temp_vh.1;
+v40 := vnode.0;
+v41 := select_array(vmemory0, v40);
+v43 := select_tuple(v41, 1, 2);
+var__temp_vnode.0 := v43;
+var__temp_vh.0 := vh.1;
+TO: main_bb8;
+
+FROM: main_bb12;
+TO: main_bb12_ret;
+

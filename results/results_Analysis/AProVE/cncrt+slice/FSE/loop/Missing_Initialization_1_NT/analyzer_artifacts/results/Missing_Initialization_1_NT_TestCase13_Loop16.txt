@@ -1,0 +1,100 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Initialization_1_NT_TestCase13_Loop16.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 76 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 101 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 441 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Initialization_1_NT_TestCase13_Loop16.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Initialization_1_NT_TestCase13_Loop16.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		br %2
+	2:
+		%3 = load %1
+		%4 = icmp eq %3 0
+		br %4, %5, %6
+	5:
+		store 0, %1
+		br %2
+	6:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #33 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #33 yields value 9.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Initialization_1_NT_TestCase13_Loop16.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Initialization_1_NT_TestCase13_Loop16.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 4783 milliseconds
+PreprocessingTime: 1086 milliseconds

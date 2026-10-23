@@ -1,0 +1,283 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Adding_Subtracting_Zero_3_T_TestCase5.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 150 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1980 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 334 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 37 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Adding_Subtracting_Zero_3_T_TestCase5.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Adding_Subtracting_Zero_3_T_TestCase5.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "read" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 i32, 1 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		%7 = alloca i32, align 4
+		store %0, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store %1, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		%8 = load @flag
+		%9 = icmp eq %8 1
+		br %9, %10, %11
+	10:
+		store 0, %3
+		br %40
+	11:
+		br %12
+	12:
+		%13 = load %4
+		%14 = load %5
+		%15 = icmp slt %13 %14
+		br %15, %16, %38
+	16:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		store 1, %7
+		%17 = load %7
+		%18 = icmp eq %17 0
+		br %18, %19, %20
+	19:
+		store -1, %3
+		br %40
+	20:
+		%21 = load %7
+		%22 = icmp slt %21 0
+		br %22, %23, %26
+	23:
+		%24 = load %7
+		%25 = sub i32 0, %24
+		store %25, %7
+		br %26
+	26:
+		%27 = load %7
+		%28 = srem i32 %27, 1000
+		store %28, %7
+		%29 = load %6
+		%30 = add i32 %29, 1
+		store %30, %6
+		%31 = load %7
+		%32 = icmp slt %31 995
+		br %32, %33, %36
+	33:
+		%34 = load %4
+		%35 = add i32 %34, 1
+		store %35, %4
+		br %12
+	36:
+		store 1, @flag
+		%37 = load %6
+		store %37, %3
+		br %40
+	38:
+		%39 = load %6
+		store %39, %3
+		br %40
+	40:
+		%41 = load %3
+		ret %41
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 68
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 0, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 2, %3
+		store 0, @flag
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		%6 = load %3
+		%7 = icmp sle %6 0
+		br %7, %11, %8
+	8:
+		%9 = load %3
+		%10 = icmp sgt %9 65536
+		br %10, %11, %12
+	11:
+		store 0, %1
+		br %43
+	12:
+		br %13
+	13:
+		%14 = load %2
+		%15 = load %3
+		%16 = icmp slt %14 %15
+		br %16, %17, %42
+	17:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%18 = load %2
+		%19 = load %3
+		%20 = load %2
+		%21 = sub i32 %19, %20
+		%22 = call i32 @read(i32 %18, i32 %21)
+		store %22, %5
+		%23 = load %5
+		%24 = icmp eq %23 -1
+		br %24, %25, %32
+	25:
+		%26 = load %4
+		%27 = add i32 %26, 1
+		store %27, %4
+		%28 = load %4
+		%29 = icmp eq %28 5
+		br %29, %30, %31
+	30:
+		store 0, %1
+		br %43
+	31:
+		br %13
+	32:
+		%33 = load %5
+		%34 = icmp eq %33 0
+		br %34, %35, %38
+	35:
+		%36 = load %5
+		%37 = add i32 %36, 1
+		store %37, %5
+		br %38
+	38:
+		%39 = load %5
+		%40 = load %2
+		%41 = add i32 %40, %39
+		store %41, %2
+		br %13
+	42:
+		store 0, %1
+		br %43
+	43:
+		%44 = load %1
+		ret %44
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 27 rulesP rules:
+f_455(v25, 0, 2, v28, v29, v30, v31, v32, v35, 1, v33, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_456(v25, 0, 2, v28, v29, v30, v31, v32, v35, 1, v33, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_456(v25, 0, 2, v28, v29, v30, v31, v32, v35, 1, v33, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_457(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: v35 < 2 && v33 = 0 && v35 = 1 && 0 = 0
+f_457(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_459(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_459(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_461(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_461(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_463(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_463(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_465(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_465(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_467(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_467(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_469(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_469(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_471(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_471(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_473(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_473(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_475(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_475(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_477(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_477(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_479(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_479(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_481(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0 && 0 < 999
+f_481(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_483(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_483(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_485(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_485(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_487(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_487(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_489(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_489(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_491(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_491(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_493(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_493(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_495(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_495(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_497(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_497(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_499(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+f_499(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_501(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_501(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_503(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_503(v25, 0, 2, v28, v29, v30, v31, v32, 1, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_454(v25, 0, 2, v28, v29, v30, v31, v32, 1, 1, 2, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: TRUE
+f_454(v25, 0, 2, v28, v29, v30, v31, v32, v33, 1, v35, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) -> f_455(v25, 0, 2, v28, v29, v30, v31, v32, v35, 1, v33, v41, v36, v42, v37, v43, v38, v44, v39, v45, v40, v46, v47, v48, v49, v50, v51, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_455(v25:0, 0, 2, v28:0, v29:0, v30:0, v31:0, v32:0, 1, 1, 0, v41:0, v36:0, v42:0, v37:0, v43:0, v38:0, v44:0, v39:0, v45:0, v40:0, v46:0, v47:0, v48:0, v49:0, v50:0, v51:0, 3, 4) -> f_455(v25:0, 0, 2, v28:0, v29:0, v30:0, v31:0, v32:0, 2, 1, 1, v41:0, v36:0, v42:0, v37:0, v43:0, v38:0, v44:0, v39:0, v45:0, v40:0, v46:0, v47:0, v48:0, v49:0, v50:0, v51:0, 3, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_455(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24, x25, x26, x27, x28, x29) -> f_455(x9, x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_455(cons_1, cons_0) -> f_455(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_455(cons_1, cons_0) -> f_455(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.003s
+AnalysisTime: 6630 milliseconds
+PreprocessingTime: 3 milliseconds

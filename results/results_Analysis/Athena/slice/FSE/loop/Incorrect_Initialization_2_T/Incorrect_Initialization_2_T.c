@@ -1,4 +1,3 @@
-#include "stdlib.h"
 extern int __VERIFIER_nondet_int(void);
 /*
 d37b2f4794acf1b0b431110c5e1fb23d652c5962

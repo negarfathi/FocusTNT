@@ -1,0 +1,56 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %list = alloca %struct.NNode*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %list = alloca %struct.NNode*, align 8 + 0
+NODE   3:   %ip = alloca %struct.NNode*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %ip = alloca %struct.NNode*, align 8 + 0
+NODE   4:   %nxt = alloca %struct.NNode*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %nxt = alloca %struct.NNode*, align 8 + 0
+NODE   5: <5> PSNodeType::CALL (points-to size: 0)
+NODE   6: <6> PSNodeType::ENTRY (points-to size: 0)
+NODE   7:   %head = alloca %struct.NNode*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %head = alloca %struct.NNode*, align 8 + 0
+NODE   8:   %cyclic = alloca %struct.NNode*, align 8 [size: 8, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %cyclic = alloca %struct.NNode*, align 8 + 0
+NODE   9:   %call = call i8* @malloc(i64 8) [size: 8, heap: 1, zeroed: 0] (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  10:   %0 = bitcast i8* %call to %struct.NNode* (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  11:   store %struct.NNode* %0, %struct.NNode** %head, align 8 (points-to size: 0)
+NODE  12:   %1 = load %struct.NNode*, %struct.NNode** %head, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  13:   store %struct.NNode* %1, %struct.NNode** %cyclic, align 8 (points-to size: 0)
+NODE  14:   %2 = load %struct.NNode*, %struct.NNode** %cyclic, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  15:   %3 = load %struct.NNode*, %struct.NNode** %cyclic, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  16:   %nxtact = getelementptr inbounds %struct.NNode, %struct.NNode* %3, i ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  17:   store %struct.NNode* %2, %struct.NNode** %nxtact, align 8 (points-to size: 0)
+NODE  18:   %4 = load %struct.NNode*, %struct.NNode** %head, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  19:   ret %struct.NNode* %4 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  20: initLink_slice_1 (points-to size: 1)
+    -> initLink_slice_1 + 0
+NODE  21: main (points-to size: 1)
+    -> main + 0
+NODE  22:   %call = call %struct.NNode* @initLink_slice_1() (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  23:   store %struct.NNode* %call, %struct.NNode** %list, align 8 (points-to size: 0)
+NODE  24:   %0 = load %struct.NNode*, %struct.NNode** %list, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  25:   store %struct.NNode* %0, %struct.NNode** %ip, align 8 (points-to size: 0)
+NODE  26:   %1 = load %struct.NNode*, %struct.NNode** %ip, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  27:   %2 = load %struct.NNode*, %struct.NNode** %ip, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  28:   %nxtact = getelementptr inbounds %struct.NNode, %struct.NNode* %2, i ... (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  29:   %3 = load %struct.NNode*, %struct.NNode** %nxtact, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  30:   store %struct.NNode* %3, %struct.NNode** %nxt, align 8 (points-to size: 0)
+NODE  31:   %4 = load %struct.NNode*, %struct.NNode** %ip, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  32:   %5 = load %struct.NNode*, %struct.NNode** %nxt, align 8 (points-to size: 1)
+    ->   %call = call i8* @malloc(i64 8) + 0
+NODE  33:   ret void (points-to size: 0)

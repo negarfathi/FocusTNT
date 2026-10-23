@@ -1,0 +1,187 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 150 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1233 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 231 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 26 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 167 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.NNode --> BasicStructureType(elementType: *struct.NNode)
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "malloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "initLink_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) parameters: (0 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode), align 8
+		store %0, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) %4)
+		%5 = call *i8 @malloc(i64 8)
+		%6 = bitcast *i8 %5 to *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode)
+		store %6, %4
+		store 2, %3
+		br %7
+	7:
+		%8 = load %3
+		%9 = load %2
+		%10 = icmp sle %8 %9
+		br %10, %11, %14
+	11:
+		%12 = load %3
+		%13 = add i32 %12, 1
+		store %13, %3
+		br %7
+	14:
+		%15 = load %4
+		ret %15
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 34
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode), align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 4, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) %2)
+		%3 = load %1
+		%4 = call *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) @initLink_slice_1(i32 %3)
+		store %4, %2
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_144(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) -> f_145(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) :|: 0 = 0
+f_145(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) -> f_146(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) :|: v39 <= 4 && v37 <= 3
+f_146(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) -> f_148(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) :|: 0 = 0
+f_148(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) -> f_150(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) :|: TRUE
+f_150(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 8) -> f_152(4, v33, v34, v35, v36, v39, 1, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8) :|: 0 = 0
+f_152(4, v33, v34, v35, v36, v39, 1, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8) -> f_154(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) :|: v48 = 1 + v39 && 4 <= v48 && v48 <= 5
+f_154(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) -> f_156(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) :|: TRUE
+f_156(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) -> f_158(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) :|: TRUE
+f_158(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 8, 5) -> f_143(4, v33, v34, v35, v36, v39, 1, v48, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) :|: TRUE
+f_143(4, v33, v34, v35, v36, v37, 1, v39, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) -> f_144(4, v33, v34, v35, v36, v39, 1, v37, v40, v42, v41, v43, v44, v45, v46, v47, 3, 7, 0, 2, 5, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_144(4, v33:0, v34:0, v35:0, v36:0, v39:0, 1, v37:0, v40:0, v42:0, v41:0, v43:0, v44:0, v45:0, v46:0, v47:0, 3, 7, 0, 2, 5, 8) -> f_144(4, v33:0, v34:0, v35:0, v36:0, 1 + v39:0, 1, v39:0, v40:0, v42:0, v41:0, v43:0, v44:0, v45:0, v46:0, v47:0, 3, 7, 0, 2, 5, 8) :|: v37:0 < 4 && v39:0 < 5 && v39:0 > 2
+Filtered unneeded arguments:
+   f_144(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) -> f_144(x6, x8)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_144(v39:0, v37:0) -> f_144(1 + v39:0, v39:0) :|: v39:0 < 5 && v39:0 > 2 && v37:0 < 4
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_144(v39:0, v37:0) -> f_144(1 + v39:0, v39:0) :|: v39:0 < 5 && v39:0 > 2 && v37:0 < 4
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_144(v39:0:0, v37:0:0) -> f_144(1 + v39:0:0, v39:0:0) :|: v39:0:0 < 5 && v39:0:0 > 2 && v37:0:0 < 4
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_144 ] = -1*f_144_1
+
+The following rules are decreasing:
+f_144(v39:0:0, v37:0:0) -> f_144(1 + v39:0:0, v39:0:0) :|: v39:0:0 < 5 && v39:0:0 > 2 && v37:0:0 < 4
+
+The following rules are bounded:
+f_144(v39:0:0, v37:0:0) -> f_144(1 + v39:0:0, v39:0:0) :|: v39:0:0 < 5 && v39:0:0 > 2 && v37:0:0 < 4
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c:9:17: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+  INSDS *head = malloc(sizeof(INSDS));
+                ^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c:9:17: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c:15:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase15_Loop21.c:15:1: note: change return type to 'int'
+void main(void)
+^~~~
+AnalysisTime: 6832 milliseconds
+PreprocessingTime: 1660 milliseconds

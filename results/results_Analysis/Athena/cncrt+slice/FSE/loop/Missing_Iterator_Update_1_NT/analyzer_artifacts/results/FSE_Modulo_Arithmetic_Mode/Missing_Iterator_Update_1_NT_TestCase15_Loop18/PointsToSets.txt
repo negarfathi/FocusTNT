@@ -1,0 +1,25 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %ret = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %ret = alloca i32, align 4 + 0
+NODE   3: <3> PSNodeType::CALL (points-to size: 0)
+NODE   4: <4> PSNodeType::ENTRY (points-to size: 0)
+NODE   5:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE   6:   %num = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %num = alloca i32, align 4 + 0
+NODE   7:   store i32 -3, i32* %num, align 4 (points-to size: 0)
+NODE   8:   %0 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE   9:   %1 = load i32, i32* %num, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  10:   store i32 %1, i32* %__retres, align 4 (points-to size: 0)
+NODE  11:   %2 = load i32, i32* %__retres, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  12:   ret i32 %2 (points-to size: 0)
+NODE  13: waitpid_slice_1 (points-to size: 1)
+    -> waitpid_slice_1 + 0
+NODE  14: main (points-to size: 1)
+    -> main + 0
+NODE  15:   %call = call i32 @waitpid_slice_1() (points-to size: 0)
+NODE  16:   store i32 %call, i32* %ret, align 4 (points-to size: 0)
+NODE  17:   ret void (points-to size: 0)

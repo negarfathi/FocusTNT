@@ -1,0 +1,59 @@
+///*** 1_main ***///
+START: main_bb3;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb3;
+flag := 0;
+flag := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(1 <= 0);
+TO: main_bb7;
+
+FROM: main_bb3_end;
+assume(0 <= 0);
+TO: main_bb4;
+
+FROM: main_bb4;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume(vpos.0 slt 2);
+TO: main_bb5;
+
+FROM: main_bb4_end;
+assume(vpos.0 sge 2);
+TO: main_bb7;
+
+FROM: main_bb5;
+v7 := 2 - vpos.0;
+v8 := flag;
+var__temp_v__retres.0.i := 0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume((v8 != 1) && (vpos.0 slt v7));
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume((v8 == 1) || (vpos.0 sge v7));
+TO: main_read_slice_1.exit;
+
+FROM: main_bb6;
+flag := 1;
+var__temp_v__retres.0.i := 1;
+TO: main_read_slice_1.exit;
+
+FROM: main_read_slice_1.exit;
+v__retres.0.i := var__temp_v__retres.0.i;
+v11 := vpos.0 + v__retres.0.i;
+var__temp_vpos.0 := v11;
+TO: main_bb4;
+
+FROM: main_bb7;
+TO: main_bb7_ret;
+

@@ -1,0 +1,162 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_TestCase14_Loop35.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 115 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1387 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 927 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_TestCase14_Loop35.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_TestCase14_Loop35.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: flag initVal: 0 type: i32 addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: null section: null
+
+Name: __const.main.argv1 initVal: (5,0) type: [2 x i32] addrSpace: null alignment: 4 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 noalias null nocapture, *i8 noalias readonly nocapture, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "fopen_or_warn_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 12
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		%2 = load @flag
+		%3 = add i32 %2, 1
+		store %3, @flag
+		%4 = load @flag
+		%5 = icmp sgt %4 10
+		br %5, %6, %7
+	6:
+		store 0, %1
+		br %8
+	7:
+		store 0, %1
+		br %8
+	8:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%9 = load %1
+		ret %9
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 31
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [2 x i32], align 4
+		%3 = alloca *i32, align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[2 x i32] %2)
+		%4 = bitcast *[2 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %4, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@652a9866, i64 8, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i32 %3)
+		%5 = getelementptr %2, 0, 0
+		store %5, %3
+		br %18
+	6:
+		br %7
+	7:
+		%8 = load %3
+		%9 = load %8
+		%10 = icmp sgt %9 0
+		br %10, %11, %17
+	11:
+		%12 = call i32 @fopen_or_warn_slice_1()
+		store %12, %1
+		%13 = load %1
+		%14 = icmp eq %13 0
+		br %14, %15, %16
+	15:
+		br %19
+	16:
+		br %17
+	17:
+		br %18
+	18:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		br %19
+	19:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%20 = load %3
+		%21 = load %20
+		%22 = icmp ne %21 0
+		br %22, %24, %23
+	23:
+		br %25
+	24:
+		br %7
+	25:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #153 with references set to {v1=1, v2=4, v3=(-13)}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #153 yields value 5.
+Nondeterministic instruction %2 = alloca [2 x i32], align 4 in node #154 yields value 9.
+Nondeterministic instruction %3 = alloca *i32, align 8 in node #155 yields value 32.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #186 yields value 21.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_TestCase14_Loop35.c:15:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_TestCase14_Loop35.c:15:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 9775 milliseconds
+PreprocessingTime: 1090 milliseconds

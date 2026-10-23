@@ -16,6 +16,7 @@ void loadpagetree(char* obj, char* kobj) {
             if (kobj == obj)
             {
                 /* prevent infinite recursion possible in maliciously crafted PDFs */
+                /*@ \slicing::slice_preserve_ctrl; */
                 return;
             }
             loadpagetree(obj, kobj);

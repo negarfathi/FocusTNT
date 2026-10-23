@@ -24,18 +24,23 @@ int main()
         switch( slots_used[i] )
         {
             case EVEBT_EPOLL_SLOTS:
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             case 0:
                 if( !ereg[i] )
+                    /*@ \slicing::slice_preserve_ctrl; */
                     return 0;
                 else
                     table = ereg[i];
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             default:
                 table = ereg[i];
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
         }
         if( table )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         i++;
     }

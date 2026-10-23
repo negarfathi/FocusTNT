@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 Commit Number: b546212a16a6ac3e9f40f332644345ceec96a0e7
 URL: https://github.com/mysql/mysql-server/commit/b546212a16a6ac3e9f40f332644345ceec96a0e7

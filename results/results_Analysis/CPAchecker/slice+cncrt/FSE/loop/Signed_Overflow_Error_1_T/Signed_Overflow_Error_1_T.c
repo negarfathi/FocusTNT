@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 Commit Number: e7df42ab68e30588a5e32ed543b0711821daf009
 URL: https://github.com/XQuartz/xorg-server/commit/e7df42ab68e30588a5e32ed543b0711821daf009

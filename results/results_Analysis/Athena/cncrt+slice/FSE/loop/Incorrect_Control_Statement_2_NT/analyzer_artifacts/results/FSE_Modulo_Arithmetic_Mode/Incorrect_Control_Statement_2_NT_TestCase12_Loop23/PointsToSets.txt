@@ -1,0 +1,43 @@
+NODE   1: <1> PSNodeType::ENTRY (points-to size: 0)
+NODE   2:   %EVENT_EPOLL_TABLES = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %EVENT_EPOLL_TABLES = alloca i32, align 4 + 0
+NODE   3:   %slots_used = alloca [10 x i32], align 16 [size: 40, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   4:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE   5:   %i_0 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i_0 = alloca i32, align 4 + 0
+NODE   6:   store i32 10, i32* %EVENT_EPOLL_TABLES, align 4 (points-to size: 0)
+NODE   7:   %0 = bitcast [10 x i32]* %slots_used to i8* (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   8:   %1 = bitcast i8* %0 to <{ i32, [9 x i32] }>* (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   9:   %2 = getelementptr inbounds <{ i32, [9 x i32] }>, <{ i32, [9 x i32]  ... (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE  10:   store i32 2, i32* %2, align 16 (points-to size: 0)
+NODE  11:   store i32 0, i32* %i, align 4 (points-to size: 0)
+NODE  12:   %3 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  13:   %4 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  14:   %inc = add nsw i32 %4, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  15:   store i32 %inc, i32* %i, align 4 (points-to size: 0)
+NODE  16:   store i32 0, i32* %i_0, align 4 (points-to size: 0)
+NODE  17:   %5 = load i32, i32* %i_0, align 4 (points-to size: 1)
+    -> null + 0
+NODE  18:   %6 = load i32, i32* %EVENT_EPOLL_TABLES, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  19:   %7 = load i32, i32* %i_0, align 4 (points-to size: 1)
+    -> null + 0
+NODE  20:   %idxprom = sext i32 %7 to i64 (points-to size: 1)
+    -> null + 0
+NODE  21:   %arrayidx = getelementptr inbounds [10 x i32], [10 x i32]* %slots_us ... (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + Offset::UNKNOWN
+NODE  22:   %8 = load i32, i32* %arrayidx, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  23:   ret void (points-to size: 0)
+NODE  24: main (points-to size: 1)
+    -> main + 0

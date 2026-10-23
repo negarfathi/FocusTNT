@@ -1,0 +1,214 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_T_TestCase6.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 159 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1419 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 259 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 3 ms]
+(10) IntTRS
+(11) PolynomialOrderProcessor [EQUIVALENT, 77 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_T_TestCase6.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_T_TestCase6.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 11, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 3, %4
+		%7 = load %2
+		%8 = icmp slt %7 0
+		br %8, %22, %9
+	9:
+		%10 = load %3
+		%11 = icmp sle %10 0
+		br %11, %22, %12
+	12:
+		%13 = load %4
+		%14 = icmp sle %13 0
+		br %14, %22, %15
+	15:
+		%16 = load %4
+		%17 = load %3
+		%18 = icmp sgt %16 %17
+		br %18, %22, %19
+	19:
+		%20 = load %3
+		%21 = icmp sgt %20 65534
+		br %21, %22, %23
+	22:
+		store 0, %1
+		br %44
+	23:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%24 = load %2
+		%25 = load %3
+		%26 = srem i32 %24, %25
+		store %26, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %27
+	27:
+		%28 = load %5
+		%29 = load %3
+		%30 = icmp slt %28 %29
+		br %30, %31, %43
+	31:
+		%32 = load %6
+		%33 = icmp ne %32 0
+		br %33, %39, %34
+	34:
+		%35 = load %2
+		%36 = load %4
+		%37 = srem i32 %35, %36
+		%38 = add i32 %37, 1
+		store %38, %6
+		br %39
+	39:
+		%40 = load %6
+		%41 = load %5
+		%42 = add i32 %41, %40
+		store %42, %5
+		br %27
+	43:
+		store 0, %1
+		br %44
+	44:
+		%45 = load %1
+		ret %45
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 14 rulesP rules:
+f_275(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v94, v95, v96, v97, v98, v99, v100, 6, 10, 8) -> f_276(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v95, v96, v97, v98, v99, v100, 6, 10) :|: 0 = 0
+f_276(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v95, v96, v97, v98, v99, v100, 6, 10) -> f_277(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) :|: v101 = 2 + v91 && 8 <= v101 && v101 <= 12
+f_277(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) -> f_278(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) :|: TRUE
+f_278(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) -> f_279(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) :|: TRUE
+f_279(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v101, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) -> f_280(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) :|: 0 = 0
+f_280(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) -> f_281(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) :|: 0 = 0
+f_281(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 10, 8, 12) -> f_282(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: v101 < 11 && v91 <= 8
+f_282(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_284(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: 0 = 0
+f_284(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_286(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: TRUE
+f_286(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_288(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: 0 = 0
+f_288(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_290(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: 0 = 0
+f_290(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_292(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) :|: TRUE
+f_292(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 8, 10) -> f_274(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v101, 1, 2, v91, v95, v96, v97, v98, v99, v100, 6, 10, 8) :|: TRUE
+f_274(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v94, v95, v96, v97, v98, v99, v100, 6, 10, 8) -> f_275(v81, v82, v83, v84, v85, v86, 4, 0, 11, 3, v91, 1, 2, v94, v95, v96, v97, v98, v99, v100, 6, 10, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_275(v81:0, v82:0, v83:0, v84:0, v85:0, v86:0, 4, 0, 11, 3, v91:0, 1, 2, v94:0, v95:0, v96:0, v97:0, v98:0, v99:0, v100:0, 6, 10, 8) -> f_275(v81:0, v82:0, v83:0, v84:0, v85:0, v86:0, 4, 0, 11, 3, 2 + v91:0, 1, 2, v91:0, v95:0, v96:0, v97:0, v98:0, v99:0, v100:0, 6, 10, 8) :|: v91:0 > 5 && v91:0 < 11 && v91:0 < 9
+Filtered unneeded arguments:
+   f_275(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23) -> f_275(x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_275(v91:0) -> f_275(2 + v91:0) :|: v91:0 < 11 && v91:0 < 9 && v91:0 > 5
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_275(v91:0) -> f_275(2 + v91:0) :|: v91:0 < 11 && v91:0 < 9 && v91:0 > 5
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_275(v91:0:0) -> f_275(2 + v91:0:0) :|: v91:0:0 < 11 && v91:0:0 < 9 && v91:0:0 > 5
+
+----------------------------------------
+
+(11) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_275(x)] = 8 - x
+
+The following rules are decreasing:
+f_275(v91:0:0) -> f_275(2 + v91:0:0) :|: v91:0:0 < 11 && v91:0:0 < 9 && v91:0:0 > 5
+The following rules are bounded:
+f_275(v91:0:0) -> f_275(2 + v91:0:0) :|: v91:0:0 < 11 && v91:0:0 < 9 && v91:0:0 > 5
+
+----------------------------------------
+
+(12)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.002s
+AnalysisTime: 6606 milliseconds
+PreprocessingTime: 2 milliseconds

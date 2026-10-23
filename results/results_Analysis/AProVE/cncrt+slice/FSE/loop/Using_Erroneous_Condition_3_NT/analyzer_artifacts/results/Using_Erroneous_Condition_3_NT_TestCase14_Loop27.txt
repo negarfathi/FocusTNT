@@ -1,0 +1,160 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase14_Loop27.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 163 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 10.2 s]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 1885 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase14_Loop27.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase14_Loop27.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.old_ initVal: (7,6,5,4,3,2,1,0,-1,0) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Name: __const.main.new_ initVal: (7,6,5,4,3,2,1,0,-1,0) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 readonly noalias nocapture, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca [10 x i32], align 16
+		%5 = alloca [10 x i32], align 16
+		%6 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 5, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 9, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %4)
+		%7 = bitcast *[10 x i32] %4 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %7, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@7e1dd7f6, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %5)
+		%8 = bitcast *[10 x i32] %5 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %8, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@5b242e72, i64 40, i1 0)
+		%9 = getelementptr %4, 0, 9
+		store 0, %9
+		%10 = getelementptr %5, 0, 9
+		store 0, %10
+		br %11
+	11:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		%12 = load %2
+		store %12, %6
+		br %13
+	13:
+		%14 = load %1
+		%15 = sext i32 %14 to i64
+		%16 = getelementptr %4, 0, %15
+		%17 = load %16
+		%18 = load %1
+		%19 = sext i32 %18 to i64
+		%20 = getelementptr %5, 0, %19
+		%21 = load %20
+		%22 = icmp ne %17 %21
+		br %22, %23, %31
+	23:
+		%24 = load %6
+		%25 = add i32 %24, 1
+		store %25, %6
+		%26 = load %6
+		%27 = load %3
+		%28 = icmp eq %26 %27
+		br %28, %29, %30
+	29:
+		br %36
+	30:
+		br %13
+	31:
+		%32 = load %1
+		%33 = add i32 %32, 1
+		store %33, %1
+		%34 = load %2
+		%35 = add i32 %34, 8
+		store %35, %2
+		br %11
+	36:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #170 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #170 yields value 76.
+Nondeterministic instruction %2 = alloca i32, align 4 in node #171 yields value 125.
+Nondeterministic instruction %3 = alloca i32, align 4 in node #172 yields value 29.
+Nondeterministic instruction %4 = alloca [10 x i32], align 16 in node #173 yields value 80.
+Nondeterministic instruction %5 = alloca [10 x i32], align 16 in node #174 yields value 33.
+Nondeterministic instruction %6 = alloca i32, align 4 in node #175 yields value 1.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase14_Loop27.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase14_Loop27.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 21217 milliseconds
+PreprocessingTime: 1093 milliseconds

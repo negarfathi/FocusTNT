@@ -1,0 +1,127 @@
+///*** 1_main ***///
+START: main_bb9;
+
+FROM: main_bb9;
+flag := 0;
+v26 := flag;
+v27 := v26 + 1;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v27 > 2147483647);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v27 <= 2147483647);
+TO: main_bb11;
+
+FROM: main_bb10;
+v29 := v27 - 2147483647;
+v30 := v29 - 1;
+v31 := v30 % 4294967296;
+v32 := -2147483648 + v31;
+var__temp_v.0.i.i := v32;
+TO: main_mdb_cursor_get_slice_1.exit;
+
+FROM: main_bb11;
+var__temp_v.0.i.i := v27;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(v27 < -2147483648);
+TO: main_bb12;
+
+FROM: main_bb11_end;
+assume(v27 >= -2147483648);
+TO: main_mdb_cursor_get_slice_1.exit;
+
+FROM: main_bb12;
+v34 := -2147483648 - v27;
+v35 := v34 - 1;
+v36 := v35 % 4294967296;
+v37 := 2147483647 - v36;
+var__temp_v.0.i.i := v37;
+TO: main_mdb_cursor_get_slice_1.exit;
+
+FROM: main_mdb_cursor_get_slice_1.exit;
+v.0.i.i := var__temp_v.0.i.i;
+flag := v.0.i.i;
+v38 := flag;
+var__temp_v.sink4 := v38;
+TO: main_bb13;
+
+FROM: main_bb13;
+v.sink4 := var__temp_v.sink4;
+TO: main_bb13_v..i;
+FROM: main_bb13_v..i;
+assume(v.sink4 > 1000);
+v..i := 1;
+TO: main_bb13_sv..i;
+
+FROM: main_bb13_v..i;
+assume(v.sink4 <= 1000);
+v..i := 0;
+TO: main_bb13_sv..i;
+
+FROM: main_bb13_sv..i;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v..i == 0);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v..i != 0);
+TO: main_bb18;
+
+FROM: main_bb14;
+v41 := flag;
+v42 := v41 + 1;
+TO: main_bb14_end;
+
+FROM: main_bb14_end;
+assume(v42 > 2147483647);
+TO: main_bb15;
+
+FROM: main_bb14_end;
+assume(v42 <= 2147483647);
+TO: main_bb16;
+
+FROM: main_bb15;
+v44 := v42 - 2147483647;
+v45 := v44 - 1;
+v46 := v45 % 4294967296;
+v47 := -2147483648 + v46;
+var__temp_v.0.i.i1 := v47;
+TO: main_mdb_cursor_get_slice_1.exit3;
+
+FROM: main_bb16;
+var__temp_v.0.i.i1 := v42;
+TO: main_bb16_end;
+
+FROM: main_bb16_end;
+assume(v42 < -2147483648);
+TO: main_bb17;
+
+FROM: main_bb16_end;
+assume(v42 >= -2147483648);
+TO: main_mdb_cursor_get_slice_1.exit3;
+
+FROM: main_bb17;
+v49 := -2147483648 - v42;
+v50 := v49 - 1;
+v51 := v50 % 4294967296;
+v52 := 2147483647 - v51;
+var__temp_v.0.i.i1 := v52;
+TO: main_mdb_cursor_get_slice_1.exit3;
+
+FROM: main_mdb_cursor_get_slice_1.exit3;
+v.0.i.i1 := var__temp_v.0.i.i1;
+flag := v.0.i.i1;
+v53 := flag;
+var__temp_v.sink4 := v53;
+TO: main_bb13;
+
+FROM: main_bb18;
+TO: main_bb18_ret;
+

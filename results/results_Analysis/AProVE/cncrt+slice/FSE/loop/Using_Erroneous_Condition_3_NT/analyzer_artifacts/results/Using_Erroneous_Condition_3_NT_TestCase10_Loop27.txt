@@ -1,0 +1,120 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase10_Loop27.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 166 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 470 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 906 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase10_Loop27.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase10_Loop27.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [10 x i32], align 16
+		%3 = alloca [10 x i32], align 16
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %2)
+		%4 = bitcast *[10 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %4, i8 0, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %3)
+		%5 = bitcast *[10 x i32] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %5, i8 0, i64 40, i1 0)
+		%6 = bitcast *i8 %5 to *BasicStructureType(elementType: i32, elementType: [9 x i32])
+		%7 = getelementptr %6, 0, 0
+		store 3, %7
+		br %8
+	8:
+		%9 = load %1
+		%10 = sext i32 %9 to i64
+		%11 = getelementptr %2, 0, %10
+		%12 = load %11
+		%13 = load %1
+		%14 = sext i32 %13 to i64
+		%15 = getelementptr %3, 0, %14
+		%16 = load %15
+		%17 = icmp ne %12 %16
+		br %17, %18, %19
+	18:
+		br %8
+	19:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #85 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #85 yields value 61.
+Nondeterministic instruction %2 = alloca [10 x i32], align 16 in node #86 yields value 128.
+Nondeterministic instruction %3 = alloca [10 x i32], align 16 in node #87 yields value 7.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase10_Loop27.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase10_Loop27.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 6702 milliseconds
+PreprocessingTime: 1093 milliseconds

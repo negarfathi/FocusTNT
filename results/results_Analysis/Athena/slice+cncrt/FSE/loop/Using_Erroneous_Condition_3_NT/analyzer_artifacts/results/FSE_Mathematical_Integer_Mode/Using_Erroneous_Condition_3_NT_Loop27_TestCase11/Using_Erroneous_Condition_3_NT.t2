@@ -1,0 +1,84 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+vold_ := nondet();
+vnew_ := nondet();
+var__temp_vj.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vj.0 := var__temp_vj.0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vj.0 slt 9);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vj.0 sge 9);
+TO: main_bb3;
+
+FROM: main_bb2;
+v3 := vj.0 + 1;
+var__temp_vj.0 := v3;
+TO: main_bb1;
+
+FROM: main_bb3;
+v4 := 9;
+vold_ := store_array(vold_, v4, 0);
+v5 := 9;
+vnew_ := store_array(vnew_, v5, 0);
+var__temp_vbase.0 := 0;
+var__temp_vi.0 := 0;
+TO: main_bb4;
+
+FROM: main_bb4;
+vbase.0 := var__temp_vbase.0;
+vi.0 := var__temp_vi.0;
+v6 := sign_extend(32, 64, vi.0);
+v7 := v6;
+v8 := select_array(vold_, v7);
+v9 := sign_extend(32, 64, vi.0);
+v10 := v9;
+v11 := select_array(vnew_, v10);
+var__temp_vnumber.0 := vbase.0;
+TO: main_bb5;
+
+FROM: main_bb5;
+vnumber.0 := var__temp_vnumber.0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(v8 != v11);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(v8 == v11);
+TO: main_bb8;
+
+FROM: main_bb6;
+v13 := vnumber.0 + 1;
+var__temp_vnumber.0 := v13;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v13 == 100);
+TO: main_bb7;
+
+FROM: main_bb6_end;
+assume(v13 != 100);
+TO: main_bb5;
+
+FROM: main_bb7;
+TO: main_bb7_ret;
+
+FROM: main_bb8;
+v15 := vi.0 + 1;
+v16 := vbase.0 + 8;
+var__temp_vbase.0 := v16;
+var__temp_vi.0 := v15;
+TO: main_bb4;
+

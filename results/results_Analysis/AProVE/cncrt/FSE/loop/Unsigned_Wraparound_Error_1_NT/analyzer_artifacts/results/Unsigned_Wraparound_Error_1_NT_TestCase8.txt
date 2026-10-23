@@ -1,0 +1,185 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_TestCase8.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 181 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1122 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 279 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 61 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_TestCase8.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_TestCase8.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 2, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 1, %6
+		%7 = load %5
+		%8 = load %6
+		%9 = icmp ule %7 %8
+		br %9, %10, %11
+	10:
+		store 0, %1
+		br %33
+	11:
+		%12 = load %2
+		%13 = icmp eq %12 0
+		br %13, %14, %15
+	14:
+		store 0, %1
+		br %33
+	15:
+		%16 = load %2
+		store %16, %4
+		br %17
+	17:
+		%18 = load %5
+		%19 = load %4
+		%20 = icmp ult %18 %19
+		br %20, %21, %22
+	21:
+		br %32
+	22:
+		%23 = load %6
+		%24 = load %4
+		%25 = icmp ugt %23 %24
+		br %25, %26, %27
+	26:
+		br %28
+	27:
+		br %28
+	28:
+		%29 = load %2
+		%30 = load %4
+		%31 = add i32 %30, %29
+		store %31, %4
+		br %17
+	32:
+		store 0, %1
+		br %33
+	33:
+		%34 = load %1
+		ret %34
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 16 rulesP rules:
+f_205(v13, v14, v15, v16, v17, v18, 2, 1, 0, v22, v23, v24, v25, v26, v27, v28, v29, 3, 4) -> f_206(v13, v14, v15, v16, v17, v18, 2, 1, 0, v23, v22, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_206(v13, v14, v15, v16, v17, v18, 2, 1, 0, v23, v22, v24, v25, v26, v27, v28, v29, 3, 4) -> f_208(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: v23 <= 2 && v22 = 1 && v23 = 2 && 0 = 0
+f_208(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_210(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_210(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_212(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: TRUE
+f_212(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_214(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_214(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_216(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_216(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_218(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_218(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_220(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: TRUE
+f_220(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_221(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: TRUE
+f_221(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_222(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_222(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_223(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+f_223(v13, v14, v15, v16, v17, v18, 2, 1, 0, v24, v25, v26, v27, v28, v29, 3, 4) -> f_224(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) :|: 0 = 0
+f_224(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) -> f_225(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) :|: TRUE
+f_225(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) -> f_226(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) :|: TRUE
+f_226(v13, v14, v15, v16, v17, v18, 2, 1, 0, 3, v24, v25, v26, v27, v28, v29, 4) -> f_204(v13, v14, v15, v16, v17, v18, 2, 1, 0, 2, 3, v24, v25, v26, v27, v28, v29, 3, 4) :|: TRUE
+f_204(v13, v14, v15, v16, v17, v18, 2, 1, 0, v22, v23, v24, v25, v26, v27, v28, v29, 3, 4) -> f_205(v13, v14, v15, v16, v17, v18, 2, 1, 0, v22, v23, v24, v25, v26, v27, v28, v29, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_205(v13:0, v14:0, v15:0, v16:0, v17:0, v18:0, 2, 1, 0, 1, 2, v24:0, v25:0, v26:0, v27:0, v28:0, v29:0, 3, 4) -> f_205(v13:0, v14:0, v15:0, v16:0, v17:0, v18:0, 2, 1, 0, 2, 3, v24:0, v25:0, v26:0, v27:0, v28:0, v29:0, 3, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_205(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19) -> f_205(x10, x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_205(cons_1, cons_2) -> f_205(2, 3) :|: TRUE && cons_1 = 1 && cons_2 = 2
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_205(cons_1, cons_2) -> f_205(2, 3) :|: TRUE && cons_1 = 1 && cons_2 = 2
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.001s
+AnalysisTime: 5450 milliseconds
+PreprocessingTime: 2 milliseconds

@@ -1,0 +1,109 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_2_NT_TestCase17_Loop16.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 72 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 84 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 458 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_2_NT_TestCase17_Loop16.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_2_NT_TestCase17_Loop16.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store -2, %1
+		%2 = load %1
+		%3 = icmp sgt %2 65534
+		br %3, %4, %5
+	4:
+		br %11
+	5:
+		br %6
+	6:
+		%7 = load %1
+		%8 = icmp ne %7 0
+		br %8, %9, %10
+	9:
+		br %6
+	10:
+		br %11
+	11:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #49 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #49 yields value 9.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_2_NT_TestCase17_Loop16.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_2_NT_TestCase17_Loop16.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5215 milliseconds
+PreprocessingTime: 1071 milliseconds

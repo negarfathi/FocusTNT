@@ -1,0 +1,128 @@
+///*** 1_main ***///
+START: main_bb12;
+
+
+
+FROM: main_bb12;
+__fc_errno := 0;
+v18 := nondet_int();
+TO: main_bb12_end;
+
+FROM: main_bb12_end;
+assume(v18 < 0);
+TO: main_bb13;
+
+FROM: main_bb12_end;
+assume(v18 >= 0);
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb13;
+v20 := nondet_int();
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v20 != 0);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v20 == 0);
+TO: main_bb17;
+
+FROM: main_bb14;
+v22 := __fc_errno;
+TO: main_bb14_end;
+
+FROM: main_bb14_end;
+assume(v22 != 1);
+TO: main_bb15;
+
+FROM: main_bb14_end;
+assume(v22 == 1);
+TO: main_bb16;
+
+FROM: main_bb15;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb16;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb17;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_waitpid_slice_1.exit;
+TO: main_waitpid_slice_1.exit_end;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(v18 == 0);
+TO: main_bb18;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(v18 != 0);
+TO: main_bb24;
+
+FROM: main_bb18;
+v25 := nondet_int();
+TO: main_bb18_end;
+
+FROM: main_bb18_end;
+assume(v25 < 0);
+TO: main_bb19;
+
+FROM: main_bb18_end;
+assume(v25 >= 0);
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb19;
+v27 := nondet_int();
+TO: main_bb19_end;
+
+FROM: main_bb19_end;
+assume(v27 != 0);
+TO: main_bb20;
+
+FROM: main_bb19_end;
+assume(v27 == 0);
+TO: main_bb23;
+
+FROM: main_bb20;
+v29 := __fc_errno;
+TO: main_bb20_end;
+
+FROM: main_bb20_end;
+assume(v29 != 1);
+TO: main_bb21;
+
+FROM: main_bb20_end;
+assume(v29 == 1);
+TO: main_bb22;
+
+FROM: main_bb21;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb22;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb23;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_waitpid_slice_1.exit1;
+v32 := __fc_errno;
+TO: main_waitpid_slice_1.exit1_end;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume((v25 < 0) && (v32 == 1));
+TO: main_bb18;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume((v25 >= 0) || (v32 != 1));
+TO: main_bb24;
+
+FROM: main_bb24;
+TO: main_bb24_ret;
+

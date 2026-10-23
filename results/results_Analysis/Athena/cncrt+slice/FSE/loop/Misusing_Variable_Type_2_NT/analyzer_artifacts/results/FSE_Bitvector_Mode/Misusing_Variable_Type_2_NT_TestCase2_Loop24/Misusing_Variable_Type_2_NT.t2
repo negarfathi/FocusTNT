@@ -1,0 +1,33 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+v1 := sign_extend(32, 64, 123);
+var__temp_vi.0 := 0;
+TO: main_bb2;
+
+FROM: main_bb2;
+vi.0 := var__temp_vi.0;
+v2 := zero_extend(16, 64, vi.0);
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(v2 ult v1);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(v2 uge v1);
+TO: main_bb4;
+
+FROM: main_bb3;
+v4 := zero_extend(16, 32, vi.0);
+v5 := v4 + 1;
+v6 := extract(15, 0, v5);
+var__temp_vi.0 := v6;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

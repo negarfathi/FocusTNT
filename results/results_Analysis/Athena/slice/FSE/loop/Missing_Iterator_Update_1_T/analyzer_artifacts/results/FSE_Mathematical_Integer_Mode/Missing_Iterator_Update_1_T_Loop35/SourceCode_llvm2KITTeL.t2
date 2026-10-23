@@ -1,0 +1,126 @@
+///*** 1_main ***///
+START: main_bb7;
+
+FROM: main_bb7;
+__fc_errno := 0;
+v6 := nondet();
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v6 slt 0);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(v6 sge 0);
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb8;
+v8 := nondet();
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v8 != 0);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v8 == 0);
+TO: main_bb12;
+
+FROM: main_bb9;
+v10 := __fc_errno;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v10 != 1);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v10 == 1);
+TO: main_bb11;
+
+FROM: main_bb10;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb11;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb12;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_waitpid_slice_1.exit;
+TO: main_waitpid_slice_1.exit_end;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(v6 == 0);
+TO: main_bb13;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(v6 != 0);
+TO: main_bb19;
+
+FROM: main_bb13;
+v13 := nondet();
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v13 slt 0);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v13 sge 0);
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb14;
+v15 := nondet();
+TO: main_bb14_end;
+
+FROM: main_bb14_end;
+assume(v15 != 0);
+TO: main_bb15;
+
+FROM: main_bb14_end;
+assume(v15 == 0);
+TO: main_bb18;
+
+FROM: main_bb15;
+v17 := __fc_errno;
+TO: main_bb15_end;
+
+FROM: main_bb15_end;
+assume(v17 != 1);
+TO: main_bb16;
+
+FROM: main_bb15_end;
+assume(v17 == 1);
+TO: main_bb17;
+
+FROM: main_bb16;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb17;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb18;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_waitpid_slice_1.exit1;
+v20 := __fc_errno;
+TO: main_waitpid_slice_1.exit1_end;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume((v13 slt 0) && (v20 == 1));
+TO: main_bb13;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume((v13 sge 0) || (v20 != 1));
+TO: main_bb19;
+
+FROM: main_bb19;
+TO: main_bb19_ret;
+

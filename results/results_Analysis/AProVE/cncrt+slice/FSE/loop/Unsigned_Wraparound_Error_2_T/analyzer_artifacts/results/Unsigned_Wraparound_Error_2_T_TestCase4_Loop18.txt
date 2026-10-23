@@ -1,0 +1,95 @@
+MAYBE
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Unsigned_Wraparound_Error_2_T_TestCase4_Loop18.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 87 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Unsigned_Wraparound_Error_2_T_TestCase4_Loop18.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Unsigned_Wraparound_Error_2_T_TestCase4_Loop18.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 7, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 3, %3
+		br %4
+	4:
+		%5 = load %1
+		%6 = load %2
+		%7 = icmp ult %5 %6
+		br %7, %8, %15
+	8:
+		%9 = load %1
+		%10 = mul i32 %9, 2
+		%11 = load %1
+		%12 = icmp ugt %10 %11
+		br %12, %14, %13
+	13:
+		br %19
+	14:
+		br %16
+	15:
+		br %19
+	16:
+		%17 = load %1
+		%18 = mul i32 %17, 2
+		store %18, %1
+		br %4
+	19:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/analyzer_artifacts/sliced_variants/Unsigned_Wraparound_Error_2_T_TestCase4_Loop18.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Unsigned_Wraparound_Error_2_T_TestCase4_Loop18.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Aborted 1792403363Exec. 4, LLVMToSEGraph with some error. Reason: InconsistentStateException [integerState=null, newRelation=null].
+AnalysisTime: 4185 milliseconds
+PreprocessingTime: 1111 milliseconds

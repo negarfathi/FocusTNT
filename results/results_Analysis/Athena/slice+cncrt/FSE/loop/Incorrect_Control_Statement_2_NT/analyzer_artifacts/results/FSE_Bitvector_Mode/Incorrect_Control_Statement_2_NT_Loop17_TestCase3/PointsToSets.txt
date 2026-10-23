@@ -1,0 +1,44 @@
+NODE   2: <2> PSNodeType::ENTRY (points-to size: 0)
+NODE   3:   %slots_used = alloca [10 x i32], align 16 [size: 40, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   4:   %ereg = alloca [10 x i32], align 16 [size: 40, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %ereg = alloca [10 x i32], align 16 + 0
+NODE   5:   %i = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %i = alloca i32, align 4 + 0
+NODE   6:   %0 = bitcast [10 x i32]* %slots_used to i8* (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   7:   %1 = bitcast i8* %0 to [10 x i32]* (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   8:   %2 = getelementptr inbounds [10 x i32], [10 x i32]* %1, i32 0, i32 0 (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 0
+NODE   9:   store i32 3, i32* %2, align 16 (points-to size: 0)
+NODE  10:   %3 = getelementptr inbounds [10 x i32], [10 x i32]* %1, i32 0, i32 1 (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 4
+NODE  11:   store i32 7, i32* %3, align 4 (points-to size: 0)
+NODE  12:   %4 = getelementptr inbounds [10 x i32], [10 x i32]* %1, i32 0, i32 4 (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 16
+NODE  13:   store i32 4, i32* %4, align 16 (points-to size: 0)
+NODE  14:   %5 = getelementptr inbounds [10 x i32], [10 x i32]* %1, i32 0, i32 7 (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 28
+NODE  15:   store i32 5, i32* %5, align 4 (points-to size: 0)
+NODE  16:   %6 = getelementptr inbounds [10 x i32], [10 x i32]* %1, i32 0, i32 8 (points-to size: 1)
+    ->   %slots_used = alloca [10 x i32], align 16 + 32
+NODE  17:   store i32 1, i32* %6, align 16 (points-to size: 0)
+NODE  18:   %7 = bitcast [10 x i32]* %ereg to i8* (points-to size: 1)
+    ->   %ereg = alloca [10 x i32], align 16 + 0
+NODE  19: i8* bitcast ([10 x i32]* @__const.main.ereg to i8*) (points-to size: 1)
+    -> @__const.main.ereg = private unnamed_addr constant [10 x i32] [i32 2,  ... + 0
+NODE  20:   call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 16 %7, i8* align 16 b ... (points-to size: 0)
+NODE  21:   store i32 0, i32* %i, align 4 (points-to size: 0)
+NODE  22:   %8 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  23:   %9 = load i32, i32* %i, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  24:   %inc = add nsw i32 %9, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  25:   store i32 %inc, i32* %i, align 4 (points-to size: 0)
+NODE  26:   ret void (points-to size: 0)
+NODE  27: main (points-to size: 1)
+    -> main + 0

@@ -1,0 +1,130 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase20_Loop27.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 158 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 4029 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 1113 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase20_Loop27.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase20_Loop27.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.old_ initVal: (11,22,33,44,55,66,77,88,99,0) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Name: __const.main.new_ initVal: (11,22,33,44,55,66,77,88,99,0) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 readonly noalias nocapture, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [10 x i32], align 16
+		%3 = alloca [10 x i32], align 16
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %2)
+		%4 = bitcast *[10 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %4, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@17de5477, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %3)
+		%5 = bitcast *[10 x i32] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %5, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@39355ffe, i64 40, i1 0)
+		%6 = getelementptr %2, 0, 9
+		store 0, %6
+		%7 = getelementptr %3, 0, 9
+		store 0, %7
+		br %8
+	8:
+		br %9
+	9:
+		%10 = load %1
+		%11 = sext i32 %10 to i64
+		%12 = getelementptr %2, 0, %11
+		%13 = load %12
+		%14 = load %1
+		%15 = sext i32 %14 to i64
+		%16 = getelementptr %3, 0, %15
+		%17 = load %16
+		%18 = icmp ne %13 %17
+		br %18, %19, %20
+	19:
+		br %9
+	20:
+		%21 = load %1
+		%22 = add i32 %21, 1
+		store %22, %1
+		br %8
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #100 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #100 yields value 1.
+Nondeterministic instruction %2 = alloca [10 x i32], align 16 in node #101 yields value 95.
+Nondeterministic instruction %3 = alloca [10 x i32], align 16 in node #102 yields value 28.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase20_Loop27.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_NT_TestCase20_Loop27.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 13075 milliseconds
+PreprocessingTime: 1093 milliseconds

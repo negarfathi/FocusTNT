@@ -1,0 +1,190 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Misusing_Variable_Type_2_T_TestCase18.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 162 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1348 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 5 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 187 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 3 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 143 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Misusing_Variable_Type_2_T_TestCase18.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Misusing_Variable_Type_2_T_TestCase18.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "gettablesize" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 8, %2
+		%3 = load %2
+		%4 = srem i32 %3, 99999
+		store %4, %2
+		%5 = load %2
+		%6 = icmp slt %5 0
+		br %6, %7, %10
+	7:
+		%8 = load %2
+		%9 = sub i32 0, %8
+		store %9, %1
+		br %12
+	10:
+		%11 = load %2
+		store %11, %1
+		br %12
+	12:
+		%13 = load %1
+		ret %13
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 27
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i64, align 8
+		%3 = alloca i64, align 8
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i64 %3)
+		%4 = call i32 @gettablesize()
+		%5 = sext i32 %4 to i64
+		store %5, %3
+		store 0, %2
+		br %6
+	6:
+		%7 = load %2
+		%8 = load %3
+		%9 = icmp slt %7 %8
+		br %9, %10, %14
+	10:
+		br %11
+	11:
+		%12 = load %2
+		%13 = add i64 %12, 1
+		store %13, %2
+		br %6
+	14:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 11 rulesP rules:
+f_218(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 4) -> f_219(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 4) :|: 0 = 0
+f_219(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 4) -> f_220(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) :|: v69 < 8 && v67 <= 6
+f_220(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) -> f_222(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) :|: 0 = 0
+f_222(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) -> f_224(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) :|: TRUE
+f_224(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) -> f_226(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) :|: TRUE
+f_226(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 6, 4) -> f_227(v63, v64, v65, 8, v69, 1, v70, v71, v72, 0, 3, 7, 4) :|: 0 = 0
+f_227(v63, v64, v65, 8, v69, 1, v70, v71, v72, 0, 3, 7, 4) -> f_228(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) :|: v74 = 1 + v69 && 2 <= v74 && v74 <= 8
+f_228(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) -> f_229(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) :|: TRUE
+f_229(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) -> f_230(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) :|: TRUE
+f_230(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4, 2) -> f_217(v63, v64, v65, 8, v69, 1, v74, v70, v71, v72, 0, 3, 7, 4) :|: TRUE
+f_217(v63, v64, v65, 8, v67, 1, v69, v70, v71, v72, 0, 3, 7, 4) -> f_218(v63, v64, v65, 8, v69, 1, v67, v70, v71, v72, 0, 3, 7, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_218(v63:0, v64:0, v65:0, 8, v69:0, 1, v67:0, v70:0, v71:0, v72:0, 0, 3, 7, 4) -> f_218(v63:0, v64:0, v65:0, 8, 1 + v69:0, 1, v69:0, v70:0, v71:0, v72:0, 0, 3, 7, 4) :|: v67:0 < 7 && v69:0 < 8 && v69:0 > 0
+Filtered unneeded arguments:
+   f_218(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14) -> f_218(x5, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_218(v69:0, v67:0) -> f_218(1 + v69:0, v69:0) :|: v69:0 < 8 && v69:0 > 0 && v67:0 < 7
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_218(v69:0, v67:0) -> f_218(1 + v69:0, v69:0) :|: v69:0 < 8 && v69:0 > 0 && v67:0 < 7
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_218(v69:0:0, v67:0:0) -> f_218(1 + v69:0:0, v69:0:0) :|: v69:0:0 < 8 && v69:0:0 > 0 && v67:0:0 < 7
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_218 ] = -1*f_218_1
+
+The following rules are decreasing:
+f_218(v69:0:0, v67:0:0) -> f_218(1 + v69:0:0, v69:0:0) :|: v69:0:0 < 8 && v69:0:0 > 0 && v67:0:0 < 7
+
+The following rules are bounded:
+f_218(v69:0:0, v67:0:0) -> f_218(1 + v69:0:0, v69:0:0) :|: v69:0:0 < 8 && v69:0:0 > 0 && v67:0:0 < 7
+
+
+----------------------------------------
+
+(12)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+AnalysisTime: 6323 milliseconds
+PreprocessingTime: 2 milliseconds

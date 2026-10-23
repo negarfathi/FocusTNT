@@ -1,0 +1,184 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 167 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2786 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 296 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 136 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.old_ initVal: (117175259,6565,623,1654407480,123456,987654,5,1,2081,12821) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 noalias nocapture readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca [10 x i32], align 16
+		%2 = alloca [10 x i32], align 16
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %1)
+		%4 = bitcast *[10 x i32] %1 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %4, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@6460df73, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %2)
+		%5 = bitcast *[10 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %5, i8 0, i64 40, i1 0)
+		%6 = bitcast *i8 %5 to *[10 x i32]
+		%7 = getelementptr %6, 0, 1
+		store -1, %7
+		%8 = getelementptr %6, 0, 4
+		store -1, %8
+		%9 = getelementptr %6, 0, 6
+		store 1, %9
+		%10 = getelementptr %6, 0, 7
+		store 1, %10
+		%11 = getelementptr %6, 0, 9
+		store 1, %11
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %12
+	12:
+		%13 = load %3
+		%14 = icmp slt %13 9
+		br %14, %15, %18
+	15:
+		%16 = load %3
+		%17 = add i32 %16, 1
+		store %17, %3
+		br %12
+	18:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 9 rulesP rules:
+f_189(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) -> f_190(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) :|: v111 < 9 && v109 <= 7
+f_190(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) -> f_192(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) :|: 0 = 0
+f_192(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) -> f_194(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) :|: TRUE
+f_194(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 7, 8, 40) -> f_196(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40) :|: 0 = 0
+f_196(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40) -> f_197(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) :|: v116 = 1 + v111 && 2 <= v116 && v116 <= 9
+f_197(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) -> f_198(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) :|: TRUE
+f_198(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) -> f_199(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) :|: TRUE
+f_199(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 8, 40, 2, 9) -> f_188(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v116, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) :|: TRUE
+f_188(v101, v102, v103, v104, v105, v106, v107, v108, v109, 1, v111, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) -> f_189(v101, v102, v103, v104, v105, v106, v107, v108, v111, 1, v109, v112, v113, v114, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_189(v101:0, v102:0, v103:0, v104:0, v105:0, v106:0, v107:0, v108:0, v111:0, 1, v109:0, v112:0, v113:0, v114:0, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) -> f_189(v101:0, v102:0, v103:0, v104:0, v105:0, v106:0, v107:0, v108:0, 1 + v111:0, 1, v111:0, v112:0, v113:0, v114:0, -1, 39, 3, 4, 16, 24, 28, 36, 5, 17, 25, 29, 37, 0, 8, 9, 40) :|: v109:0 < 8 && v111:0 < 9 && v111:0 > 0
+Filtered unneeded arguments:
+   f_189(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24, x25, x26, x27, x28, x29, x30, x31) -> f_189(x9, x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_189(v111:0, v109:0) -> f_189(1 + v111:0, v111:0) :|: v111:0 < 9 && v111:0 > 0 && v109:0 < 8
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_189(v111:0, v109:0) -> f_189(1 + v111:0, v111:0) :|: v111:0 < 9 && v111:0 > 0 && v109:0 < 8
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_189(v111:0:0, v109:0:0) -> f_189(1 + v111:0:0, v111:0:0) :|: v111:0:0 < 9 && v111:0:0 > 0 && v109:0:0 < 8
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_189 ] = -1*f_189_1
+
+The following rules are decreasing:
+f_189(v111:0:0, v109:0:0) -> f_189(1 + v111:0:0, v111:0:0) :|: v111:0:0 < 9 && v111:0:0 > 0 && v109:0:0 < 8
+
+The following rules are bounded:
+f_189(v111:0:0, v109:0:0) -> f_189(1 + v111:0:0, v111:0:0) :|: v111:0:0 < 9 && v111:0:0 > 0 && v109:0:0 < 8
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+/FILES_DIR/analyzer_artifacts/concretized_variants/Using_Erroneous_Condition_3_T_Loop17_TestCase20.c:7:19: warning: implicit conversion from 'long' to 'int' changes value from 1679449387995 to 117175259 [-Wconstant-conversion]
+  int old_[10] = {1679449387995,6565,623,1654407480,123456,987654,5,1,2081,12821};
+                 ~^~~~~~~~~~~~~
+AnalysisTime: 8344 milliseconds
+PreprocessingTime: 69 milliseconds

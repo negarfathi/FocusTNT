@@ -1,0 +1,38 @@
+Running CPAchecker with Java heap of size 10000M.
+Running CPAchecker with default stack size (1024k). Specify a larger value with --stack if needed.
+Using the following resource limits: CPU-time limit of 900s (ResourceLimitChecker.fromConfiguration, INFO)
+
+CPAchecker 4.2.2-3630-g7b1450b26d6 / terminationAnalysis (OpenJDK 64-Bit Server VM 21.0.12.1) started (CPAchecker.run, INFO)
+
+Parsing CFA from file(s) "/FILES_DIR/analyzer_artifacts/sliced_variants/Undefined_Behavior_2_NT_TestCase1_Loop13.c" (CPAchecker.parse, INFO)
+
+Undefined identifier w found, first referenced in line 5 (CheckBindingVisitor.visit, WARNING)
+
+Exception in thread "main" java.lang.UnsupportedOperationException
+	at org.sosy_lab.cpachecker.cfa.types.c.CProblemType.isAtomic(CProblemType.java:40)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.ASTConverter.convert(ASTConverter.java:946)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.ASTConverter.convertExpressionWithSideEffectsNotSimplified(ASTConverter.java:460)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.ASTConverter.convertExpressionWithSideEffects(ASTConverter.java:442)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.ASTConverter.convertExpressionToStatement(ASTConverter.java:1896)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.ASTConverter.convert(ASTConverter.java:1892)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.CFAFunctionBuilder.handleExpressionStatement(CFAFunctionBuilder.java:711)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.CFAFunctionBuilder.visit(CFAFunctionBuilder.java:652)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTExpressionStatement.accept(CASTExpressionStatement.java:68)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTWhileStatement.accept(CASTWhileStatement.java:101)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTCompoundStatement.accept(CASTCompoundStatement.java:89)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition.accept(CASTFunctionDefinition.java:141)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.CFABuilder.handleFunctionDefinition(CFABuilder.java:460)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.CFABuilder.createCFA(CFABuilder.java:383)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.EclipseCParser.buildCFA(EclipseCParser.java:344)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.EclipseCParser.parseSomething(EclipseCParser.java:132)
+	at org.sosy_lab.cpachecker.cfa.parser.eclipse.c.EclipseCParser.parseString(EclipseCParser.java:151)
+	at org.sosy_lab.cpachecker.cfa.CParserWithLocationMapper.parseString(CParserWithLocationMapper.java:237)
+	at org.sosy_lab.cpachecker.cfa.CParserWithPreprocessor.parseFiles(CParserWithPreprocessor.java:64)
+	at org.sosy_lab.cpachecker.cfa.CFACreator.parseToCFAs(CFACreator.java:827)
+	at org.sosy_lab.cpachecker.cfa.CFACreator.parseFileAndCreateCFA(CFACreator.java:568)
+	at org.sosy_lab.cpachecker.core.CPAchecker.parse(CPAchecker.java:492)
+	at org.sosy_lab.cpachecker.core.CPAchecker.run(CPAchecker.java:304)
+	at org.sosy_lab.cpachecker.cmdline.CPAMain.main(CPAMain.java:157)
+AnalysisTime: 3661 milliseconds
+PreprocessingTime: 1638 milliseconds

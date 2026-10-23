@@ -1,0 +1,73 @@
+///*** 1_main ***///
+START: main_bb0;
+
+FROM: main_bb0;
+vslots_used := nondet();
+v2 := 0;
+v1 := store_array(v1, v2, 1);
+v3 := 1;
+v1 := store_array(v1, v3, 2);
+v4 := 2;
+v1 := store_array(v1, v4, 2);
+v5 := 3;
+v1 := store_array(v1, v5, 1);
+v6 := 4;
+v1 := store_array(v1, v6, 2);
+v7 := 5;
+v1 := store_array(v1, v7, 1);
+var__temp_vi.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vi.0 := var__temp_vi.0;
+var__temp_vi_0.0 := 0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vi.0 slt 10);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vi.0 sge 10);
+TO: main_bb3;
+
+FROM: main_bb2;
+v9 := vi.0 + 1;
+var__temp_vi.0 := v9;
+TO: main_bb1;
+
+FROM: main_bb3;
+vi_0.0 := var__temp_vi_0.0;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(vi_0.0 slt 10);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(vi_0.0 sge 10);
+TO: main_bb5;
+
+FROM: main_bb4;
+v11 := sign_extend(32, 64, vi_0.0);
+v12 := v11;
+v13 := select_array(vslots_used, v12);
+v14 := vi_0.0 + 1;
+TO: main_bb4_vi_0.0.;
+FROM: main_bb4_vi_0.0.;
+assume(v13 == 2);
+vi_0.0. := vi_0.0;
+TO: main_bb4_svi_0.0.;
+
+FROM: main_bb4_vi_0.0.;
+assume(v13 != 2);
+vi_0.0. := v14;
+TO: main_bb4_svi_0.0.;
+
+FROM: main_bb4_svi_0.0.;
+var__temp_vi_0.0 := vi_0.0.;
+TO: main_bb3;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

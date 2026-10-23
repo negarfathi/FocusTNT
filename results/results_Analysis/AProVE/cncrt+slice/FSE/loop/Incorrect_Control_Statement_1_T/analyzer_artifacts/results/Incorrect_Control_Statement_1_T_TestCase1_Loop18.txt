@@ -1,0 +1,152 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_1_T_TestCase1_Loop18.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 149 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1281 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 956 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_1_T_TestCase1_Loop18.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_1_T_TestCase1_Loop18.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.array initVal: }aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa type: [101 x i8] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 noalias nocapture readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [101 x i8], align 16
+		%3 = alloca *i8, align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[101 x i8] %2)
+		%4 = bitcast *[101 x i8] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %4, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMGetElementPtrConstExpr@3aacd276, i64 101, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		%5 = getelementptr %2, 0, 0
+		store %5, %3
+		br %6
+	6:
+		%7 = load %3
+		%8 = load %7
+		%9 = icmp ne %8 0
+		br %9, %10, %15
+	10:
+		%11 = load %1
+		%12 = icmp ne %11 0
+		br %12, %13, %14
+	13:
+		br %37
+	14:
+		br %16
+	15:
+		br %37
+	16:
+		%17 = load %3
+		%18 = load %17
+		%19 = sext i8 %18 to i32
+		switch %19, %35 [125, %20 58, %21]
+	20:
+		store 1, %1
+		br %36
+	21:
+		%22 = load %3
+		%23 = getelementptr %22, 1
+		%24 = load %23
+		%25 = icmp ne %24 0
+		br %25, %26, %34
+	26:
+		%27 = load %3
+		%28 = getelementptr %27, 1
+		%29 = load %28
+		%30 = sext i8 %29 to i32
+		%31 = icmp eq %30 45
+		br %31, %32, %33
+	32:
+		br %36
+	33:
+		br %34
+	34:
+		br %35
+	35:
+		br %36
+	36:
+		br %6
+	37:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #139 with references set to {v1=157, v2=257}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #139 yields value 137.
+Nondeterministic instruction %2 = alloca [101 x i8], align 16 in node #140 yields value 2.
+Nondeterministic instruction %3 = alloca *i8, align 8 in node #141 yields value 119.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_1_T_TestCase1_Loop18.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_1_T_TestCase1_Loop18.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 11959 milliseconds
+PreprocessingTime: 1108 milliseconds

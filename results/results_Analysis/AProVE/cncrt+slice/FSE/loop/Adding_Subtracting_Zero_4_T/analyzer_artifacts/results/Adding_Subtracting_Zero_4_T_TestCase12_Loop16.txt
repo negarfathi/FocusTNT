@@ -1,0 +1,238 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_T_TestCase12_Loop16.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 163 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2286 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 2 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 227 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 151 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_T_TestCase12_Loop16.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_T_TestCase12_Loop16.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "read_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 i32, 1 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %7
+	7:
+		%8 = load %3
+		%9 = load %4
+		%10 = icmp slt %8 %9
+		br %10, %11, %16
+	11:
+		%12 = load %6
+		%13 = add i32 %12, 1
+		store %13, %6
+		%14 = load %3
+		%15 = add i32 %14, 1
+		store %15, %3
+		br %7
+	16:
+		%17 = load %6
+		store %17, %5
+		%18 = load %5
+		ret %18
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 33
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		br %6
+	6:
+		%7 = load %2
+		%8 = icmp sgt %7 0
+		br %8, %9, %30
+	9:
+		%10 = load %3
+		%11 = load %2
+		%12 = call i32 @read_slice_1(i32 %10, i32 %11)
+		store %12, %1
+		%13 = load %1
+		%14 = icmp sle %13 0
+		br %14, %15, %23
+	15:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%16 = load %4
+		store %16, %5
+		%17 = load %4
+		%18 = add i32 %17, 1
+		store %18, %4
+		%19 = load %5
+		%20 = icmp slt %19 5
+		br %20, %21, %22
+	21:
+		br %6
+	22:
+		br %31
+	23:
+		%24 = load %1
+		%25 = load %2
+		%26 = sub i32 %25, %24
+		store %26, %2
+		%27 = load %1
+		%28 = load %3
+		%29 = add i32 %28, %27
+		store %29, %3
+		br %6
+	30:
+		br %31
+	31:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 13 rulesP rules:
+f_303(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) -> f_304(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) :|: 0 = 0
+f_304(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) -> f_305(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: v79 < 4 && v77 <= 2
+f_305(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_307(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: 0 = 0
+f_307(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_309(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: TRUE
+f_309(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_311(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: 0 = 0
+f_311(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_313(0, 4, v73, v74, v75, v76, v79, 1, v94, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: v94 = 1 + v79 && 2 <= v94 && v94 <= 4
+f_313(0, 4, v73, v74, v75, v76, v79, 1, v94, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_315(0, 4, v73, v74, v75, v76, v79, 1, v94, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: TRUE
+f_315(0, 4, v73, v74, v75, v76, v79, 1, v94, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_317(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: 0 = 0
+f_317(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_319(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: v94 = 1 + v79
+f_319(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_321(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: TRUE
+f_321(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_323(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) :|: TRUE
+f_323(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3, 2) -> f_302(0, 4, v73, v74, v75, v76, v79, 1, v94, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) :|: TRUE
+f_302(0, 4, v73, v74, v75, v76, v77, 1, v79, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) -> f_303(0, 4, v73, v74, v75, v76, v79, 1, v77, v80, v85, v81, v86, v82, v87, v83, v88, v84, v89, v90, v91, v92, v93, 3) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_303(0, 4, v73:0, v74:0, v75:0, v76:0, v79:0, 1, v77:0, v80:0, v85:0, v81:0, v86:0, v82:0, v87:0, v83:0, v88:0, v84:0, v89:0, v90:0, v91:0, v92:0, v93:0, 3) -> f_303(0, 4, v73:0, v74:0, v75:0, v76:0, 1 + v79:0, 1, v79:0, v80:0, v85:0, v81:0, v86:0, v82:0, v87:0, v83:0, v88:0, v84:0, v89:0, v90:0, v91:0, v92:0, v93:0, 3) :|: v77:0 < 3 && v79:0 < 4 && v79:0 > 0
+Filtered unneeded arguments:
+   f_303(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24) -> f_303(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_303(v79:0, v77:0) -> f_303(1 + v79:0, v79:0) :|: v79:0 < 4 && v79:0 > 0 && v77:0 < 3
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_303(v79:0, v77:0) -> f_303(1 + v79:0, v79:0) :|: v79:0 < 4 && v79:0 > 0 && v77:0 < 3
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_303(v79:0:0, v77:0:0) -> f_303(1 + v79:0:0, v79:0:0) :|: v79:0:0 < 4 && v79:0:0 > 0 && v77:0:0 < 3
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_303 ] = -1*f_303_1
+
+The following rules are decreasing:
+f_303(v79:0:0, v77:0:0) -> f_303(1 + v79:0:0, v79:0:0) :|: v79:0:0 < 4 && v79:0:0 > 0 && v77:0:0 < 3
+
+The following rules are bounded:
+f_303(v79:0:0, v77:0:0) -> f_303(1 + v79:0:0, v79:0:0) :|: v79:0:0 < 4 && v79:0:0 > 0 && v77:0:0 < 3
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_T_TestCase12_Loop16.c:14:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_T_TestCase12_Loop16.c:14:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 7502 milliseconds
+PreprocessingTime: 1653 milliseconds

@@ -18,6 +18,8 @@ int main()
             res = __VERIFIER_nondet_int();
             pkt++;
             if( res == 0 )
+                /*@ \slicing::slice_preserve_ctrl; */
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
         }
     }

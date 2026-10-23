@@ -1,0 +1,76 @@
+///*** 1_main ***///
+START: main_bb4;
+
+FROM: main_bb4;
+flag := 0;
+flag := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume(1 <= 0);
+TO: main_bb9;
+
+FROM: main_bb4_end;
+assume(0 <= 0);
+TO: main_bb5;
+
+FROM: main_bb5;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(vpos.0 slt 1);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(vpos.0 sge 1);
+TO: main_bb9;
+
+FROM: main_bb6;
+v6 := 1 - vpos.0;
+var__temp_vcount.0.i := 0;
+var__temp_v.0.i := vpos.0;
+TO: main_bb7;
+
+FROM: main_bb7;
+vcount.0.i := var__temp_vcount.0.i;
+v.0.i := var__temp_v.0.i;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(v.0.i slt v6);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(v.0.i sge v6);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb8;
+v8 := vcount.0.i + 1;
+v9 := v.0.i + 1;
+var__temp_vcount.0.i := v8;
+var__temp_v.0.i := v9;
+TO: main_bb7;
+
+FROM: main_read_slice_1.exit;
+v11 := vcount.0.i + 1;
+TO: main_read_slice_1.exit_v.count.0.i;
+FROM: main_read_slice_1.exit_v.count.0.i;
+assume(vcount.0.i == 0);
+v.count.0.i := v11;
+TO: main_read_slice_1.exit_sv.count.0.i;
+
+FROM: main_read_slice_1.exit_v.count.0.i;
+assume(vcount.0.i != 0);
+v.count.0.i := vcount.0.i;
+TO: main_read_slice_1.exit_sv.count.0.i;
+
+FROM: main_read_slice_1.exit_sv.count.0.i;
+v12 := vpos.0 + v.count.0.i;
+var__temp_vpos.0 := v12;
+TO: main_bb5;
+
+FROM: main_bb9;
+TO: main_bb9_ret;
+

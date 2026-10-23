@@ -1,0 +1,25 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+vmain.old_ := nondet();
+vmain.new_ := nondet();
+vold_ := nondet();
+vnew_ := nondet();
+v0 := v1;
+v2 := v3;
+v4 := 9;
+vold_ := store_array(vold_, v4, 0);
+v5 := 9;
+vnew_ := store_array(vnew_, v5, 0);
+var__temp_vi.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vi.0 := var__temp_vi.0;
+v6 := vi.0 + 1;
+var__temp_vi.0 := v6;
+TO: main_bb1;
+

@@ -1,0 +1,37 @@
+///*** 1_main ***///
+START: main_bb0;
+
+FROM: main_bb0;
+vold_ := nondet();
+vnew_ := nondet();
+v2 := 9;
+vold_ := store_array(vold_, v2, 0);
+v3 := 9;
+vnew_ := store_array(vnew_, v3, 0);
+var__temp_vbase.0 := 8;
+var__temp_vi.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vbase.0 := var__temp_vbase.0;
+vi.0 := var__temp_vi.0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vbase.0 slt 64);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vbase.0 sge 64);
+TO: main_bb3;
+
+FROM: main_bb2;
+v5 := vi.0 + 1;
+v6 := vbase.0 + 8;
+var__temp_vbase.0 := v6;
+var__temp_vi.0 := v5;
+TO: main_bb1;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

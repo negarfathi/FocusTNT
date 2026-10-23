@@ -1,0 +1,29 @@
+///*** 1_main ***///
+START: main_bb1;
+
+TYPE vw.0: bv(32);
+
+FROM: main_bb1;
+var__temp_vw.0 := 3;
+TO: main_bb2;
+
+FROM: main_bb2;
+vw.0 := var__temp_vw.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(vw.0 != 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(vw.0 == 0);
+TO: main_bb4;
+
+FROM: main_bb3;
+v1 := lshr(vw.0, 1);
+var__temp_vw.0 := v1;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

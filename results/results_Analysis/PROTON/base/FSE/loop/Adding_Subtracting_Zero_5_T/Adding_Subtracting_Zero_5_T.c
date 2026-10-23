@@ -38,6 +38,7 @@ int main()
     {
         INSDS *nxt = ip->nxtact;
         if( ip == nxt )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         ip = nxt;
     }

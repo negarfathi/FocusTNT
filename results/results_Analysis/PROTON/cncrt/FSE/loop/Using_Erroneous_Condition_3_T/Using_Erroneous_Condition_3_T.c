@@ -26,6 +26,8 @@ int main()
         while( old_[i] != new_[i] )
         {
             if( ++number == count )
+                /*@ \slicing::slice_preserve_ctrl; */
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
         }
         i++;

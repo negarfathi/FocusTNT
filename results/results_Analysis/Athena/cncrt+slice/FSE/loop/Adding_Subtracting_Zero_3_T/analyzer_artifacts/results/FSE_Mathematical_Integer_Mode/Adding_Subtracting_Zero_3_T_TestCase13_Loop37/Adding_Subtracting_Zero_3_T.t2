@@ -1,0 +1,57 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+flag := 0;
+flag := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb2;
+
+FROM: main_bb2;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(vpos.0 slt 5);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(vpos.0 sge 5);
+TO: main_bb4;
+
+FROM: main_bb3;
+v3 := 5 - vpos.0;
+TO: main_bb3_v__retres.0.i;
+FROM: main_bb3_v__retres.0.i;
+assume(vpos.0 slt v3);
+v__retres.0.i := 1;
+TO: main_bb3_sv__retres.0.i;
+
+FROM: main_bb3_v__retres.0.i;
+assume(vpos.0 sge v3);
+v__retres.0.i := 0;
+TO: main_bb3_sv__retres.0.i;
+
+FROM: main_bb3_sv__retres.0.i;
+v6 := v__retres.0.i + 1;
+TO: main_bb3_v.__retres.0.i;
+FROM: main_bb3_v.__retres.0.i;
+assume(v__retres.0.i == 0);
+v.__retres.0.i := v6;
+TO: main_bb3_sv.__retres.0.i;
+
+FROM: main_bb3_v.__retres.0.i;
+assume(v__retres.0.i != 0);
+v.__retres.0.i := v__retres.0.i;
+TO: main_bb3_sv.__retres.0.i;
+
+FROM: main_bb3_sv.__retres.0.i;
+v7 := vpos.0 + v.__retres.0.i;
+var__temp_vpos.0 := v7;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

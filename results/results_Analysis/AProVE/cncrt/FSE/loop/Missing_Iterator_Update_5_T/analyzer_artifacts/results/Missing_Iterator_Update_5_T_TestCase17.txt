@@ -1,0 +1,261 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_5_T_TestCase17.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 135 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1571 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 4 ms]
+(6) AND
+    (7) LLVM Symbolic Execution SCC
+        (8) SCC2IRS [SOUND, 228 ms]
+        (9) IntTRS
+        (10) TerminationGraphProcessor [EQUIVALENT, 13 ms]
+        (11) YES
+    (12) LLVM Symbolic Execution SCC
+        (13) SCC2IRS [SOUND, 233 ms]
+        (14) IntTRS
+        (15) TerminationGraphProcessor [EQUIVALENT, 42 ms]
+        (16) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_5_T_TestCase17.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_5_T_TestCase17.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.mcelog_entry initVal: (5,0) type: [2 x i32] addrSpace: null alignment: 4 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 noalias nocapture readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca [2 x i32], align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 2, %2
+		%6 = load %2
+		%7 = icmp sle %6 0
+		br %7, %11, %8
+	8:
+		%9 = load %2
+		%10 = icmp sgt %9 1000
+		br %10, %11, %12
+	11:
+		store 0, %1
+		br %43
+	12:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[2 x i32] %3)
+		%13 = bitcast *[2 x i32] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %13, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@48de253f, i64 8, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		br %14
+	14:
+		%15 = load %4
+		%16 = load %2
+		%17 = icmp slt %15 %16
+		br %17, %18, %22
+	18:
+		br %19
+	19:
+		%20 = load %4
+		%21 = add i32 %20, 1
+		store %21, %4
+		br %14
+	22:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 0, %5
+		%23 = load %5
+		%24 = icmp slt %23 0
+		br %24, %25, %26
+	25:
+		store 0, %1
+		br %43
+	26:
+		br %27
+	27:
+		%28 = load %5
+		%29 = load %2
+		%30 = icmp sge %28 %29
+		br %30, %31, %32
+	31:
+		store 0, %1
+		br %43
+	32:
+		%33 = load %5
+		%34 = sext i32 %33 to i64
+		%35 = getelementptr %3, 0, %34
+		%36 = load %35
+		%37 = icmp ne %36 0
+		br %37, %38, %41
+	38:
+		%39 = load %5
+		%40 = add i32 %39, 1
+		store %40, %5
+		br %27
+	41:
+		br %42
+	42:
+		store 0, %1
+		br %43
+	43:
+		%44 = load %1
+		ret %44
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 2 SCCs.
+----------------------------------------
+
+(6)
+Complex Obligation (AND)
+
+----------------------------------------
+
+(7)
+Obligation:
+SCC
+----------------------------------------
+
+(8) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 17 rulesP rules:
+f_287(v50, v51, v52, v53, v54, 2, 0, 1, v61, v58, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_288(v50, v51, v52, v53, v54, 2, 0, 1, v61, v58, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: 0 = 0
+f_288(v50, v51, v52, v53, v54, 2, 0, 1, v61, v58, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_290(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: v61 < 2 && v58 = 0 && v61 = 1 && 0 = 0
+f_290(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_292(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: 0 = 0
+f_292(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_294(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: TRUE
+f_294(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_296(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: 0 = 0
+f_296(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_298(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: 0 = 0
+f_298(v50, v51, v52, v53, v54, 2, 0, 1, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_300(v50, v51, v52, v53, v54, 2, 0, 1, v68, v60, v62, v63, v64, v65, v66, v67, v59, 3, 7, 4, 8, 5) :|: v68 = 4 + v52 && 5 <= v68
+f_300(v50, v51, v52, v53, v54, 2, 0, 1, v68, v60, v62, v63, v64, v65, v66, v67, v59, 3, 7, 4, 8, 5) -> f_301(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: TRUE
+f_301(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_302(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: v69 != 0
+f_302(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_304(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: 0 = 0
+f_304(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_306(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: TRUE
+f_306(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_308(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: 0 = 0
+f_308(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_310(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: 0 = 0
+f_310(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_312(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: TRUE
+f_312(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_314(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) :|: TRUE
+f_314(v50, v51, v52, v53, v54, 2, 0, 1, v68, v69, v62, v63, v64, v65, v66, v67, v59, v60, 3, 7, 4, 8, 5) -> f_286(v50, v51, v52, v53, v54, 2, 0, 1, 1, v68, v69, 2, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: TRUE
+f_286(v50, v51, v52, v53, v54, 2, 0, 1, v58, v59, v60, v61, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) -> f_287(v50, v51, v52, v53, v54, 2, 0, 1, v61, v58, v59, v60, v62, v63, v64, v65, v66, v67, 3, 7, 4, 8) :|: 0 = 0
+Combined rules. Obtained 2 rulesP rules:
+f_287(v50:0, v51:0, v52:0, v53:0, v54:0, 2, 0, 1, 1, 0, v59:0, v60:0, v62:0, v63:0, v64:0, v65:0, v66:0, v67:0, 3, 7, 4, 8) -> f_287(v50:0, v51:0, v52:0, v53:0, v54:0, 2, 0, 1, 2, 1, 4 + v52:0, v69:0, v62:0, v63:0, v64:0, v65:0, v66:0, v67:0, 3, 7, 4, 8) :|: v69:0 < 0 && v52:0 > 0
+f_287(v50:0, v51:0, v52:0, v53:0, v54:0, 2, 0, 1, 1, 0, v59:0, v60:0, v62:0, v63:0, v64:0, v65:0, v66:0, v67:0, 3, 7, 4, 8) -> f_287(v50:0, v51:0, v52:0, v53:0, v54:0, 2, 0, 1, 2, 1, 4 + v52:0, v69:0, v62:0, v63:0, v64:0, v65:0, v66:0, v67:0, 3, 7, 4, 8) :|: v69:0 > 0 && v52:0 > 0
+Filtered unneeded arguments:
+   f_287(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) -> f_287(x3, x9, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_287(v52:0, cons_1, cons_0) -> f_287(v52:0, 2, 1) :|: v52:0 > 0 && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(9)
+Obligation:
+Rules:
+f_287(v52:0, cons_1, cons_0) -> f_287(v52:0, 2, 1) :|: v52:0 > 0 && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(10) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(11)
+YES
+
+----------------------------------------
+
+(12)
+Obligation:
+SCC
+----------------------------------------
+
+(13) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 11 rulesP rules:
+f_224(v15, v16, v17, v18, v19, 2, 0, v24, 1, v22, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_225(v15, v16, v17, v18, v19, 2, 0, v24, 1, v22, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: 0 = 0
+f_225(v15, v16, v17, v18, v19, 2, 0, v24, 1, v22, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_226(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: v24 < 2 && v22 = 0 && v24 = 1 && 0 = 0
+f_226(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_228(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: 0 = 0
+f_228(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_230(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: TRUE
+f_230(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_232(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: TRUE
+f_232(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_234(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: 0 = 0
+f_234(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_236(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: 0 = 0
+f_236(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_238(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: TRUE
+f_238(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_240(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: TRUE
+f_240(v15, v16, v17, v18, v19, 2, 0, 1, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_223(v15, v16, v17, v18, v19, 2, 0, 1, 1, 2, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: TRUE
+f_223(v15, v16, v17, v18, v19, 2, 0, v22, 1, v24, v25, v26, v27, v28, v29, 3, 7, 4, 8) -> f_224(v15, v16, v17, v18, v19, 2, 0, v24, 1, v22, v25, v26, v27, v28, v29, 3, 7, 4, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_224(v15:0, v16:0, v17:0, v18:0, v19:0, 2, 0, 1, 1, 0, v25:0, v26:0, v27:0, v28:0, v29:0, 3, 7, 4, 8) -> f_224(v15:0, v16:0, v17:0, v18:0, v19:0, 2, 0, 2, 1, 1, v25:0, v26:0, v27:0, v28:0, v29:0, 3, 7, 4, 8) :|: TRUE
+Filtered unneeded arguments:
+   f_224(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19) -> f_224(x8, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_224(cons_1, cons_0) -> f_224(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(14)
+Obligation:
+Rules:
+f_224(cons_1, cons_0) -> f_224(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(15) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(16)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+AnalysisTime: 6243 milliseconds
+PreprocessingTime: 2 milliseconds

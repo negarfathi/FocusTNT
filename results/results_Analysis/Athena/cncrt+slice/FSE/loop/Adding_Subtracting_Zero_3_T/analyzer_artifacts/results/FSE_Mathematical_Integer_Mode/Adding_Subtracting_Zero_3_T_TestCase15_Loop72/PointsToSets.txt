@@ -1,0 +1,44 @@
+NODE   2: <2> PSNodeType::ENTRY (points-to size: 0)
+NODE   3:   %pos = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %pos = alloca i32, align 4 + 0
+NODE   4:   %size = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %size = alloca i32, align 4 + 0
+NODE   5:   %__fc_errno_0 = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__fc_errno_0 = alloca i32, align 4 + 0
+NODE   6:   %rc = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %rc = alloca i32, align 4 + 0
+NODE   7:   store i32 0, i32* %pos, align 4 (points-to size: 0)
+NODE   8:   store i32 200, i32* %size, align 4 (points-to size: 0)
+NODE   9:   store i32 0, i32* @flag, align 4 (points-to size: 0)
+NODE  10:   store i32 0, i32* %__fc_errno_0, align 4 (points-to size: 0)
+NODE  11:   %0 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  12:   ret void (points-to size: 0)
+NODE  13:   %1 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  14:   %2 = load i32, i32* %pos, align 4 (points-to size: 1)
+    -> null + 0
+NODE  15:   %3 = load i32, i32* %size, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  16: <16> PSNodeType::CALL (points-to size: 0)
+NODE  17: <17> PSNodeType::ENTRY (points-to size: 0)
+NODE  18:   %__retres = alloca i32, align 4 [size: 4, heap: 0, zeroed: 0] (points-to size: 1)
+    ->   %__retres = alloca i32, align 4 + 0
+NODE  19:   store i32 -1, i32* %__retres, align 4 (points-to size: 0)
+NODE  20:   %0 = load i32, i32* %__retres, align 4 (points-to size: 1)
+    -> unknown + Offset::UNKNOWN
+NODE  21:   ret i32 %0 (points-to size: 0)
+NODE  22: read_slice_1 (points-to size: 1)
+    -> read_slice_1 + 0
+NODE  23: main (points-to size: 1)
+    -> main + 0
+NODE  24:   %call = call i32 @read_slice_1() (points-to size: 0)
+NODE  25:   store i32 %call, i32* %rc, align 4 (points-to size: 0)
+NODE  26:   %4 = load i32, i32* %__fc_errno_0, align 4 (points-to size: 2)
+    -> null + 0
+    -> null + Offset::UNKNOWN
+NODE  27:   %inc = add nsw i32 %4, 1 (points-to size: 1)
+    -> null + Offset::UNKNOWN
+NODE  28:   store i32 %inc, i32* %__fc_errno_0, align 4 (points-to size: 0)
+NODE  29:   %5 = load i32, i32* %__fc_errno_0, align 4 (points-to size: 1)
+    -> null + Offset::UNKNOWN

@@ -21,10 +21,12 @@ int main()
     for( ;  ; )
     {
         if( st_max < cur )
+        /*@ \slicing::slice_preserve_ctrl; */
         break;
         pre = cur;
         cur += best;
         if( cur <= pre )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
     }
     return 0;

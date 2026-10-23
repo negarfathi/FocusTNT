@@ -1,0 +1,70 @@
+///*** 1_main ***///
+START: main_bb10;
+
+FROM: main_bb10;
+__fc_errno := 0;
+v15 := __fc_errno;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v15 != 1);
+TO: main_bb11;
+
+FROM: main_bb10_end;
+assume(v15 == 1);
+TO: main_bb12;
+
+FROM: main_bb11;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_bb12;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit;
+
+FROM: main_waitpid_slice_1.exit;
+TO: main_waitpid_slice_1.exit_end;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(1 <= 0);
+TO: main_bb13;
+
+FROM: main_waitpid_slice_1.exit_end;
+assume(0 <= 0);
+TO: main_bb16;
+
+FROM: main_bb13;
+v18 := __fc_errno;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v18 != 1);
+TO: main_bb14;
+
+FROM: main_bb13_end;
+assume(v18 == 1);
+TO: main_bb15;
+
+FROM: main_bb14;
+__fc_errno := 1;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_bb15;
+__fc_errno := 2;
+TO: main_waitpid_slice_1.exit1;
+
+FROM: main_waitpid_slice_1.exit1;
+v21 := __fc_errno;
+TO: main_waitpid_slice_1.exit1_end;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume(v21 == 1);
+TO: main_bb13;
+
+FROM: main_waitpid_slice_1.exit1_end;
+assume(v21 != 1);
+TO: main_bb16;
+
+FROM: main_bb16;
+TO: main_bb16_ret;
+

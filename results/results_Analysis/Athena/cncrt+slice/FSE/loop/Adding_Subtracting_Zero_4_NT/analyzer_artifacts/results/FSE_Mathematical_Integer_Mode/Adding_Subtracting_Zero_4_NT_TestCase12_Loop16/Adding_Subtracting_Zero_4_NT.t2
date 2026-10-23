@@ -1,0 +1,46 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+flag := 0;
+var__temp_vbuf.0 := 0;
+var__temp_vcount.0 := 2;
+TO: main_bb2;
+
+FROM: main_bb2;
+vbuf.0 := var__temp_vbuf.0;
+vcount.0 := var__temp_vcount.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(vcount.0 sgt 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(vcount.0 sle 0);
+TO: main_bb4;
+
+FROM: main_bb3;
+TO: main_bb3_v__retres.0.i;
+FROM: main_bb3_v__retres.0.i;
+assume(vbuf.0 slt vcount.0);
+v__retres.0.i := 1;
+TO: main_bb3_sv__retres.0.i;
+
+FROM: main_bb3_v__retres.0.i;
+assume(vbuf.0 sge vcount.0);
+v__retres.0.i := 0;
+TO: main_bb3_sv__retres.0.i;
+
+FROM: main_bb3_sv__retres.0.i;
+v4 := vcount.0 - v__retres.0.i;
+v5 := vbuf.0 + v__retres.0.i;
+var__temp_vbuf.0 := v5;
+var__temp_vcount.0 := v4;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

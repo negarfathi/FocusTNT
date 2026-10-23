@@ -1,4 +1,3 @@
-#include "stdlib.h"
 extern int __VERIFIER_nondet_int(void);
 /*
 Commit Number: fa741cd4fffbbaa5d4ba9a15f53550ac7817cc92

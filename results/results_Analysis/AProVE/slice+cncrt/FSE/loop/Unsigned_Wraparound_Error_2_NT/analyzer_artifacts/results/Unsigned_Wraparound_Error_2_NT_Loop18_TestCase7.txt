@@ -1,0 +1,178 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase7.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 63 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 972 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 156 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 27 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 151 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase7.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase7.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 7, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 6, %3
+		%4 = load %2
+		%5 = load %3
+		%6 = icmp ult %4 %5
+		br %6, %7, %9
+	7:
+		%8 = load %3
+		store %8, %2
+		br %9
+	9:
+		br %10
+	10:
+		%11 = load %1
+		%12 = load %2
+		%13 = icmp ult %11 %12
+		br %13, %14, %17
+	14:
+		%15 = load %1
+		%16 = mul i32 %15, 2
+		store %16, %1
+		br %10
+	17:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_135(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) -> f_136(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) :|: 0 = 0
+f_136(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) -> f_137(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) :|: v43 < 7 && 1 <= v41 && v41 <= 3
+f_137(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) -> f_139(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) :|: 0 = 0
+f_139(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) -> f_141(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) :|: TRUE
+f_141(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) -> f_143(v35, v36, v37, 7, 6, 0, v43, 1, v44, v45, v46, 3, 2, 4) :|: 0 = 0
+f_143(v35, v36, v37, 7, 6, 0, v43, 1, v44, v45, v46, 3, 2, 4) -> f_144(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) :|: v47 = 2 * v43 && 4 <= v47 && v47 <= 12
+f_144(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) -> f_145(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) :|: TRUE
+f_145(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) -> f_146(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) :|: TRUE
+f_146(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4, 12) -> f_134(v35, v36, v37, 7, 6, 0, v43, 1, v47, v44, v45, v46, 3, 2, 4) :|: TRUE
+f_134(v35, v36, v37, 7, 6, 0, v41, 1, v43, v44, v45, v46, 3, 2, 4) -> f_135(v35, v36, v37, 7, 6, 0, v43, 1, v41, v44, v45, v46, 3, 2, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_135(v35:0, v36:0, v37:0, 7, 6, 0, v43:0, 1, v41:0, v44:0, v45:0, v46:0, 3, 2, 4) -> f_135(v35:0, v36:0, v37:0, 7, 6, 0, 2 * v43:0, 1, v43:0, v44:0, v45:0, v46:0, 3, 2, 4) :|: v41:0 > 0 && v43:0 < 7 && v41:0 < 4 && 2 * v43:0 < 13 && 3 < 2 * v43:0
+Filtered unneeded arguments:
+   f_135(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_135(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_135(v43:0, v41:0) -> f_135(2 * v43:0, v43:0) :|: v43:0 < 7 && v41:0 > 0 && v41:0 < 4 && 3 < 2 * v43:0 && 2 * v43:0 < 13
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_135(v43:0, v41:0) -> f_135(2 * v43:0, v43:0) :|: v43:0 < 7 && v41:0 > 0 && v41:0 < 4 && 3 < 2 * v43:0 && 2 * v43:0 < 13
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_135(v43:0:0, v41:0:0) -> f_135(2 * v43:0:0, v43:0:0) :|: 3 < 2 * v43:0:0 && 2 * v43:0:0 < 13 && v41:0:0 < 4 && v41:0:0 > 0 && v43:0:0 < 7
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_135 ] = -1*f_135_1 + f_135_2
+
+The following rules are decreasing:
+f_135(v43:0:0, v41:0:0) -> f_135(2 * v43:0:0, v43:0:0) :|: 3 < 2 * v43:0:0 && 2 * v43:0:0 < 13 && v41:0:0 < 4 && v41:0:0 > 0 && v43:0:0 < 7
+
+The following rules are bounded:
+f_135(v43:0:0, v41:0:0) -> f_135(2 * v43:0:0, v43:0:0) :|: 3 < 2 * v43:0:0 && 2 * v43:0:0 < 13 && v41:0:0 < 4 && v41:0:0 > 0 && v43:0:0 < 7
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase7.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase7.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 6033 milliseconds
+PreprocessingTime: 58 milliseconds

@@ -1,0 +1,115 @@
+///*** 1_main ***///
+START: main_bb6;
+
+FROM: main_bb6;
+flag := 0;
+v9 := nondet();
+var__temp_vbuf.0 := 0;
+var__temp_vcount.0 := v9;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume(v9 sle 0);
+TO: main_bb13;
+
+FROM: main_bb6_end;
+assume(v9 sgt 0);
+TO: main_bb7;
+
+FROM: main_bb7;
+vbuf.0 := var__temp_vbuf.0;
+vcount.0 := var__temp_vcount.0;
+var__temp_vcount.0.i := 0;
+var__temp_v.0.i := vbuf.0;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(vcount.0 sgt 0);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(vcount.0 sle 0);
+TO: main_bb13;
+
+FROM: main_bb8;
+vcount.0.i := var__temp_vcount.0.i;
+v.0.i := var__temp_v.0.i;
+var__temp_v__retres.0.i := vcount.0.i;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v.0.i slt vcount.0);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v.0.i sge vcount.0);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb9;
+v13 := nondet();
+var__temp_v__retres.0.i := -1;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v13 == 0);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb9_end;
+assume(v13 != 0);
+TO: main_bb10;
+
+FROM: main_bb10;
+v16 := 0 - v13;
+TO: main_bb10_v..i;
+FROM: main_bb10_v..i;
+assume(v13 slt 0);
+v..i := v16;
+TO: main_bb10_sv..i;
+
+FROM: main_bb10_v..i;
+assume(v13 sge 0);
+v..i := v13;
+TO: main_bb10_sv..i;
+
+FROM: main_bb10_sv..i;
+v17 := v..i srem 1000;
+v18 := vcount.0.i + 1;
+var__temp_v__retres.0.i := v18;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v17 slt 995);
+TO: main_bb11;
+
+FROM: main_bb10_end;
+assume(v17 sge 995);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb11;
+v20 := v.0.i + 1;
+var__temp_vcount.0.i := v18;
+var__temp_v.0.i := v20;
+TO: main_bb8;
+
+FROM: main_read_slice_1.exit;
+v__retres.0.i := var__temp_v__retres.0.i;
+TO: main_read_slice_1.exit_end;
+
+FROM: main_read_slice_1.exit_end;
+assume(v__retres.0.i slt 0);
+TO: main_bb13;
+
+FROM: main_read_slice_1.exit_end;
+assume(v__retres.0.i sge 0);
+TO: main_bb12;
+
+FROM: main_bb12;
+v22 := vcount.0 - v__retres.0.i;
+v23 := vbuf.0 + v__retres.0.i;
+var__temp_vbuf.0 := v23;
+var__temp_vcount.0 := v22;
+TO: main_bb7;
+
+FROM: main_bb13;
+TO: main_bb13_ret;
+

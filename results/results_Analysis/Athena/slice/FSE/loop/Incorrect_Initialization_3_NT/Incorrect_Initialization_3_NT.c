@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 d37b2f4794acf1b0b431110c5e1fb23d652c5962
 https://github.com/acassen/keepalived/commit/d37b2f4794acf1b0b431110c5e1fb23d652c5962

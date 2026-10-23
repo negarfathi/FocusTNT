@@ -1,0 +1,36 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+memory0_freeIndex := 1;
+vmemory0 := nondet();
+v3 := memory0_freeIndex;
+v4 := memory0_freeIndex;
+v5 := v4 + 1;
+memory0_freeIndex := v5;
+v6 := 1 - 1;
+v7 := v3 + v6;
+v8 := sign_extend(32, 64, v7);
+v9 := v8;
+vmemory0 := store_array(vmemory0, v9, 0);
+v10 := sign_extend(32, 64, v3);
+v11 := v10;
+v12 := select_array(vmemory0, v11);
+TO: main_bb2;
+
+FROM: main_bb2;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(v12 != 0);
+TO: main_bb2;
+
+FROM: main_bb2_end;
+assume(v12 == 0);
+TO: main_bb3;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

@@ -27,15 +27,19 @@ int main()
                 continue;
             case 0:
                 if( !ereg[i] )
+                    /*@ \slicing::slice_preserve_ctrl; */
                     return 0;
                 else
                     table = ereg[i];
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             default:
                 table = ereg[i];
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
         }
         if( table )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         i++;
     }

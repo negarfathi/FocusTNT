@@ -1,4 +1,3 @@
-#include "stdlib.h"
 
 class LogMessage{
 public:

@@ -1,0 +1,179 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Reusing_Same_Loop_Iterator_2_T_TestCase1_Loop20.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 166 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 661 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 251 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 13 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 128 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Reusing_Same_Loop_Iterator_2_T_TestCase1_Loop20.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Reusing_Same_Loop_Iterator_2_T_TestCase1_Loop20.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 1, %2
+		store 0, %1
+		br %4
+	4:
+		%5 = load %1
+		%6 = load %2
+		%7 = icmp slt %5 %6
+		br %7, %8, %18
+	8:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %9
+	9:
+		%10 = load %3
+		%11 = icmp slt %10 3
+		br %11, %12, %15
+	12:
+		%13 = load %3
+		%14 = add i32 %13, 1
+		store %14, %3
+		br %9
+	15:
+		%16 = load %1
+		%17 = add i32 %16, 1
+		store %17, %1
+		br %4
+	18:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 9 rulesP rules:
+f_123(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) -> f_124(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) :|: v25 < 3 && v24 <= 1
+f_124(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) -> f_126(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) :|: 0 = 0
+f_126(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) -> f_128(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) :|: TRUE
+f_128(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) -> f_130(v19, v20, v21, 0, 1, v25, v26, v27, v28, 3, 2, 4) :|: 0 = 0
+f_130(v19, v20, v21, 0, 1, v25, v26, v27, v28, 3, 2, 4) -> f_132(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) :|: v29 = 1 + v25 && 2 <= v29 && v29 <= 3
+f_132(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) -> f_134(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) :|: TRUE
+f_134(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) -> f_136(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) :|: TRUE
+f_136(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) -> f_122(v19, v20, v21, 0, 1, v25, v29, v26, v27, v28, 3, 2, 4) :|: TRUE
+f_122(v19, v20, v21, 0, 1, v24, v25, v26, v27, v28, 3, 2, 4) -> f_123(v19, v20, v21, 0, 1, v25, v24, v26, v27, v28, 3, 2, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_123(v19:0, v20:0, v21:0, 0, 1, v25:0, v24:0, v26:0, v27:0, v28:0, 3, 2, 4) -> f_123(v19:0, v20:0, v21:0, 0, 1, 1 + v25:0, v25:0, v26:0, v27:0, v28:0, 3, 2, 4) :|: v24:0 < 2 && v25:0 < 3 && v25:0 > 0
+Filtered unneeded arguments:
+   f_123(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13) -> f_123(x6, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_123(v25:0, v24:0) -> f_123(1 + v25:0, v25:0) :|: v25:0 < 3 && v25:0 > 0 && v24:0 < 2
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_123(v25:0, v24:0) -> f_123(1 + v25:0, v25:0) :|: v25:0 < 3 && v25:0 > 0 && v24:0 < 2
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_123(v25:0:0, v24:0:0) -> f_123(1 + v25:0:0, v25:0:0) :|: v25:0:0 < 3 && v25:0:0 > 0 && v24:0:0 < 2
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_123 ] = -1*f_123_1
+
+The following rules are decreasing:
+f_123(v25:0:0, v24:0:0) -> f_123(1 + v25:0:0, v25:0:0) :|: v25:0:0 < 3 && v25:0:0 > 0 && v24:0:0 < 2
+
+The following rules are bounded:
+f_123(v25:0:0, v24:0:0) -> f_123(1 + v25:0:0, v25:0:0) :|: v25:0:0 < 3 && v25:0:0 > 0 && v24:0:0 < 2
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Reusing_Same_Loop_Iterator_2_T_TestCase1_Loop20.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Reusing_Same_Loop_Iterator_2_T_TestCase1_Loop20.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5655 milliseconds
+PreprocessingTime: 1075 milliseconds

@@ -1,0 +1,167 @@
+MAYBE
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Control_Statement_2_NT_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 147 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Control_Statement_2_NT_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Control_Statement_2_NT_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.ereg initVal: (2,1,0,2,0,1,2,1,0,3) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture noalias, *i8 nocapture readonly noalias, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca [10 x i32], align 16
+		%4 = alloca [10 x i32], align 16
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		%7 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 10, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %3)
+		%8 = bitcast *[10 x i32] %3 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %8, i8 0, i64 40, i1 0)
+		%9 = bitcast *i8 %8 to *[10 x i32]
+		%10 = getelementptr %9, 0, 0
+		store 3, %10
+		%11 = getelementptr %9, 0, 1
+		store 7, %11
+		%12 = getelementptr %9, 0, 4
+		store 4, %12
+		%13 = getelementptr %9, 0, 7
+		store 5, %13
+		%14 = getelementptr %9, 0, 8
+		store 1, %14
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %4)
+		%15 = bitcast *[10 x i32] %4 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %15, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@26b42245, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %16
+	16:
+		%17 = load %6
+		%18 = icmp slt %17 10
+		br %18, %19, %23
+	19:
+		br %20
+	20:
+		%21 = load %6
+		%22 = add i32 %21, 1
+		store %22, %6
+		br %16
+	23:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %7)
+		store 0, %7
+		br %24
+	24:
+		%25 = load %7
+		%26 = load %2
+		%27 = icmp slt %25 %26
+		br %27, %28, %59
+	28:
+		%29 = load %7
+		%30 = sext i32 %29 to i64
+		%31 = getelementptr %3, 0, %30
+		%32 = load %31
+		switch %32, %47 [2, %33 0, %34]
+	33:
+		br %24
+	34:
+		%35 = load %7
+		%36 = sext i32 %35 to i64
+		%37 = getelementptr %4, 0, %36
+		%38 = load %37
+		%39 = icmp ne %38 0
+		br %39, %41, %40
+	40:
+		store 0, %1
+		br %60
+	41:
+		%42 = load %7
+		%43 = sext i32 %42 to i64
+		%44 = getelementptr %4, 0, %43
+		%45 = load %44
+		store %45, %5
+		br %46
+	46:
+		br %52
+	47:
+		%48 = load %7
+		%49 = sext i32 %48 to i64
+		%50 = getelementptr %4, 0, %49
+		%51 = load %50
+		store %51, %5
+		br %52
+	52:
+		%53 = load %5
+		%54 = icmp ne %53 0
+		br %54, %55, %56
+	55:
+		br %59
+	56:
+		%57 = load %7
+		%58 = add i32 %57, 1
+		store %58, %7
+		br %24
+	59:
+		store 0, %1
+		br %60
+	60:
+		%61 = load %1
+		ret %61
+
+
+Analyze Termination of all function calls matching the pattern:
+main()Aborted 1792164979Exec. 4, LLVMToSEGraph with some error. Reason: java.util.NoSuchElementException.
+            java.base/java.util.LinkedHashMap$LinkedHashIterator.nextNode(LinkedHashMap.java:758)
+            java.base/java.util.LinkedHashMap$LinkedKeyIterator.next(LinkedHashMap.java:778)
+            aprove.InputModules.Programs.llvm.states.LLVMHeuristicState.adjustValues(LLVMHeuristicState.java:4187)
+            aprove.InputModules.Programs.llvm.states.LLVMHeuristicState.adjustValues(LLVMHeuristicState.java:508)
+            aprove.InputModules.Programs.llvm.states.LLVMHeuristicState.postProcess(LLVMHeuristicState.java:3220)
+            aprove.InputModules.Programs.llvm.states.LLVMHeuristicState.postProcessAfterRefinement(LLVMHeuristicState.java:2662)
+            aprove.InputModules.Programs.llvm.states.LLVMAbstractState.evaluate(LLVMAbstractState.java:542)
+            aprove.InputModules.Programs.llvm.segraph.graphConstructionSteps.LLVMStandardStep.perform(LLVMStandardStep.java:98)
+            aprove.InputModules.Programs.llvm.segraph.LLVMSEGraph.executeStepAndPutSucessorStepsInQueue(LLVMSEGraph.java:1087)
+AnalysisTime: 8562 milliseconds
+PreprocessingTime: 3 milliseconds

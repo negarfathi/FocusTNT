@@ -1,0 +1,151 @@
+MAYBE
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could not be shown:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 145 ms]
+(2) LLVM problem
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.Node --> BasicStructureType(elementType: i32, elementType: i32)
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "malloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca *BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32), align 8
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32) %2)
+		%5 = call *i8 @malloc(i64 8)
+		%6 = bitcast *i8 %5 to *BasicTypeName typeName: struct.NodeBasicStructureType(elementType: i32, elementType: i32)
+		store %6, %2
+		%7 = load %2
+		%8 = getelementptr %7, 0, 1
+		store 1, %8
+		%9 = load %2
+		%10 = getelementptr %9, 0, 0
+		store 2, %10
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		%11 = load %2
+		%12 = getelementptr %11, 0, 1
+		%13 = load %12
+		store %13, %3
+		br 1, %14, %22
+	14:
+		%15 = load %3
+		%16 = icmp sge %15 1
+		br %16, %17, %20
+	17:
+		%18 = load %3
+		%19 = add i32 %18, -1
+		store %19, %3
+		store -1, %1
+		br %21
+	20:
+		br %23
+	21:
+		br %24
+	22:
+		br %23
+	23:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		br %24
+	24:
+		%25 = load %2
+		%26 = getelementptr %25, 0, 0
+		%27 = load %26
+		%28 = load %3
+		%29 = srem i32 %28, %27
+		store %29, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%30 = load %3
+		store %30, %4
+		br %31
+	31:
+		%32 = load %1
+		%33 = load %3
+		%34 = add i32 %33, %32
+		store %34, %3
+		%35 = load %3
+		%36 = load %2
+		%37 = getelementptr %36, 0, 0
+		%38 = load %37
+		%39 = icmp eq %35 %38
+		br %39, %49, %40
+	40:
+		%41 = load %3
+		%42 = icmp slt %41 0
+		br %42, %43, %48
+	43:
+		%44 = load %2
+		%45 = getelementptr %44, 0, 0
+		%46 = load %45
+		%47 = sub i32 %46, 1
+		store %47, %3
+		br %48
+	48:
+		br %49
+	49:
+		%50 = load %3
+		%51 = load %4
+		%52 = icmp ne %50 %51
+		br %52, %54, %53
+	53:
+		br %55
+	54:
+		br %31
+	55:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c:7:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c:7:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_1_T_TestCase8_Loop39.c:10:16: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+  Node *menu = malloc(sizeof(Node));
+               ^
+AnalysisTime: 4275 milliseconds
+PreprocessingTime: 1139 milliseconds

@@ -17,6 +17,7 @@ int read( int loc , int len )
         int num =  __VERIFIER_nondet_int();
         if( num == 0 ) //abnormal
         {
+            /*@ \slicing::slice_preserve_ctrl; */
             return -1;
         }
         else
@@ -33,6 +34,7 @@ int read( int loc , int len )
             else // EOF
             {
                 flag = 1;
+                /*@ \slicing::slice_preserve_ctrl; */
                 return count;
             }
         }
@@ -50,6 +52,7 @@ int main()
     {
         ret = read( buf, count );
         if( ret < 0 )
+            /*@ \slicing::slice_preserve_ctrl; */
             return 0;
         count -= ret;
         buf += ret;

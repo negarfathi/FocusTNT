@@ -1,0 +1,185 @@
+///*** 1_main ***///
+START: main_bb4;
+
+FROM: main_bb4;
+flag := 0;
+var__temp_vres.0 := 0;
+var__temp_vmatroska.0 := 2;
+TO: main_bb5;
+
+FROM: main_bb5;
+vres.0 := var__temp_vres.0;
+vmatroska.0 := var__temp_vmatroska.0;
+TO: main_bb5_v..i;
+FROM: main_bb5_v..i;
+assume(vmatroska.0 == 1);
+v..i := 0;
+TO: main_bb5_sv..i;
+
+FROM: main_bb5_v..i;
+assume(vmatroska.0 != 1);
+v..i := 1;
+TO: main_bb5_sv..i;
+
+FROM: main_bb5_sv..i;
+var__temp_vres.1 := vres.0;
+TO: main_bb5_end;
+
+FROM: main_bb5_end;
+assume(v..i != 0);
+TO: main_bb6;
+
+FROM: main_bb5_end;
+assume(v..i == 0);
+TO: main_bb12;
+
+FROM: main_bb6;
+vres.1 := var__temp_vres.1;
+TO: main_NodeBlock;
+
+FROM: main_NodeBlock;
+TO: main_NodeBlock_end;
+
+FROM: main_NodeBlock_end;
+assume(vres.1 slt 0);
+TO: main_LeafBlock;
+
+FROM: main_NodeBlock_end;
+assume(vres.1 sge 0);
+TO: main_LeafBlock5;
+
+FROM: main_LeafBlock;
+TO: main_LeafBlock_end;
+
+FROM: main_LeafBlock_end;
+assume(vres.1 == -1);
+TO: main_bb7;
+
+FROM: main_LeafBlock_end;
+assume(vres.1 != -1);
+TO: main_NewDefault;
+
+FROM: main_bb7;
+var__temp_vres.0 := vres.1;
+var__temp_vmatroska.0 := 1;
+TO: main_bb5;
+
+FROM: main_LeafBlock5;
+TO: main_LeafBlock5_end;
+
+FROM: main_LeafBlock5_end;
+assume(vres.1 == 0);
+TO: main_bb8;
+
+FROM: main_LeafBlock5_end;
+assume(vres.1 != 0);
+TO: main_NewDefault;
+
+FROM: main_bb8;
+v8 := flag;
+v9 := flag;
+v10 := v9 + 1;
+flag := v10;
+var__temp_v__retres.0.i1 := -1;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(v8 slt 100);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(v8 sge 100);
+TO: main_res_return_slice_1.exit2;
+
+FROM: main_bb9;
+v12 := nondet();
+var__temp_v__retres.0.i1 := v12;
+TO: main_res_return_slice_1.exit2;
+
+FROM: main_res_return_slice_1.exit2;
+v__retres.0.i1 := var__temp_v__retres.0.i1;
+TO: main_res_return_slice_1.exit2_v13;
+
+FROM: main_res_return_slice_1.exit2_v13;
+assume(v__retres.0.i1 slt 0);
+v13 := 1;
+TO: main_res_return_slice_1.exit2_sv13;
+
+FROM: main_res_return_slice_1.exit2_v13;
+assume(v__retres.0.i1 sge 0);
+v13 := 0;
+TO: main_res_return_slice_1.exit2_sv13;
+
+FROM: main_res_return_slice_1.exit2_sv13;
+v14 := zero_extend(1, 32, v13);
+var__temp_vres.1 := v14;
+TO: main_res_return_slice_1.exit2_end;
+
+FROM: main_res_return_slice_1.exit2_end;
+assume(v14 != 0);
+TO: main_bb6;
+
+FROM: main_res_return_slice_1.exit2_end;
+assume(v14 == 0);
+TO: main_bb10;
+
+FROM: main_bb10;
+v16 := flag;
+v17 := flag;
+v18 := v17 + 1;
+flag := v18;
+var__temp_v__retres.0.i3 := -1;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v16 slt 100);
+TO: main_bb11;
+
+FROM: main_bb10_end;
+assume(v16 sge 100);
+TO: main_res_return_slice_1.exit4;
+
+FROM: main_bb11;
+v20 := nondet();
+var__temp_v__retres.0.i3 := v20;
+TO: main_res_return_slice_1.exit4;
+
+FROM: main_res_return_slice_1.exit4;
+v__retres.0.i3 := var__temp_v__retres.0.i3;
+TO: main_res_return_slice_1.exit4_v21;
+
+FROM: main_res_return_slice_1.exit4_v21;
+assume(v__retres.0.i3 == 0);
+v21 := 1;
+TO: main_res_return_slice_1.exit4_sv21;
+
+FROM: main_res_return_slice_1.exit4_v21;
+assume(v__retres.0.i3 != 0);
+v21 := 0;
+TO: main_res_return_slice_1.exit4_sv21;
+
+FROM: main_res_return_slice_1.exit4_sv21;
+v22 := zero_extend(1, 32, v21);
+TO: main_res_return_slice_1.exit4_v.;
+FROM: main_res_return_slice_1.exit4_v.;
+assume(v22 != 0);
+v. := 1;
+TO: main_res_return_slice_1.exit4_sv.;
+
+FROM: main_res_return_slice_1.exit4_v.;
+assume(v22 == 0);
+v. := v22;
+TO: main_res_return_slice_1.exit4_sv.;
+
+FROM: main_res_return_slice_1.exit4_sv.;
+var__temp_vres.1 := v.;
+TO: main_bb6;
+
+FROM: main_NewDefault;
+var__temp_vres.0 := vres.1;
+var__temp_vmatroska.0 := vmatroska.0;
+TO: main_bb5;
+
+FROM: main_bb12;
+TO: main_bb12_ret;
+

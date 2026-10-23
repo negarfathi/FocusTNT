@@ -1,0 +1,197 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_2_T_TestCase6_Loop23.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 151 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1505 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 160 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 90 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_2_T_TestCase6_Loop23.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_2_T_TestCase6_Loop23.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Name: __const.main.slots_used initVal: (2,1,0,3,4,0,5,6,7,0) type: [10 x i32] addrSpace: null alignment: 16 threadLocal: false constant: true linkageType: PRIVATE section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memcpy.p0i8.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null noalias nocapture, *i8 noalias nocapture readonly, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca [10 x i32], align 16
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 10, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %2)
+		%5 = bitcast *[10 x i32] %2 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memcpy.p0i8.p0i8.i64(*i8 %5, *i8 aprove.InputModules.Programs.llvm.internalStructures.literals.const_expr.LLVMConversionConstExpr@49b37abf, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %6
+	6:
+		%7 = load %3
+		%8 = icmp slt %7 10
+		br %8, %9, %12
+	9:
+		%10 = load %3
+		%11 = add i32 %10, 1
+		store %11, %3
+		br %6
+	12:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 0, %4
+		%13 = load %4
+		%14 = load %1
+		%15 = icmp slt %13 %14
+		br %15, %17, %16
+	16:
+		br %26
+	17:
+		%18 = load %4
+		%19 = sext i32 %18 to i64
+		%20 = getelementptr %2, 0, %19
+		%21 = load %20
+		switch %21, %24 [2, %22 0, %23]
+	22:
+		br %25
+	23:
+		br %24
+	24:
+		br %25
+	25:
+		br %26
+	26:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 9 rulesP rules:
+f_190(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 9, 4, 40) -> f_191(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) :|: v75 < 10 && v73 <= 8
+f_191(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) -> f_193(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) :|: 0 = 0
+f_193(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) -> f_195(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) :|: TRUE
+f_195(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 8, 9, 4, 40) -> f_197(v69, v70, v71, v72, v75, 1, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40) :|: 0 = 0
+f_197(v69, v70, v71, v72, v75, 1, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40) -> f_199(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) :|: v81 = 1 + v75 && 2 <= v81 && v81 <= 10
+f_199(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) -> f_201(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) :|: TRUE
+f_201(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) -> f_203(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) :|: TRUE
+f_203(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 9, 4, 40, 2) -> f_189(v69, v70, v71, v72, v75, 1, v81, v76, v77, v78, v79, 10, 3, 39, 0, 9, 4, 40) :|: TRUE
+f_189(v69, v70, v71, v72, v73, 1, v75, v76, v77, v78, v79, 10, 3, 39, 0, 9, 4, 40) -> f_190(v69, v70, v71, v72, v75, 1, v73, v76, v77, v78, v79, 10, 3, 39, 0, 9, 4, 40) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_190(v69:0, v70:0, v71:0, v72:0, v75:0, 1, v73:0, v76:0, v77:0, v78:0, v79:0, 10, 3, 39, 0, 9, 4, 40) -> f_190(v69:0, v70:0, v71:0, v72:0, 1 + v75:0, 1, v75:0, v76:0, v77:0, v78:0, v79:0, 10, 3, 39, 0, 9, 4, 40) :|: v73:0 < 9 && v75:0 < 10 && v75:0 > 0
+Filtered unneeded arguments:
+   f_190(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18) -> f_190(x5, x7)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_190(v75:0, v73:0) -> f_190(1 + v75:0, v75:0) :|: v75:0 < 10 && v75:0 > 0 && v73:0 < 9
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_190(v75:0, v73:0) -> f_190(1 + v75:0, v75:0) :|: v75:0 < 10 && v75:0 > 0 && v73:0 < 9
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_190(v75:0:0, v73:0:0) -> f_190(1 + v75:0:0, v75:0:0) :|: v75:0:0 < 10 && v75:0:0 > 0 && v73:0:0 < 9
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_190 ] = -1*f_190_1
+
+The following rules are decreasing:
+f_190(v75:0:0, v73:0:0) -> f_190(1 + v75:0:0, v75:0:0) :|: v75:0:0 < 10 && v75:0:0 > 0 && v73:0:0 < 9
+
+The following rules are bounded:
+f_190(v75:0:0, v73:0:0) -> f_190(1 + v75:0:0, v75:0:0) :|: v75:0:0 < 10 && v75:0:0 > 0 && v73:0:0 < 9
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_2_T_TestCase6_Loop23.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Incorrect_Control_Statement_2_T_TestCase6_Loop23.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 6242 milliseconds
+PreprocessingTime: 1073 milliseconds

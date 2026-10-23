@@ -35,9 +35,11 @@ int main()
     {
         int inc = ff_subtitles_next_line();
         if( !inc )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         b += inc;
         if( b >= end - 4 )
+        /*@ \slicing::slice_preserve_ctrl; */
         return 0;
     }
     return 0;

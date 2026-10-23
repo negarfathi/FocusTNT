@@ -27,15 +27,20 @@ int main()
     {
         temp = fgetc();
         if( temp == '\0' || temp == EOF )
+            /*@ \slicing::slice_preserve_ctrl; */
             return 0;
         switch( temp ){
             case EOF:
+                /*@ \slicing::slice_preserve_ctrl; */
                 return 0;
             case '=':
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             case '\0':
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             default:
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
         }
     }

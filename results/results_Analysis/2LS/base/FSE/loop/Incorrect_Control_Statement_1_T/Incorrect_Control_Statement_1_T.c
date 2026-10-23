@@ -19,17 +19,20 @@ int main()
         switch(*p){
         case '}':
             stop = 1;
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
 
         case ':':
             if( *(p+1) && (*(p+1) == '-')){
                 p += 2;
                 stop = 1;
+                /*@ \slicing::slice_preserve_ctrl; */
                 break;
             }
 
         default:
             p++;
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         }
     }

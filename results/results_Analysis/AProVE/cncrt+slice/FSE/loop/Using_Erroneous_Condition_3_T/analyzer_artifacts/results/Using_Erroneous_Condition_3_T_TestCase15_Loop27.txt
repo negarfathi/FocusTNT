@@ -1,0 +1,138 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase15_Loop27.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 170 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 960 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) TRUE
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase15_Loop27.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase15_Loop27.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.memset.p0i8.i64" returnParam: BasicVoidType parameters: (*i8 null nocapture, i8, i64, i1) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca [10 x i32], align 16
+		%5 = alloca [10 x i32], align 16
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 2, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 9, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %4)
+		%6 = bitcast *[10 x i32] %4 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %6, i8 0, i64 40, i1 0)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*[10 x i32] %5)
+		%7 = bitcast *[10 x i32] %5 to *i8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.memset.p0i8.i64(*i8 %7, i8 0, i64 40, i1 0)
+		%8 = getelementptr %4, 0, 9
+		store 0, %8
+		%9 = getelementptr %5, 0, 9
+		store 0, %9
+		br %10
+	10:
+		%11 = load %2
+		%12 = load %3
+		%13 = icmp slt %11 %12
+		br %13, %14, %31
+	14:
+		%15 = load %1
+		%16 = sext i32 %15 to i64
+		%17 = getelementptr %4, 0, %16
+		%18 = load %17
+		%19 = load %1
+		%20 = sext i32 %19 to i64
+		%21 = getelementptr %5, 0, %20
+		%22 = load %21
+		%23 = icmp ne %18 %22
+		br %23, %25, %24
+	24:
+		br %26
+	25:
+		br %26
+	26:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		%27 = load %1
+		%28 = add i32 %27, 1
+		store %28, %1
+		%29 = load %2
+		%30 = add i32 %29, 8
+		store %30, %2
+		br %10
+	31:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Proven termination by absence of SCCs
+----------------------------------------
+
+(6)
+TRUE
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase15_Loop27.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase15_Loop27.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 4269 milliseconds
+PreprocessingTime: 1099 milliseconds

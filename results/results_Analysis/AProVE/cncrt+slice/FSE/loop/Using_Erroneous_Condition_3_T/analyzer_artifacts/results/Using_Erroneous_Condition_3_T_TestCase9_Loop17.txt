@@ -1,0 +1,180 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase9_Loop17.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 147 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 753 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SEGraph to IRS [EQUIVALENT, 258 ms]
+(6) IntTRS
+(7) IRSToKoat [EQUIVALENT, 10 ms]
+(8) Koat Problem
+(9) KoAT2 [EQUIVALENT, 256 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase9_Loop17.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase9_Loop17.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 0, %1
+		br %2
+	2:
+		%3 = load %1
+		%4 = icmp slt %3 9
+		br %4, %5, %8
+	5:
+		%6 = load %1
+		%7 = add i32 %6, 1
+		store %7, %1
+		br %2
+	8:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SEGraph to IRS (EQUIVALENT)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 28 rulesP rules:
+f_39 -> f_40(v1, v2, 3, 1, 4) :|: 1 <= v1 && v2 = 3 + v1 && 4 <= v2
+f_40(v1, v2, 3, 1, 4) -> f_41(v1, v2, 3, 1, 4) :|: TRUE
+f_41(v1, v2, 3, 1, 4) -> f_42(v1, v2, 0, 3, 1, 4) :|: TRUE
+f_42(v1, v2, 0, 3, 1, 4) -> f_43(v1, v2, 0, 3, 1, 4) :|: TRUE
+f_43(v1, v2, 0, 3, 1, 4) -> f_44(v1, 0, v2, 3, 1, 4) :|: 0 = 0
+f_44(v1, 0, v2, 3, 1, 4) -> f_45(v1, 0, 1, v2, 3, 4) :|: 0 = 0
+f_45(v1, 0, 1, v2, 3, 4) -> f_46(v1, 0, 1, v2, 3, 4) :|: TRUE
+f_46(v1, 0, 1, v2, 3, 4) -> f_47(v1, 0, 1, v2, 3, 4) :|: 0 = 0
+f_47(v1, 0, 1, v2, 3, 4) -> f_48(v1, 0, 1, v2, 3, 4) :|: 0 = 0
+f_48(v1, 0, 1, v2, 3, 4) -> f_49(v1, 0, 1, v2, 3, 4) :|: TRUE
+f_49(v1, 0, 1, v2, 3, 4) -> f_50(v1, 0, 1, v2, 3, 4) :|: TRUE
+f_50(v1, 0, 1, v2, 3, 4) -> f_58(v1, 0, 1, 1, v2, 3, 0, 2, 4) :|: TRUE
+f_58(v3, v4, 1, v6, v7, 3, 0, 2, 4) -> f_66(v3, v4, 1, v6, v7, 3, 0, 2, 4) :|: TRUE
+f_66(v10, v11, 1, v13, v14, 3, 0, 2, 4) -> f_74(v10, v11, 1, v13, v14, 3, 0, 8, 9, 4) :|: TRUE
+f_74(v17, v18, 1, v20, v21, 3, 0, 8, 9, 4) -> f_86(v17, v18, 1, v20, v21, 3, 0, 8, 9, 4) :|: TRUE
+f_86(v24, v25, 1, v27, v28, 3, 0, 8, 9, 4) -> f_98(v24, v25, 1, v27, v28, 3, 0, 8, 9, 4) :|: TRUE
+f_98(v31, v32, 1, v34, v35, 3, 0, 8, 9, 4) -> f_99(v31, v34, 1, v32, v35, 3, 0, 8, 9, 4) :|: 0 = 0
+f_99(v31, v34, 1, v32, v35, 3, 0, 8, 9, 4) -> f_100(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) :|: v34 < 9 && v32 <= 7
+f_99(v31, v34, 1, v32, v35, 3, 0, 8, 9, 4) -> f_101(v31, 9, 1, 8, v35, 3, 4) :|: 9 <= v34 && v32 = 8 && v34 = 9 && 0 = 0
+f_100(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) -> f_102(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) :|: 0 = 0
+f_101(v31, 9, 1, 8, v35, 3, 4) -> f_103(v31, 9, 0, 8, v35, 3, 1, 4) :|: 0 = 0
+f_102(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) -> f_104(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) :|: TRUE
+f_103(v31, 9, 0, 8, v35, 3, 1, 4) -> f_105(v31, 9, 0, 8, v35, 3, 1, 4) :|: TRUE
+f_104(v31, v34, 1, v32, v35, 3, 0, 7, 8, 4) -> f_106(v31, v34, 1, v35, 3, 8, 4) :|: 0 = 0
+f_106(v31, v34, 1, v35, 3, 8, 4) -> f_107(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) :|: v36 = 1 + v34 && 2 <= v36 && v36 <= 9
+f_107(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) -> f_108(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) :|: TRUE
+f_108(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) -> f_109(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) :|: TRUE
+f_109(v31, v34, 1, v36, v35, 3, 8, 4, 2, 9) -> f_98(v31, v34, 1, v36, v35, 3, 0, 8, 9, 4) :|: TRUE
+Combined rules. Obtained 3 rulesP rules:
+f_99(v31:0, v34:0, 1, v32:0, v35:0, 3, 0, 8, 9, 4) -> f_99(v31:0, 1 + v34:0, 1, v34:0, v35:0, 3, 0, 8, 9, 4) :|: v32:0 < 8 && v34:0 < 9 && v34:0 > 0
+f_99(v31:0, 9, 1, 8, v35:0, 3, 0, 8, 9, 4) -> f_105(v31:0, 9, 0, 8, v35:0, 3, 1, 4) :|: TRUE
+f_39 -> f_99(v1:0, 1, 1, 0, 3 + v1:0, 3, 0, 8, 9, 4) :|: v1:0 > 0
+Filtered unneeded arguments:
+   f_99(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) -> f_99(x2, x4)
+Removed division, modulo operations, cleaned up constraints. Obtained 3 rules.P rules:
+f_99(v34:0, v32:0) -> f_99(1 + v34:0, v34:0) :|: v34:0 < 9 && v34:0 > 0 && v32:0 < 8
+f_99(cons_9, cons_8) -> f_105(v31:0, 9, 0, 8, v35:0, 3, 1, 4) :|: TRUE && cons_9 = 9 && cons_8 = 8
+f_39 -> f_99(1, 0) :|: TRUE
+
+----------------------------------------
+
+(6)
+Obligation:
+Rules:
+f_99(v34:0, v32:0) -> f_99(1 + v34:0, v34:0) :|: v34:0 < 9 && v34:0 > 0 && v32:0 < 8
+f_99(cons_9, cons_8) -> f_105(v31:0, 9, 0, 8, v35:0, 3, 1, 4) :|: TRUE && cons_9 = 9 && cons_8 = 8
+f_39 -> f_99(1, 0) :|: TRUE
+Start term: f_39
+
+----------------------------------------
+
+(7) IRSToKoat (EQUIVALENT)
+Convert an IRS to a koat problem
+----------------------------------------
+
+(8)
+Obligation:
+(GOAL COMPLEXITY)
+(STARTTERM (FUNCTIONSYMBOLS f_39))
+(VAR x4 x28 x5 x29 x2 x3 x8 x24 x9 x25 x6 x26 x7 x27 x20 x21 x22 x23 x x1 k5 x' k0 k3 k4 k1 k2 x17 x18 x19 x13 x14 x15 x16 x10 x'' x11 x12)
+(RULES
+  f_39(x4, x5, x6, x7, x8, x9, x10, x11) -> f_99(1, 0, x12, x13, x14, x15, x16, x17) :|: 0 = 0
+  f_99(k4, k2, x18, x19, x20, x21, x22, x23) -> f_99(1 + k4, k4, x24, x25, x26, x27, x28, x29) :|: k4 < 9 && k4 > 0 && k2 < 8
+  f_99(k1, k0, x, x', x'', x1, x2, x3) -> f_105(k3, 9, 0, 8, k5, 3, 1, 4) :|: 0 = 0 && k1 = 9 && k0 = 8
+)
+
+----------------------------------------
+
+(9) KoAT2 (EQUIVALENT)
+KoAT2 was called with the following command:
+
+/aprove/bin/koat2 analyse --termination --cfr=pe -d5 --local=mprf,twn -rtermcomp -i /tmp/aprove.InputModules.Programs.koat2_6744325317318909892.koat 
+
+KoAT2's output was:
+
+YES
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase9_Loop17.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Using_Erroneous_Condition_3_T_TestCase9_Loop17.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5765 milliseconds
+PreprocessingTime: 1100 milliseconds

@@ -1,0 +1,49 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+flag := 0;
+v4 := flag;
+v5 := v4 + 1;
+flag := v5;
+v6 := flag;
+var__temp_v.sink2 := v6;
+TO: main_bb2;
+
+FROM: main_bb2;
+v.sink2 := var__temp_v.sink2;
+TO: main_bb2_v..i;
+FROM: main_bb2_v..i;
+assume(v.sink2 sgt 1000);
+v..i := 1;
+TO: main_bb2_sv..i;
+
+FROM: main_bb2_v..i;
+assume(v.sink2 sle 1000);
+v..i := 0;
+TO: main_bb2_sv..i;
+
+FROM: main_bb2_sv..i;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(v..i == 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(v..i != 0);
+TO: main_bb4;
+
+FROM: main_bb3;
+v9 := flag;
+v10 := v9 + 1;
+flag := v10;
+v11 := flag;
+var__temp_v.sink2 := v11;
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

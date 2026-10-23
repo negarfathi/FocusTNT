@@ -21,6 +21,7 @@ int main()
     for( cur = best ;  ; cur += best )
     {
         if( st_max < cur )
+        /*@ \slicing::slice_preserve_ctrl; */
         break;
         if( it_min > cur  )
         continue;

@@ -1,0 +1,32 @@
+///*** 1_main ***///
+START: main_bb3;
+
+FROM: main_bb3;
+__fc_errno := 0;
+__fc_errno := 2;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(1 <= 0);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(0 <= 0);
+TO: main_bb5;
+
+FROM: main_bb4;
+__fc_errno := 2;
+v3 := __fc_errno;
+TO: main_bb4_end;
+
+FROM: main_bb4_end;
+assume(v3 == 1);
+TO: main_bb4;
+
+FROM: main_bb4_end;
+assume(v3 != 1);
+TO: main_bb5;
+
+FROM: main_bb5;
+TO: main_bb5_ret;
+

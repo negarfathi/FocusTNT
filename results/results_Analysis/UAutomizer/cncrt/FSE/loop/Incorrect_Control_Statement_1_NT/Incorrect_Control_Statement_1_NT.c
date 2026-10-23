@@ -21,6 +21,7 @@ int main()
         switch(*p){
         case '}':
             stop = 1;
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
 
         case ':':
@@ -28,6 +29,7 @@ int main()
                 p += 2;
                 stop = 1;
             }
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         default:
             p++;

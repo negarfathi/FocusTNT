@@ -13,6 +13,7 @@ int main()
     while( smallest <= needed )
     {
         if( smallest == 0 )
+            /*@ \slicing::slice_preserve_ctrl; */
             return 0;
         smallest <<= 1;
     }

@@ -1,4 +1,3 @@
-#include "stdlib.h"
 #define NDEBUG 1;
 class LogMessage{
 public:

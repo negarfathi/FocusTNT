@@ -1,0 +1,45 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+vslots_used := nondet();
+vereg := nondet();
+v2 := 0;
+v1 := store_array(v1, v2, 25);
+v3 := 5;
+v1 := store_array(v1, v3, 8);
+v4 := 6;
+v1 := store_array(v1, v4, 3);
+v5 := 7;
+v1 := store_array(v1, v5, 2);
+v6 := 8;
+v1 := store_array(v1, v6, 17);
+v7 := 9;
+v1 := store_array(v1, v7, 2);
+v10 := 0;
+v9 := store_array(v9, v10, 5);
+var__temp_vi.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vi.0 := var__temp_vi.0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vi.0 slt 10);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vi.0 sge 10);
+TO: main_bb3;
+
+FROM: main_bb2;
+v12 := vi.0 + 1;
+var__temp_vi.0 := v12;
+TO: main_bb1;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

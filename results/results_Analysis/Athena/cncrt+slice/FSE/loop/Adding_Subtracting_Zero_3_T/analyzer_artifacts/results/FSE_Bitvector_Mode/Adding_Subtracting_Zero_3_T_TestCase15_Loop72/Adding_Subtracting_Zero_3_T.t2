@@ -1,0 +1,47 @@
+///*** 1_main ***///
+START: main_bb1;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb1;
+flag := 0;
+flag := 0;
+var__temp_v__fc_errno_0.0 := 0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(1 <= 0);
+TO: main_bb4;
+
+FROM: main_bb1_end;
+assume(0 <= 0);
+TO: main_bb2;
+
+FROM: main_bb2;
+v__fc_errno_0.0 := var__temp_v__fc_errno_0.0;
+TO: main_bb2_end;
+
+FROM: main_bb2_end;
+assume(0 <= 0);
+TO: main_bb3;
+
+FROM: main_bb2_end;
+assume(1 <= 0);
+TO: main_bb4;
+
+FROM: main_bb3;
+v3 := v__fc_errno_0.0 + 1;
+var__temp_v__fc_errno_0.0 := v3;
+TO: main_bb3_end;
+
+FROM: main_bb3_end;
+assume(v3 == 5);
+TO: main_bb4;
+
+FROM: main_bb3_end;
+assume(v3 != 5);
+TO: main_bb2;
+
+FROM: main_bb4;
+TO: main_bb4_ret;
+

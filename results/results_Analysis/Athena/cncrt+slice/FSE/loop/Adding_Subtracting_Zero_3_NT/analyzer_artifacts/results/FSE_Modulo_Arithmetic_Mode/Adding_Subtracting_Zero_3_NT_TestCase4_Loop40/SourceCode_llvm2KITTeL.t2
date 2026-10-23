@@ -1,0 +1,207 @@
+///*** 1_main ***///
+START: main_bb14;
+
+FROM: main_bb14;
+flag := 0;
+flag := 0;
+var__temp_vpos.0 := 0;
+TO: main_wrap_around.exit2;
+
+FROM: main_wrap_around.exit2;
+vpos.0 := var__temp_vpos.0;
+TO: main_wrap_around.exit2_end;
+
+FROM: main_wrap_around.exit2_end;
+assume(vpos.0 < 10);
+TO: main_bb15;
+
+FROM: main_wrap_around.exit2_end;
+assume(vpos.0 >= 10);
+TO: main_bb29;
+
+FROM: main_bb15;
+v36 := 10 - vpos.0;
+TO: main_bb15_end;
+
+FROM: main_bb15_end;
+assume(v36 > 2147483647);
+TO: main_bb16;
+
+FROM: main_bb15_end;
+assume(v36 <= 2147483647);
+TO: main_bb17;
+
+FROM: main_bb16;
+v38 := v36 - 2147483647;
+v39 := v38 - 1;
+v40 := v39 % 4294967296;
+v41 := -2147483648 + v40;
+var__temp_v.0.i := v41;
+TO: main_wrap_around.exit;
+
+FROM: main_bb17;
+var__temp_v.0.i := v36;
+TO: main_bb17_end;
+
+FROM: main_bb17_end;
+assume(v36 < -2147483648);
+TO: main_bb18;
+
+FROM: main_bb17_end;
+assume(v36 >= -2147483648);
+TO: main_wrap_around.exit;
+
+FROM: main_bb18;
+v43 := -2147483648 - v36;
+v44 := v43 - 1;
+v45 := v44 % 4294967296;
+v46 := 2147483647 - v45;
+var__temp_v.0.i := v46;
+TO: main_wrap_around.exit;
+
+FROM: main_wrap_around.exit;
+v.0.i := var__temp_v.0.i;
+var__temp_vcount.0.i := 0;
+var__temp_v.0.i3 := vpos.0;
+TO: main_wrap_around.exit2.i;
+
+FROM: main_wrap_around.exit2.i;
+vcount.0.i := var__temp_vcount.0.i;
+v.0.i3 := var__temp_v.0.i3;
+TO: main_wrap_around.exit2.i_end;
+
+FROM: main_wrap_around.exit2.i_end;
+assume(v.0.i3 < v.0.i);
+TO: main_bb19;
+
+FROM: main_wrap_around.exit2.i_end;
+assume(v.0.i3 >= v.0.i);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb19;
+v48 := vcount.0.i + 1;
+TO: main_bb19_end;
+
+FROM: main_bb19_end;
+assume(v48 > 2147483647);
+TO: main_bb20;
+
+FROM: main_bb19_end;
+assume(v48 <= 2147483647);
+TO: main_bb21;
+
+FROM: main_bb20;
+v50 := v48 - 2147483647;
+v51 := v50 - 1;
+v52 := v51 % 4294967296;
+v53 := -2147483648 + v52;
+var__temp_v.0.i.i := v53;
+TO: main_wrap_around.exit.i;
+
+FROM: main_bb21;
+var__temp_v.0.i.i := v48;
+TO: main_bb21_end;
+
+FROM: main_bb21_end;
+assume(v48 < -2147483648);
+TO: main_bb22;
+
+FROM: main_bb21_end;
+assume(v48 >= -2147483648);
+TO: main_wrap_around.exit.i;
+
+FROM: main_bb22;
+v55 := -2147483648 - v48;
+v56 := v55 - 1;
+v57 := v56 % 4294967296;
+v58 := 2147483647 - v57;
+var__temp_v.0.i.i := v58;
+TO: main_wrap_around.exit.i;
+
+FROM: main_wrap_around.exit.i;
+v.0.i.i := var__temp_v.0.i.i;
+v59 := v.0.i3 + 1;
+TO: main_wrap_around.exit.i_end;
+
+FROM: main_wrap_around.exit.i_end;
+assume(v59 > 2147483647);
+TO: main_bb23;
+
+FROM: main_wrap_around.exit.i_end;
+assume(v59 <= 2147483647);
+TO: main_bb24;
+
+FROM: main_bb23;
+v61 := v59 - 2147483647;
+v62 := v61 - 1;
+v63 := v62 % 4294967296;
+v64 := -2147483648 + v63;
+var__temp_vcount.0.i := v.0.i.i;
+var__temp_v.0.i3 := v64;
+TO: main_wrap_around.exit2.i;
+
+FROM: main_bb24;
+var__temp_vcount.0.i := v.0.i.i;
+var__temp_v.0.i3 := v59;
+TO: main_bb24_end;
+
+FROM: main_bb24_end;
+assume(v59 < -2147483648);
+TO: main_bb25;
+
+FROM: main_bb24_end;
+assume(v59 >= -2147483648);
+TO: main_wrap_around.exit2.i;
+
+FROM: main_bb25;
+v66 := -2147483648 - v59;
+v67 := v66 - 1;
+v68 := v67 % 4294967296;
+v69 := 2147483647 - v68;
+var__temp_vcount.0.i := v.0.i.i;
+var__temp_v.0.i3 := v69;
+TO: main_wrap_around.exit2.i;
+
+FROM: main_read_slice_1.exit;
+v70 := vpos.0 + vcount.0.i;
+TO: main_read_slice_1.exit_end;
+
+FROM: main_read_slice_1.exit_end;
+assume(v70 > 2147483647);
+TO: main_bb26;
+
+FROM: main_read_slice_1.exit_end;
+assume(v70 <= 2147483647);
+TO: main_bb27;
+
+FROM: main_bb26;
+v72 := v70 - 2147483647;
+v73 := v72 - 1;
+v74 := v73 % 4294967296;
+v75 := -2147483648 + v74;
+var__temp_vpos.0 := v75;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb27;
+var__temp_vpos.0 := v70;
+TO: main_bb27_end;
+
+FROM: main_bb27_end;
+assume(v70 < -2147483648);
+TO: main_bb28;
+
+FROM: main_bb27_end;
+assume(v70 >= -2147483648);
+TO: main_wrap_around.exit2;
+
+FROM: main_bb28;
+v77 := -2147483648 - v70;
+v78 := v77 - 1;
+v79 := v78 % 4294967296;
+v80 := 2147483647 - v79;
+var__temp_vpos.0 := v80;
+TO: main_wrap_around.exit2;
+
+FROM: main_bb29;
+TO: main_bb29_ret;
+

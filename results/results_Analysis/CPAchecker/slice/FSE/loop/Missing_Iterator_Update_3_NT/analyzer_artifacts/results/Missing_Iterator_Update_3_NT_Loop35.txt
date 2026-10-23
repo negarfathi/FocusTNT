@@ -1,0 +1,459 @@
+Running CPAchecker with Java heap of size 10000M.
+Running CPAchecker with default stack size (1024k). Specify a larger value with --stack if needed.
+Using the following resource limits: CPU-time limit of 900s (ResourceLimitChecker.fromConfiguration, INFO)
+
+CPAchecker 4.2.2-3630-g7b1450b26d6 / terminationAnalysis (OpenJDK 64-Bit Server VM 21.0.12.1) started (CPAchecker.run, INFO)
+
+Parsing CFA from file(s) "/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_3_NT_Loop35.c" (CPAchecker.parse, INFO)
+
+line 41: Dead code detected:  (CFACreationUtils.addEdgeToCFA, INFO)
+
+Using Restarting Algorithm (CoreComponentsFactory.createAlgorithm, INFO)
+
+The following configuration options were specified but are not used:
+ cpa.arg.lateMerge
+ counterexample.export.exportWitness 
+ (CPAchecker.printConfigurationWarnings, WARNING)
+
+Starting analysis ... (CPAchecker.runAlgorithm, INFO)
+
+Loading analysis 1 from file /cpachecker/config/components/combinations-parallel-termination.properties ... (RestartAlgorithm.run, INFO)
+
+Using the following resource limits: CPU-time limit of 900s (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:ResourceLimitChecker.fromConfiguration, INFO)
+
+Using the following resource limits: CPU-time limit of 900s, Thread CPU-time limit of 300s (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety.properties:ResourceLimitChecker.fromConfiguration, INFO)
+
+Using predicate analysis with MathSAT5 version 5.6.11 (1a1154baf0ab) (Aug  9 2024 08:45:22, gmp 6.2.0, gcc 7.5.0, 64-bit, reentrant) and JFactory 1.21. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety.properties:PredicateCPA:PredicateCPA.<init>, INFO)
+
+Using the following resource limits: CPU-time limit of 900s, Thread CPU-time limit of 200s (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties:ResourceLimitChecker.fromConfiguration, INFO)
+
+Using predicate analysis with MathSAT5 version 5.6.11 (1a1154baf0ab) (Aug  9 2024 08:45:22, gmp 6.2.0, gcc 7.5.0, 64-bit, reentrant) and JFactory 1.21. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties:PredicateCPA:PredicateCPA.<init>, INFO)
+
+Using the following resource limits: CPU-time limit of 900s (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:ResourceLimitChecker.fromConfiguration, INFO)
+
+Using predicate analysis with MathSAT5 version 5.6.11 (1a1154baf0ab) (Aug  9 2024 08:45:22, gmp 6.2.0, gcc 7.5.0, 64-bit, reentrant) and JFactory 1.21. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:PredicateCPA:PredicateCPA.<init>, INFO)
+
+Using refinement for predicate analysis with PredicateAbstractionRefinementStrategy strategy. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:PredicateCPA:PredicateCPARefiner.<init>, INFO)
+
+Using unsound approximation of ints with unbounded integers and floats with rationals for encoding program semantics. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:FormulaManagerView.<init>, WARNING)
+
+Starting analysis 1 ... (RestartAlgorithm.run, INFO)
+
+Starting termination algorithm. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:TerminationAlgorithm.run0, INFO)
+
+Assuming external function __fc_vla_alloc to be a pure function. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:PredicateCPA:ExpressionToFormulaVisitor.visit, INFO)
+
+Assuming external function __fc_vla_alloc to be a pure function. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety.properties:PredicateCPA:ExpressionToFormulaVisitor.visit, INFO)
+
+Assuming external function __fc_vla_alloc to be a pure function. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties:PredicateCPA:ExpressionToFormulaVisitor.visit, INFO)
+
+Assuming external function __fc_vla_alloc to be a pure function. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:ExpressionToFormulaVisitor.visit, INFO)
+
+Warning: Could not extract lasso (Loop with heads [N96]
+  incoming: [line 33:	N92 -{while}-> N96]
+  outgoing: [line 33:	N96 -{[!(i < (len - 1))]}-> N103]
+  nodes:    [N96, N101, N102, N110, N111, N116]
+). (Unknown sort in equality) (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:InequalityConverter.convert, WARNING)
+
+Could not synthesize a termination or non-termination argument. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:TerminationAlgorithm.proveLoopTermination, WARNING)
+
+Warning: Could not extract lasso (Loop with heads [N91, N94]
+  incoming: [line 40:	N98 -{Goto: GOT_NEW_FILE}-> N94]
+  outgoing: [line 49:	N91 -{[(*argv) == 0]}-> N89]
+  nodes:    [N91, N93, N94, N95, N97, N99, N100, N105, N106, N108, N109, N114, N115]
+). (Unknown sort in equality) (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:InequalityConverter.convert, WARNING)
+
+Could not synthesize a termination or non-termination argument. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:TerminationAlgorithm.proveLoopTermination, WARNING)
+
+Termination algorithm did not find a non-terminating loop. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:TerminationAlgorithm.run0, INFO)
+
+/cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties finished without usable result. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:ParallelAlgorithm.handleFutureResults, INFO)
+
+Analysis was terminated (The Thread CPU-time limit of 200s has elapsed.) (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties:ShutdownNotifier.shutdownIfNecessary, INFO)
+
+/cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties finished without usable result. (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:ParallelAlgorithm.handleFutureResults, INFO)
+
+Shutdown requested (The JVM is shutting down, probably because Ctrl+C was pressed.), waiting for termination. (ForceTerminationOnShutdown$1.shutdownRequested, WARNING)
+
+Analysis was terminated (The JVM is shutting down, probably because Ctrl+C was pressed.) (Analysis /cpachecker/config/components/combinations-parallel-termination.properties:Parallel analysis /cpachecker/config/components/termination-composition-terminationToSafety.properties:ShutdownNotifier.shutdownIfNecessary, INFO)
+
+Ignoring restart configuration '/cpachecker/config/components/termination-recursion.properties' because condition if-recursive did not match. (RestartAlgorithm.skipNextAnalysesIfRequired, INFO)
+
+Warning: Analysis interrupted (AbstractFutureState.blockingGet, WARNING)
+
+
+Restart Algorithm statistics
+----------------------------
+Number of algorithms provided:    2
+Number of algorithms used:        2
+Last algorithm used:        /cpachecker/config/components/termination-recursion.properties
+Total time for algorithm 2:   296.407s
+
+Parallel Algorithm statistics
+-----------------------------
+Number of algorithms used:        3
+
+
+Statistics for: /cpachecker/config/components/termination-composition-terminationToSafety.properties
+====================================================================================================
+Time spent in analysis thread /cpachecker/config/components/termination-composition-terminationToSafety.properties:   289.705s
+
+PredicateCPA statistics
+-----------------------
+Number of abstractions:            28215 (9% of all post computations)
+  Times abstraction was reused:    0
+  Because of function entry/exit:  0 (0%)
+  Because of loop head:            28215 (100%)
+  Because of join nodes:           0 (0%)
+  Because of threshold:            0 (0%)
+  Because of target state:         0 (0%)
+  Times precision was empty:       28215 (100%)
+  Times precision was {false}:     0 (0%)
+  Times result was cached:         0 (0%)
+  Times cartesian abs was used:    0 (0%)
+  Times boolean abs was used:      0 (0%)
+  Times result was 'false':        0 (0%)
+Number of strengthen sat checks:   0
+Number of coverage checks:         221037578
+  BDD entailment checks:           220936290
+Number of actual SMT sat checks:   91548
+Number of trivial SMT sat checks:  25246
+Number of cached SMT sat checks:   81818
+
+Max ABE block size:                       15
+Avg ABE block size:                                5.96 (sum: 168236, count: 28215, min: 0, max: 15)
+Number of predicates discovered:          0
+Number of path formula cache hits:        332487 (98%)
+
+Time for post operator:                                2.045s (Max:     0.066s), (Avg:     0.000s), (#intervals = 319488)
+  Time for path formula creation:                      1.939s (Max:     0.066s), (Avg:     0.000s), (#intervals = 319488)
+Time for strengthen operator:                          0.073s (Max:     0.002s), (Avg:     0.000s), (#intervals = 319488)
+Time for prec operator:                                0.676s (Max:     0.012s), (Avg:     0.000s), (#intervals = 319488)
+  Time for abstraction:                  0.188s (Max:     0.007s, Count: 28215)
+    Solving time:                        0.000s (Max:     0.000s)
+    Model enumeration time:              0.000s
+    Time for BDD construction:           0.000s (Max:     0.000s)
+Time for merge operator:                               0.074s (Max:     0.007s), (Avg:     0.000s), (#intervals = 21257)
+Time for coverage checks:                             39.962s (Max:     0.023s), (Avg:     0.000s), (#intervals = 221037578)
+  Time for BDD entailment checks:                     26.212s (Max:     0.023s), (Avg:     0.000s), (#intervals = 220936290)
+Total time for SMT solver (w/o itp):    14.085s
+
+Number of BDD nodes:                               202
+Size of BDD node table:                            466043
+Size of BDD cache:                                 46619
+Size of BDD node cleanup queue:                    0.00 (sum: 5, count: 221074736, min: 0, max: 5)
+Time for BDD node cleanup:                             8.515s (Max:     0.002s), (Avg:     0.000s), (#intervals = 221074736)
+Time for BDD garbage collection:                       0.000s (in 0 runs)
+
+Invariant Generation statistics
+-------------------------------
+
+CPA algorithm statistics
+------------------------
+Number of iterations:            287578
+Max size of waitlist:            31251
+Average size of waitlist:        15623
+Number of computed successors:   319488
+Max successors for one state:    2
+Number of times merged:          0
+Number of times stopped:         661
+Number of times breaked:         0
+
+Total time for CPA algorithm:       295.250s (Max:   295.250s)
+  Time for choose from waitlist:      0.212s
+  Time for precision adjustment:    157.741s
+  Time for transfer relation:        12.614s
+  Time for merge operator:           41.523s
+  Time for stop operator:            82.004s
+  Time for adding to reached set:     0.334s
+
+
+Statistics for: /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties
+========================================================================================================
+Time spent in analysis thread /cpachecker/config/components/termination-composition-terminationToSafety-bmc.properties:   200.132s
+
+PredicateCPA statistics
+-----------------------
+Number of abstractions:            19913 (8% of all post computations)
+  Times abstraction was reused:    0
+  Because of function entry/exit:  0 (0%)
+  Because of loop head:            19913 (100%)
+  Because of join nodes:           0 (0%)
+  Because of threshold:            0 (0%)
+  Because of target state:         0 (0%)
+  Times precision was empty:       19913 (100%)
+  Times precision was {false}:     0 (0%)
+  Times result was cached:         0 (0%)
+  Times cartesian abs was used:    0 (0%)
+  Times boolean abs was used:      0 (0%)
+  Times result was 'false':        0 (0%)
+Number of strengthen sat checks:   0
+Number of coverage checks:         109238306
+  BDD entailment checks:           109200337
+Number of actual SMT sat checks:   71566
+Number of trivial SMT sat checks:  18874
+Number of cached SMT sat checks:   60232
+
+Max ABE block size:                       15
+Avg ABE block size:                                5.62 (sum: 111999, count: 19913, min: 0, max: 15)
+Number of predicates discovered:          0
+Number of path formula cache hits:        252748 (96%)
+
+Time for post operator:                                2.145s (Max:     0.062s), (Avg:     0.000s), (#intervals = 248317)
+  Time for path formula creation:                      2.049s (Max:     0.062s), (Avg:     0.000s), (#intervals = 248317)
+Time for strengthen operator:                          0.112s (Max:     0.002s), (Avg:     0.000s), (#intervals = 481738)
+Time for prec operator:                                0.542s (Max:     0.011s), (Avg:     0.000s), (#intervals = 240869)
+  Time for abstraction:                  0.124s (Max:     0.004s, Count: 19913)
+    Solving time:                        0.000s (Max:     0.000s)
+    Model enumeration time:              0.000s
+    Time for BDD construction:           0.000s (Max:     0.000s)
+Time for merge operator:                               0.049s (Max:     0.006s), (Avg:     0.000s), (#intervals = 14775)
+Time for coverage checks:                             20.539s (Max:     0.012s), (Avg:     0.000s), (#intervals = 109238306)
+  Time for BDD entailment checks:                     13.703s (Max:     0.012s), (Avg:     0.000s), (#intervals = 109200337)
+Total time for SMT solver (w/o itp):    13.532s
+
+Number of BDD nodes:                               202
+Size of BDD node table:                            466043
+Size of BDD cache:                                 46619
+Size of BDD node cleanup queue:                    0.00 (sum: 19593, count: 109298641, min: 0, max: 19593)
+Time for BDD node cleanup:                             4.355s (Max:     0.009s), (Avg:     0.000s), (#intervals = 109298641)
+Time for BDD garbage collection:                       0.000s (in 0 runs)
+
+Invariant Generation statistics
+-------------------------------
+
+ValueAnalysisCPA statistics
+---------------------------
+Number of variables per state:                     3.60 (sum: 866187, count: 240550, min: 0, max: 6)
+Number of global variables per state:              1.00 (sum: 240547, count: 240550, min: 0, max: 1)
+Number of assumptions:                                67774
+Number of deterministic assumptions:                  14896
+Level of Determinism:                              22%
+
+Time for transfer relation:                            1.651s (Max:     0.029s), (Avg:     0.000s), (#intervals = 248317)
+
+ValueAnalysisPrecisionAdjustment statistics
+-------------------------------------------
+Number of abstraction computations:                  240869
+Total time for liveness abstraction:                   0.000s
+Total time for abstraction computation:                0.324s
+Total time for path thresholds:                        0.000s
+
+ConstraintsStrengthenOperator statistics
+----------------------------------------
+Total time for strengthening by ConstraintsCPA:     0.000s
+Replaced symbolic expressions: 0
+
+CPA algorithm statistics
+------------------------
+Number of iterations:            222411
+Max size of waitlist:            18143
+Average size of waitlist:        8928
+Number of computed successors:   240869
+Max successors for one state:    2
+Number of times merged:          0
+Number of times stopped:         319
+Number of times breaked:         0
+
+Total time for CPA algorithm:       205.204s (Max:   205.204s)
+  Time for choose from waitlist:      0.165s
+  Time for precision adjustment:    110.374s
+  Time for transfer relation:        13.215s
+  Time for merge operator:           25.138s
+  Time for stop operator:            55.360s
+  Time for adding to reached set:     0.267s
+
+
+Statistics for: /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties
+===================================================================================================
+Time spent in analysis thread /cpachecker/config/components/termination-composition-lassoBasedAnalysis.properties:     3.180s
+
+PredicateCPA statistics
+-----------------------
+Number of abstractions:            57 (5% of all post computations)
+  Times abstraction was reused:    0
+  Because of function entry/exit:  0 (0%)
+  Because of loop head:            53 (93%)
+  Because of join nodes:           0 (0%)
+  Because of threshold:            0 (0%)
+  Because of target state:         4 (7%)
+  Times precision was empty:       30 (53%)
+  Times precision was {false}:     2 (4%)
+  Times result was cached:         9 (16%)
+  Times cartesian abs was used:    13 (23%)
+  Times boolean abs was used:      3 (5%)
+  Times result was 'false':        11 (19%)
+Number of strengthen sat checks:   0
+Number of coverage checks:         152
+  BDD entailment checks:           34
+Number of actual SMT sat checks:   2
+Number of trivial SMT sat checks:  5
+Number of cached SMT sat checks:   0
+
+Max ABE block size:                       31
+Avg ABE block size:                                11.68 (sum: 666, count: 57, min: 0, max: 31)
+Number of predicates discovered:          4
+Number of abstraction locations:          3
+Max number of predicates per location:    2
+Avg number of predicates per location:    1
+Total predicates per abstraction:         38
+Max number of predicates per abstraction: 2
+Avg number of predicates per abstraction: 2.11
+Number of irrelevant predicates:          15 (39%)
+Number of preds cached for cartesian abs: 0 (0%)
+Number of preds solved by cartesian abs:  5 (13%)
+Number of preds handled by boolean abs:   6 (16%)
+  Total number of models for allsat:      5
+  Max number of models for allsat:        2
+  Avg number of models for allsat:        1.67
+Number of path formula cache hits:        336 (27%)
+
+Time for post operator:                                1.283s (Max:     0.065s), (Avg:     0.001s), (#intervals = 1146)
+  Time for path formula creation:                      1.275s (Max:     0.065s), (Avg:     0.001s), (#intervals = 1146)
+Time for strengthen operator:                          0.048s (Max:     0.003s), (Avg:     0.000s), (#intervals = 2296)
+Time for prec operator:                                0.310s (Max:     0.036s), (Avg:     0.000s), (#intervals = 444)
+  Time for abstraction:                  0.251s (Max:     0.036s, Count: 57)
+    Cartesian abstraction:               0.097s
+    Boolean abstraction:                 0.035s
+    Solving time:                        0.027s (Max:     0.010s)
+    Model enumeration time:              0.102s
+    Time for BDD construction:           0.009s (Max:     0.003s)
+Time for merge operator:                               0.071s (Max:     0.014s), (Avg:     0.001s), (#intervals = 59)
+Time for coverage checks:                              0.020s (Max:     0.005s), (Avg:     0.000s), (#intervals = 152)
+  Time for BDD entailment checks:                      0.016s (Max:     0.005s), (Avg:     0.000s), (#intervals = 34)
+Total time for SMT solver (w/o itp):     0.129s
+
+Number of BDD nodes:                               205
+Size of BDD node table:                            466043
+Size of BDD cache:                                 46619
+Size of BDD node cleanup queue:                    0.16 (sum: 43, count: 262, min: 0, max: 31)
+Time for BDD node cleanup:                             0.004s (Max:     0.002s), (Avg:     0.000s), (#intervals = 262)
+Time for BDD garbage collection:                       0.000s (in 0 runs)
+
+Invariant Generation statistics
+-------------------------------
+
+AutomatonAnalysis (NonTerminationLabelAutomaton) statistics
+-----------------------------------------------------------
+Number of states:                                  1
+Total time for successor computation:                  0.152s
+Automaton transfers with branching:                0
+Automaton transfer successors:                     1.00 (sum: 1146, count: 1146, min: 1, max: 1) [1 x 1146]
+Number of states with assumption transitions:      0
+
+AutomatonAnalysis (TerminatingFunctions) statistics
+---------------------------------------------------
+Number of states:                                  1
+Total time for successor computation:                  0.020s
+Automaton transfers with branching:                0
+Automaton transfer successors:                     1.00 (sum: 1146, count: 1146, min: 1, max: 1) [1 x 1146]
+Number of states with assumption transitions:      0
+
+Termination Algorithm statistics
+--------------------------------
+Total time :                                            5.932s
+Time for recursion analysis:                            0.000s
+
+Number of analysed loops:                               2 (100%)
+Total time for loop analysis:                           5.914s
+  Avg time per loop analysis:                           2.957s
+  Max time per loop analysis:                           3.373s
+
+Number of safety analysis runs:                         4
+  Avg safety analysis run per loop:                     2.00
+  Max safety analysis run per loop:                     2 	 for loops [N91, N94], [N96]
+Total time for safety analysis:                         3.492s
+  Avg time per safety analysis run:                     0.873s
+  Max time per safety analysis run:                     2.112s
+
+Number of analysed lassos:                              0
+  Avg number of lassos per loop:                        0.00
+  Max number of lassos per loop:                        0 	 for loops 
+  Avg number of lassos per iteration:                   0.00
+  Max number of lassos per iteration:                   0
+
+Total time for lassos analysis:                         2.375s
+  Avg time per iteration:                               1.187s
+  Max time per iteration:                               1.239s
+  Time for lassos construction:                         2.375s
+    Avg time for lasso construction per iteration:      1.187s
+    Max time for lasso construction per iteration:      1.239s
+      Time for stem and loop construction:                         0.298s
+        Avg time for stem and loop construction per iteration:      0.149s
+        Max time for stem and loop construction per iteration:      0.158s
+      Time for lassos creation:                         2.033s
+        Avg time for lassos creation per iteration:      1.016s
+        Max time for lassos creation per iteration:      1.041s
+  Total time for non-termination analysis:              0.000s
+    Avg time for non-termination analysis per lasso:    0.000s
+    Max time for non-termination analysis per lasso:    0.000s
+  Total time for termination analysis:                  0.000s
+    Avg time for termination analysis per lasso:        0.000s
+    Max time for termination analysis per lasso:        0.000s
+
+Total number of termination arguments:                  0
+  Avg termination arguments per loop:                   0.00
+  Max termination arguments per loop:                   0 	 for loops 
+
+
+
+Other statistics
+================
+
+CPAchecker general statistics
+-----------------------------
+Number of program locations:                       62
+Number of CFA edges (per node):                          68 (count: 62, min: 0, max: 2, avg: 1.10)
+Number of relevant variables:                      10
+Number of functions:                               2
+Number of loops (and loop nodes):                         2 (sum: 19, min: 6, max: 13, avg: 9.50)
+Size of reached set:             1
+  Number of reached locations:   1 (2%)
+    Avg states per location:     1
+    Max states per location:     1 (at node N21)
+  Number of reached functions:   1 (50%)
+  Number of target states:       0
+  Size of final wait list:       1
+
+Time for analysis setup:          1.387s
+  Time for loading CPAs:          0.014s
+  Time for loading parser:        0.345s
+  Time for CFA construction:      0.933s
+    Time for parsing file(s):     0.342s
+    Time for AST to CFA:          0.269s
+    Time for CFA sanity check:    0.025s
+    Time for post-processing:     0.135s
+    Time for loop structure:      0.009s
+    Time for AST structure:       0.000s
+    Time for CFA export:          0.103s
+      Time for function pointers resolving:            0.004s
+        Function calls via function pointers:             0 (count: 1, min: 0, max: 0, avg: 0.00)
+        Instrumented function pointer calls:              0 (count: 1, min: 0, max: 0, avg: 0.00)
+        Function calls with function pointer arguments:        0 (count: 1, min: 0, max: 0, avg: 0.00)
+        Instrumented function pointer arguments:          0 (count: 1, min: 0, max: 0, avg: 0.00)
+      Time for classifying variables:                  0.083s
+        Time for collecting variables:                 0.045s
+        Time for solving dependencies:                 0.001s
+        Time for building hierarchy:                   0.000s
+        Time for building classification:              0.018s
+        Time for exporting data:                       0.019s
+Time for Analysis:              296.408s
+CPU time for analysis:          517.310s
+Total time for CPAchecker:      297.803s
+Total CPU time for CPAchecker:  520.280s
+Time for statistics:              2.534s
+
+Time for Garbage Collector:       2.766s (in 466 runs)
+Garbage Collector(s) used:    PS MarkSweep, PS Scavenge
+Used heap memory:                964MB (   919 MiB) max;    580MB (   553 MiB) avg;   1139MB (  1086 MiB) peak
+Used non-heap memory:             63MB (    60 MiB) max;     62MB (    59 MiB) avg;     66MB (    63 MiB) peak
+Used in PS Old Gen pool:         788MB (   752 MiB) max;    519MB (   495 MiB) avg;    814MB (   776 MiB) peak
+Allocated heap memory:           978MB (   933 MiB) max;    648MB (   618 MiB) avg
+Allocated non-heap memory:        65MB (    62 MiB) max;     64MB (    61 MiB) avg
+Total process virtual memory:  15190MB ( 14486 MiB) max;  15182MB ( 14479 MiB) avg
+
+Verification result: UNKNOWN, incomplete analysis.
+More details about the verification run can be found in the directory "./output".
+Graphical representation included in the file "./output/Report.html".
+AnalysisTime: 303444 milliseconds
+PreprocessingTime: 1186 milliseconds

@@ -1,0 +1,171 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Initialization_1_T_Loop14_TestCase20.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 68 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 487 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 325 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 77 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Initialization_1_T_Loop14_TestCase20.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Initialization_1_T_Loop14_TestCase20.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 8, %2
+		br %3
+	3:
+		%4 = load %2
+		%5 = icmp slt %4 10
+		br %5, %6, %18
+	6:
+		store 0, %1
+		br %7
+	7:
+		%8 = load %1
+		%9 = icmp eq %8 0
+		br %9, %10, %17
+	10:
+		store 1, %1
+		%11 = load %2
+		%12 = add i32 %11, 1
+		store %12, %2
+		%13 = load %1
+		%14 = icmp eq %13 0
+		br %14, %15, %16
+	15:
+		br %17
+	16:
+		br %7
+	17:
+		br %3
+	18:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 22 rulesP rules:
+f_122(v10, v11, v12, 1, v15, 0, v16, v17, 3, 8, 9, 10, 4) -> f_123(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) :|: 0 = 0
+f_123(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) -> f_124(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) :|: TRUE
+f_124(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) -> f_125(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) :|: TRUE
+f_125(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) -> f_126(v10, v11, v15, 1, 0, v12, v16, v17, 3, 8, 9, 10, 4) :|: 0 = 0
+f_126(v10, v11, v15, 1, 0, v12, v16, v17, 3, 8, 9, 10, 4) -> f_127(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: v15 < 10 && v12 = 8 && v15 = 9 && 0 = 0
+f_127(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_129(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: 0 = 0
+f_129(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_131(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: TRUE
+f_131(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_133(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: TRUE
+f_133(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_134(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: TRUE
+f_134(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_135(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: 0 = 0
+f_135(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_136(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: 0 = 0
+f_136(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_137(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: TRUE
+f_137(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_138(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) :|: TRUE
+f_138(v10, v11, 9, 1, 0, 8, v16, v17, 3, 4) -> f_139(v10, v11, 9, 1, 0, v16, v17, 3, 4) :|: 0 = 0
+f_139(v10, v11, 9, 1, 0, v16, v17, 3, 4) -> f_140(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: 0 = 0
+f_140(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_141(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: TRUE
+f_141(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_142(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: 0 = 0
+f_142(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_143(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: 0 = 0
+f_143(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_144(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: TRUE
+f_144(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_145(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) :|: TRUE
+f_145(v10, v11, 9, 1, 0, 10, v16, v17, 3, 4) -> f_121(v10, v11, 9, 1, 0, 10, v16, v17, 3, 8, 9, 10, 4) :|: TRUE
+f_121(v10, v11, v12, 1, 0, v15, v16, v17, 3, 8, 9, 10, 4) -> f_122(v10, v11, v12, 1, v15, 0, v16, v17, 3, 8, 9, 10, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_122(v10:0, v11:0, 8, 1, 9, 0, v16:0, v17:0, 3, 8, 9, 10, 4) -> f_122(v10:0, v11:0, 9, 1, 10, 0, v16:0, v17:0, 3, 8, 9, 10, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_122(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13) -> f_122(x3, x5)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_122(cons_8, cons_9) -> f_122(9, 10) :|: TRUE && cons_8 = 8 && cons_9 = 9
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_122(cons_8, cons_9) -> f_122(9, 10) :|: TRUE && cons_8 = 8 && cons_9 = 9
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Initialization_1_T_Loop14_TestCase20.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Initialization_1_T_Loop14_TestCase20.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5151 milliseconds
+PreprocessingTime: 65 milliseconds

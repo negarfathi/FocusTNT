@@ -1,0 +1,174 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_NT_Loop19_TestCase15.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 169 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1910 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 1455 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_NT_Loop19_TestCase15.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_NT_Loop19_TestCase15.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 10, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 15, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 5, %4
+		%7 = load %2
+		%8 = icmp slt %7 0
+		br %8, %9, %10
+	9:
+		store 0, %1
+		br %46
+	10:
+		%11 = load %3
+		%12 = icmp sle %11 0
+		br %12, %13, %14
+	13:
+		store 0, %1
+		br %46
+	14:
+		%15 = load %4
+		%16 = icmp sle %15 0
+		br %16, %17, %18
+	17:
+		store 0, %1
+		br %46
+	18:
+		%19 = load %4
+		%20 = load %3
+		%21 = icmp sgt %19 %20
+		br %21, %22, %23
+	22:
+		store 0, %1
+		br %46
+	23:
+		br %24
+	24:
+		br %25
+	25:
+		br %26
+	26:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%27 = load %2
+		%28 = load %3
+		%29 = srem i32 %27, %28
+		store %29, %5
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		br %30
+	30:
+		%31 = load %5
+		%32 = load %3
+		%33 = icmp slt %31 %32
+		br %33, %34, %45
+	34:
+		%35 = load %6
+		%36 = icmp ne %35 0
+		br %36, %41, %37
+	37:
+		%38 = load %2
+		%39 = load %4
+		%40 = srem i32 %38, %39
+		store %40, %6
+		br %41
+	41:
+		%42 = load %6
+		%43 = load %5
+		%44 = add i32 %43, %42
+		store %44, %5
+		br %30
+	45:
+		br %46
+	46:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #196 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #196 yields value 9.
+Nondeterministic instruction %2 = alloca i32, align 4 in node #197 yields value 17.
+Nondeterministic instruction %3 = alloca i32, align 4 in node #198 yields value 21.
+Nondeterministic instruction %4 = alloca i32, align 4 in node #199 yields value 1.
+Nondeterministic instruction %5 = alloca i32, align 4 in node #200 yields value 13.
+Nondeterministic instruction %6 = alloca i32, align 4 in node #201 yields value 5.
+
+----------------------------------------
+
+(6)
+NO
+/FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_NT_Loop19_TestCase15.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Initialization_4_NT_Loop19_TestCase15.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 10553 milliseconds
+PreprocessingTime: 66 milliseconds

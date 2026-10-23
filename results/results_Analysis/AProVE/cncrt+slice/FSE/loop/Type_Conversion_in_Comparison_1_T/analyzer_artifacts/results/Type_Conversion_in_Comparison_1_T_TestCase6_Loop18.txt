@@ -1,0 +1,166 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Type_Conversion_in_Comparison_1_T_TestCase6_Loop18.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 84 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 679 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 192 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 123 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Type_Conversion_in_Comparison_1_T_TestCase6_Loop18.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Type_Conversion_in_Comparison_1_T_TestCase6_Loop18.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 4, %1
+		store 0, %2
+		br %3
+	3:
+		%4 = load %2
+		%5 = load %1
+		%6 = icmp slt %4 %5
+		br %6, %7, %10
+	7:
+		%8 = load %2
+		%9 = add i32 %8, 1
+		store %9, %2
+		br %3
+	10:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_94(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0) -> f_95(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0) :|: 0 = 0
+f_95(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0) -> f_96(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) :|: v30 < 4 && v27 <= 2
+f_96(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) -> f_98(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) :|: 0 = 0
+f_98(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) -> f_100(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) :|: TRUE
+f_100(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0, 2) -> f_102(v25, v26, v30, 4, 1, v31, v32, 3) :|: 0 = 0
+f_102(v25, v26, v30, 4, 1, v31, v32, 3) -> f_103(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) :|: v33 = 1 + v30 && 2 <= v33 && v33 <= 4
+f_103(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) -> f_104(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) :|: TRUE
+f_104(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) -> f_105(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) :|: TRUE
+f_105(v25, v26, v30, 4, 1, v33, v31, v32, 3, 2) -> f_93(v25, v26, v30, 4, 1, v33, v31, v32, 3, 0) :|: TRUE
+f_93(v25, v26, v27, 4, 1, v30, v31, v32, 3, 0) -> f_94(v25, v26, v30, 4, 1, v27, v31, v32, 3, 0) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_94(v25:0, v26:0, v30:0, 4, 1, v27:0, v31:0, v32:0, 3, 0) -> f_94(v25:0, v26:0, 1 + v30:0, 4, 1, v30:0, v31:0, v32:0, 3, 0) :|: v27:0 < 3 && v30:0 < 4 && v30:0 > 0
+Filtered unneeded arguments:
+   f_94(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) -> f_94(x3, x6)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_94(v30:0, v27:0) -> f_94(1 + v30:0, v30:0) :|: v30:0 < 4 && v30:0 > 0 && v27:0 < 3
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_94(v30:0, v27:0) -> f_94(1 + v30:0, v30:0) :|: v30:0 < 4 && v30:0 > 0 && v27:0 < 3
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_94(v30:0:0, v27:0:0) -> f_94(1 + v30:0:0, v30:0:0) :|: v30:0:0 < 4 && v30:0:0 > 0 && v27:0:0 < 3
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_94 ] = -1*f_94_1
+
+The following rules are decreasing:
+f_94(v30:0:0, v27:0:0) -> f_94(1 + v30:0:0, v30:0:0) :|: v30:0:0 < 4 && v30:0:0 > 0 && v27:0:0 < 3
+
+The following rules are bounded:
+f_94(v30:0:0, v27:0:0) -> f_94(1 + v30:0:0, v30:0:0) :|: v30:0:0 < 4 && v30:0:0 > 0 && v27:0:0 < 3
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Type_Conversion_in_Comparison_1_T_TestCase6_Loop18.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Type_Conversion_in_Comparison_1_T_TestCase6_Loop18.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5677 milliseconds
+PreprocessingTime: 1083 milliseconds

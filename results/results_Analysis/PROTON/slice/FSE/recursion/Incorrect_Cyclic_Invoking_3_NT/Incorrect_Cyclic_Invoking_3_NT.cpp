@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 Commit Number: bcdd0fdf80f57545452eb43fee33903fd3849e53
 URL: https://github.com/KDE/akonadi/commit/bcdd0fdf80f57545452eb43fee33903fd3849e53

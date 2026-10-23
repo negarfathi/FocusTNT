@@ -1,0 +1,168 @@
+///*** 1_main ***///
+START: main_bb6;
+
+FROM: main_bb6;
+flag := 0;
+v9 := nondet();
+flag := 0;
+var__temp_v__fc_errno_0.0 := 0;
+var__temp_vpos.0 := 0;
+TO: main_bb6_end;
+
+FROM: main_bb6_end;
+assume((v9 sle 0) || (v9 sgt 65536));
+TO: main_bb16;
+
+FROM: main_bb6_end;
+assume((v9 sgt 0) && (v9 sle 65536));
+TO: main_bb7;
+
+FROM: main_bb7;
+v__fc_errno_0.0 := var__temp_v__fc_errno_0.0;
+vpos.0 := var__temp_vpos.0;
+TO: main_bb7_end;
+
+FROM: main_bb7_end;
+assume(vpos.0 slt v9);
+TO: main_bb8;
+
+FROM: main_bb7_end;
+assume(vpos.0 sge v9);
+TO: main_bb16;
+
+FROM: main_bb8;
+v13 := v9 - vpos.0;
+var__temp_vcount.0.i := 0;
+var__temp_v.0.i := vpos.0;
+TO: main_bb9;
+
+FROM: main_bb9;
+vcount.0.i := var__temp_vcount.0.i;
+v.0.i := var__temp_v.0.i;
+var__temp_v__retres.0.i := vcount.0.i;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v.0.i slt v13);
+TO: main_bb10;
+
+FROM: main_bb9_end;
+assume(v.0.i sge v13);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb10;
+v15 := nondet();
+var__temp_v__retres.0.i := -1;
+TO: main_bb10_end;
+
+FROM: main_bb10_end;
+assume(v15 == 0);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb10_end;
+assume(v15 != 0);
+TO: main_bb11;
+
+FROM: main_bb11;
+v18 := 0 - v15;
+TO: main_bb11_v..i;
+FROM: main_bb11_v..i;
+assume(v15 slt 0);
+v..i := v18;
+TO: main_bb11_sv..i;
+
+FROM: main_bb11_v..i;
+assume(v15 sge 0);
+v..i := v15;
+TO: main_bb11_sv..i;
+
+FROM: main_bb11_sv..i;
+v19 := v..i srem 1000;
+v20 := vcount.0.i + 1;
+var__temp_v__retres.0.i := v20;
+TO: main_bb11_end;
+
+FROM: main_bb11_end;
+assume(v19 slt 995);
+TO: main_bb12;
+
+FROM: main_bb11_end;
+assume(v19 sge 995);
+TO: main_read_slice_1.exit;
+
+FROM: main_bb12;
+v22 := v.0.i + 1;
+var__temp_vcount.0.i := v20;
+var__temp_v.0.i := v22;
+TO: main_bb9;
+
+FROM: main_read_slice_1.exit;
+v__retres.0.i := var__temp_v__retres.0.i;
+TO: main_NodeBlock;
+
+FROM: main_NodeBlock;
+TO: main_NodeBlock_end;
+
+FROM: main_NodeBlock_end;
+assume(v__retres.0.i slt 0);
+TO: main_LeafBlock;
+
+FROM: main_NodeBlock_end;
+assume(v__retres.0.i sge 0);
+TO: main_LeafBlock1;
+
+FROM: main_LeafBlock;
+TO: main_LeafBlock_end;
+
+FROM: main_LeafBlock_end;
+assume(v__retres.0.i == -1);
+TO: main_bb13;
+
+FROM: main_LeafBlock_end;
+assume(v__retres.0.i != -1);
+TO: main_NewDefault;
+
+FROM: main_bb13;
+v23 := v__fc_errno_0.0 + 1;
+var__temp_v__fc_errno_0.0 := v23;
+var__temp_vpos.0 := vpos.0;
+TO: main_bb13_end;
+
+FROM: main_bb13_end;
+assume(v23 == 5);
+TO: main_bb16;
+
+FROM: main_bb13_end;
+assume(v23 != 5);
+TO: main_bb7;
+
+FROM: main_LeafBlock1;
+TO: main_LeafBlock1_end;
+
+FROM: main_LeafBlock1_end;
+assume(v__retres.0.i == 0);
+TO: main_bb14;
+
+FROM: main_LeafBlock1_end;
+assume(v__retres.0.i != 0);
+TO: main_NewDefault;
+
+FROM: main_bb14;
+v25 := v__retres.0.i + 1;
+var__temp_vrc.0 := v25;
+TO: main_bb15;
+
+FROM: main_NewDefault;
+var__temp_vrc.0 := v__retres.0.i;
+TO: main_bb15;
+
+FROM: main_bb15;
+vrc.0 := var__temp_vrc.0;
+v26 := vpos.0 + vrc.0;
+var__temp_v__fc_errno_0.0 := v__fc_errno_0.0;
+var__temp_vpos.0 := v26;
+TO: main_bb7;
+
+FROM: main_bb16;
+TO: main_bb16_ret;
+

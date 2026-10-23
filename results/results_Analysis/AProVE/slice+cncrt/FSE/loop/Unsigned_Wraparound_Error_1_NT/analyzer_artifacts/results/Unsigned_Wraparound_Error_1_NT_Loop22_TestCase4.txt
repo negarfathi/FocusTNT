@@ -1,0 +1,192 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_Loop22_TestCase4.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 157 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1139 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 184 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+(10) IntTRS
+(11) PolynomialOrderProcessor [EQUIVALENT, 51 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_Loop22_TestCase4.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_Loop22_TestCase4.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 10, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 3, %4
+		%5 = load %3
+		%6 = load %4
+		%7 = icmp ule %5 %6
+		br %7, %8, %9
+	8:
+		br %25
+	9:
+		%10 = load %2
+		%11 = icmp eq %10 0
+		br %11, %12, %13
+	12:
+		br %25
+	13:
+		%14 = load %2
+		store %14, %1
+		br %15
+	15:
+		%16 = load %3
+		%17 = load %1
+		%18 = icmp ult %16 %17
+		br %18, %19, %20
+	19:
+		br %24
+	20:
+		%21 = load %2
+		%22 = load %1
+		%23 = add i32 %22, %21
+		store %23, %1
+		br %15
+	24:
+		br %25
+	25:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 11 rulesP rules:
+f_170(v25, v26, v27, v28, 10, 3, 0, 4, v33, v34, v35, v36, v37, v38, 1, 8, 14) -> f_171(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 8, 14) :|: 0 = 0
+f_171(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 8, 14) -> f_173(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) :|: v34 <= 10 && v33 <= 6
+f_173(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) -> f_175(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) :|: 0 = 0
+f_175(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) -> f_177(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) :|: TRUE
+f_177(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) -> f_179(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) :|: 0 = 0
+f_179(v25, v26, v27, v28, 10, 3, 0, 4, v34, v33, v35, v36, v37, v38, 1, 6, 8) -> f_181(v25, v26, v27, v28, 10, 3, 0, 4, v34, v35, v36, v37, v38, 1, 8) :|: 0 = 0
+f_181(v25, v26, v27, v28, 10, 3, 0, 4, v34, v35, v36, v37, v38, 1, 8) -> f_183(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) :|: v39 = 4 + v34 && 12 <= v39 && v39 <= 14
+f_183(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) -> f_184(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) :|: TRUE
+f_184(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) -> f_185(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) :|: TRUE
+f_185(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 12, 14) -> f_169(v25, v26, v27, v28, 10, 3, 0, 4, v34, v39, v35, v36, v37, v38, 1, 8, 14) :|: TRUE
+f_169(v25, v26, v27, v28, 10, 3, 0, 4, v33, v34, v35, v36, v37, v38, 1, 8, 14) -> f_170(v25, v26, v27, v28, 10, 3, 0, 4, v33, v34, v35, v36, v37, v38, 1, 8, 14) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_170(v25:0, v26:0, v27:0, v28:0, 10, 3, 0, 4, v33:0, v34:0, v35:0, v36:0, v37:0, v38:0, 1, 8, 14) -> f_170(v25:0, v26:0, v27:0, v28:0, 10, 3, 0, 4, v34:0, 4 + v34:0, v35:0, v36:0, v37:0, v38:0, 1, 8, 14) :|: v33:0 < 7 && v34:0 < 11 && v34:0 > 7
+Filtered unneeded arguments:
+   f_170(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17) -> f_170(x9, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_170(v33:0, v34:0) -> f_170(v34:0, 4 + v34:0) :|: v34:0 < 11 && v34:0 > 7 && v33:0 < 7
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_170(v33:0, v34:0) -> f_170(v34:0, 4 + v34:0) :|: v34:0 < 11 && v34:0 > 7 && v33:0 < 7
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_170(v33:0:0, v34:0:0) -> f_170(v34:0:0, 4 + v34:0:0) :|: v34:0:0 < 11 && v34:0:0 > 7 && v33:0:0 < 7
+
+----------------------------------------
+
+(11) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_170(x, x1)] = 6 - x
+
+The following rules are decreasing:
+f_170(v33:0:0, v34:0:0) -> f_170(v34:0:0, 4 + v34:0:0) :|: v34:0:0 < 11 && v34:0:0 > 7 && v33:0:0 < 7
+The following rules are bounded:
+f_170(v33:0:0, v34:0:0) -> f_170(v34:0:0, 4 + v34:0:0) :|: v34:0:0 < 11 && v34:0:0 > 7 && v33:0:0 < 7
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_Loop22_TestCase4.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_1_NT_Loop22_TestCase4.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5620 milliseconds
+PreprocessingTime: 58 milliseconds

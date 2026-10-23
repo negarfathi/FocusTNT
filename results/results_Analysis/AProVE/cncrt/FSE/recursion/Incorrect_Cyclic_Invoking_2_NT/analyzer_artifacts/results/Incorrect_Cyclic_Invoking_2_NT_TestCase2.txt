@@ -1,0 +1,146 @@
+NO
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Cyclic_Invoking_2_NT_TestCase2.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be disproven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 167 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2823 ms]
+(4) LLVM Symbolic Execution Graph
+(5) LLVMNonterminationProof [COMPLETE, 2433 ms]
+(6) NO
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Cyclic_Invoking_2_NT_TestCase2.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Incorrect_Cyclic_Invoking_2_NT_TestCase2.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.omap2_gpio_s --> BasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32)
+
+Global variables:
+
+Name: omap2_gpio_s initVal: {0,0,0,0,0,0,0,0,0,0,0,0} type: BasicTypeName typeName: struct.omap2_gpio_sBasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32) addrSpace: null alignment: 4 threadLocal: false constant: false linkageType: COMMON section: null
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 26
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca BasicTypeName typeName: struct.omap2_gpio_sBasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32), align 4
+		%4 = alloca *i8, align 8
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 9999, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*BasicTypeName typeName: struct.omap2_gpio_sBasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32) %3)
+		%6 = getelementptr %3, 0, 0
+		store 12345, %6
+		%7 = getelementptr %3, 0, 1
+		store 54321, %7
+		%8 = getelementptr %3, 0, 2
+		store 65535, %8
+		%9 = getelementptr %3, 0, 3
+		store -1, %9
+		%10 = getelementptr %3, 0, 4
+		store 0, %10
+		%11 = getelementptr %3, 0, 5
+		store 1, %11
+		%12 = getelementptr %3, 0, 6
+		store 67890, %12
+		%13 = getelementptr %3, 0, 7
+		store 98765, %13
+		%14 = getelementptr %3, 0, 8
+		store 2, %14
+		%15 = getelementptr %3, 0, 9
+		store 3, %15
+		%16 = getelementptr %3, 0, 10
+		store 4, %16
+		%17 = getelementptr %3, 0, 11
+		store 5, %17
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %4)
+		%18 = bitcast *BasicTypeName typeName: struct.omap2_gpio_sBasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32) %3 to *i8
+		store %18, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		%19 = load %4
+		%20 = load %2
+		%21 = call i32 @omap2_gpio_module_readp(*i8 %19, i32 %20)
+		store %21, %5
+		ret 0
+
+*BasicFunctionTypename: "omap2_gpio_module_readp" linkageType: INTERNAL returnParam: i32 parameters: (0 *i8, 1 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 68
+	0:
+		%3 = alloca *i8, align 8
+		%4 = alloca i32, align 4
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**i8 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		%5 = load %3
+		%6 = load %4
+		%7 = call i32 @omap2_gpio_module_readp(*i8 %5, i32 %6)
+		%8 = load %4
+		%9 = and i32 %8, 3
+		%10 = shl i32 %9, 3
+		%11 = lshr i32 %7, %10
+		ret %11
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) LLVMNonterminationProof (COMPLETE)
+Proved nontermination with the following witness:
+
+State #172 with references set to {}.
+Nondeterministic instruction %1 = alloca i32, align 4 in node #172 yields value 125.
+Nondeterministic instruction %2 = alloca i32, align 4 in node #173 yields value 157.
+Nondeterministic instruction %3 = alloca BasicTypeName typeName: struct.omap2_gpio_sBasicStructureType(elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32, elementType: i32), align 4 in node #174 yields value 5.
+Nondeterministic instruction %4 = alloca *i8, align 8 in node #175 yields value 247.
+Nondeterministic instruction %5 = alloca i32, align 4 in node #176 yields value 1.
+
+----------------------------------------
+
+(6)
+NO
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.016s
+AnalysisTime: 13704 milliseconds
+PreprocessingTime: 3 milliseconds

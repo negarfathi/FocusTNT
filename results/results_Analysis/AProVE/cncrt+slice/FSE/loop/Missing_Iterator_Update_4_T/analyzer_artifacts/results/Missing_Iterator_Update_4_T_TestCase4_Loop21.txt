@@ -1,0 +1,359 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_4_T_TestCase4_Loop21.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 84 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 3669 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) AND
+    (7) LLVM Symbolic Execution SCC
+        (8) SCC2IRS [SOUND, 232 ms]
+        (9) IntTRS
+        (10) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+        (11) IntTRS
+        (12) PolynomialOrderProcessor [EQUIVALENT, 50 ms]
+        (13) IntTRS
+        (14) IntTRSCompressionProof [EQUIVALENT, 0 ms]
+        (15) IntTRS
+        (16) IntTRSUnneededArgumentFilterProof [EQUIVALENT, 0 ms]
+        (17) IntTRS
+        (18) RankingReductionPairProof [EQUIVALENT, 30 ms]
+        (19) YES
+    (20) LLVM Symbolic Execution SCC
+        (21) SCC2IRS [SOUND, 239 ms]
+        (22) IntTRS
+        (23) IntTRSCompressionProof [EQUIVALENT, 10 ms]
+        (24) IntTRS
+        (25) RankingReductionPairProof [EQUIVALENT, 127 ms]
+        (26) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_4_T_TestCase4_Loop21.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_4_T_TestCase4_Loop21.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 10, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 4, %4
+		%5 = load %4
+		%6 = icmp slt %5 0
+		br %6, %7, %8
+	7:
+		br %35
+	8:
+		%9 = load %3
+		%10 = icmp sgt %9 65534
+		br %10, %11, %12
+	11:
+		br %35
+	12:
+		%13 = load %4
+		%14 = icmp sgt %13 65534
+		br %14, %15, %16
+	15:
+		br %35
+	16:
+		br %17
+	17:
+		br %18
+	18:
+		store 0, %1
+		br %19
+	19:
+		%20 = load %1
+		%21 = load %3
+		%22 = icmp slt %20 %21
+		br %22, %23, %34
+	23:
+		store 0, %2
+		br %24
+	24:
+		%25 = load %2
+		%26 = load %4
+		%27 = icmp slt %25 %26
+		br %27, %28, %31
+	28:
+		%29 = load %2
+		%30 = add i32 %29, 1
+		store %30, %2
+		br %24
+	31:
+		%32 = load %1
+		%33 = add i32 %32, 1
+		store %33, %1
+		br %19
+	34:
+		br %35
+	35:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 2 SCCs.
+----------------------------------------
+
+(6)
+Complex Obligation (AND)
+
+----------------------------------------
+
+(7)
+Obligation:
+SCC
+----------------------------------------
+
+(8) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 30 rulesP rules:
+f_440(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) -> f_441(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) :|: 0 = 0
+f_441(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) -> f_442(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) :|: 0 = 0
+f_442(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) -> f_443(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) :|: TRUE
+f_443(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) -> f_444(v910, v911, v912, v913, 4, 0, 10, v917, 1, 0, v920, v919, v921, v922, v923, v924, v925, 3) :|: TRUE
+f_444(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v958, v959, v960, v961, v962, v963, v964, 3) -> f_445(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v959, v960, v961, v962, v963, v964, 3) :|: 0 = 0
+f_445(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v959, v960, v961, v962, v963, v964, 3) -> f_446(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) :|: v965 = 1 + v957 && 1 <= v965
+f_446(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) -> f_447(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) :|: TRUE
+f_447(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) -> f_448(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) :|: TRUE
+f_448(v948, v949, v950, v951, 4, 0, 10, v955, 1, v957, v965, v960, v961, v962, v963, v964, 3) -> f_449(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) :|: 0 = 0
+f_449(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_450(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) :|: 0 = 0
+f_450(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_451(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) :|: v965 < 4 && v957 <= 2
+f_450(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_452(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) :|: 4 <= v965 && 3 <= v957
+f_451(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) -> f_453(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) :|: 0 = 0
+f_453(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) -> f_455(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) :|: TRUE
+f_455(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3, 2) -> f_444(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v965, v960, v961, v962, v963, v964, 3) :|: TRUE
+f_452(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_454(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) :|: 0 = 0
+f_454(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_456(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) :|: TRUE
+f_456(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v960, v961, v962, v963, v964, 3) -> f_457(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v961, v962, v963, v964, 3) :|: 0 = 0
+f_457(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v961, v962, v963, v964, 3) -> f_458(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) :|: v1016 = 1 + v955 && 2 <= v1016
+f_458(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) -> f_459(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) :|: TRUE
+f_459(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) -> f_460(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) :|: TRUE
+f_460(v948, v949, v950, v951, 4, 0, 10, v955, 1, v965, v957, v1016, v961, v962, v963, v964, 3, 2) -> f_461(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 2) :|: 0 = 0
+f_461(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 2) -> f_462(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 2) :|: 0 = 0
+f_462(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 2) -> f_463(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) :|: v1016 < 10 && v955 <= 8
+f_463(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) -> f_465(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) :|: 0 = 0
+f_465(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) -> f_467(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) :|: TRUE
+f_467(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) -> f_469(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) :|: TRUE
+f_469(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) -> f_471(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) :|: TRUE
+f_471(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3, 8, 2, 9) -> f_438(v948, v949, v950, v951, 4, 0, 10, v1016, 1, v965, v957, v955, v961, v962, v963, v964, 3) :|: TRUE
+f_438(v910, v911, v912, v913, 4, 0, 10, v917, 1, v919, v920, v921, v922, v923, v924, v925, 3) -> f_440(v910, v911, v912, v913, 4, 0, 10, v917, 1, v920, v919, v921, v922, v923, v924, v925, 3) :|: 0 = 0
+Combined rules. Obtained 2 rulesP rules:
+f_450(v948:0, v949:0, v950:0, v951:0, 4, 0, 10, v955:0, 1, v965:0, v957:0, v960:0, v961:0, v962:0, v963:0, v964:0, 3) -> f_450(v948:0, v949:0, v950:0, v951:0, 4, 0, 10, v955:0, 1, 1 + v965:0, v965:0, v960:0, v961:0, v962:0, v963:0, v964:0, 3) :|: v965:0 > -1 && v965:0 < 4 && v957:0 < 3
+f_450(v948:0, v949:0, v950:0, v951:0, 4, 0, 10, v955:0, 1, v965:0, v957:0, v960:0, v961:0, v962:0, v963:0, v964:0, 3) -> f_450(v948:0, v949:0, v950:0, v951:0, 4, 0, 10, 1 + v955:0, 1, 1, 0, v955:0, v961:0, v962:0, v963:0, v964:0, 3) :|: v957:0 > 2 && v965:0 > 3 && v955:0 > 0 && v955:0 < 9
+Filtered unneeded arguments:
+   f_450(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17) -> f_450(x8, x10, x11)
+Removed division, modulo operations, cleaned up constraints. Obtained 2 rules.P rules:
+f_450(v955:0, v965:0, v957:0) -> f_450(v955:0, 1 + v965:0, v965:0) :|: v965:0 < 4 && v957:0 < 3 && v965:0 > -1
+f_450(v955:0, v965:0, v957:0) -> f_450(1 + v955:0, 1, 0) :|: v965:0 > 3 && v957:0 > 2 && v955:0 < 9 && v955:0 > 0
+
+----------------------------------------
+
+(9)
+Obligation:
+Rules:
+f_450(v955:0, v965:0, v957:0) -> f_450(v955:0, 1 + v965:0, v965:0) :|: v965:0 < 4 && v957:0 < 3 && v965:0 > -1
+f_450(x, x1, x2) -> f_450(1 + x, 1, 0) :|: x1 > 3 && x2 > 2 && x < 9 && x > 0
+
+----------------------------------------
+
+(10) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(11)
+Obligation:
+Rules:
+f_450(v955:0:0, v965:0:0, v957:0:0) -> f_450(v955:0:0, 1 + v965:0:0, v965:0:0) :|: v965:0:0 < 4 && v957:0:0 < 3 && v965:0:0 > -1
+f_450(x:0, x1:0, x2:0) -> f_450(1 + x:0, 1, 0) :|: x:0 < 9 && x:0 > 0 && x2:0 > 2 && x1:0 > 3
+
+----------------------------------------
+
+(12) PolynomialOrderProcessor (EQUIVALENT)
+Found the following polynomial interpretation:
+[f_450(x, x1, x2)] = 8 - x
+
+The following rules are decreasing:
+f_450(x:0, x1:0, x2:0) -> f_450(1 + x:0, 1, 0) :|: x:0 < 9 && x:0 > 0 && x2:0 > 2 && x1:0 > 3
+The following rules are bounded:
+f_450(x:0, x1:0, x2:0) -> f_450(1 + x:0, 1, 0) :|: x:0 < 9 && x:0 > 0 && x2:0 > 2 && x1:0 > 3
+
+----------------------------------------
+
+(13)
+Obligation:
+Rules:
+f_450(v955:0:0, v965:0:0, v957:0:0) -> f_450(v955:0:0, 1 + v965:0:0, v965:0:0) :|: v965:0:0 < 4 && v957:0:0 < 3 && v965:0:0 > -1
+
+----------------------------------------
+
+(14) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(15)
+Obligation:
+Rules:
+f_450(v955:0:0:0, v965:0:0:0, v957:0:0:0) -> f_450(v955:0:0:0, 1 + v965:0:0:0, v965:0:0:0) :|: v965:0:0:0 < 4 && v957:0:0:0 < 3 && v965:0:0:0 > -1
+
+----------------------------------------
+
+(16) IntTRSUnneededArgumentFilterProof (EQUIVALENT)
+Some arguments are removed because they cannot influence termination. We removed arguments according to the following replacements:
+
+   f_450(x1, x2, x3) -> f_450(x2, x3)
+
+----------------------------------------
+
+(17)
+Obligation:
+Rules:
+f_450(v965:0:0:0, v957:0:0:0) -> f_450(1 + v965:0:0:0, v965:0:0:0) :|: v965:0:0:0 < 4 && v957:0:0:0 < 3 && v965:0:0:0 > -1
+
+----------------------------------------
+
+(18) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_450 ] = -1*f_450_1
+
+The following rules are decreasing:
+f_450(v965:0:0:0, v957:0:0:0) -> f_450(1 + v965:0:0:0, v965:0:0:0) :|: v965:0:0:0 < 4 && v957:0:0:0 < 3 && v965:0:0:0 > -1
+
+The following rules are bounded:
+f_450(v965:0:0:0, v957:0:0:0) -> f_450(1 + v965:0:0:0, v965:0:0:0) :|: v965:0:0:0 < 4 && v957:0:0:0 < 3 && v965:0:0:0 > -1
+
+
+----------------------------------------
+
+(19)
+YES
+
+----------------------------------------
+
+(20)
+Obligation:
+SCC
+----------------------------------------
+
+(21) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_210(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3) -> f_211(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3) :|: 0 = 0
+f_211(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3) -> f_212(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) :|: v50 < 4 && v49 <= 2
+f_212(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) -> f_214(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) :|: 0 = 0
+f_214(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) -> f_216(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) :|: TRUE
+f_216(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3, 2) -> f_218(v41, v42, v43, v44, 4, 0, 10, 1, v50, v51, v52, v53, v54, 3) :|: 0 = 0
+f_218(v41, v42, v43, v44, 4, 0, 10, 1, v50, v51, v52, v53, v54, 3) -> f_220(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) :|: v55 = 1 + v50 && 2 <= v55 && v55 <= 4
+f_220(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) -> f_222(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) :|: TRUE
+f_222(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) -> f_224(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) :|: TRUE
+f_224(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3, 2) -> f_209(v41, v42, v43, v44, 4, 0, 10, 1, v50, v55, v51, v52, v53, v54, 3) :|: TRUE
+f_209(v41, v42, v43, v44, 4, 0, 10, 1, v49, v50, v51, v52, v53, v54, 3) -> f_210(v41, v42, v43, v44, 4, 0, 10, 1, v50, v49, v51, v52, v53, v54, 3) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_210(v41:0, v42:0, v43:0, v44:0, 4, 0, 10, 1, v50:0, v49:0, v51:0, v52:0, v53:0, v54:0, 3) -> f_210(v41:0, v42:0, v43:0, v44:0, 4, 0, 10, 1, 1 + v50:0, v50:0, v51:0, v52:0, v53:0, v54:0, 3) :|: v49:0 < 3 && v50:0 < 4 && v50:0 > 0
+Filtered unneeded arguments:
+   f_210(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15) -> f_210(x9, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_210(v50:0, v49:0) -> f_210(1 + v50:0, v50:0) :|: v50:0 < 4 && v50:0 > 0 && v49:0 < 3
+
+----------------------------------------
+
+(22)
+Obligation:
+Rules:
+f_210(v50:0, v49:0) -> f_210(1 + v50:0, v50:0) :|: v50:0 < 4 && v50:0 > 0 && v49:0 < 3
+
+----------------------------------------
+
+(23) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(24)
+Obligation:
+Rules:
+f_210(v50:0:0, v49:0:0) -> f_210(1 + v50:0:0, v50:0:0) :|: v50:0:0 < 4 && v50:0:0 > 0 && v49:0:0 < 3
+
+----------------------------------------
+
+(25) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_210 ] = -1*f_210_1
+
+The following rules are decreasing:
+f_210(v50:0:0, v49:0:0) -> f_210(1 + v50:0:0, v50:0:0) :|: v50:0:0 < 4 && v50:0:0 > 0 && v49:0:0 < 3
+
+The following rules are bounded:
+f_210(v50:0:0, v49:0:0) -> f_210(1 + v50:0:0, v50:0:0) :|: v50:0:0 < 4 && v50:0:0 > 0 && v49:0:0 < 3
+
+
+----------------------------------------
+
+(26)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_4_T_TestCase4_Loop21.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Iterator_Update_4_T_TestCase4_Loop21.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 10513 milliseconds
+PreprocessingTime: 1091 milliseconds

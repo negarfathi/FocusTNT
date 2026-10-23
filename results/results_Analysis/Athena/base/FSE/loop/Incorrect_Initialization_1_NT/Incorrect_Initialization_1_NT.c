@@ -18,6 +18,8 @@ int strcspn(const char *strSrc, const char *str)
         while (*s != '\0')
         {
             if (*t == *s )
+            /*@ \slicing::slice_preserve_ctrl; */
+            /*@ \slicing::slice_preserve_ctrl; */
             return t-strSrc;
             ++s;
         }

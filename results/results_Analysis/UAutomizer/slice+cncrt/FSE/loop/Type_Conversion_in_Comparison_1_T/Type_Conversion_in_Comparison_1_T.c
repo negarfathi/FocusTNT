@@ -1,4 +1,3 @@
-#include "stdlib.h"
 extern unsigned short __VERIFIER_nondet_ushort(void);
 extern int __VERIFIER_nondet_int(void);
 /*

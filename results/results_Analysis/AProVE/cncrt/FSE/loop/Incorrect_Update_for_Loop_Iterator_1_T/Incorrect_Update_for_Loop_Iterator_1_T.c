@@ -21,6 +21,7 @@ int main()
         if( max_msg_size != -1 && size > max_msg_size )
         {
             size = max_msg_size;
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
         }
         buffer_bytes_left = size - buffer_bytes_left;

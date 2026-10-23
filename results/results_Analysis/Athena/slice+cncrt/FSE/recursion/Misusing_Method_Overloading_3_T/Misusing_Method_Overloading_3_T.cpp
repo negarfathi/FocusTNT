@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 Commit Number: c9353e306c304911cb96bbd9f5aeda9dd0820fb0
 URL: https://github.com/apache/impala/commit/c9353e306c304911cb96bbd9f5aeda9dd0820fb0

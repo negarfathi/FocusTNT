@@ -1,4 +1,3 @@
-#include "stdlib.h"
 /*
 Commit Number: 2a44538e0f43e93257c6d69d0b86d26219dd7a99
 URL: https://github.com/qt/qt/commit/2a44538e0f43e93257c6d69d0b86d26219dd7a99

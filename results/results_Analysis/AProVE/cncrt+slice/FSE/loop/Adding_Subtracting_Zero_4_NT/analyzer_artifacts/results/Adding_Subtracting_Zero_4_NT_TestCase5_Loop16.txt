@@ -1,0 +1,212 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_NT_TestCase5_Loop16.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 141 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1786 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 239 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 9 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 145 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_NT_TestCase5_Loop16.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_NT_TestCase5_Loop16.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "read_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: (0 i32, 1 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		%6 = alloca i32, align 4
+		store %0, %3
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store %1, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %6)
+		store 0, %6
+		br %7
+	7:
+		%8 = load %3
+		%9 = load %4
+		%10 = icmp slt %8 %9
+		br %10, %11, %16
+	11:
+		%12 = load %6
+		%13 = add i32 %12, 1
+		store %13, %6
+		%14 = load %3
+		%15 = add i32 %14, 1
+		store %15, %3
+		br %7
+	16:
+		%17 = load %6
+		store %17, %5
+		%18 = load %5
+		ret %18
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 33
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 4, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 0, %3
+		br %4
+	4:
+		%5 = load %2
+		%6 = icmp sgt %5 0
+		br %6, %7, %17
+	7:
+		%8 = load %3
+		%9 = load %2
+		%10 = call i32 @read_slice_1(i32 %8, i32 %9)
+		store %10, %1
+		%11 = load %1
+		%12 = load %2
+		%13 = sub i32 %12, %11
+		store %13, %2
+		%14 = load %1
+		%15 = load %3
+		%16 = add i32 %15, %14
+		store %16, %3
+		br %4
+	17:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 13 rulesP rules:
+f_238(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) -> f_239(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) :|: 0 = 0
+f_239(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) -> f_240(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: v67 < 4 && v65 <= 2
+f_240(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_242(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: 0 = 0
+f_242(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_244(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: TRUE
+f_244(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_246(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: 0 = 0
+f_246(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_248(0, 4, v61, v62, v63, v64, v67, 1, v78, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: v78 = 1 + v67 && 2 <= v78 && v78 <= 4
+f_248(0, 4, v61, v62, v63, v64, v67, 1, v78, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_250(0, 4, v61, v62, v63, v64, v67, 1, v78, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: TRUE
+f_250(0, 4, v61, v62, v63, v64, v67, 1, v78, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_252(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: 0 = 0
+f_252(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_254(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: v78 = 1 + v67
+f_254(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_256(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: TRUE
+f_256(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_258(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) :|: TRUE
+f_258(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3, 2) -> f_237(0, 4, v61, v62, v63, v64, v67, 1, v78, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) :|: TRUE
+f_237(0, 4, v61, v62, v63, v64, v65, 1, v67, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) -> f_238(0, 4, v61, v62, v63, v64, v67, 1, v65, v68, v71, v69, v72, v70, v73, v74, v75, v76, v77, 3) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_238(0, 4, v61:0, v62:0, v63:0, v64:0, v67:0, 1, v65:0, v68:0, v71:0, v69:0, v72:0, v70:0, v73:0, v74:0, v75:0, v76:0, v77:0, 3) -> f_238(0, 4, v61:0, v62:0, v63:0, v64:0, 1 + v67:0, 1, v67:0, v68:0, v71:0, v69:0, v72:0, v70:0, v73:0, v74:0, v75:0, v76:0, v77:0, 3) :|: v65:0 < 3 && v67:0 < 4 && v67:0 > 0
+Filtered unneeded arguments:
+   f_238(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20) -> f_238(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_238(v67:0, v65:0) -> f_238(1 + v67:0, v67:0) :|: v67:0 < 4 && v67:0 > 0 && v65:0 < 3
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_238(v67:0, v65:0) -> f_238(1 + v67:0, v67:0) :|: v67:0 < 4 && v67:0 > 0 && v65:0 < 3
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_238(v67:0:0, v65:0:0) -> f_238(1 + v67:0:0, v67:0:0) :|: v67:0:0 < 4 && v67:0:0 > 0 && v65:0:0 < 3
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_238 ] = -1*f_238_1
+
+The following rules are decreasing:
+f_238(v67:0:0, v65:0:0) -> f_238(1 + v67:0:0, v67:0:0) :|: v67:0:0 < 4 && v67:0:0 > 0 && v65:0:0 < 3
+
+The following rules are bounded:
+f_238(v67:0:0, v65:0:0) -> f_238(1 + v67:0:0, v67:0:0) :|: v67:0:0 < 4 && v67:0:0 > 0 && v65:0:0 < 3
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_NT_TestCase5_Loop16.c:14:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_4_NT_TestCase5_Loop16.c:14:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 7075 milliseconds
+PreprocessingTime: 1631 milliseconds

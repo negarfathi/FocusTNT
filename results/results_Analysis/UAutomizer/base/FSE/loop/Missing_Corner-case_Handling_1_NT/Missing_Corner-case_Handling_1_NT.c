@@ -39,6 +39,7 @@ int main()
     while(1)
     {
         if( read() < 0 )
+            /*@ \slicing::slice_preserve_ctrl; */
             break;
     }
     return 0;

@@ -34,6 +34,7 @@ int main()
     {
         b += ff_subtitles_next_line();
         if( b >= end - 4 )
+        /*@ \slicing::slice_preserve_ctrl; */
         return 0;
     }
     return 0;

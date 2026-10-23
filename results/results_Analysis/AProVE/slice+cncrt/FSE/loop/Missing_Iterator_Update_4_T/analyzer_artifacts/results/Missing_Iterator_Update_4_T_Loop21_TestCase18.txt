@@ -1,0 +1,237 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_4_T_Loop21_TestCase18.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 169 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 1338 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 282 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 10 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 95 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_4_T_Loop21_TestCase18.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_4_T_Loop21_TestCase18.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 3, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 1, %5
+		%6 = load %4
+		%7 = icmp slt %6 0
+		br %7, %8, %9
+	8:
+		br %41
+	9:
+		%10 = load %5
+		%11 = icmp slt %10 0
+		br %11, %12, %13
+	12:
+		store 0, %1
+		br %41
+	13:
+		%14 = load %4
+		%15 = icmp sgt %14 65534
+		br %15, %16, %17
+	16:
+		store 0, %1
+		br %41
+	17:
+		%18 = load %5
+		%19 = icmp sgt %18 65534
+		br %19, %20, %21
+	20:
+		store 0, %1
+		br %41
+	21:
+		br %22
+	22:
+		br %23
+	23:
+		br %24
+	24:
+		store 0, %2
+		br %25
+	25:
+		%26 = load %2
+		%27 = load %4
+		%28 = icmp slt %26 %27
+		br %28, %29, %40
+	29:
+		store 0, %3
+		br %30
+	30:
+		%31 = load %3
+		%32 = load %5
+		%33 = icmp slt %31 %32
+		br %33, %34, %37
+	34:
+		%35 = load %3
+		%36 = add i32 %35, 1
+		store %36, %3
+		br %30
+	37:
+		%38 = load %2
+		%39 = add i32 %38, 1
+		store %39, %2
+		br %25
+	40:
+		br %41
+	41:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 24 rulesP rules:
+f_273(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_274(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_274(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_275(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: v91 < 3 && v90 <= 1
+f_275(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_277(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_277(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_279(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_279(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_281(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_281(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_283(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_283(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_285(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_285(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_286(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_286(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_287(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_287(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_288(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_288(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_289(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_289(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_290(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_290(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_291(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_291(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_292(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_292(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_293(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_293(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_294(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_294(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_295(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_295(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_296(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_296(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) -> f_297(v82, v83, v84, v85, v86, 3, 0, 1, v91, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+f_297(v82, v83, v84, v85, v86, 3, 0, 1, v91, v92, v93, v94, v95, v96, 2, 4) -> f_298(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) :|: v124 = 1 + v91 && 2 <= v124 && v124 <= 3
+f_298(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) -> f_299(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_299(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) -> f_300(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_300(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) -> f_272(v82, v83, v84, v85, v86, 3, 0, 1, v91, v124, v92, v93, v94, v95, v96, 2, 4) :|: TRUE
+f_272(v82, v83, v84, v85, v86, 3, 0, 1, v90, v91, v92, v93, v94, v95, v96, 2, 4) -> f_273(v82, v83, v84, v85, v86, 3, 0, 1, v91, v90, v92, v93, v94, v95, v96, 2, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_273(v82:0, v83:0, v84:0, v85:0, v86:0, 3, 0, 1, v91:0, v90:0, v92:0, v93:0, v94:0, v95:0, v96:0, 2, 4) -> f_273(v82:0, v83:0, v84:0, v85:0, v86:0, 3, 0, 1, 1 + v91:0, v91:0, v92:0, v93:0, v94:0, v95:0, v96:0, 2, 4) :|: v90:0 < 2 && v91:0 < 3 && v91:0 > 0
+Filtered unneeded arguments:
+   f_273(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17) -> f_273(x9, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_273(v91:0, v90:0) -> f_273(1 + v91:0, v91:0) :|: v91:0 < 3 && v91:0 > 0 && v90:0 < 2
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_273(v91:0, v90:0) -> f_273(1 + v91:0, v91:0) :|: v91:0 < 3 && v91:0 > 0 && v90:0 < 2
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_273(v91:0:0, v90:0:0) -> f_273(1 + v91:0:0, v91:0:0) :|: v91:0:0 < 3 && v91:0:0 > 0 && v90:0:0 < 2
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_273 ] = -1*f_273_1
+
+The following rules are decreasing:
+f_273(v91:0:0, v90:0:0) -> f_273(1 + v91:0:0, v91:0:0) :|: v91:0:0 < 3 && v91:0:0 > 0 && v90:0:0 < 2
+
+The following rules are bounded:
+f_273(v91:0:0, v90:0:0) -> f_273(1 + v91:0:0, v91:0:0) :|: v91:0:0 < 3 && v91:0:0 > 0 && v90:0:0 < 2
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_4_T_Loop21_TestCase18.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Missing_Iterator_Update_4_T_Loop21_TestCase18.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 6641 milliseconds
+PreprocessingTime: 62 milliseconds

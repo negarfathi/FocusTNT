@@ -1,0 +1,41 @@
+///*** 1_main ***///
+START: main_bb0;
+TYPE dummy: bv(32);
+
+
+FROM: main_bb0;
+var__temp_vpkt.0 := 0;
+TO: main_bb1;
+
+FROM: main_bb1;
+vpkt.0 := var__temp_vpkt.0;
+TO: main_bb1_end;
+
+FROM: main_bb1_end;
+assume(vpkt.0 slt 10);
+TO: main_bb2;
+
+FROM: main_bb1_end;
+assume(vpkt.0 sge 10);
+TO: main_bb3;
+
+FROM: main_bb2;
+v2 := vpkt.0 + 1;
+TO: main_bb2_vpkt.2;
+FROM: main_bb2_vpkt.2;
+assume(0 <= 0);
+vpkt.2 := v2;
+TO: main_bb2_svpkt.2;
+
+FROM: main_bb2_vpkt.2;
+assume(1 <= 0);
+vpkt.2 := vpkt.0;
+TO: main_bb2_svpkt.2;
+
+FROM: main_bb2_svpkt.2;
+var__temp_vpkt.0 := vpkt.2;
+TO: main_bb1;
+
+FROM: main_bb3;
+TO: main_bb3_ret;
+

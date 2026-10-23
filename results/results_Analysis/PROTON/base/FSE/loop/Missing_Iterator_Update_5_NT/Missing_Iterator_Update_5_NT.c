@@ -22,6 +22,7 @@ int main()
     for( ; ; )
     {
         if( entry >= MCE_LOG_LEN )
+            /*@ \slicing::slice_preserve_ctrl; */
             return 0;
         if( mcelog_entry[entry] )
         {

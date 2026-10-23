@@ -1,0 +1,157 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase9.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 158 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 563 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 221 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 76 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase9.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase9.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 9
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 3, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 2, %3
+		%4 = load %2
+		%5 = load %3
+		%6 = icmp ult %4 %5
+		br %6, %7, %9
+	7:
+		%8 = load %3
+		store %8, %2
+		br %9
+	9:
+		br %10
+	10:
+		%11 = load %1
+		%12 = load %2
+		%13 = icmp ult %11 %12
+		br %13, %14, %17
+	14:
+		%15 = load %1
+		%16 = mul i32 %15, 2
+		store %16, %1
+		br %10
+	17:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_113(v7, v8, v9, 3, 2, 0, v15, 1, v13, v16, v17, v18, 4) -> f_114(v7, v8, v9, 3, 2, 0, v15, 1, v13, v16, v17, v18, 4) :|: 0 = 0
+f_114(v7, v8, v9, 3, 2, 0, v15, 1, v13, v16, v17, v18, 4) -> f_115(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) :|: v15 < 3 && v13 = 1
+f_115(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) -> f_117(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) :|: 0 = 0
+f_117(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) -> f_119(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) :|: TRUE
+f_119(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) -> f_121(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) :|: 0 = 0
+f_121(v7, v8, v9, 3, 2, 0, 1, v16, v17, v18, 4) -> f_122(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) :|: 0 = 0
+f_122(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) -> f_123(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) :|: TRUE
+f_123(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) -> f_124(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) :|: TRUE
+f_124(v7, v8, v9, 3, 2, 0, 1, 4, v16, v17, v18) -> f_112(v7, v8, v9, 3, 2, 0, 2, 1, 4, v16, v17, v18, 4) :|: TRUE
+f_112(v7, v8, v9, 3, 2, 0, v13, 1, v15, v16, v17, v18, 4) -> f_113(v7, v8, v9, 3, 2, 0, v15, 1, v13, v16, v17, v18, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_113(v7:0, v8:0, v9:0, 3, 2, 0, v15:0, 1, 1, v16:0, v17:0, v18:0, 4) -> f_113(v7:0, v8:0, v9:0, 3, 2, 0, 4, 1, 2, v16:0, v17:0, v18:0, 4) :|: v15:0 < 3
+Filtered unneeded arguments:
+   f_113(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13) -> f_113(x7, x9)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_113(v15:0, cons_1) -> f_113(4, 2) :|: v15:0 < 3 && cons_1 = 1
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_113(v15:0, cons_1) -> f_113(4, 2) :|: v15:0 < 3 && cons_1 = 1
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase9.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Unsigned_Wraparound_Error_2_NT_Loop18_TestCase9.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 4691 milliseconds
+PreprocessingTime: 58 milliseconds

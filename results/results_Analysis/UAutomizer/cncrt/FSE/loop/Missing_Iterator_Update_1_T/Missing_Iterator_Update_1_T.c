@@ -19,6 +19,7 @@ int waitpid()
             errno = EINTR;
         else
             errno = OTHER;
+        /*@ \slicing::slice_preserve_ctrl; */
         return num;
     }
     return num;

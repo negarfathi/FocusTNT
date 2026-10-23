@@ -25,7 +25,8 @@ int main()
 {
     int matroska =  __VERIFIER_nondet_int();
     int res = 0;
-    while( matroska_deliver_packet( matroska) )
+    int tmpVar0;
+    while( (tmpVar0 = matroska_deliver_packet( matroska)) )
     {
         while( res == 0 )
         {
@@ -33,14 +34,20 @@ int main()
             switch( id ){
                 case 1:
                     if( res = res_return() < 0 )
+                        /*@ \slicing::slice_preserve_ctrl; */
+                        /*@ \slicing::slice_preserve_ctrl; */
                         break;
                     if( res = res_return() == 0 )
                         res = 1;
+                    /*@ \slicing::slice_preserve_ctrl; */
+                    /*@ \slicing::slice_preserve_ctrl; */
                     break;
 
                 default:
                 case 2:
                     res = res_return();
+                    /*@ \slicing::slice_preserve_ctrl; */
+                    /*@ \slicing::slice_preserve_ctrl; */
                     break;
             }
         }

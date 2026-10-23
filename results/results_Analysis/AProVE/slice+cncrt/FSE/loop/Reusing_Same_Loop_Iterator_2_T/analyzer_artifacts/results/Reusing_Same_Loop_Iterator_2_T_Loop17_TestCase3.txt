@@ -1,0 +1,158 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Reusing_Same_Loop_Iterator_2_T_Loop17_TestCase3.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 135 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 691 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 216 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 66 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Reusing_Same_Loop_Iterator_2_T_Loop17_TestCase3.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Reusing_Same_Loop_Iterator_2_T_Loop17_TestCase3.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "llvm.dbg.label" returnParam: BasicVoidType parameters: (BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		store 2, %3
+		%4 = load %3
+		%5 = icmp sgt %4 65534
+		br %5, %6, %7
+	6:
+		store 0, %1
+		br %16
+	7:
+		store 0, %2
+		br %8
+	8:
+		%9 = load %2
+		%10 = load %3
+		%11 = icmp slt %9 %10
+		br %11, %12, %15
+	12:
+		%13 = load %2
+		%14 = add i32 %13, 1
+		store %14, %2
+		br %8
+	15:
+		br %16
+	16:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.label()
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_109(v7, v8, v9, 2, 0, v14, 1, v12, v15, v16, v17, 3, 4) -> f_110(v7, v8, v9, 2, 0, v14, 1, v12, v15, v16, v17, 3, 4) :|: 0 = 0
+f_110(v7, v8, v9, 2, 0, v14, 1, v12, v15, v16, v17, 3, 4) -> f_111(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: v14 < 2 && v12 = 0 && v14 = 1 && 0 = 0
+f_111(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_113(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: 0 = 0
+f_113(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_115(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: TRUE
+f_115(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_117(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: 0 = 0
+f_117(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_119(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: 0 = 0
+f_119(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_121(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: TRUE
+f_121(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_122(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) :|: TRUE
+f_122(v7, v8, v9, 2, 0, 1, v15, v16, v17, 3, 4) -> f_108(v7, v8, v9, 2, 0, 1, 1, 2, v15, v16, v17, 3, 4) :|: TRUE
+f_108(v7, v8, v9, 2, 0, v12, 1, v14, v15, v16, v17, 3, 4) -> f_109(v7, v8, v9, 2, 0, v14, 1, v12, v15, v16, v17, 3, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_109(v7:0, v8:0, v9:0, 2, 0, 1, 1, 0, v15:0, v16:0, v17:0, 3, 4) -> f_109(v7:0, v8:0, v9:0, 2, 0, 2, 1, 1, v15:0, v16:0, v17:0, 3, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_109(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13) -> f_109(x6, x8)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_109(cons_1, cons_0) -> f_109(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_109(cons_1, cons_0) -> f_109(2, 1) :|: TRUE && cons_1 = 1 && cons_0 = 0
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/analyzer_artifacts/concretized_variants/Reusing_Same_Loop_Iterator_2_T_Loop17_TestCase3.c:5:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/concretized_variants/Reusing_Same_Loop_Iterator_2_T_Loop17_TestCase3.c:5:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 5487 milliseconds
+PreprocessingTime: 59 milliseconds

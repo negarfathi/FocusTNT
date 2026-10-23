@@ -8,6 +8,7 @@ termination: true
 char* strchr(char* str, int c) {
 	for (; *str != 0; ++str) {
 		if (*str == c) {
+			/*@ \slicing::slice_preserve_ctrl; */
 			return str;
 		}
 	}

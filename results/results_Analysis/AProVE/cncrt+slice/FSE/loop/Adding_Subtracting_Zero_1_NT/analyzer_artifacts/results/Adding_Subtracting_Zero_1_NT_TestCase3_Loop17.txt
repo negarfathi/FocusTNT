@@ -1,0 +1,145 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_1_NT_TestCase3_Loop17.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 155 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 478 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 179 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 35 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_1_NT_TestCase3_Loop17.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_1_NT_TestCase3_Loop17.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i32, align 4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 1, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		store 2, %2
+		br %3
+	3:
+		%4 = load %2
+		%5 = icmp sgt %4 0
+		br %5, %6, %10
+	6:
+		%7 = load %1
+		%8 = load %2
+		%9 = sub i32 %8, %7
+		store %9, %2
+		br %3
+	10:
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_76(v5, v6, v9, 1, v7, v10, v11, 3, 2, 0, 4) -> f_77(v5, v6, 1, 2, v10, v11, 3, 4) :|: 0 < v9 && v7 = 2 && v9 = 1 && 0 = 0
+f_77(v5, v6, 1, 2, v10, v11, 3, 4) -> f_79(v5, v6, 1, 2, v10, v11, 3, 4) :|: 0 = 0
+f_79(v5, v6, 1, 2, v10, v11, 3, 4) -> f_81(v5, v6, 1, 2, v10, v11, 3, 4) :|: TRUE
+f_81(v5, v6, 1, 2, v10, v11, 3, 4) -> f_83(v5, v6, 1, 2, v10, v11, 3, 4) :|: 0 = 0
+f_83(v5, v6, 1, 2, v10, v11, 3, 4) -> f_84(v5, v6, 1, v10, v11, 3, 4) :|: 0 = 0
+f_84(v5, v6, 1, v10, v11, 3, 4) -> f_85(v5, v6, 1, 0, v10, v11, 3, 4) :|: 0 = 0
+f_85(v5, v6, 1, 0, v10, v11, 3, 4) -> f_86(v5, v6, 1, 0, v10, v11, 3, 4) :|: TRUE
+f_86(v5, v6, 1, 0, v10, v11, 3, 4) -> f_87(v5, v6, 1, 0, v10, v11, 3, 4) :|: TRUE
+f_87(v5, v6, 1, 0, v10, v11, 3, 4) -> f_75(v5, v6, 1, 1, 0, v10, v11, 3, 2, 0, 4) :|: TRUE
+f_75(v5, v6, v7, 1, v9, v10, v11, 3, 2, 0, 4) -> f_76(v5, v6, v9, 1, v7, v10, v11, 3, 2, 0, 4) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_76(v5:0, v6:0, 1, 1, 2, v10:0, v11:0, 3, 2, 0, 4) -> f_76(v5:0, v6:0, 0, 1, 1, v10:0, v11:0, 3, 2, 0, 4) :|: TRUE
+Filtered unneeded arguments:
+   f_76(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11) -> f_76(x3, x5)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_76(cons_1, cons_2) -> f_76(0, 1) :|: TRUE && cons_1 = 1 && cons_2 = 2
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_76(cons_1, cons_2) -> f_76(0, 1) :|: TRUE && cons_1 = 1 && cons_2 = 2
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_1_NT_TestCase3_Loop17.c:2:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_1_NT_TestCase3_Loop17.c:2:1: note: change return type to 'int'
+void main(void)
+^~~~
+int
+1 warning generated.
+
+Graph finished, checking  consistency
+AnalysisTime: 4434 milliseconds
+PreprocessingTime: 1128 milliseconds

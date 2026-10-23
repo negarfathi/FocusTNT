@@ -1,0 +1,34 @@
+///*** 1_main ***///
+START: main_bb8;
+
+
+
+FROM: main_bb8;
+errno := 0;
+errno := 2;
+TO: main_bb8_end;
+
+FROM: main_bb8_end;
+assume(1 <= 0);
+TO: main_bb9;
+
+FROM: main_bb8_end;
+assume(0 <= 0);
+TO: main_.critedge;
+
+FROM: main_bb9;
+errno := 2;
+v15 := errno;
+TO: main_bb9_end;
+
+FROM: main_bb9_end;
+assume(v15 == 1);
+TO: main_bb9;
+
+FROM: main_bb9_end;
+assume(v15 != 1);
+TO: main_.critedge;
+
+FROM: main_.critedge;
+TO: main_.critedge_ret;
+

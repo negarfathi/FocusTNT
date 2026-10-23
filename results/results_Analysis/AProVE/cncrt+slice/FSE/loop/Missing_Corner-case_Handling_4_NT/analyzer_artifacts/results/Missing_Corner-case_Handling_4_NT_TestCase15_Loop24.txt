@@ -1,0 +1,204 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 124 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2669 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 289 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 41 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 216 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.NNode --> BasicStructureType(elementType: i32, elementType: *struct.NNode)
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "malloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "initLink_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode) parameters: (0 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode), align 8
+		%5 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode), align 8
+		store %0, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode) %4)
+		%6 = call *i8 @malloc(i64 16)
+		%7 = bitcast *i8 %6 to *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode)
+		store %7, %4
+		store 2, %3
+		br %8
+	8:
+		%9 = load %3
+		%10 = load %2
+		%11 = icmp sle %9 %10
+		br %11, %12, %20
+	12:
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode) %5)
+		%13 = call *i8 @malloc(i64 16)
+		%14 = bitcast *i8 %13 to *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode)
+		store %14, %5
+		%15 = load %3
+		%16 = load %5
+		%17 = getelementptr %16, 0, 0
+		store %15, %17
+		%18 = load %3
+		%19 = add i32 %18, 1
+		store %19, %3
+		br %8
+	20:
+		%21 = load %4
+		ret %21
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 45
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode), align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 6, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode) %2)
+		%3 = load %1
+		%4 = call *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: i32, elementType: *struct.NNode) @initLink_slice_1(i32 %3)
+		store %4, %2
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 18 rulesP rules:
+f_213(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 8, 16) -> f_214(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 8, 16) :|: 0 = 0
+f_214(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 8, 16) -> f_215(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: v83 <= 6 && v80 <= 5
+f_215(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_217(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_217(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_219(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_219(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_221(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_221(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_223(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: v95 = 15 + v94 && v94 % 4 = 0 && 16 <= v95
+f_223(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_225(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v82, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_225(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v82, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_227(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v82, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_227(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v82, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_228(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_228(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_229(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_229(6, v75, v76, v77, v78, v79, v83, 1, v94, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_230(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_230(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_231(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_231(6, v75, v76, v77, v78, v79, v83, 1, v94, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_232(6, v75, v76, v77, v78, v79, v83, 1, v94, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: 0 = 0
+f_232(6, v75, v76, v77, v78, v79, v83, 1, v94, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_233(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: v99 = 1 + v83 && 4 <= v99 && v99 <= 7
+f_233(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_234(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_234(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_235(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) :|: TRUE
+f_235(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v82, v93, v95, v80, 3, 7, 15, 4, 0, 2, 5, 8, 16) -> f_212(6, v75, v76, v77, v78, v79, v83, 1, v94, v99, v84, v86, v85, v87, v88, v89, v90, v91, v92, v95, 3, 7, 15, 4, 0, 2, 8, 16) :|: TRUE
+f_212(6, v75, v76, v77, v78, v79, v80, 1, v82, v83, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 8, 16) -> f_213(6, v75, v76, v77, v78, v79, v83, 1, v82, v80, v84, v86, v85, v87, v88, v89, v90, v91, v92, v93, 3, 7, 15, 4, 0, 2, 8, 16) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_213(6, v75:0, v76:0, v77:0, v78:0, v79:0, v83:0, 1, v82:0, v80:0, v84:0, v86:0, v85:0, v87:0, v88:0, v89:0, v90:0, v91:0, v92:0, v93:0, 3, 7, 15, 4, 0, 2, 8, 16) -> f_213(6, v75:0, v76:0, v77:0, v78:0, v79:0, 1 + v83:0, 1, v94:0, v83:0, v84:0, v86:0, v85:0, v87:0, v88:0, v89:0, v90:0, v91:0, v92:0, 15 + v94:0, 3, 7, 15, 4, 0, 2, 8, 16) :|: v80:0 < 6 && v83:0 < 7 && v94:0 % 4 = 0 && v94:0 > 0 && v83:0 > 2
+Filtered unneeded arguments:
+   f_213(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22, x23, x24, x25, x26, x27, x28) -> f_213(x7, x10)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_213(v83:0, v80:0) -> f_213(1 + v83:0, v83:0) :|: v83:0 < 7 && v83:0 > 2 && v80:0 < 6
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_213(v83:0, v80:0) -> f_213(1 + v83:0, v83:0) :|: v83:0 < 7 && v83:0 > 2 && v80:0 < 6
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_213(v83:0:0, v80:0:0) -> f_213(1 + v83:0:0, v83:0:0) :|: v83:0:0 < 7 && v83:0:0 > 2 && v80:0:0 < 6
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_213 ] = -1*f_213_1
+
+The following rules are decreasing:
+f_213(v83:0:0, v80:0:0) -> f_213(1 + v83:0:0, v83:0:0) :|: v83:0:0 < 7 && v83:0:0 > 2 && v80:0:0 < 6
+
+The following rules are bounded:
+f_213(v83:0:0, v80:0:0) -> f_213(1 + v83:0:0, v83:0:0) :|: v83:0:0 < 7 && v83:0:0 > 2 && v80:0:0 < 6
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c:10:16: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+  Node *head = malloc(sizeof(Node));
+               ^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c:10:16: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c:22:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Missing_Corner-case_Handling_4_NT_TestCase15_Loop24.c:22:1: note: change return type to 'int'
+void main(void)
+^~~~
+AnalysisTime: 8260 milliseconds
+PreprocessingTime: 1838 milliseconds

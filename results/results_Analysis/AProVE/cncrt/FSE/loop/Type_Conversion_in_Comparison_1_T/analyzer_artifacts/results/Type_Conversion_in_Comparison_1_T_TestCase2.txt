@@ -1,0 +1,155 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/concretized_variants/Type_Conversion_in_Comparison_1_T_TestCase2.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 77 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 952 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 244 ms]
+(8) IntTRS
+(9) TerminationGraphProcessor [EQUIVALENT, 82 ms]
+(10) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/concretized_variants/Type_Conversion_in_Comparison_1_T_TestCase2.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/concretized_variants/Type_Conversion_in_Comparison_1_T_TestCase2.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: i32 parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca i16, align 2
+		%3 = alloca i16, align 2
+		%4 = alloca i32, align 4
+		%5 = alloca i32, align 4
+		store 0, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i16 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i16 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %4)
+		store 3, %3
+		store 2, %4
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %5)
+		store 0, %5
+		%6 = load %3
+		store %6, %2
+		br %7
+	7:
+		%8 = load %5
+		%9 = load %4
+		%10 = icmp slt %8 %9
+		br %10, %11, %17
+	11:
+		br %12
+	12:
+		%13 = load %5
+		%14 = add i32 %13, 1
+		store %14, %5
+		%15 = load %2
+		%16 = add i16 %15, 1
+		store %16, %2
+		br %7
+	17:
+		ret 0
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 14 rulesP rules:
+f_132(v11, v12, v13, v14, v15, 3, v20, 2, 1, v17, v21, v22, v23, v24, v25, v26, v27, 0, 4, 5) -> f_133(v11, v12, v13, v14, v15, 3, v20, 2, 1, v17, v21, v22, v23, v24, v25, v26, v27, 0, 4, 5) :|: 0 = 0
+f_133(v11, v12, v13, v14, v15, 3, v20, 2, 1, v17, v21, v22, v23, v24, v25, v26, v27, 0, 4, 5) -> f_134(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) :|: v20 < 2 && v17 = 0 && v20 = 1 && 0 = 0 && v21 = 3 && v22 = 4
+f_134(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) -> f_136(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) :|: 0 = 0
+f_136(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) -> f_138(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) :|: TRUE
+f_138(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) -> f_140(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) :|: TRUE
+f_140(v11, v12, v13, v14, v15, 3, 1, 2, 0, 4, v23, v24, v25, v26, v27) -> f_141(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) :|: 0 = 0
+f_141(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) -> f_142(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) :|: 0 = 0
+f_142(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) -> f_143(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) :|: TRUE
+f_143(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) -> f_144(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) :|: 0 = 0
+f_144(v11, v12, v13, v14, v15, 3, 1, 2, 4, v23, v24, v25, v26, v27, 0) -> f_145(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) :|: 0 = 0
+f_145(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) -> f_146(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) :|: TRUE
+f_146(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) -> f_147(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) :|: TRUE
+f_147(v11, v12, v13, v14, v15, 3, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0) -> f_131(v11, v12, v13, v14, v15, 3, 1, 2, 1, 2, 4, 5, v23, v24, v25, v26, v27, 0, 4, 5) :|: TRUE
+f_131(v11, v12, v13, v14, v15, 3, v17, 2, 1, v20, v21, v22, v23, v24, v25, v26, v27, 0, 4, 5) -> f_132(v11, v12, v13, v14, v15, 3, v20, 2, 1, v17, v21, v22, v23, v24, v25, v26, v27, 0, 4, 5) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_132(v11:0, v12:0, v13:0, v14:0, v15:0, 3, 1, 2, 1, 0, 3, 4, v23:0, v24:0, v25:0, v26:0, v27:0, 0, 4, 5) -> f_132(v11:0, v12:0, v13:0, v14:0, v15:0, 3, 2, 2, 1, 1, 4, 5, v23:0, v24:0, v25:0, v26:0, v27:0, 0, 4, 5) :|: TRUE
+Filtered unneeded arguments:
+   f_132(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20) -> f_132(x7, x10, x11, x12)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_132(cons_1, cons_0, cons_3, cons_4) -> f_132(2, 1, 4, 5) :|: TRUE && cons_1 = 1 && cons_0 = 0 && cons_3 = 3 && cons_4 = 4
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_132(cons_1, cons_0, cons_3, cons_4) -> f_132(2, 1, 4, 5) :|: TRUE && cons_1 = 1 && cons_0 = 0 && cons_3 = 3 && cons_4 = 4
+
+----------------------------------------
+
+(9) TerminationGraphProcessor (EQUIVALENT)
+Constructed the termination graph and obtained no non-trivial SCC(s).
+
+----------------------------------------
+
+(10)
+YES
+Graph finished, checking  consistency
+Graph finished, checked consistency, took 0.0s
+AnalysisTime: 5346 milliseconds
+PreprocessingTime: 3 milliseconds

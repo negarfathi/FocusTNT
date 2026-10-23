@@ -1,0 +1,187 @@
+YES
+proof of /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c
+# AProVE Commit ID: 48c83ccb80d5f8312cb92f4aa1b51dc35e247e65 nils 20241118 unpublished
+
+
+Termination of the given C Problem could be proven:
+
+(0) C Problem
+(1) CToLLVMProof [EQUIVALENT, 123 ms]
+(2) LLVM problem
+(3) LLVMToTerminationGraphProof [EQUIVALENT, 2226 ms]
+(4) LLVM Symbolic Execution Graph
+(5) SymbolicExecutionGraphToSCCProof [SOUND, 0 ms]
+(6) LLVM Symbolic Execution SCC
+(7) SCC2IRS [SOUND, 212 ms]
+(8) IntTRS
+(9) IntTRSCompressionProof [EQUIVALENT, 9 ms]
+(10) IntTRS
+(11) RankingReductionPairProof [EQUIVALENT, 147 ms]
+(12) YES
+
+
+----------------------------------------
+
+(0)
+Obligation:
+c file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c
+----------------------------------------
+
+(1) CToLLVMProof (EQUIVALENT)
+Compiled c-file /FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c to LLVM.
+----------------------------------------
+
+(2)
+Obligation:
+LLVM Problem
+
+Aliases:
+
+Data layout:
+
+"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+
+Machine:
+
+"x86_64-pc-linux-gnu"
+
+Type definitions:
+
+struct.NNode --> BasicStructureType(elementType: *struct.NNode)
+
+Global variables:
+
+Function declarations and definitions:
+
+*BasicFunctionTypename: "llvm.dbg.declare" returnParam: BasicVoidType parameters: (BasicMetadataType, BasicMetadataType, BasicMetadataType) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "malloc" returnParam: *i8 parameters: (i64) variableLength: false visibilityType: DEFAULT callingConvention: ccc
+*BasicFunctionTypename: "initLink_slice_1" linkageType: EXTERNALLY_VISIBLE returnParam: *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) parameters: (0 i32) variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 7
+	0:
+		%2 = alloca i32, align 4
+		%3 = alloca i32, align 4
+		%4 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode), align 8
+		store %0, %2
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %2)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %3)
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) %4)
+		%5 = call *i8 @malloc(i64 8)
+		%6 = bitcast *i8 %5 to *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode)
+		store %6, %4
+		store 2, %3
+		br %7
+	7:
+		%8 = load %3
+		%9 = load %2
+		%10 = icmp sle %8 %9
+		br %10, %11, %14
+	11:
+		%12 = load %3
+		%13 = add i32 %12, 1
+		store %13, %3
+		br %7
+	14:
+		%15 = load %4
+		ret %15
+
+*BasicFunctionTypename: "main" linkageType: EXTERNALLY_VISIBLE returnParam: BasicVoidType parameters: () variableLength: false visibilityType: DEFAULT callingConvention: ccc debug line: 34
+	0:
+		%1 = alloca i32, align 4
+		%2 = alloca *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode), align 8
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(*i32 %1)
+		store 311, %1
+		Unnamed Call-Instruction = call BasicVoidType @llvm.dbg.declare(**BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) %2)
+		%3 = load %1
+		%4 = call *BasicTypeName typeName: struct.NNodeBasicStructureType(elementType: *struct.NNode) @initLink_slice_1(i32 %3)
+		store %4, %2
+		ret void
+
+
+Analyze Termination of all function calls matching the pattern:
+main()
+----------------------------------------
+
+(3) LLVMToTerminationGraphProof (EQUIVALENT)
+Constructed symbolic execution graph for LLVM program.
+----------------------------------------
+
+(4)
+Obligation:
+Symbolic Execution Graph
+----------------------------------------
+
+(5) SymbolicExecutionGraphToSCCProof (SOUND)
+Splitted symbolic execution graph to 1 SCC.
+----------------------------------------
+
+(6)
+Obligation:
+SCC
+----------------------------------------
+
+(7) SCC2IRS (SOUND)
+Transformed LLVM symbolic execution graph SCC into a rewrite problem. Log: 
+Generated rules. Obtained 10 rulesP rules:
+f_201(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) -> f_202(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) :|: 0 = 0
+f_202(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) -> f_203(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) :|: v114 <= 311 && v112 <= 310
+f_203(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) -> f_205(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) :|: 0 = 0
+f_205(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) -> f_207(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) :|: TRUE
+f_207(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 310, 8) -> f_209(311, v108, v109, v110, v111, v114, 1, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8) :|: 0 = 0
+f_209(311, v108, v109, v110, v111, v114, 1, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8) -> f_211(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) :|: v123 = 1 + v114 && 4 <= v123 && v123 <= 312
+f_211(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) -> f_213(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) :|: TRUE
+f_213(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) -> f_215(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) :|: TRUE
+f_215(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 8, 312) -> f_200(311, v108, v109, v110, v111, v114, 1, v123, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) :|: TRUE
+f_200(311, v108, v109, v110, v111, v112, 1, v114, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) -> f_201(311, v108, v109, v110, v111, v114, 1, v112, v115, v117, v116, v118, v119, v120, v121, v122, 3, 7, 4, 0, 2, 8) :|: 0 = 0
+Combined rules. Obtained 1 rulesP rules:
+f_201(311, v108:0, v109:0, v110:0, v111:0, v114:0, 1, v112:0, v115:0, v117:0, v116:0, v118:0, v119:0, v120:0, v121:0, v122:0, 3, 7, 4, 0, 2, 8) -> f_201(311, v108:0, v109:0, v110:0, v111:0, 1 + v114:0, 1, v114:0, v115:0, v117:0, v116:0, v118:0, v119:0, v120:0, v121:0, v122:0, 3, 7, 4, 0, 2, 8) :|: v112:0 < 311 && v114:0 < 312 && v114:0 > 2
+Filtered unneeded arguments:
+   f_201(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17, x18, x19, x20, x21, x22) -> f_201(x6, x8)
+Removed division, modulo operations, cleaned up constraints. Obtained 1 rules.P rules:
+f_201(v114:0, v112:0) -> f_201(1 + v114:0, v114:0) :|: v114:0 < 312 && v114:0 > 2 && v112:0 < 311
+
+----------------------------------------
+
+(8)
+Obligation:
+Rules:
+f_201(v114:0, v112:0) -> f_201(1 + v114:0, v114:0) :|: v114:0 < 312 && v114:0 > 2 && v112:0 < 311
+
+----------------------------------------
+
+(9) IntTRSCompressionProof (EQUIVALENT)
+Compressed rules.
+----------------------------------------
+
+(10)
+Obligation:
+Rules:
+f_201(v114:0:0, v112:0:0) -> f_201(1 + v114:0:0, v114:0:0) :|: v114:0:0 < 312 && v114:0:0 > 2 && v112:0:0 < 311
+
+----------------------------------------
+
+(11) RankingReductionPairProof (EQUIVALENT)
+Interpretation:
+[ f_201 ] = -1*f_201_1
+
+The following rules are decreasing:
+f_201(v114:0:0, v112:0:0) -> f_201(1 + v114:0:0, v114:0:0) :|: v114:0:0 < 312 && v114:0:0 > 2 && v112:0:0 < 311
+
+The following rules are bounded:
+f_201(v114:0:0, v112:0:0) -> f_201(1 + v114:0:0, v114:0:0) :|: v114:0:0 < 312 && v114:0:0 > 2 && v112:0:0 < 311
+
+
+----------------------------------------
+
+(12)
+YES
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c:9:17: warning: implicitly declaring library function 'malloc' with type 'void *(unsigned long)' [-Wimplicit-function-declaration]
+  INSDS *head = malloc(sizeof(INSDS));
+                ^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c:9:17: note: include the header <stdlib.h> or explicitly provide a declaration for 'malloc'
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c:15:1: warning: return type of 'main' is not 'int' [-Wmain-return-type]
+void main(void)
+^
+/FILES_DIR/analyzer_artifacts/sliced_variants/Adding_Subtracting_Zero_5_T_TestCase8_Loop21.c:15:1: note: change return type to 'int'
+void main(void)
+^~~~
+AnalysisTime: 7332 milliseconds
+PreprocessingTime: 1661 milliseconds

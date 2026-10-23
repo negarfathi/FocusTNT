@@ -1,0 +1,81 @@
+///*** 1_main ***///
+START: main_bb14;
+
+FROM: main_bb14;
+flag := 0;
+count := 0;
+v31 := flag;
+TO: main_bb15;
+
+FROM: main_bb15;
+v33 := count;
+TO: main_bb15_end;
+
+FROM: main_bb15_end;
+assume((v31 == 1) || (v33 > 100));
+TO: main_read.exit;
+
+FROM: main_bb15_end;
+assume((v31 != 1) && (v33 <= 100));
+TO: main_bb16;
+
+FROM: main_bb16;
+v35 := count;
+v36 := v35 + 1;
+TO: main_bb16_end;
+
+FROM: main_bb16_end;
+assume(v36 > 2147483647);
+TO: main_bb17;
+
+FROM: main_bb16_end;
+assume(v36 <= 2147483647);
+TO: main_bb18;
+
+FROM: main_bb17;
+v38 := v36 - 2147483647;
+v39 := v38 - 1;
+v40 := v39 % 4294967296;
+v41 := -2147483648 + v40;
+var__temp_v.0.i.i := v41;
+TO: main_wrap_around.exit.i;
+
+FROM: main_bb18;
+var__temp_v.0.i.i := v36;
+TO: main_bb18_end;
+
+FROM: main_bb18_end;
+assume(v36 < -2147483648);
+TO: main_bb19;
+
+FROM: main_bb18_end;
+assume(v36 >= -2147483648);
+TO: main_wrap_around.exit.i;
+
+FROM: main_bb19;
+v43 := -2147483648 - v36;
+v44 := v43 - 1;
+v45 := v44 % 4294967296;
+v46 := 2147483647 - v45;
+var__temp_v.0.i.i := v46;
+TO: main_wrap_around.exit.i;
+
+FROM: main_wrap_around.exit.i;
+v.0.i.i := var__temp_v.0.i.i;
+count := v.0.i.i;
+TO: main_read.exit;
+
+FROM: main_read.exit;
+TO: main_read.exit_end;
+
+FROM: main_read.exit_end;
+assume(1 <= 0);
+TO: main_bb20;
+
+FROM: main_read.exit_end;
+assume(0 <= 0);
+TO: main_bb15;
+
+FROM: main_bb20;
+TO: main_bb20_ret;
+
