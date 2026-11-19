@@ -940,100 +940,61 @@ void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::st
         inputFileName = std::regex_replace(inputFileName, std::regex("_TestCase[0-9]+"), "");
         inputFileName += inputProgramExtension;
 
+        auto shellQuote = [](const std::string &value) {
+            std::string quoted = "'";
+            for (char c : value) quoted += (c == '\'') ? "'\\''" : std::string(1, c);
+            return quoted + "'";
+        };
+
+        auto runAthena = [&](const std::string &category, const std::filesystem::path &modeDirectory, const std::filesystem::path &destination, const std::string &timeLabel) {
+            std::filesystem::create_directories(modeDirectory);
+            std::filesystem::copy_file(inputProgramPath, modeDirectory / inputFileName, std::filesystem::copy_options::overwrite_existing);
+            std::filesystem::path outputPath = modeDirectory / "Output.txt";
+            std::string command = "docker run --rm --platform linux/amd64 -v " +
+                                  shellQuote(modeDirectory.string() + ":/opt/coar/test:ro") +
+                                  " -e WORKING_DIR=/opt/coar termcomp:latest timeout -k 5s " +
+                                  shellQuote(timeout + "s") + " solver " +
+                                  shellQuote("--category=" + category) + " " +
+                                  shellQuote("test/" + inputFileName) + " > " + shellQuote(outputPath.string()) + " 2>&1";
+            auto start = std::chrono::steady_clock::now();
+            int status = system(command.c_str());
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
+            bool hasVerdict = false;
+            bool hasInternalError = false;
+            {
+                std::ifstream solverOutput(outputPath);
+                std::string line;
+                while (std::getline(solverOutput, line)) {
+                    if (!line.empty() && line.back() == '\r') line.pop_back();
+                    if (line == "YES" || line == "NO" || line == "MAYBE") hasVerdict = true;
+                    if (line.rfind("error:", 0) == 0 || line.find("Sys_error") != std::string::npos) {
+                        hasInternalError = true;
+                    }
+                }
+            }
+            std::ofstream output(outputPath, std::ios::app);
+            if (status != 0) {
+                bool timedOut = status != -1 && WIFEXITED(status) && WEXITSTATUS(status) == 124;
+                output << (timedOut ? "\nTIMEOUT\n" : "\nERROR\n");
+                std::cerr << "Athena " << category << " failed for " << inputProgramName << ".\n";
+            }
+            else if (hasInternalError || !hasVerdict) {
+                output << "\nERROR: Athena reported a diagnostic error or no verdict\n";
+                std::cerr << "Athena " << category << " reported an error/no verdict for " << inputProgramName << ".\n";
+            }
+            output << timeLabel << ": " << duration << " milliseconds\n";
+            output.close();
+            std::filesystem::copy_file(outputPath, destination, std::filesystem::copy_options::overwrite_existing); // ADDED
+        };
+
         if (benchmarkName == "TermCOMP") {
-            std::filesystem::path athenaDirectory = resultsDirectory / inputProgramName;
-            std::filesystem::create_directories(athenaDirectory);
-            std::filesystem::path copiedInputPath = athenaDirectory / inputFileName;
-            std::filesystem::copy_file(inputProgramPath, copiedInputPath, std::filesystem::copy_options::overwrite_existing);
-
-            std::string command_TermCOMP = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
-                                           " " + copiedInputPath.string() +
-                                           " --timeout=" + timeout +
-                                           " --semantic-augmentor-mode=none"
-                                           " --type-annotator-mode=none"
-                                           " --signedness-info=none"
-                                           " --unreachable-exit=true"
-                                           " --muval-mode=TermCOMP";
-            int result_TermCOMP = system(command_TermCOMP.c_str());
-            if (result_TermCOMP != 0) {
-                std::cerr << toolName + " execution failed." << "\n";
-            }
-
-            std::filesystem::path athenaOutputPath = athenaDirectory / "Output.txt";
-            if (std::filesystem::exists(athenaOutputPath)) {
-                std::filesystem::copy_file(athenaOutputPath, resultPath, std::filesystem::copy_options::overwrite_existing);
-            }
+            runAthena("C", resultsDirectory / inputProgramName, resultPath, "AnalysisTime");
         }
 
         else if (benchmarkName == "FSE") {
-            std::filesystem::path bitvectorDirectory = resultsDirectory / ("FSE_Bitvector_Mode/" + inputProgramName);
-            std::filesystem::create_directories(bitvectorDirectory);
-            std::filesystem::path bitvectorInputPath = bitvectorDirectory / inputFileName;
-            std::filesystem::copy_file(inputProgramPath, bitvectorInputPath, std::filesystem::copy_options::overwrite_existing);
-
-            std::string command_BV = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
-                                     " " + bitvectorInputPath.string() +
-                                     " --timeout=" + timeout +
-                                     " --semantic-augmentor-mode=none"
-                                     " --type-annotator-mode=all"
-                                     " --signedness-info=all"
-                                     " --unreachable-exit=true"
-                                     " --muval-mode=FSE-BV";
-            int result_BV = system(command_BV.c_str());
-            if (result_BV != 0) {
-                std::cerr << toolName + "_BV execution failed." << "\n";
-            }
-
-            std::filesystem::path bitvectorOutputPath = bitvectorDirectory / "Output.txt";
-            if (std::filesystem::exists(bitvectorOutputPath)) {
-                std::filesystem::copy_file(bitvectorOutputPath, resultsDirectory / ("FSE_Bitvector_Mode_" + inputProgramName + ".txt"), std::filesystem::copy_options::overwrite_existing);
-            }
-
-            std::filesystem::path moduloArithmeticDirectory = resultsDirectory / ("FSE_Modulo_Arithmetic_Mode/" + inputProgramName);
-            std::filesystem::create_directories(moduloArithmeticDirectory);
-            std::filesystem::path moduloArithmeticInputPath = moduloArithmeticDirectory / inputFileName;
-            std::filesystem::copy_file(inputProgramPath, moduloArithmeticInputPath, std::filesystem::copy_options::overwrite_existing);
-
-            std::string command_MA = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
-                                     " " + moduloArithmeticInputPath.string() +
-                                     " --timeout=" + timeout +
-                                     " --semantic-augmentor-mode=only-nobv"
-                                     " --type-annotator-mode=only-bv"
-                                     " --signedness-info=only-bv"
-                                     " --unreachable-exit=true"
-                                     " --muval-mode=FSE-MI";
-            int result_MA = system(command_MA.c_str());
-            if (result_MA != 0) {
-                std::cerr << toolName + "_MA execution failed." << "\n";
-            }
-
-            std::filesystem::path moduloArithmeticOutputPath = moduloArithmeticDirectory / "Output.txt";
-            if (std::filesystem::exists(moduloArithmeticOutputPath)) {
-                std::filesystem::copy_file(moduloArithmeticOutputPath, resultsDirectory / ("FSE_Modulo_Arithmetic_Mode_" + inputProgramName + ".txt"), std::filesystem::copy_options::overwrite_existing);
-            }
-
-            std::filesystem::path mathematicalIntegerDirectory = resultsDirectory / ("FSE_Mathematical_Integer_Mode/" + inputProgramName);
-            std::filesystem::create_directories(mathematicalIntegerDirectory);
-            std::filesystem::path mathematicalIntegerInputPath = mathematicalIntegerDirectory / inputFileName;
-            std::filesystem::copy_file(inputProgramPath, mathematicalIntegerInputPath, std::filesystem::copy_options::overwrite_existing);
-
-            std::string command_MI = toolDirectory.parent_path().string() + "/tools/Athena/cmake-build-debug/Athena" +
-                                     " " + mathematicalIntegerInputPath.string() +
-                                     " --timeout=" + timeout +
-                                     " --semantic-augmentor-mode=none"
-                                     " --type-annotator-mode=all"
-                                     " --signedness-info=all"
-                                     " --unreachable-exit=true"
-                                     " --muval-mode=FSE-MI";
-            int result_MI = system(command_MI.c_str());
-            if (result_MI != 0) {
-                std::cerr << toolName + "_MI execution failed." << "\n";
-            }
-
-            std::filesystem::path mathematicalIntegerOutputPath = mathematicalIntegerDirectory / "Output.txt";
-            if (std::filesystem::exists(mathematicalIntegerOutputPath)) {
-                std::filesystem::copy_file(mathematicalIntegerOutputPath, resultsDirectory / ("FSE_Mathematical_Integer_Mode_" + inputProgramName + ".txt"), std::filesystem::copy_options::overwrite_existing);
-            }
+            runAthena("C_BV", resultsDirectory / "FSE_Bitvector_Mode" / inputProgramName, resultsDirectory / ("FSE_Bitvector_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
+            runAthena("C_Mod", resultsDirectory / "FSE_Modulo_Arithmetic_Mode" / inputProgramName, resultsDirectory / ("FSE_Modulo_Arithmetic_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
+            runAthena("C", resultsDirectory / "FSE_Mathematical_Integer_Mode" / inputProgramName, resultsDirectory / ("FSE_Mathematical_Integer_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
         }
     }
 

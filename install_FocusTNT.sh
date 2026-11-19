@@ -26,16 +26,7 @@ echo "Installing FocusTNT's tool dependencies..."
 
 "$root_directory/tools/XLNT/install_xlnt.sh"
 "$root_directory/tools/FramaC/install_FramaC.sh"
-
-if cd "$root_directory/tools" && \
-    rm -rf Athena && \
-    git clone https://github.com/negarfathi/Athena.git; then
-    "$root_directory/tools/Athena/install_Athena.sh"
-else
-    echo "Failed to clone Athena."
-    exit 1
-fi
-
+bash "$root_directory/tools/Athena/install_Athena.sh"
 "$root_directory/tools/PROTON/install_PROTON.sh"
 "$root_directory/tools/UAutomizer/install_UAutomizer.sh"
 "$root_directory/tools/AProVE/install_AProVE.sh"
