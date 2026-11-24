@@ -16,7 +16,7 @@ std::string NormalizeVerdict(std::string result) {
     if (result == "ERROR" || result == "INTERNAL-ERROR") {
         return "ERROR";
     }
-    if (result == "MAYBE" || result == "UNKNOWN" || result == "INCONCLUSIVE") {
+    if (result == "MAYBE" || result == "UNKNOWN" || result == "INCONCLUSIVE" || result == "UB-DEPENDENT") {
         return "UNKNOWN";
     }
     return "UNKNOWN";
@@ -38,7 +38,7 @@ std::tuple<std::string, long long, long long> ReadAnalyzerResult(const std::file
 
     std::string result;
     if (toolName == "Athena" || toolName == "Athena_BV" || toolName == "Athena_MA" || toolName == "Athena_MI") {
-        std::regex pattern("^(YES|NO|MAYBE|TIMEOUT|ERROR)$", std::regex_constants::icase);
+        std::regex pattern(R"(^(YES|NO|MAYBE|UNKNOWN|TIMEOUT|ERROR|UB-DEPENDENT)$)", std::regex_constants::icase);
         for (auto it = lines.rbegin(); it != lines.rend(); it++) {
             if (std::regex_match(*it, pattern)) {
                 result = *it;
@@ -108,9 +108,8 @@ std::tuple<std::string, long long, long long> ReadAnalyzerResult(const std::file
     }
 
     long long analysisTime = -1;
-    std::string timeKeyword = (toolName == "Athena_BV" || toolName == "Athena_MA" || toolName == "Athena_MI") ? "Runtime:" : "AnalysisTime:";
     for (auto it = lines.rbegin(); it != lines.rend(); it++) {
-        if (it->find(timeKeyword) != std::string::npos) {
+        if (it->find("AnalysisTime:") != std::string::npos) {
             std::smatch matches;
             if (std::regex_search(*it, matches, std::regex("([0-9]+)"))) {
                 analysisTime = std::stoll(matches[1].str());

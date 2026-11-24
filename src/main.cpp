@@ -935,66 +935,57 @@ void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::st
     std::cout << "Running " << toolName << " on " << inputProgramName << "..." << std::endl;
 
     if (toolName == "Athena") {
-        std::string inputFileName = inputProgramName;
-        inputFileName = std::regex_replace(inputFileName, std::regex("_Loop[0-9]+"), "");
-        inputFileName = std::regex_replace(inputFileName, std::regex("_TestCase[0-9]+"), "");
-        inputFileName += inputProgramExtension;
-
         auto shellQuote = [](const std::string &value) {
             std::string quoted = "'";
-            for (char c : value) quoted += (c == '\'') ? "'\\''" : std::string(1, c);
+            for (char c : value) {
+                quoted += (c == '\'') ? "'\\''" : std::string(1, c);
+            }
             return quoted + "'";
         };
 
-        auto runAthena = [&](const std::string &category, const std::filesystem::path &modeDirectory, const std::filesystem::path &destination, const std::string &timeLabel) {
-            std::filesystem::create_directories(modeDirectory);
-            std::filesystem::copy_file(inputProgramPath, modeDirectory / inputFileName, std::filesystem::copy_options::overwrite_existing);
-            std::filesystem::path outputPath = modeDirectory / "Output.txt";
-            std::string command = "docker run --rm --platform linux/amd64 -v " +
-                                  shellQuote(modeDirectory.string() + ":/opt/coar/test:ro") +
-                                  " -e WORKING_DIR=/opt/coar termcomp:latest timeout -k 5s " +
-                                  shellQuote(timeout + "s") + " solver " +
-                                  shellQuote("--category=" + category) + " " +
-                                  shellQuote("test/" + inputFileName) + " > " + shellQuote(outputPath.string()) + " 2>&1";
+        auto runAthena = [&](const std::string &configuration, const std::filesystem::path &destination, const std::string &timeLabel) {
+            const std::string configPath = "/opt/coar/config/solver/" + configuration;
+            const std::string runtimeConfigPath = "/tmp/focustnt_athena.json";
+            const std::string configureAthena =
+                "import json, sys\n"
+                "with open(sys.argv[1]) as f:\n"
+                "    config = json.load(f)\n"
+                "config[1]['clang'] = '/opt/coar/bin/llvm-19.1.7/bin/clang-19'\n"
+                "config[1]['framac_share'] = '/opt/coar/share/frama-c'\n"
+                "with open(sys.argv[2], 'w') as f:\n"
+                "    json.dump(config, f)\n";
+            std::string innerCommand =
+                "python3 -c " + shellQuote(configureAthena) +
+                " " + shellQuote(configPath) +
+                " " + shellQuote(runtimeConfigPath) +
+                " && exec timeout -k 5s " + shellQuote(timeout + "s") +
+                " /opt/coar/bin/coar -c " + shellQuote(runtimeConfigPath) +
+                " -p cterm --c-data-model LP64 " +
+                shellQuote("/inputs/" + inputProgramPath.filename().string());
+            std::string command =
+                "docker run --rm --platform linux/amd64 -v " +
+                shellQuote(inputProgramPath.parent_path().string() + ":/inputs:ro") +
+                " -w /opt/coar --entrypoint /bin/bash coar:svcomp -c " +
+                shellQuote(innerCommand) + " > " + shellQuote(destination.string()) + " 2>&1";
             auto start = std::chrono::steady_clock::now();
             int status = system(command.c_str());
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
-            bool hasVerdict = false;
-            bool hasInternalError = false;
-            {
-                std::ifstream solverOutput(outputPath);
-                std::string line;
-                while (std::getline(solverOutput, line)) {
-                    if (!line.empty() && line.back() == '\r') line.pop_back();
-                    if (line == "YES" || line == "NO" || line == "MAYBE") hasVerdict = true;
-                    if (line.rfind("error:", 0) == 0 || line.find("Sys_error") != std::string::npos) {
-                        hasInternalError = true;
-                    }
-                }
-            }
-            std::ofstream output(outputPath, std::ios::app);
+            std::ofstream output(destination, std::ios::app);
             if (status != 0) {
                 bool timedOut = status != -1 && WIFEXITED(status) && WEXITSTATUS(status) == 124;
                 output << (timedOut ? "\nTIMEOUT\n" : "\nERROR\n");
-                std::cerr << "Athena " << category << " failed for " << inputProgramName << ".\n";
+                std::cerr << "Athena execution failed for " << inputProgramName << ".\n";
             }
-            else if (hasInternalError || !hasVerdict) {
-                output << "\nERROR: Athena reported a diagnostic error or no verdict\n";
-                std::cerr << "Athena " << category << " reported an error/no verdict for " << inputProgramName << ".\n";
-            }
-            output << timeLabel << ": " << duration << " milliseconds\n";
-            output.close();
-            std::filesystem::copy_file(outputPath, destination, std::filesystem::copy_options::overwrite_existing); // ADDED
+            output << "\n" << timeLabel << ": " << duration << " milliseconds\n";
         };
 
         if (benchmarkName == "TermCOMP") {
-            runAthena("C", resultsDirectory / inputProgramName, resultPath, "AnalysisTime");
+            runAthena("athena_termcomp.json", resultPath, "AnalysisTime");
         }
-
         else if (benchmarkName == "FSE") {
-            runAthena("C_BV", resultsDirectory / "FSE_Bitvector_Mode" / inputProgramName, resultsDirectory / ("FSE_Bitvector_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
-            runAthena("C_Mod", resultsDirectory / "FSE_Modulo_Arithmetic_Mode" / inputProgramName, resultsDirectory / ("FSE_Modulo_Arithmetic_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
-            runAthena("C", resultsDirectory / "FSE_Mathematical_Integer_Mode" / inputProgramName, resultsDirectory / ("FSE_Mathematical_Integer_Mode_" + inputProgramName + ".txt"), "Runtime"); // CHANGED
+            runAthena("athena_bv.json", resultsDirectory / ("FSE_Bitvector_Mode_" + inputProgramName + ".txt"), "AnalysisTime");
+            runAthena("athena_mod.json", resultsDirectory / ("FSE_Modulo_Arithmetic_Mode_" + inputProgramName + ".txt"), "AnalysisTime");
+            runAthena("athena_termcomp.json", resultsDirectory / ("FSE_Mathematical_Integer_Mode_" + inputProgramName + ".txt"), "AnalysisTime");
         }
     }
 
