@@ -13,16 +13,17 @@
 #include "../include/nondet_extractor/action.h"
 #include "../include/input_generator/input_generator.h"
 #include "../include/slicer/action.h"
-#include "../include/slicer/fix_framac_bugs.h"
 #include "../include/slicer/merge_sliced_program.h"
+#include "../include/slicing_validator/slicing_validator.h"
 #include "../include/concretizer/action.h"
 #include "../include/result_recorder/result_recorder.h"
 
-int runAnalyzer(int argc, char *argv[]);
 int runInputGenerator(int argc, char *argv[]);
+int runAnalyzer(int argc, char *argv[]);
 std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::path> &inputProgramsDirectory, const std::filesystem::path &slicedVariantsDirectory, const std::filesystem::path &toolDirectory, const std::filesystem::path &workingDirectory);
 std::vector<std::filesystem::path> runConcretizer(const std::vector<std::filesystem::path> &inputProgramsDirectory, const std::filesystem::path &testCasesPath, const std::filesystem::path &concretizedVariantsDirectory);
 void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::string &toolName, const std::string &benchmarkName, const std::string &timeout, const std::filesystem::path &resultsDirectory, const std::filesystem::path &toolDirectory, const std::filesystem::path &workingDirectory);
+int runSlicingValidator(int argc, char *argv[]);
 
 int main(int argc, char *argv[]) {
     if (argc >= 2 && std::string(argv[1]) == "--input-generation") {
@@ -31,9 +32,13 @@ int main(int argc, char *argv[]) {
     if (argc >= 2 && std::string(argv[1]) == "--analysis") {
         return runAnalyzer(argc, argv);
     }
+    if (argc >= 2 && std::string(argv[1]) == "--slicing-validation") {
+        return runSlicingValidator(argc, argv);
+    }
     std::cerr << "Usage:" << std::endl;
-    std::cerr << "  ./FocusTNT --analysis <path/to/source_code.c> <path/to/test_cases.csv> <path/to/ground_truth.csv> --tool=<Athena|PROTON|UAutomizer|AProVE|CPAchecker|2LS> --benchmark=<TermCOMP|FSE> --configuration=<base|slice|cncrt|slice_cncrt|cncrt_slice> --timeout=<seconds>\n";
     std::cerr << "  ./FocusTNT --input-generation <path/to/source_code.c> --model=<gpt-5.6-terra|gpt-oss-20b> --temperature=<0.0-2.0> --reasoning-effort=<low|medium|high> --max-attempts=<number> --num-inputs=<number> --execution-timeout=<seconds>\n";
+    std::cerr << "  ./FocusTNT --analysis <path/to/source_code.c> <path/to/test_cases.csv> <path/to/ground_truth.csv> --tool=<Athena|PROTON|UAutomizer|AProVE|CPAchecker|2LS> --benchmark=<TermCOMP|FSE> --configuration=<base|slice|cncrt|slice_cncrt|cncrt_slice> --timeout=<seconds>\n";
+    std::cerr << "  ./FocusTNT --slicing-validation <program-directory-or-dataset-directory>\n";
     return 1;
 }
 
@@ -732,7 +737,6 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(slicedVariantPath, inputProgramPath);
 
                 slicedVariants.push_back(slicedVariantPath);
             }
@@ -759,7 +763,6 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for first slice of " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(slicedVariant1Path, inputProgramPath);
 
                 std::string command2_FramaC = "docker run --rm --platform linux/amd64 -v " + toolDirectory.parent_path().string() + "/tools:/TOOL_DIR -v " + workingDirectory.string() + ":/FILES_DIR framac/frama-c-gui:dev bash -c '"
                                               "cd /FILES_DIR && "
@@ -774,7 +777,6 @@ std::vector<std::filesystem::path> runSlicer(const std::vector<std::filesystem::
                     std::cerr << "Frama-C execution failed for second slice of " << inputProgramName << ", loop " << loop.lineNumber << "." << std::endl;
                     continue;
                 }
-                fixFramacBugs(slicedVariant2Path, inputProgramPath);
 
                 std::ifstream slicedProgram1InStream(slicedVariant1Path);
                 std::stringstream slicedProgram1Buffer;
@@ -1050,5 +1052,21 @@ void analyzeVariant(const std::filesystem::path &inputProgramPath, const std::st
         auto analysisTime_end = std::chrono::steady_clock::now();
         auto analysisTime = std::chrono::duration_cast<std::chrono::milliseconds>(analysisTime_end - analysisTime_start).count();
         std::ofstream(resultPath, std::ios::app) << "AnalysisTime: " << analysisTime << " milliseconds" << std::endl;
+    }
+}
+
+int runSlicingValidator(int argc, char *argv[]) {
+    if (argc != 3) {
+        std::cerr << "Usage:\n" << " ./FocusTNT --slicing-validation <program-directory-or-dataset-directory>\n";
+        return 1;
+    }
+    try {
+        std::filesystem::path toolPath = std::filesystem::canonical(argv[0]);
+        std::filesystem::path toolDirectory = toolPath.parent_path();
+        std::filesystem::path programDirectory = std::filesystem::canonical(argv[2]);
+        return validateSlicedPrograms(programDirectory, toolDirectory.parent_path());
+    } catch (const std::exception &e) {
+        std::cerr << "Slicing validation: " << e.what() << '\n';
+        return 1;
     }
 }

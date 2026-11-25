@@ -66,10 +66,11 @@ add_executable(FocusTNT
         src/slicer/consumer.cpp
         include/slicer/visitor_and_rewriter.h
         src/slicer/visitor_and_rewriter.cpp
-        include/slicer/fix_framac_bugs.h
-        src/slicer/fix_framac_bugs.cpp
         include/slicer/merge_sliced_program.h
         src/slicer/merge_sliced_programs.cpp
+
+        include/slicing_validator/slicing_validator.h
+        src/slicing_validator/slicing_validator.cpp
 
         include/concretizer/nondet_assignment.h
         include/concretizer/action.h
